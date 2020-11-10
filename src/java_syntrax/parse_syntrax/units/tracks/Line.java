@@ -10,7 +10,7 @@ public class Line extends Track {
   }
 
   public Line(Unit unit) {
-    super(new ArrayList<>(1));
-    units.set(0, unit);
+    super(new ArrayList<>());
+    units.add(unit);
   }
 }

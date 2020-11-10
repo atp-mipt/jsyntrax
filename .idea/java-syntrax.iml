@@ -8,5 +8,17 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="groovy-3.0.6" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///opt/groovy/groovy-3.0.6/lib/extras-jaxb" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file:///opt/groovy/groovy-3.0.6/lib/extras-jaxb" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="groovy-3.0.6" level="application" />
+    <orderEntry type="library" name="groovy-3.0.6" level="application" />
   </component>
 </module>
