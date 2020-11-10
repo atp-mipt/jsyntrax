@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="647e35b5-86b9-4f6d-80db-99e4761f9019" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1k6BjETL0YijpEcBdMZaWsE9fpK" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="java_syntrax.parse_syntrax.parser" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="java_syntrax.parse_syntrax.exceptions" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="647e35b5-86b9-4f6d-80db-99e4761f9019" name="Default Changelist" comment="" />
+      <created>1605011297919</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605011297919</updated>
+      <workItem from="1605011300708" duration="39000" />
+      <workItem from="1605011765501" duration="10788000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2048" y="1001" key="#Project_Structure" timestamp="1605020225292">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2048" y="1001" key="#Project_Structure/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605020225292" />
+    <state x="2281" y="1338" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog" timestamp="1605012022272">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2281" y="1338" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605012022272" />
+    <state x="2373" y="1127" key="#com.intellij.ide.util.MemberChooser" timestamp="1605022539256">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2373" y="1127" key="#com.intellij.ide.util.MemberChooser/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605022539256" />
+    <state x="2271" y="1217" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605013445852">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2271" y="1217" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605013445852" />
+    <state x="2298" y="1171" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605020799548">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2298" y="1171" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605020799548" />
+    <state x="2343" y="1165" key="FileChooserDialogImpl" timestamp="1605011321895">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2343" y="1165" key="FileChooserDialogImpl/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605011321895" />
+    <state x="2048" y="1001" key="SettingsEditor" timestamp="1605012025669">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2048" y="1001" key="SettingsEditor/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605012025669" />
+    <state x="2250" y="1315" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1605012005761">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2250" y="1315" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605012005761" />
+    <state x="2287" y="1077" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1605021911539">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2287" y="1077" key="com.intellij.testIntegration.createTest.CreateTestDialog/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605021911539" />
+    <state x="1700" y="1000" width="1720" height="846" key="dock-window-1" timestamp="1605020548030">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="1700" y="1000" width="1720" height="846" key="dock-window-1/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605020548030" />
+    <state x="1909" y="1002" width="1292" height="840" key="new project wizard" timestamp="1605011338701">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="1909" y="1002" width="1292" height="840" key="new project wizard/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605011338701" />
+    <state x="2325" y="1165" key="refactoring.ChangeSignatureDialog" timestamp="1605017495565">
+      <screen x="1600" y="900" width="1920" height="1080" />
+    </state>
+    <state x="2325" y="1165" key="refactoring.ChangeSignatureDialog/1600.900.1920.1080/0.0.1600.900@1600.900.1920.1080" timestamp="1605017495565" />
+  </component>
+</project>
