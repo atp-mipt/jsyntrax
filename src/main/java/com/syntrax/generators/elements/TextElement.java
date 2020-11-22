@@ -26,8 +26,8 @@ public class TextElement extends Element {
         FontMetrics metrics = svgGraphics2D.getFontMetrics(font);
 
         // TODO: dirty...
-        int h = metrics.getHeight() + 4;
-        int w = metrics.stringWidth(text) + 4;
+        int h = metrics.getHeight() + 10;
+        int w = metrics.stringWidth(text) + 10;
 
         if (anchor == 'c') {
             start.f -= w / 2;

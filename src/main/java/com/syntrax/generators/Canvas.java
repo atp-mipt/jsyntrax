@@ -160,10 +160,11 @@ public class Canvas {
         sb.append("</marker>\n</defs>\n");
 
         // elements
+        if (!style.transparent) {
+            sb.append("<rect width=\"100%\" height=\"100%\" fill=\"white\"/>\n");
+        }
         for (Element e : this.elements) {
-            if (!style.transparent) {
-                sb.append("<rect width=\"100%\" height=\"100%\" fill=\"white\"/>");
-            }
+
             if (style.shadow) {
                 e.addShadow(sb, this.style);
             }

@@ -196,7 +196,7 @@ public class SVGGeneratedText {
                 int xn = pos.f + sep;
                 this.canvas.moveByTag(endPoint.tag, xn, pos.s);
                 // create line from previous to this
-                LineElement l = new LineElement(new Pair<>(pos.f - 1, pos.s), new Pair<>(xn, pos.s),
+                LineElement l = new LineElement(new Pair<>(pos.f - 1, pos.s + 2), new Pair<>(xn, pos.s + 2),
                         "last", width, tag);
                 this.canvas.addElement(l);
                 pos.f = xn + endPoint.endpoint.f;

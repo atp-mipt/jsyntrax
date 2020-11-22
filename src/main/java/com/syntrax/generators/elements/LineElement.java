@@ -1,6 +1,7 @@
 package com.syntrax.generators.elements;
 
 import com.syntrax.styles.Style;
+import com.syntrax.util.Algorithm;
 import com.syntrax.util.Pair;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 
@@ -19,12 +20,12 @@ public class LineElement extends Element {
     }
 
     public void toSVG(StringBuilder sb, Style style) {
-        String attributes = "stroke=\"" + style.line_color + "\" " + "stroke-width=\"" + this.width + "\"";
+        String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " + "stroke-width=\"" + this.width + "\"";
 
         if (arrow != null) {
             // TODO: what is this ???
             attributes += " marker-end=\"url(#arrow)\"";
-            if (arrow.equals("last")) {
+            if (arrow.equals("first")) {
                 // swap
                 Pair<Integer, Integer> tmp = super.start;
                 super.start = super.end;
@@ -34,6 +35,7 @@ public class LineElement extends Element {
                     (super.end.f - super.start.f) * (super.end.f - super.start.f) +
                             (super.end.s - super.start.s) * (super.end.s - super.start.s)
             );
+            len -= 4;
             double angle = Math.atan2(super.end.s - super.start.s, super.end.f - super.start.f);
 
             super.end.f = (int)(super.start.f + len * Math.cos(angle));
