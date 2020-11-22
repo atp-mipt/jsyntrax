@@ -11,6 +11,13 @@
     <name>JavaSyntrax</name>
     <description>Reimplement Syntrax</description>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.main.class>com.syntrax.Main</java.main.class>
+        <java.version>1.11</java.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
@@ -19,25 +26,8 @@
         </dependency>
         <dependency>
             <groupId>org.jfree</groupId>
-            <artifactId>org.jfree.svg</artifactId>
-            <version>4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jfree</groupId>
             <artifactId>jfreesvg</artifactId>
             <version>3.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -50,14 +40,38 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <compilerId>groovy-eclipse-compiler</compilerId>
+                    <verbose>true</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-compiler</artifactId>
+                        <version>2.7.0-01</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <additionalProjectnatures>
+                        <projectnature>org.eclipse.jdt.groovy.core.groovyNature</projectnature>
+                    </additionalProjectnatures>
+                    <sourceIncludes>
+                        <sourceInclude>src/main/java/**/*.groovy</sourceInclude>
+                    </sourceIncludes>
                 </configuration>
             </plugin>
+
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>com.syntrax.Main</mainClass>
+                    <mainClass>${java.main.class}</mainClass>
                 </configuration>
             </plugin>
         </plugins>

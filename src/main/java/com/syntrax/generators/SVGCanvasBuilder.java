@@ -16,10 +16,10 @@ import org.jfree.graphics2d.svg.SVGGraphics2D;
 import java.awt.*;
 
 /**
- * @brief TODO: write correct documentation
+ * @brief class for building canvas by Unit
  */
-public class SVGGeneratedText {
-    public SVGGeneratedText() {}
+public class SVGCanvasBuilder {
+    public SVGCanvasBuilder() {}
 
     public Canvas generateSVG(Unit unit) {
         this.style = new Style();
@@ -109,7 +109,7 @@ public class SVGGeneratedText {
 
         // TODO: add url mapping
 
-        Pair<Integer, Integer> textSize = getTextSize(txt, font);
+        Pair<Integer, Integer> textSize = TextElement.getTextSize(txt, font);
         int x0 = -textSize.f / 2;
         int y0 = -textSize.s / 2;
         int x1 = x0 + textSize.f;
@@ -266,16 +266,6 @@ public class SVGGeneratedText {
     // TODO: impl
     private UnitEndPoint parseStack(Stack stack) {
         return null;
-    }
-
-    private static Pair<Integer, Integer> getTextSize(String text, Font font) {
-        SVGGraphics2D svgGraphics2D = new SVGGraphics2D(500, 500);
-        svgGraphics2D.setFont(font);
-        svgGraphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        FontMetrics metrics = svgGraphics2D.getFontMetrics(font);
-
-        // TODO: dirty...
-        return new Pair<>(metrics.stringWidth(text) + 4, metrics.getHeight() + 4);
     }
 
     /**

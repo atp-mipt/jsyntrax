@@ -15,19 +15,17 @@ public class TextElement extends Element {
                        Font font, String fontName, Color textColor, String tag) {
         super(tag);
 
+        System.out.println("Teeeeext");
+
         this.text = text;
         this.font = font;
         this.fontName = fontName;
         this.textColor = textColor;
 
-        SVGGraphics2D svgGraphics2D = new SVGGraphics2D(500, 500);
-        svgGraphics2D.setFont(font);
-        svgGraphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        FontMetrics metrics = svgGraphics2D.getFontMetrics(font);
+        Pair<Integer, Integer> hw = getTextSize(text, font);
 
-        // TODO: dirty...
-        int h = metrics.getHeight() + 10;
-        int w = metrics.stringWidth(text) + 10;
+        int h = hw.f;
+        int w = hw.s;
 
         if (anchor == 'c') {
             start.f -= w / 2;
@@ -36,6 +34,16 @@ public class TextElement extends Element {
 
         super.start = start;
         super.end = new Pair<>(start.f + w, start.s + h);
+    }
+
+    public static Pair<Integer, Integer> getTextSize(String text, Font font) {
+        SVGGraphics2D svgGraphics2D = new SVGGraphics2D(500, 500);
+        svgGraphics2D.setFont(font);
+        svgGraphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        FontMetrics metrics = svgGraphics2D.getFontMetrics(font);
+
+        // TODO: dirty...
+        return new Pair<>(metrics.stringWidth(text) + 10, metrics.getHeight() + 10);
     }
 
     public void toSVG(StringBuilder sb, Style style) {

@@ -1,7 +1,7 @@
 package com.syntrax;
 
 import com.syntrax.generators.Canvas;
-import com.syntrax.generators.SVGGeneratedText;
+import com.syntrax.generators.SVGCanvasBuilder;
 import com.syntrax.groovy_parser.Parser;
 import com.syntrax.units.tracks.Track;
 
@@ -14,7 +14,7 @@ public class Main {
         Track track = Parser.parse(file);
         System.out.println(track);
 
-        Canvas c = new SVGGeneratedText().generateSVG(track);
+        Canvas c = new SVGCanvasBuilder().generateSVG(track);
         String result = c.generateSVG();
 
         // write result to file
@@ -25,7 +25,7 @@ public class Main {
             System.out.println("Done!");
         }
         catch (IOException e) {
-            System.out.println("problems...");
+            System.out.println("Problems...");
             System.out.println(e.getMessage());
         }
     }
