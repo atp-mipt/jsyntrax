@@ -11,7 +11,6 @@ import com.syntrax.units.tracks.opt.*;
 import com.syntrax.units.tracks.stack.*;
 import com.syntrax.units.tracks.*;
 import com.syntrax.util.Pair;
-import org.jfree.graphics2d.svg.SVGGraphics2D;
 
 import java.awt.*;
 
@@ -21,9 +20,9 @@ import java.awt.*;
 public class SVGCanvasBuilder {
     public SVGCanvasBuilder() {}
 
-    public Canvas generateSVG(Unit unit) {
+    public SVGCanvas generateSVG(Unit unit) {
         this.style = new Style();
-        this.canvas = new Canvas(this.style);
+        this.canvas = new SVGCanvas(this.style);
         this.parseDiagram(unit);
         return this.canvas;
     }
@@ -42,6 +41,10 @@ public class SVGCanvasBuilder {
 
         if (unit instanceof Node) {
             return parseNode((Node) unit);
+        }
+
+        if (unit instanceof Bullet) {
+            return parseBullet((Bullet)unit);
         }
 
         if (unit instanceof Line) {
@@ -178,6 +181,16 @@ public class SVGCanvasBuilder {
         return new UnitEndPoint(tag, new Pair<>(width, 0));
     }
 
+    private UnitEndPoint parseBullet(Bullet bullet) {
+        String tag = this.canvas.new_tag("x", "");
+        int w = this.style.outline_width;
+        int r = w + 1;
+        this.canvas.addElement(
+                new OvalElement(new Pair<>(0, -r), new Pair<>(2 * r, r),
+                        w, this.style.bullet_fill, tag));
+        return new UnitEndPoint(tag, new Pair<>(2 * r, 0));
+    }
+
     private UnitEndPoint parseLine(Line line) {
         String tag = this.canvas.new_tag("x", "");
 
@@ -196,7 +209,7 @@ public class SVGCanvasBuilder {
                 int xn = pos.f + sep;
                 this.canvas.moveByTag(endPoint.tag, xn, pos.s);
                 // create line from previous to this
-                LineElement l = new LineElement(new Pair<>(pos.f - 1, pos.s + 2), new Pair<>(xn, pos.s + 2),
+                LineElement l = new LineElement(new Pair<>(pos.f - 1, pos.s), new Pair<>(xn, pos.s),
                         "last", width, tag);
                 this.canvas.addElement(l);
                 pos.f = xn + endPoint.endpoint.f;
@@ -283,5 +296,5 @@ public class SVGCanvasBuilder {
     }
 
     private Style style;
-    private Canvas canvas;
+    private SVGCanvas canvas;
 }

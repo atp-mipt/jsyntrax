@@ -5,16 +5,15 @@ import com.syntrax.styles.NodeStyle;
 import com.syntrax.styles.Style;
 import com.syntrax.util.Algorithm;
 import com.syntrax.util.Pair;
-import org.jfree.graphics2d.svg.SVGGraphics2D;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Canvas {
+public class SVGCanvas {
 
-    public Canvas(Style style) {
+    public SVGCanvas(Style style) {
         this.style = style;
         this.tagcnt = new HashMap<>();
         this.elements = new ArrayList<Element>();

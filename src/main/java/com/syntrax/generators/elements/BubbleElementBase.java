@@ -1,8 +1,6 @@
 package com.syntrax.generators.elements;
 
-import com.syntrax.styles.Style;
 import com.syntrax.util.Pair;
-import org.jfree.graphics2d.svg.SVGGraphics2D;
 
 import java.awt.*;
 

@@ -3,8 +3,7 @@ package com.syntrax.generators.elements;
 import com.syntrax.styles.Style;
 import com.syntrax.util.Algorithm;
 import com.syntrax.util.Pair;
-import org.jfree.graphics2d.svg.SVGGraphics2D;
-import org.jfree.graphics2d.svg.SVGUnits;
+import sun.font.FontDesignMetrics;
 
 import java.awt.*;
 
@@ -14,9 +13,6 @@ public class TextElement extends Element {
     public TextElement(Pair<Integer, Integer> start, char anchor, String text,
                        Font font, String fontName, Color textColor, String tag) {
         super(tag);
-
-        System.out.println("Teeeeext");
-
         this.text = text;
         this.font = font;
         this.fontName = fontName;
@@ -37,10 +33,7 @@ public class TextElement extends Element {
     }
 
     public static Pair<Integer, Integer> getTextSize(String text, Font font) {
-        SVGGraphics2D svgGraphics2D = new SVGGraphics2D(500, 500);
-        svgGraphics2D.setFont(font);
-        svgGraphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        FontMetrics metrics = svgGraphics2D.getFontMetrics(font);
+        FontMetrics metrics = FontDesignMetrics.getMetrics(font);
 
         // TODO: dirty...
         return new Pair<>(metrics.stringWidth(text) + 10, metrics.getHeight() + 10);
