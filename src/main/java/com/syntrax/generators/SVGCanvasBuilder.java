@@ -474,7 +474,7 @@ public class SVGCanvasBuilder {
                     this.canvas.getBoundingBoxByTag(res.get(i).tag);
             int w = box.s.f - box.f.f;
             if (i != 0) {
-                w += 10;
+                w += 20;
             }
             mxw = Math.max(mxw, w);
         }
