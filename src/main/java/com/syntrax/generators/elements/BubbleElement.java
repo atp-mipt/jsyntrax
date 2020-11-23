@@ -84,8 +84,10 @@ public class BubbleElement extends BubbleElementBase {
         }
 
         // Add text
+        // TODO: bad centering
         int th = Math.abs(super.textPos.s);
         int x = (x0 + x1) / 2;
+        // y = (y0 + y1) / 2 if need good centering
         int y =  (y0 + y1) / 2 + th / 2;
 
         String txt = Algorithm.escapeXML(super.text);

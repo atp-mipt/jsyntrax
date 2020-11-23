@@ -19,7 +19,6 @@ public class LineElement extends Element {
         String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " + "stroke-width=\"" + this.width + "\"";
 
         if (arrow != null) {
-            // TODO: what is this ???
             attributes += " marker-end=\"url(#arrow)\"";
             if (arrow.equals("first")) {
                 // swap

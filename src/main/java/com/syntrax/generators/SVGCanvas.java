@@ -62,20 +62,26 @@ public class SVGCanvas {
         }
     }
 
-    private Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getBoundingBox() {
-        Pair<Integer, Integer> start = new Pair<>(this.elements.get(0).start);
-        Pair<Integer, Integer> end = new Pair<>(this.elements.get(0).end);
+    public Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getBoundingBoxByTag(String tag) {
+        Pair<Integer, Integer> start = null;
+        Pair<Integer, Integer> end = null;
         for (Element e: this.elements)
         {
-            start.f = Math.min(start.f, e.start.f);
-            start.f = Math.min(start.f, e.end.f);
-            start.s = Math.min(start.s, e.start.s);
-            start.s = Math.min(start.s, e.end.s);
+            if (e.isTagged(tag)) {
+                if (start == null) {
+                    start = new Pair<>(e.start);
+                    end = new Pair<>(e.end);
+                }
+                start.f = Math.min(start.f, e.start.f);
+                start.f = Math.min(start.f, e.end.f);
+                start.s = Math.min(start.s, e.start.s);
+                start.s = Math.min(start.s, e.end.s);
 
-            end.f = Math.max(end.f, e.start.f);
-            end.f = Math.max(end.f, e.end.f);
-            end.s = Math.max(end.s, e.start.s);
-            end.s = Math.max(end.s, e.end.s);
+                end.f = Math.max(end.f, e.start.f);
+                end.f = Math.max(end.f, e.end.f);
+                end.s = Math.max(end.s, e.start.s);
+                end.s = Math.max(end.s, e.end.s);
+            }
         }
         return new Pair<>(start, end);
     }
@@ -84,11 +90,7 @@ public class SVGCanvas {
         StringBuilder sb = new StringBuilder();
         // TODO: add title
 
-        // x0 = start.f
-        // y0 = start.s
-        // x1 = end.f
-        // y1 = end.s
-        Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> res = this.getBoundingBox();
+        Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> res = this.getBoundingBoxByTag("all");
         Pair<Integer, Integer> start = res.f;
         Pair<Integer, Integer> end = res.s;
 
