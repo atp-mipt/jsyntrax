@@ -462,7 +462,6 @@ public class SVGCanvasBuilder {
         int n = choice.getUnits().size();
 
         if (n == 0) {
-            // TODO: unlikely
             return null;
         }
         ArrayList<UnitEndPoint> res = new ArrayList<>();
@@ -839,7 +838,7 @@ public class SVGCanvasBuilder {
         FontMetrics metrics = FontDesignMetrics.getMetrics(font);
 
         // TODO: dirty...
-        return new Pair<>(metrics.stringWidth(text) + 10, metrics.getHeight() + 10);
+        return new Pair<>(metrics.stringWidth(text) + text.length() + 10, metrics.getHeight() + 10);
     }
 
     /**
