@@ -1,0 +1,2 @@
+def None = 'None'
+line('-')
