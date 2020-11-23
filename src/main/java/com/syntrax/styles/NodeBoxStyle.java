@@ -1,5 +1,9 @@
 package com.syntrax.styles;
 
+import com.syntrax.generators.elements.BoxBubbleElement;
+import com.syntrax.generators.elements.BubbleElementBase;
+import com.syntrax.util.Pair;
+
 import java.awt.*;
 import java.util.regex.*;
 

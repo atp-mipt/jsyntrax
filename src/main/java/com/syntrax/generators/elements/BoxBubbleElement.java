@@ -17,7 +17,7 @@ public class BoxBubbleElement extends BubbleElementBase {
         int x0 = super.start.f + super.width + 1;
         int y0 = super.start.s + super.width + 1;
         int x1 = super.end.f + super.width + 1;
-        int y1 = super.end.s = super.width + 1;
+        int y1 = super.end.s + super.width + 1;
 
         String attributes = "fill=\"" + Algorithm.toHex(style.shadow_fill) + "\" " +
                 "fill-opacity=\"" + Algorithm.fillOpacity(style.shadow_fill) + "\"";
@@ -35,7 +35,8 @@ public class BoxBubbleElement extends BubbleElementBase {
 
         String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
                 "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + Algorithm.toHex(this.fill) + "\"";
+                "fill=\"" + Algorithm.toHex(this.fill) + "\" " +
+                "fill-opacity=\"" + Algorithm.fillOpacity(this.fill) + "\"";
 
         sb.append("<rect x=\"").append(x0).append("\" y=\"").append(y0)
                 .append("\" width=\"").append(x1 - x0).append("\" height=\"").append(y1 - y0)

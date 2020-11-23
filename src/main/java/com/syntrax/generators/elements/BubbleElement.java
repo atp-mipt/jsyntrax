@@ -56,7 +56,8 @@ public class BubbleElement extends BubbleElementBase {
 
         String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
                 "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + Algorithm.toHex(this.fill) + "\"";
+                "fill=\"" + Algorithm.toHex(this.fill) + "\" " +
+                "fill-opacity=\"" + Algorithm.fillOpacity(this.fill) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;

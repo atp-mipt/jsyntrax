@@ -24,6 +24,7 @@ public class Style {
 
         // TODO: add custom Node styles
         nodeStyles = new ArrayList<>();
+        nodeStyles.add(new NodeHexStyle());
         nodeStyles.add(new NodeBubbleStyle());
         nodeStyles.add(new NodeBoxStyle());
         nodeStyles.add(new NodeTokenStyle());

@@ -462,7 +462,6 @@ public class SVGCanvasBuilder {
         int n = choice.getUnits().size();
 
         if (n == 0) {
-            // TODO: unlikely
             return null;
         }
         ArrayList<UnitEndPoint> res = new ArrayList<>();
@@ -475,7 +474,7 @@ public class SVGCanvasBuilder {
                     this.canvas.getBoundingBoxByTag(res.get(i).tag);
             int w = box.s.f - box.f.f;
             if (i != 0) {
-                w += 10;
+                w += 20;
             }
             mxw = Math.max(mxw, w);
         }
@@ -839,7 +838,7 @@ public class SVGCanvasBuilder {
         FontMetrics metrics = FontDesignMetrics.getMetrics(font);
 
         // TODO: dirty...
-        return new Pair<>(metrics.stringWidth(text) + 10, metrics.getHeight() + 10);
+        return new Pair<>(metrics.stringWidth(text) + text.length() + 10, metrics.getHeight() + 10);
     }
 
     /**
