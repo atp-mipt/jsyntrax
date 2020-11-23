@@ -5,5 +5,5 @@ package com.syntrax.units.nodes;
  * @brief special class for parse None in syntrax language
  */
 public class NoneNode extends Node {
-    NoneNode() { super(""); }
+    public NoneNode() { super(""); }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Indentstack extends Stack {
-  final int indent;
+  public final int indent;
 
   public Indentstack(int indent, ArrayList<Unit> units) {
     super(units);
