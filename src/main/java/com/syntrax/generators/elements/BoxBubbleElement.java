@@ -17,7 +17,7 @@ public class BoxBubbleElement extends BubbleElementBase {
         int x0 = super.start.f + super.width + 1;
         int y0 = super.start.s + super.width + 1;
         int x1 = super.end.f + super.width + 1;
-        int y1 = super.end.s = super.width + 1;
+        int y1 = super.end.s + super.width + 1;
 
         String attributes = "fill=\"" + Algorithm.toHex(style.shadow_fill) + "\" " +
                 "fill-opacity=\"" + Algorithm.fillOpacity(style.shadow_fill) + "\"";
