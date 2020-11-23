@@ -1,6 +1,5 @@
 package com.syntrax.generators.elements;
 
-import com.syntrax.Main;
 import com.syntrax.styles.Style;
 import com.syntrax.util.Algorithm;
 import com.syntrax.util.Pair;

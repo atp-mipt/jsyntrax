@@ -35,7 +35,8 @@ public class BoxBubbleElement extends BubbleElementBase {
 
         String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
                 "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + Algorithm.toHex(this.fill) + "\"";
+                "fill=\"" + Algorithm.toHex(this.fill) + "\" " +
+                "fill-opacity=\"" + Algorithm.fillOpacity(this.fill) + "\"";
 
         sb.append("<rect x=\"").append(x0).append("\" y=\"").append(y0)
                 .append("\" width=\"").append(x1 - x0).append("\" height=\"").append(y1 - y0)
