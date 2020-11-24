@@ -15,7 +15,8 @@ public class Main {
     public static void main(String[] args) {
         String program_path = "syntrax_scripts";
         File file = new File(program_path, "test1.groovy");
-        Track track = Parser.parse(file);
+        Specification spec = Parser.parse(file);
+        Track track = spec.getTrack();
         System.out.println(track);
 
         // TODO: not in Main

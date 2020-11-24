@@ -3,13 +3,17 @@ package com.syntrax;
 import com.syntrax.units.tracks.Track;
 
 import java.net.URL;
-import java.util.Map;
+import java.util.HashMap;
 
 public class Specification {
   Track track;
-  Map<String, URL> url_map;
+  HashMap<String, URL> url_map;
 
-  public Specification(Track track, Map<String, URL> url_map) {
+  public Specification(Track track) {
+    this(track, new HashMap<String, URL>());
+  }
+
+  public Specification(Track track, HashMap<String, URL> url_map) {
     this.track = track;
     this.url_map = url_map;
   }
@@ -18,7 +22,7 @@ public class Specification {
     return track;
   }
 
-  public Map<String, URL> getUrl_map() {
+  public HashMap<String, URL> getUrl_map() {
     return url_map;
   }
 }
