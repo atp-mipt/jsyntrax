@@ -98,6 +98,7 @@ public class SVGCanvasBuilder {
         }
 
         return null;
+
     }
 
     private UnitEndPoint parseNoneNode(NoneNode node) {
