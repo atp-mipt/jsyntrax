@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by Syntax-Trax http://kevinpt.github.io/syntax-trax -->
+<svg xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xml:space="preserve"
+width="446" height="306" version="1.1">
+<style type="text/css">
+<![CDATA[
+.box_font {fill:#646464; text-anchor:middle;
+    font-family:Helvetica; font-size:14pt; font-weight:bold; font-style:normal;}
+.token_font {fill:#000000; text-anchor:middle;
+    font-family:Times; font-size:16pt; font-weight:normal; font-style:italic;}
+.title_font {fill:#000000; text-anchor:middle;
+    font-family:Helvetica; font-size:22pt; font-weight:bold; font-style:normal;}
+.hex_bubble_font {fill:#000000; text-anchor:middle;
+    font-family:Helvetica; font-size:14pt; font-weight:bold; font-style:normal;}
+.label {fill:#000;
+  text-anchor:middle;
+  font-size:16pt; font-weight:bold; font-family:Sans;}
+.link {fill: #0D47A1;}
+.link:hover {fill: #0D47A1; text-decoration:underline;}
+.link:visited {fill: #4A148C;}
+]]>
+</style>
+<defs>
+  <marker id="arrow" markerWidth="5" markerHeight="4" refX="2.5" refY="2" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0.5,2 L0,4 L4.5,2 z" fill="#000000" />
+  </marker>
+</defs>
+<rect width="100%" height="100%" fill="white"/><path d="M41.0,41.0 H119.0 L127.0,25.0 L119.0,9.0 H41.0 L33.0,25.0 z" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<rect x="146.0" y="9.0" width="177.0" height="32.0" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<path d="M350.0,41.0 H373.0 L381.0,25.0 L373.0,9.0 H350.0 L342.0,25.0 z" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<rect x="96.0" y="121.0" width="162.0" height="32.0" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<circle cx="177.0" cy="98.0" r="17.0" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<path d="M105.0,191.0 H166.0 L174.0,175.0 L166.0,159.0 H105.0 L97.0,175.0 z" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<path d="M105.0,229.0 H131.0 L139.0,213.0 L131.0,197.0 H105.0 L97.0,213.0 z" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<circle cx="345.0" cy="137.0" r="17.0" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<rect x="69.0" y="270.0" width="115.0" height="32.0" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<path d="M211.0,302.0 H232.0 L240.0,286.0 L232.0,270.0 H211.0 L203.0,286.0 z" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<rect x="259.0" y="270.0" width="107.0" height="32.0" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<circle cx="402.0" cy="286.0" r="17.0" stroke="none" fill-opacity="0.498039215686" fill="#000000"/>
+<circle cx="9" cy="21.0" r="3" stroke="#000000" stroke-width="2" fill="#FFFF00"/>
+<path d="M38.0,38.0 H116.0 L124.0,22.0 L116.0,6.0 H38.0 L30.0,22.0 z" fill-opacity="0.498039215686" stroke="#000000" stroke-width="2" fill="#FF0000"/>
+<text class="hex_bubble_font" x="77.0" y="29.0">attribute</text>
+<rect x="143.0" y="6.0" width="177.0" height="32.0" stroke="#000000" stroke-width="2" fill="#88AAEE"/>
+<text class="box_font" x="231.5" y="29.0">(attribute) identifier</text>
+<line x1="124.0" y1="21.0" x2="142.0" y2="21.0" stroke="#000000" stroke-width="3" />
+<path d="M347.0,38.0 H370.0 L378.0,22.0 L370.0,6.0 H347.0 L339.0,22.0 z" fill-opacity="0.498039215686" stroke="#000000" stroke-width="2" fill="#FF0000"/>
+<text class="hex_bubble_font" x="358.5" y="29.0">of</text>
+<line x1="320.0" y1="21.0" x2="338.0" y2="21.0" stroke="#000000" stroke-width="3" />
+<rect x="93.0" y="118.0" width="162.0" height="32.0" stroke="#000000" stroke-width="2" fill="#88AAEE"/>
+<text class="box_font" x="174.0" y="141.0">entity_designator</text>
+<circle cx="174.0" cy="95.0" r="17.0" fill-opacity="0.498039215686" stroke="#000000" stroke-width="2" fill="#00FF00"/>
+<text class="token_font" x="174.0" y="102.5">,</text>
+<line x1="92.0" y1="94.0" x2="156.0" y2="94.0" stroke="#000000" stroke-width="3" />
+<line x1="192.0" y1="94.0" x2="256.0" y2="94.0" stroke="#000000" stroke-width="3" />
+<line x1="83.0" y1="133.0" x2="92.0" y2="133.0" stroke="#000000" stroke-width="3" />
+<path d="M92.0,94.0 A19.5,19.5 0 0,0 92.0,133.0" stroke="#000000" stroke-width="3" fill="none"/>
+<path d="M256.0,133.0 A19.5,19.5 0 0,0 256.0,94.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="256.0" y1="133.0" x2="276.5" y2="133.0" stroke="#000000" stroke-width="3" />
+<path d="M102.0,188.0 H163.0 L171.0,172.0 L163.0,156.0 H102.0 L94.0,172.0 z" fill-opacity="0.498039215686" stroke="#000000" stroke-width="2" fill="#FF0000"/>
+<text class="hex_bubble_font" x="132.5" y="179.0">others</text>
+<path d="M102.0,226.0 H128.0 L136.0,210.0 L128.0,194.0 H102.0 L94.0,210.0 z" fill-opacity="0.498039215686" stroke="#000000" stroke-width="2" fill="#FF0000"/>
+<text class="hex_bubble_font" x="115.0" y="217.0">all</text>
+<line x1="65" y1="133.0" x2="83.0" y2="133.0" stroke="#000000" stroke-width="3" />
+<line x1="276.5" y1="133.0" x2="308.0" y2="133.0" stroke="#000000" stroke-width="3" />
+<path d="M74.0,142.0 A9,9 0 0,0 65.0,133.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="83" y1="171.0" x2="93" y2="171.0" stroke="#000000" stroke-width="3" />
+<line x1="172.0" y1="171.0" x2="289.0" y2="171.0" stroke="#000000" stroke-width="3" />
+<path d="M74.0,162.0 A9,9 0 0,0 83.0,171.0" stroke="#000000" stroke-width="3" fill="none"/>
+<path d="M289.0,171.0 A9.0,9.0 0 0,0 298.0,162.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="83" y1="209.0" x2="93" y2="209.0" stroke="#000000" stroke-width="3" />
+<line x1="137.0" y1="209.0" x2="289.0" y2="209.0" stroke="#000000" stroke-width="3" />
+<path d="M74.0,200.0 A9,9 0 0,0 83.0,209.0" stroke="#000000" stroke-width="3" fill="none"/>
+<path d="M289.0,209.0 A9.0,9.0 0 0,0 298.0,200.0" stroke="#000000" stroke-width="3" fill="none"/>
+<path d="M307.0,133.0 A9.0,9.0 0 0,0 298.0,142.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="74" y1="200.0" x2="74" y2="142.0" stroke="#000000" stroke-width="3" />
+<line x1="298.0" y1="200.0" x2="298.0" y2="142.0" stroke="#000000" stroke-width="3" />
+<circle cx="342.0" cy="134.0" r="17.0" fill-opacity="0.498039215686" stroke="#000000" stroke-width="2" fill="#00FF00"/>
+<text class="token_font" x="342.0" y="141.5">:</text>
+<line x1="306.0" y1="133.0" x2="324.0" y2="133.0" stroke="#000000" stroke-width="3" />
+<line x1="379.0" y1="21.0" x2="397.0" y2="21.0" stroke="#000000" stroke-width="3" />
+<path d="M397.0,58.0 A18.5,18.5 0 0,0 397.0,21.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="397.0" y1="58.0" x2="222.0" y2="58.0" stroke="#000000" stroke-width="3" />
+<line x1="222.0" y1="58.0" x2="47" y2="58.0" stroke="#000000" stroke-width="3" />
+<path d="M47.0,58.0 A37.5,37.5 0 0,0 47.0,133.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="47" y1="133.0" x2="65" y2="133.0" stroke="#000000" stroke-width="3" />
+<rect x="66.0" y="267.0" width="115.0" height="32.0" stroke="#000000" stroke-width="2" fill="#88AAEE"/>
+<text class="box_font" x="123.5" y="290.0">entity_class</text>
+<path d="M208.0,299.0 H229.0 L237.0,283.0 L229.0,267.0 H208.0 L200.0,283.0 z" fill-opacity="0.498039215686" stroke="#000000" stroke-width="2" fill="#FF0000"/>
+<text class="hex_bubble_font" x="218.5" y="290.0">is</text>
+<line x1="181.0" y1="282.0" x2="199.0" y2="282.0" stroke="#000000" stroke-width="3" />
+<rect x="256.0" y="267.0" width="107.0" height="32.0" stroke="#000000" stroke-width="2" fill="#88AAEE"/>
+<text class="box_font" x="309.5" y="290.0">expression</text>
+<line x1="237.0" y1="282.0" x2="255.0" y2="282.0" stroke="#000000" stroke-width="3" />
+<circle cx="399.0" cy="283.0" r="17.0" fill-opacity="0.498039215686" stroke="#000000" stroke-width="2" fill="#00FF00"/>
+<text class="token_font" x="399.0" y="290.5">;</text>
+<line x1="363.0" y1="282.0" x2="381.0" y2="282.0" stroke="#000000" stroke-width="3" />
+<line x1="360.0" y1="133.0" x2="378.0" y2="133.0" stroke="#000000" stroke-width="3" />
+<path d="M407.0,162.0 A29.0,29.0 0 0,0 378.0,133.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="407.0" y1="162.0" x2="407.0" y2="217.0" stroke="#000000" stroke-width="3" />
+<path d="M378.0,246.0 A29.0,29.0 0 0,0 407.0,217.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="378.0" y1="246.0" x2="212.5" y2="246.0" stroke="#000000" stroke-width="3" />
+<line x1="212.5" y1="246.0" x2="47" y2="246.0" stroke="#000000" stroke-width="3" />
+<path d="M47.0,246.0 A18.0,18.0 0 0,0 47.0,282.0" stroke="#000000" stroke-width="3" fill="none"/>
+<line x1="47" y1="282.0" x2="65" y2="282.0" stroke="#000000" stroke-width="3" />
+<line x1="11" y1="21.0" x2="29" y2="21.0" stroke="#000000" stroke-width="3" />
+<circle cx="437.0" cy="282.0" r="3.0" stroke="#000000" stroke-width="2" fill="#FFFF00"/>
+<line x1="416.0" y1="282.0" x2="434.0" y2="282.0" stroke="#000000" stroke-width="3" />
+</svg>

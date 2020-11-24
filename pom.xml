@@ -1,79 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>main.java</groupId>
-    <artifactId>Main</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <!--http://start.spring.io/-->
-    <name>JavaSyntrax</name>
-    <description>Reimplement Syntrax</description>
+    <groupId>org.atp-fivt</groupId>
+    <artifactId>jsyntrax-parent</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    
+    <name>jsyntrax parent pom</name>
+    <description>JSyntrax: Railroad diagrams generator</description>
+    <url>https://github.com/atp-mipt/jsyntrax</url>
+
+    <organization>
+        <name>MIPT/FIVT/ATP</name>
+        <url>https://mipt.ru/education/chairs/programmingtechnolgy/</url>
+    </organization>
+
+    <scm>
+        <url>https://github.com/atp-mipt/jsyntrax.git</url>
+        <connection>git@github.com:atp-mipt/jsyntrax.git</connection>
+        <developerConnection>git@github.com:atp-mipt/jsyntrax.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Ekaterina Klementeva</name>
+            <email>katyaklema@gmail.com</email>
+        </developer>
+        <developer>
+            <name>Egor Kologermansky</name>
+            <email>kologermanskij.ei@phystech.edu</email>
+        </developer>
+        <developer>
+            <name>Ivan Ponomarev</name>
+            <email>ponomarev@phystech.edu</email>
+        </developer>
+        <developer>
+            <name>Mikhail Yumanov</name>
+            <email>iumanov.ms@phystech.edu</email>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Kevin Thibedeau</name>
+            <email>kevin.thibedeau@gmail.com</email>
+        </contributor>
+        <contributor>
+          <name>Oleg Ivchenko</name>
+          <email>oleg.ivchenko@phystech.edu</email>
+        </contributor>
+    </contributors>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.main.class>com.syntrax.Main</java.main.class>
-        <java.version>1.11</java.version>
+        <revision>1.0</revision>
+        <asciidoctor.maven.plugin.version>2.1.0</asciidoctor.maven.plugin.version>
+        <asciidoctorj-diagram.version>2.0.5</asciidoctorj-diagram.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jfree</groupId>
-            <artifactId>jfreesvg</artifactId>
-            <version>3.4</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <verbose>true</verbose>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.7.0-01</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <additionalProjectnatures>
-                        <projectnature>org.eclipse.jdt.groovy.core.groovyNature</projectnature>
-                    </additionalProjectnatures>
-                    <sourceIncludes>
-                        <sourceInclude>src/main/java/**/*.groovy</sourceInclude>
-                    </sourceIncludes>
-                </configuration>
-            </plugin>
-
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <mainClass>${java.main.class}</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <modules>
+        <module>doc</module>
+        <module>jsyntrax</module>
+    </modules>
 </project>

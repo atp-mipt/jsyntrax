@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->
+<svg xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xml:space="preserve"
+width="625" height="253" version="1.1">
+<style type="text/css">
+<![CDATA[
+.title_font {fill:#000000; text-anchor:middle;
+font-family:Sans; font-size:22pt; font-weight:bold; font-style:normal; }
+.token_font {fill:#000000; text-anchor:middle;
+font-family:Sans; font-size:16pt; font-weight:bold; font-style:normal; }
+.box_font {fill:#000000; text-anchor:middle;
+font-family:Times; font-size:14pt; font-weight:normal; font-style:italic; }
+.bubble_font {fill:#000000; text-anchor:middle;
+font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
+.label {fill: #000; text-anchor:middle; font-size:16pt; font-weight:bold; font-family:Sans;}
+.link {fill: #0D47A1;}
+.link:hover {fill: #0D47A1; text-decoration:underline;}
+.link:visited {fill: #4A148C;}
+]]>
+</style>
+<defs>
+<marker id="arrow" markerWidth="5" markerHeight="4" refX="2.5" refY="2" orient="auto" markerUnits="strokeWidth">
+<path d="M0,0 L0.5,2 L0,4 L4.5,2 z" fill="#000000" />
+</marker>
+</defs>
+<rect width="100%" height="100%" fill="white"/>
+<circle cx="8" cy="18" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<line x1="68" y1="18" x2="69" y2="18" stroke="#000000" stroke-width="2" />
+<path d="M70,57 A16,16 0 0,1 70,25 H74 A16,16 0 0,1 74,57 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M67,54 A16,16 0 0,1 67,22 H71 A16,16 0 0,1 71,54 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="token_font" x="69" y="45">-</text>
+<line x1="28" y1="18" x2="64" y2="18" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="69" y1="18" x2="111" y2="18" stroke="#000000" stroke-width="2" />
+<path d="M37,27 A9,9 0 0,0 28,18" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="46" y1="36" x2="47" y2="36" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="87" y1="36" x2="92" y2="36" stroke="#000000" stroke-width="2" />
+<path d="M37,27 A9,9 0 0,0 46,36" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M92,36 A9,9 0 0,0 101,27" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M110,18 A9,9 0 0,0 101,27" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="37" y1="27" x2="37" y2="27" stroke="#000000" stroke-width="2" />
+<line x1="101" y1="27" x2="101" y2="27" stroke="#000000" stroke-width="2" />
+<path d="M173,38 A15,15 0 0,1 173,8 H181 A15,15 0 0,1 181,38 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M170,35 A15,15 0 0,1 170,5 H178 A15,15 0 0,1 178,35 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="174" y="27">0</text>
+<path d="M168,72 A15,15 0 0,1 168,42 H189 A15,15 0 0,1 189,72 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M165,69 A15,15 0 0,1 165,39 H186 A15,15 0 0,1 186,69 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="175" y="61">1-9</text>
+<path d="M245,72 A15,15 0 0,1 245,42 H282 A15,15 0 0,1 282,72 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M242,69 A15,15 0 0,1 242,39 H279 A15,15 0 0,1 279,69 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="260" y="61">None</text>
+<path d="M253,106 A15,15 0 0,1 253,76 H274 A15,15 0 0,1 274,106 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M250,103 A15,15 0 0,1 250,73 H271 A15,15 0 0,1 271,103 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="260" y="95">0-9</text>
+<line x1="227" y1="86" x2="235" y2="86" stroke="#000000" stroke-width="2" />
+<line x1="294" y1="86" x2="290" y2="86" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="218" y1="52" x2="227" y2="52" stroke="#000000" stroke-width="2" />
+<path d="M227,52 A9,9 0 0,0 218,61" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="218" y1="61" x2="218" y2="77" stroke="#000000" stroke-width="2" />
+<path d="M218,77 A9,9 0 0,0 227,86" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M303,61 A9,9 0 0,0 294,52" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="303" y1="61" x2="303" y2="77" stroke="#000000" stroke-width="2" />
+<path d="M294,86 A9,9 0 0,0 303,77" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="294" y1="52" x2="303" y2="52" stroke="#000000" stroke-width="2" />
+<line x1="200" y1="52" x2="214" y2="52" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="127" y1="18" x2="151" y2="18" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="193" y1="18" x2="327" y2="18" stroke="#000000" stroke-width="2" />
+<path d="M136,27 A9,9 0 0,0 127,18" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="145" y1="52" x2="146" y2="52" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="303" y1="52" x2="308" y2="52" stroke="#000000" stroke-width="2" />
+<path d="M136,43 A9,9 0 0,0 145,52" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M308,52 A9,9 0 0,0 317,43" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M326,18 A9,9 0 0,0 317,27" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="136" y1="43" x2="136" y2="27" stroke="#000000" stroke-width="2" />
+<line x1="317" y1="43" x2="317" y2="27" stroke="#000000" stroke-width="2" />
+<line x1="109" y1="18" x2="123" y2="18" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="434" y1="18" x2="435" y2="18" stroke="#000000" stroke-width="2" />
+<path d="M385,57 A16,16 0 0,1 385,25 H388 A16,16 0 0,1 388,57 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M382,54 A16,16 0 0,1 382,22 H385 A16,16 0 0,1 385,54 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="token_font" x="383" y="45">.</text>
+<path d="M453,56 A15,15 0 0,1 453,26 H474 A15,15 0 0,1 474,56 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M450,53 A15,15 0 0,1 450,23 H471 A15,15 0 0,1 471,53 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="460" y="45">0-9</text>
+<path d="M445,90 A15,15 0 0,1 445,60 H482 A15,15 0 0,1 482,90 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M442,87 A15,15 0 0,1 442,57 H479 A15,15 0 0,1 479,87 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="460" y="79">None</text>
+<line x1="427" y1="36" x2="431" y2="36" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="486" y1="36" x2="494" y2="36" stroke="#000000" stroke-width="2" />
+<line x1="418" y1="36" x2="427" y2="36" stroke="#000000" stroke-width="2" />
+<path d="M427,36 A9,9 0 0,0 418,45" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="418" y1="45" x2="418" y2="61" stroke="#000000" stroke-width="2" />
+<path d="M418,61 A9,9 0 0,0 427,70" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M503,45 A9,9 0 0,0 494,36" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="503" y1="45" x2="503" y2="61" stroke="#000000" stroke-width="2" />
+<path d="M494,70 A9,9 0 0,0 503,61" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="494" y1="36" x2="503" y2="36" stroke="#000000" stroke-width="2" />
+<line x1="400" y1="36" x2="414" y2="36" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="343" y1="18" x2="430" y2="18" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="435" y1="18" x2="527" y2="18" stroke="#000000" stroke-width="2" />
+<path d="M352,27 A9,9 0 0,0 343,18" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="361" y1="36" x2="362" y2="36" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="503" y1="36" x2="508" y2="36" stroke="#000000" stroke-width="2" />
+<path d="M352,27 A9,9 0 0,0 361,36" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M508,36 A9,9 0 0,0 517,27" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M526,18 A9,9 0 0,0 517,27" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="352" y1="27" x2="352" y2="27" stroke="#000000" stroke-width="2" />
+<line x1="517" y1="27" x2="517" y2="27" stroke="#000000" stroke-width="2" />
+<line x1="325" y1="18" x2="339" y2="18" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="415" y1="141" x2="416" y2="141" stroke="#000000" stroke-width="2" />
+<path d="M298,179 A15,15 0 0,1 298,149 H307 A15,15 0 0,1 307,179 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M295,176 A15,15 0 0,1 295,146 H304 A15,15 0 0,1 304,176 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="299" y="168">e</text>
+<path d="M298,213 A15,15 0 0,1 298,183 H308 A15,15 0 0,1 308,213 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M295,210 A15,15 0 0,1 295,180 H305 A15,15 0 0,1 305,210 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="300" y="202">E</text>
+<line x1="257" y1="159" x2="276" y2="159" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="319" y1="159" x2="344" y2="159" stroke="#000000" stroke-width="2" />
+<path d="M266,168 A9,9 0 0,0 257,159" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="275" y1="193" x2="276" y2="193" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="320" y1="193" x2="325" y2="193" stroke="#000000" stroke-width="2" />
+<path d="M266,184 A9,9 0 0,0 275,193" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M325,193 A9,9 0 0,0 334,184" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M343,159 A9,9 0 0,0 334,168" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="266" y1="184" x2="266" y2="168" stroke="#000000" stroke-width="2" />
+<line x1="334" y1="184" x2="334" y2="168" stroke="#000000" stroke-width="2" />
+<path d="M396,179 A15,15 0 0,1 396,149 H433 A15,15 0 0,1 433,179 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M393,176 A15,15 0 0,1 393,146 H430 A15,15 0 0,1 430,176 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="411" y="168">None</text>
+<path d="M407,215 A16,16 0 0,1 407,183 H415 A16,16 0 0,1 415,215 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M404,212 A16,16 0 0,1 404,180 H412 A16,16 0 0,1 412,212 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="token_font" x="408" y="203">+</text>
+<path d="M407,251 A16,16 0 0,1 407,219 H411 A16,16 0 0,1 411,251 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M404,248 A16,16 0 0,1 404,216 H408 A16,16 0 0,1 408,248 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="token_font" x="406" y="239">-</text>
+<line x1="360" y1="159" x2="378" y2="159" stroke="#000000" stroke-width="2" />
+<line x1="445" y1="159" x2="464" y2="159" stroke="#000000" stroke-width="2" />
+<path d="M369,168 A9,9 0 0,0 360,159" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="378" y1="194" x2="384" y2="194" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="428" y1="194" x2="445" y2="194" stroke="#000000" stroke-width="2" />
+<path d="M369,185 A9,9 0 0,0 378,194" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M445,194 A9,9 0 0,0 454,185" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="378" y1="230" x2="384" y2="230" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="424" y1="230" x2="445" y2="230" stroke="#000000" stroke-width="2" />
+<path d="M369,221 A9,9 0 0,0 378,230" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M445,230 A9,9 0 0,0 454,221" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M463,159 A9,9 0 0,0 454,168" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="369" y1="221" x2="369" y2="168" stroke="#000000" stroke-width="2" />
+<line x1="454" y1="221" x2="454" y2="168" stroke="#000000" stroke-width="2" />
+<line x1="342" y1="159" x2="356" y2="159" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M515,179 A15,15 0 0,1 515,149 H536 A15,15 0 0,1 536,179 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M512,176 A15,15 0 0,1 512,146 H533 A15,15 0 0,1 533,176 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="522" y="168">0-9</text>
+<path d="M507,213 A15,15 0 0,1 507,183 H544 A15,15 0 0,1 544,213 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M504,210 A15,15 0 0,1 504,180 H541 A15,15 0 0,1 541,210 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" />
+<text class="bubble_font" x="522" y="202">None</text>
+<line x1="489" y1="159" x2="493" y2="159" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="548" y1="159" x2="556" y2="159" stroke="#000000" stroke-width="2" />
+<line x1="480" y1="159" x2="489" y2="159" stroke="#000000" stroke-width="2" />
+<path d="M489,159 A9,9 0 0,0 480,168" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="480" y1="168" x2="480" y2="184" stroke="#000000" stroke-width="2" />
+<path d="M480,184 A9,9 0 0,0 489,193" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M565,168 A9,9 0 0,0 556,159" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="565" y1="168" x2="565" y2="184" stroke="#000000" stroke-width="2" />
+<path d="M556,193 A9,9 0 0,0 565,184" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="556" y1="159" x2="565" y2="159" stroke="#000000" stroke-width="2" />
+<line x1="462" y1="159" x2="476" y2="159" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="234" y1="141" x2="411" y2="141" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="416" y1="141" x2="598" y2="141" stroke="#000000" stroke-width="2" />
+<path d="M243,150 A9,9 0 0,0 234,141" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="252" y1="159" x2="253" y2="159" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="565" y1="159" x2="579" y2="159" stroke="#000000" stroke-width="2" />
+<path d="M243,150 A9,9 0 0,0 252,159" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M579,159 A9,9 0 0,0 588,150" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M597,141 A9,9 0 0,0 588,150" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="243" y1="150" x2="243" y2="150" stroke="#000000" stroke-width="2" />
+<line x1="588" y1="150" x2="588" y2="150" stroke="#000000" stroke-width="2" />
+<line x1="526" y1="18" x2="544" y2="18" stroke="#000000" stroke-width="2" />
+<path d="M553,27 A9,9 0 0,0 544,18" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="553" y1="27" x2="553" y2="66" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="553" y1="70" x2="553" y2="113" stroke="#000000" stroke-width="2" />
+<path d="M544,122 A9,9 0 0,0 553,113" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="544" y1="122" x2="384" y2="122" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="380" y1="122" x2="216" y2="122" stroke="#000000" stroke-width="2" />
+<path d="M216,122 A9,9 0 0,0 216,140" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="216" y1="141" x2="230" y2="141" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="10" y1="18" x2="24" y2="18" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<circle cx="617" cy="141" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<line x1="596" y1="141" x2="610" y2="141" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+</svg>
