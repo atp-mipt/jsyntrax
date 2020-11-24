@@ -9,20 +9,28 @@ import java.net.URL;
 public class Node implements Unit {
   Style style;
   String text;
-  URL link;
+  boolean is_link = false;
 
   public Node(String text) {
     this.text = text;
   }
 
-  public Node(Style style, String text, URL link) {
+  public Node(Style style, String text) {
     this.style = style;
     this.text = text;
-    this.link = link;
+    this.is_link = false;  // FIXME: replace with slash checker
   }
 
-  public URL getLink() {
-    return link;
+  public boolean isLink() {
+    return is_link;
+  }
+
+  public void setLink() {
+    is_link = true;
+  }
+
+  public void unsetLink() {
+    is_link = false;
   }
 
   @Override

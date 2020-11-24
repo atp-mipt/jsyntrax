@@ -10,7 +10,7 @@ public class Specification {
   HashMap<String, URL> url_map;
 
   public Specification(Track track) {
-    this(track, new HashMap<String, URL>());
+    this(track, new HashMap<>());
   }
 
   public Specification(Track track, HashMap<String, URL> url_map) {
@@ -22,7 +22,7 @@ public class Specification {
     return track;
   }
 
-  public HashMap<String, URL> getUrl_map() {
-    return url_map;
+  public URL getUrl(String s) {
+    return url_map.get(s);
   }
 }
