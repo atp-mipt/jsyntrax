@@ -1,6 +1,7 @@
 package com.syntrax.units;
 
 import com.syntrax.util.Pair;
+import com.syntrax.visitors.Visitor;
 
 import java.util.ArrayList;
 import java.util.HashSet;

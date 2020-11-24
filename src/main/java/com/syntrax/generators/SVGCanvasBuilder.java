@@ -11,6 +11,7 @@ import com.syntrax.units.tracks.opt.*;
 import com.syntrax.units.tracks.stack.*;
 import com.syntrax.units.tracks.*;
 import com.syntrax.util.Pair;
+import com.syntrax.visitors.CanvasBuilderVisitor;
 import groovy.json.internal.ArrayUtils;
 import sun.font.FontDesignMetrics;
 
@@ -41,6 +42,10 @@ public class SVGCanvasBuilder {
         if (null == unit) {
             return null;
         }
+
+        // CanvasBuilderVisitor visitor = new CanvasBuilderVisitor();
+        // visitor.visit(unit);
+        // return (UnitEndPoint) visitor.getTosValue();
 
         if (unit instanceof NoneNode) {
             return parseNoneNode((NoneNode) unit);
@@ -93,6 +98,7 @@ public class SVGCanvasBuilder {
         }
 
         return null;
+
     }
 
     private UnitEndPoint parseNoneNode(NoneNode node) {

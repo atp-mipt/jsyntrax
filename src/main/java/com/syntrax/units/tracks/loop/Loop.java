@@ -4,6 +4,7 @@ import com.syntrax.exceptions.LoopNotTwoArgsException;
 import com.syntrax.units.Unit;
 import com.syntrax.units.tracks.ComplexTrack;
 import com.syntrax.units.tracks.Track;
+import com.syntrax.visitors.Visitor;
 
 import java.util.ArrayList;
 
@@ -30,5 +31,9 @@ public class Loop extends ComplexTrack {
 
   public boolean isBackwardNull() {
     return getBackwardPart() == null;
+  }
+
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }

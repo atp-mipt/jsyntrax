@@ -2,6 +2,7 @@ package com.syntrax.units.tracks.opt;
 
 import com.syntrax.units.Unit;
 import com.syntrax.units.tracks.ComplexTrack;
+import com.syntrax.visitors.Visitor;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -32,5 +33,9 @@ public class Opt extends ComplexTrack {
         units.stream().map(Object::toString)
             .collect(Collectors.joining("\n"))
         + " ]" + " >";
+  }
+
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }

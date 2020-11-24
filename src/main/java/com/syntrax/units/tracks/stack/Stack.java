@@ -3,6 +3,7 @@ package com.syntrax.units.tracks.stack;
 import com.syntrax.units.Unit;
 import com.syntrax.units.tracks.ComplexTrack;
 import com.syntrax.units.tracks.opt.Opt;
+import com.syntrax.visitors.Visitor;
 
 import java.util.ArrayList;
 
@@ -17,5 +18,9 @@ public class Stack extends ComplexTrack {
         unit.setStacked();
       }
     }
+  }
+
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }

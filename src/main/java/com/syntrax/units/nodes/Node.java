@@ -2,6 +2,7 @@ package com.syntrax.units.nodes;
 
 import com.syntrax.styles.Style;
 import com.syntrax.units.Unit;
+import com.syntrax.visitors.Visitor;
 
 public class Node implements Unit {
   Style style;
@@ -19,5 +20,9 @@ public class Node implements Unit {
   @Override
   public String toString() {
     return text;
+  }
+
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }
