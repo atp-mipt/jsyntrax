@@ -1,5 +1,7 @@
 package org.atpfivt.jsyntrax.styles;
 
+import org.atpfivt.jsyntrax.units.nodes.Node;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -23,11 +25,12 @@ public class Style {
         this.transparent = false;
 
         // TODO: add custom Node styles
-        nodeStyles = new ArrayList<>();
-        nodeStyles.add(new NodeHexStyle());
-        nodeStyles.add(new NodeBubbleStyle());
-        nodeStyles.add(new NodeBoxStyle());
-        nodeStyles.add(new NodeTokenStyle());
+        nodeStyles = new ArrayList<NodeStyle>(){{
+            add(new NodeBubbleStyle());
+            add(new NodeBoxStyle());
+            add(new NodeTokenStyle());
+            add(new NodeHexStyle());
+        }};
     }
 
     public void addStyle(NodeStyle ns) {
