@@ -1,5 +1,6 @@
 package org.atpfivt.jsyntrax.generators;
 
+import org.atpfivt.jsyntrax.Specification;
 import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
@@ -17,6 +18,7 @@ import sun.font.FontDesignMetrics;
 
 import javax.annotation.processing.SupportedSourceVersion;
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,10 +30,10 @@ public class SVGCanvasBuilder {
     public SVGCanvasBuilder() {
     }
 
-    public SVGCanvas generateSVG(Unit unit) {
+    public SVGCanvas generateSVG(Specification spec) {
         this.style = new Style();
-        this.canvas = new SVGCanvas(this.style);
-        this.parseDiagram(unit, true);
+        this.canvas = new SVGCanvas(this.style, spec);
+        this.parseDiagram(spec.getRoot(), true);
         return this.canvas;
     }
 
@@ -125,8 +127,6 @@ public class SVGCanvasBuilder {
         Color fill = ns.fill;
         Color textColor = ns.text_color;
 
-        // TODO: add url mapping
-
         Pair<Integer, Integer> textSize = getTextSize(txt, font);
         int x0 = -textSize.f / 2;
         int y0 = -textSize.s / 2;
@@ -161,23 +161,24 @@ public class SVGCanvasBuilder {
         Pair<Integer, Integer> end;
 
         BubbleElementBase b;
+        URL href = this.canvas.spec.getUrl(txt);
         switch (ns.shape) {
             case "bubble":
                 start = new Pair<>(lft - rad, top);
                 end = new Pair<>(rgt + rad, btm);
-                b = new BubbleElement(start, end, txt, new Pair<>(x0, y0), font,
+                b = new BubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
             case "hex":
                 start = new Pair<>(lft - rad, top);
                 end = new Pair<>(rgt + rad, btm);
-                b = new HexBubbleElement(start, end, txt, new Pair<>(x0, y0), font,
+                b = new HexBubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
             default:
                 start = new Pair<>(lft, top);
                 end = new Pair<>(rgt, btm);
-                b = new BoxBubbleElement(start, end, txt, new Pair<>(x0, y0), font,
+                b = new BoxBubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
         }

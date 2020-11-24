@@ -1,7 +1,5 @@
-// def None = 'None'
-indentstack(10,
-    line(opt('-'), choice('0', line('1-9', loop(None, '0-9'))),
-        opt('.', loop('0-9', None))),
-
-    line(opt(choice('e', 'E'), choice(None, '+', '-'), loop('0-9', None)))
+stack(
+        line('attribute', '/(attribute) identifier', 'of'),
+        line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':'),
+        line('/entity_class', 'is', '/expression', ';')
 )
