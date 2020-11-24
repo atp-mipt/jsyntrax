@@ -1,6 +1,6 @@
 package com.syntrax.visitors;
 
-import com.syntrax.units.Unit;
+import com.syntrax.generators.SVGCanvasBuilder.UnitEndPoint;
 import com.syntrax.units.nodes.Bullet;
 import com.syntrax.units.nodes.Node;
 import com.syntrax.units.nodes.NoneNode;
@@ -13,9 +13,8 @@ import com.syntrax.units.tracks.opt.Optx;
 import com.syntrax.units.tracks.stack.Indentstack;
 import com.syntrax.units.tracks.stack.Rightstack;
 import com.syntrax.units.tracks.stack.Stack;
-import org.codehaus.groovy.transform.trait.Traits;
 
-public class CanvasBuilderVisitor extends Visitor {
+public class CanvasBuilderVisitor extends TemplateVisitor<UnitEndPoint> {
   @Override
   public void visit(Line unit) {
 
@@ -75,7 +74,4 @@ public class CanvasBuilderVisitor extends Visitor {
   public void visit(NoneNode unit) {
 
   }
-
-
-  Object tos_value_;
 }
