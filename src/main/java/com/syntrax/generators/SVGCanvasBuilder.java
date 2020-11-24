@@ -851,7 +851,7 @@ public class SVGCanvasBuilder {
      * @brief class for return in parse functions
      * @details contain pair of tag end endpoint
      */
-    private static class UnitEndPoint {
+    public static class UnitEndPoint {
         UnitEndPoint(String tag, Pair<Integer, Integer> endpoint) {
             this.tag = tag;
             this.endpoint = endpoint;

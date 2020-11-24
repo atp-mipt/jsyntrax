@@ -1,11 +1,19 @@
 package com.syntrax.groovy_parser
 
 import com.syntrax.units.Unit
-import com.syntrax.units.nodes.*
-import com.syntrax.units.tracks.*
-import com.syntrax.units.tracks.loop.*
-import com.syntrax.units.tracks.opt.*
-import com.syntrax.units.tracks.stack.*
+import com.syntrax.units.nodes.Bullet;
+import com.syntrax.units.nodes.Node;
+import com.syntrax.units.nodes.NoneNode;
+import com.syntrax.units.tracks.Choice;
+import com.syntrax.units.tracks.Line
+import com.syntrax.units.tracks.Track;
+import com.syntrax.units.tracks.loop.Loop;
+import com.syntrax.units.tracks.loop.Toploop;
+import com.syntrax.units.tracks.opt.Opt;
+import com.syntrax.units.tracks.opt.Optx;
+import com.syntrax.units.tracks.stack.Indentstack;
+import com.syntrax.units.tracks.stack.Rightstack;
+import com.syntrax.units.tracks.stack.Stack;
 
 class SyntraxScript extends Script {
   static ArrayList<Unit> unitsToString(Object... units) {
