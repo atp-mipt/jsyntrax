@@ -3,18 +3,23 @@ package org.atpfivt.jsyntrax.generators;
 import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.units.*;
+import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.nodes.*;
-import org.atpfivt.jsyntrax.units.tracks.*;
 import org.atpfivt.jsyntrax.units.tracks.Choice;
 import org.atpfivt.jsyntrax.units.tracks.loop.*;
 import org.atpfivt.jsyntrax.units.tracks.opt.*;
 import org.atpfivt.jsyntrax.units.tracks.stack.*;
+import org.atpfivt.jsyntrax.units.tracks.*;
 import org.atpfivt.jsyntrax.util.Pair;
+import org.atpfivt.jsyntrax.visitors.CanvasBuilderVisitor;
+import groovy.json.internal.ArrayUtils;
 import sun.font.FontDesignMetrics;
 
+import javax.annotation.processing.SupportedSourceVersion;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @brief class for building canvas by Unit
@@ -37,6 +42,10 @@ public class SVGCanvasBuilder {
         if (null == unit) {
             return null;
         }
+
+        // CanvasBuilderVisitor visitor = new CanvasBuilderVisitor();
+        // visitor.visit(unit);
+        // return (UnitEndPoint) visitor.getTosValue();
 
         if (unit instanceof NoneNode) {
             return parseNoneNode((NoneNode) unit);

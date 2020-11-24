@@ -1,6 +1,7 @@
 package org.atpfivt.jsyntrax.units.tracks.stack;
 
 import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.visitors.Visitor;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -20,5 +21,9 @@ public class Indentstack extends Stack {
         units.stream().map(Object::toString)
             .collect(Collectors.joining("\n"))
         + " ]" + " >";
+  }
+
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }

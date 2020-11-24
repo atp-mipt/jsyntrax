@@ -2,6 +2,7 @@ package org.atpfivt.jsyntrax.units.nodes;
 
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.visitors.Visitor;
 
 public class Node implements Unit {
   Style style;
@@ -19,5 +20,9 @@ public class Node implements Unit {
   @Override
   public String toString() {
     return text;
+  }
+
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }

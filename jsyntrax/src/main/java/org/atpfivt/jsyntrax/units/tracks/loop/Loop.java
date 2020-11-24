@@ -4,6 +4,7 @@ import org.atpfivt.jsyntrax.exceptions.LoopNotTwoArgsException;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.tracks.ComplexTrack;
 import org.atpfivt.jsyntrax.units.tracks.Track;
+import org.atpfivt.jsyntrax.visitors.Visitor;
 
 import java.util.ArrayList;
 
@@ -30,5 +31,9 @@ public class Loop extends ComplexTrack {
 
   public boolean isBackwardNull() {
     return getBackwardPart() == null;
+  }
+
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }
