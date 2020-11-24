@@ -1,12 +1,12 @@
-package com.syntrax.visitors;
+package org.atpfivt.jsyntrax.visitors;
 
-import com.syntrax.generators.SVGCanvasBuilder;
-import com.syntrax.units.Unit;
-import com.syntrax.units.tracks.*;
-import com.syntrax.units.tracks.loop.*;
-import com.syntrax.units.tracks.opt.*;
-import com.syntrax.units.tracks.stack.*;
-import com.syntrax.units.nodes.*;
+import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
+import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.units.tracks.*;
+import org.atpfivt.jsyntrax.units.tracks.loop.*;
+import org.atpfivt.jsyntrax.units.tracks.opt.*;
+import org.atpfivt.jsyntrax.units.tracks.stack.*;
+import org.atpfivt.jsyntrax.units.nodes.*;
 
 public interface Visitor {
   void visit(Line unit);

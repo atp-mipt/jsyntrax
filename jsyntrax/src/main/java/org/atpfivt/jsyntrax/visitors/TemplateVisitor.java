@@ -1,4 +1,4 @@
-package com.syntrax.visitors;
+package org.atpfivt.jsyntrax.visitors;
 
 public abstract class TemplateVisitor<T> implements Visitor {
   T tos_value_;

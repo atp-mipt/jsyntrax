@@ -1,6 +1,6 @@
 package org.atpfivt.jsyntrax.units.nodes;
 
-import com.syntrax.visitors.Visitor;
+import org.atpfivt.jsyntrax.visitors.Visitor;
 
 /**
  * @brief special class for parse None in syntrax language

@@ -1,4 +1,4 @@
-package org.atpfivt.jsyntrax.units.nodes;
+package org.atpfivt.jsyntrax.nodes;
 
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.visitors.Visitor;

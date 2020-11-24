@@ -1,6 +1,6 @@
-package com.syntrax;
+package org.atpfivt.jsyntrax;
 
-import com.syntrax.units.tracks.Track;
+import org.atpfivt.jsyntrax.units.tracks.Track;
 
 import java.net.URL;
 import java.util.HashMap;
