@@ -8,13 +8,11 @@ import com.syntrax.units.tracks.opt.*
 import com.syntrax.units.tracks.stack.*
 
 class SyntraxScript extends Script {
-  static getNone() {
-    return null
-  }
-
   static ArrayList<Unit> unitsToString(Object... units) {
     for (i in 0..<units.length) {
-      if (!(units[i] instanceof Track)) {
+      if (units[i] == null) {
+        units[i] = new NoneNode()
+      } else if (!(units[i] instanceof Track)) {
         units[i] = new Node(units[i].toString())
       }
     }
