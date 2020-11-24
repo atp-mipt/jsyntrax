@@ -16,17 +16,10 @@ public class Main {
         String program_path = "syntrax_scripts";
         File file = new File(program_path, "test1.groovy");
         Specification spec = Parser.parse(file);
-        Track track = spec.getTrack();
-        System.out.println(track);
+        Unit root = spec.getRoot();
+        System.out.println(root);
 
-        // TODO: not in Main
-        Line l = new Line(new ArrayList<Unit>(){{
-            add(new Bullet());
-            add(track);
-            add(new Bullet());
-        }});
-
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(l);
+        SVGCanvas c = new SVGCanvasBuilder().generateSVG(spec);
         String result = c.generateSVG();
 
         // write result to file

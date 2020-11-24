@@ -24,7 +24,6 @@ public class Style {
         this.title_font = new Font("Sans",Font.BOLD, 22);
         this.transparent = false;
 
-        // TODO: add custom Node styles
         nodeStyles = new ArrayList<NodeStyle>(){{
             add(new NodeBubbleStyle());
             add(new NodeBoxStyle());

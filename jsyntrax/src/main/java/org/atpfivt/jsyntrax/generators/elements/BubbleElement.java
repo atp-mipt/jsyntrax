@@ -5,12 +5,13 @@ import org.atpfivt.jsyntrax.util.Algorithm;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.awt.*;
+import java.net.URL;
 
 public class BubbleElement extends BubbleElementBase {
-    public BubbleElement(Pair<Integer, Integer> start, Pair<Integer, Integer> end, String text,
-                         Pair<Integer, Integer> textPos, Font font, String fontName, Color textColor,
-                         int width, Color fill, String tag) {
-        super(start, end, text, textPos, font, fontName, textColor, width, fill, tag);
+    public BubbleElement(Pair<Integer, Integer> start, Pair<Integer, Integer> end, URL href,
+                         String text, Pair<Integer, Integer> textPos, Font font, String fontName,
+                         Color textColor, int width, Color fill, String tag) {
+        super(start, end, href, text, textPos, font, fontName, textColor, width, fill, tag);
     }
 
     public void addShadow(StringBuilder sb, Style style) {
@@ -85,17 +86,6 @@ public class BubbleElement extends BubbleElementBase {
         }
 
         // Add text
-        // TODO: bad centering
-        int th = Math.abs(super.textPos.s);
-        int x = (x0 + x1) / 2;
-        // y = (y0 + y1) / 2 if need good centering
-        int y =  (y0 + y1) / 2 + th / 2;
-
-        String txt = Algorithm.escapeXML(super.text);
-
-        // TODO: add href
-
-        sb.append("<text class=\"").append(super.fontName).append("\" x=\"").append(x)
-                .append("\" y=\"").append(y).append("\">").append(txt).append("</text>\n");
+        addXMLText(sb);
     }
 }

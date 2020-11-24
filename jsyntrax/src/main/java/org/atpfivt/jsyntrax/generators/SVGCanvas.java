@@ -1,5 +1,6 @@
 package org.atpfivt.jsyntrax.generators;
 
+import org.atpfivt.jsyntrax.Specification;
 import org.atpfivt.jsyntrax.generators.elements.Element;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
@@ -13,7 +14,8 @@ import java.util.Map;
 
 public class SVGCanvas {
 
-    public SVGCanvas(Style style) {
+    public SVGCanvas(Style style, Specification spec) {
+        this.spec = spec;
         this.style = style;
         this.tagcnt = new HashMap<>();
         this.elements = new ArrayList<Element>();
@@ -175,6 +177,8 @@ public class SVGCanvas {
         sb.append("</svg>\n");
         return sb.toString();
     }
+
+    public final Specification spec;
 
     private final Style style;
 
