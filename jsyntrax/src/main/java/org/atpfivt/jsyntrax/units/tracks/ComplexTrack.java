@@ -2,7 +2,6 @@ package org.atpfivt.jsyntrax.units.tracks;
 
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.nodes.NoneNode;
-
 import java.util.ArrayList;
 
 public abstract class ComplexTrack extends Track {
