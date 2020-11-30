@@ -52,7 +52,7 @@ public class Main {
 
         // find url map
         Map<String, String> urlMap = new HashMap<>();
-        Matcher m = Pattern.compile("^*url_map[ ]+=*").matcher(scriptText);
+        Matcher m = Pattern.compile("^*url_map[ ]*=*").matcher(scriptText);
         if (m.find()) {
             String urlMapText = scriptText.substring(m.end());
             scriptText = scriptText.substring(0, m.start());
