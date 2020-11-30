@@ -18,6 +18,7 @@ public class OvalElement extends Element {
         this.fill = fill;
     }
 
+    @Override
     public void toSVG(StringBuilder sb, Style style) {
         int x0 = super.start.f;
         int y0 = super.start.s;
@@ -35,6 +36,12 @@ public class OvalElement extends Element {
         sb.append("<circle cx=\"").append(xc).append("\" cy=\"").append(yc)
                 .append("\" r=\"").append(rad).append("\" ")
                 .append(attributes).append("/>\n");
+    }
+
+    @Override
+    public void scale(double scale) {
+        super.scale(scale);
+        width *= scale;
     }
 
     int width;

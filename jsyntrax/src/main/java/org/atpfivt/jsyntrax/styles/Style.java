@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Style {
-    public Style() {
+    public Style(double scale, boolean transparent) {
         // default styles
         this.line_width = 2;
         this.line_color = new Color(0, 0, 0);
@@ -22,7 +22,8 @@ public class Style {
         this.shadow = true;
         this.shadow_fill = new Color(0, 0, 0, 127);
         this.title_font = new Font("Sans",Font.BOLD, 22);
-        this.transparent = false;
+        this.scale = scale;
+        this.transparent = transparent;
 
         nodeStyles = new ArrayList<NodeStyle>(){{
             add(new NodeBubbleStyle());
@@ -59,6 +60,7 @@ public class Style {
     public boolean shadow;
     public Color shadow_fill;
     public Font title_font;
+    public double scale;
     public boolean transparent;
 
     public final ArrayList<NodeStyle> nodeStyles;

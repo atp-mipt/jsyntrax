@@ -7,7 +7,7 @@ public class NodeBoxStyle extends NodeStyle {
     NodeBoxStyle() {
         super.name = "box";
         super.shape = "box";
-        this.pattern = Pattern.compile("^/");
+        this.pattern = Pattern.compile("^/.");
         super.font = new Font("Times", Font.ITALIC, 14);
         super.fill = new Color(144, 164, 174);
     }

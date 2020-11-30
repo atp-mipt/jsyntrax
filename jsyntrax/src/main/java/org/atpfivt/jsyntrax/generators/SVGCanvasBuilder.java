@@ -1,5 +1,6 @@
 package org.atpfivt.jsyntrax.generators;
 
+import org.atpfivt.jsyntrax.InputArguments;
 import org.atpfivt.jsyntrax.Specification;
 import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
@@ -21,20 +22,21 @@ import org.atpfivt.jsyntrax.util.Pair;
 import sun.font.FontDesignMetrics;
 
 import java.awt.*;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * @brief class for building canvas by Unit
  */
 public class SVGCanvasBuilder {
-    public SVGCanvasBuilder() {
+    public SVGCanvasBuilder(InputArguments iArgs) {
+        this.iArgs = iArgs;
     }
 
-    public SVGCanvas generateSVG(Specification spec) {
-        this.style = new Style();
-        this.canvas = new SVGCanvas(this.style, spec);
-        this.parseDiagram(spec.getRoot(), true);
+    public SVGCanvas generateSVG(Unit root, Map<String, String> urlMap) {
+        this.style = new Style(iArgs.getScale(), iArgs.transparent());
+        this.canvas = new SVGCanvas(this.style, urlMap);
+        this.parseDiagram(root, true);
         return this.canvas;
     }
 
@@ -151,7 +153,6 @@ public class SVGCanvasBuilder {
         }
 
         if (lft > rgt) {
-            // TODO: they are equal ???
             lft = (x0 + x1) / 2;
             rgt = lft;
         }
@@ -162,7 +163,7 @@ public class SVGCanvasBuilder {
         Pair<Integer, Integer> end;
 
         BubbleElementBase b;
-        URL href = this.canvas.spec.getUrl(txt);
+        String href = this.canvas.urlMap.get(txt);
         switch (ns.shape) {
             case "bubble":
                 start = new Pair<>(lft - rad, top);
@@ -191,9 +192,6 @@ public class SVGCanvasBuilder {
         int width = x1 - x0;
 
         this.canvas.moveByTag(tag, -x0, 2);
-
-        //c.tag_raise(id1) # Bring text above any filled bubbles
-
         return new UnitEndPoint(tag, new Pair<>(width, 0));
     }
 
@@ -845,7 +843,6 @@ public class SVGCanvasBuilder {
     private static Pair<Integer, Integer> getTextSize(String text, Font font) {
         FontMetrics metrics = FontDesignMetrics.getMetrics(font);
 
-        // TODO: dirty...
         return new Pair<>(metrics.stringWidth(text) + text.length() + 10, metrics.getHeight() + 10);
     }
 
@@ -863,6 +860,7 @@ public class SVGCanvasBuilder {
         public Pair<Integer, Integer> endpoint;
     }
 
+    private InputArguments iArgs;
     private Style style;
     private SVGCanvas canvas;
 }

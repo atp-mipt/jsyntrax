@@ -15,6 +15,7 @@ public class ArcElement extends Element {
         this.extentAngle = extentAngle;
     }
 
+    @Override
     public void toSVG(StringBuilder sb, Style style) {
         int x0 = super.start.f;
         int y0 = super.start.s;
@@ -49,6 +50,12 @@ public class ArcElement extends Element {
                 .append(" A").append(rad).append(",").append(rad)
                 .append(" 0 0,0 ").append(xe).append(",").append(ye)
                 .append("\" ").append(attributes).append("/>\n");
+    }
+
+    @Override
+    public void scale(double scale) {
+        super.scale(scale);
+        width *= scale;
     }
 
     int width;

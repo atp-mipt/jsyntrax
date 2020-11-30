@@ -8,12 +8,13 @@ import java.awt.*;
 import java.net.URL;
 
 public class BubbleElement extends BubbleElementBase {
-    public BubbleElement(Pair<Integer, Integer> start, Pair<Integer, Integer> end, URL href,
+    public BubbleElement(Pair<Integer, Integer> start, Pair<Integer, Integer> end, String href,
                          String text, Pair<Integer, Integer> textPos, Font font, String fontName,
                          Color textColor, int width, Color fill, String tag) {
         super(start, end, href, text, textPos, font, fontName, textColor, width, fill, tag);
     }
 
+    @Override
     public void addShadow(StringBuilder sb, Style style) {
         int x0 = super.start.f + this.width + 1;
         int y0 = super.start.s + this.width + 1;
@@ -49,6 +50,7 @@ public class BubbleElement extends BubbleElementBase {
         }
     }
 
+    @Override
     public void toSVG(StringBuilder sb, Style style) {
         int x0 = super.start.f;
         int y0 = super.start.s;
@@ -86,6 +88,6 @@ public class BubbleElement extends BubbleElementBase {
         }
 
         // Add text
-        addXMLText(sb);
+        addXMLText(sb, style);
     }
 }
