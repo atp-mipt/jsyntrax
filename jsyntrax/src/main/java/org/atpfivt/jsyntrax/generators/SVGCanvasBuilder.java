@@ -18,7 +18,6 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Indentstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.atpfivt.jsyntrax.util.Pair;
-import sun.font.FontDesignMetrics;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -840,7 +839,9 @@ public class SVGCanvasBuilder {
     }
 
     private static Pair<Integer, Integer> getTextSize(String text, Font font) {
-        FontMetrics metrics = FontDesignMetrics.getMetrics(font);
+        // TODO: dirty
+        //FontMetrics metrics = FontDesignMetrics.getMetrics(font);
+        FontMetrics metrics = new Canvas().getFontMetrics(font);
 
         return new Pair<>(metrics.stringWidth(text) + text.length() + 10, metrics.getHeight() + 10);
     }
