@@ -1,7 +1,5 @@
 package org.atpfivt.jsyntrax.generators;
 
-import org.atpfivt.jsyntrax.InputArguments;
-import org.atpfivt.jsyntrax.Specification;
 import org.atpfivt.jsyntrax.generators.elements.Element;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
@@ -10,7 +8,6 @@ import org.atpfivt.jsyntrax.util.Pair;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
