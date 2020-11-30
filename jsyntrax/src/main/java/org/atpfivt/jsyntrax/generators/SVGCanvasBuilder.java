@@ -5,23 +5,24 @@ import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
-import org.atpfivt.jsyntrax.units.nodes.*;
+import org.atpfivt.jsyntrax.units.nodes.Bullet;
+import org.atpfivt.jsyntrax.units.nodes.Node;
+import org.atpfivt.jsyntrax.units.nodes.NoneNode;
 import org.atpfivt.jsyntrax.units.tracks.Choice;
-import org.atpfivt.jsyntrax.units.tracks.loop.*;
-import org.atpfivt.jsyntrax.units.tracks.opt.*;
-import org.atpfivt.jsyntrax.units.tracks.stack.*;
-import org.atpfivt.jsyntrax.units.tracks.*;
+import org.atpfivt.jsyntrax.units.tracks.Line;
+import org.atpfivt.jsyntrax.units.tracks.loop.Loop;
+import org.atpfivt.jsyntrax.units.tracks.loop.Toploop;
+import org.atpfivt.jsyntrax.units.tracks.opt.Opt;
+import org.atpfivt.jsyntrax.units.tracks.opt.Optx;
+import org.atpfivt.jsyntrax.units.tracks.stack.Indentstack;
+import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
+import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.atpfivt.jsyntrax.util.Pair;
-import org.atpfivt.jsyntrax.visitors.CanvasBuilderVisitor;
-import groovy.json.internal.ArrayUtils;
 import sun.font.FontDesignMetrics;
 
-import javax.annotation.processing.SupportedSourceVersion;
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * @brief class for building canvas by Unit
