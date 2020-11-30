@@ -115,7 +115,7 @@ public class SVGCanvas {
 
         // header
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n")
-                .append("<!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->\n");
+                .append("<!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->\n");
         sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\"\n");
         sb.append("xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n");
         sb.append("xml:space=\"preserve\"\n");
