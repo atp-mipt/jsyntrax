@@ -3,6 +3,7 @@ package org.atpfivt.jsyntrax.units.tracks.stack;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.tracks.ComplexTrack;
 import org.atpfivt.jsyntrax.units.tracks.opt.Opt;
+import org.atpfivt.jsyntrax.visitors.Visitor;
 
 import java.util.ArrayList;
 
@@ -17,5 +18,9 @@ public class Stack extends ComplexTrack {
         unit.setStacked();
       }
     }
+  }
+
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
   }
 }

@@ -1,9 +1,14 @@
 package org.atpfivt.jsyntrax.units.nodes;
 
-// TODO: add parse of this class in groovy shell
+import org.atpfivt.jsyntrax.visitors.Visitor;
+
 /**
  * @brief special class for parse None in syntrax language
  */
 public class NoneNode extends Node {
     public NoneNode() { super(""); }
+
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }
