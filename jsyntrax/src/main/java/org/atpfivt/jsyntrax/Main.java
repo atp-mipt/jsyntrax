@@ -1,6 +1,7 @@
 package org.atpfivt.jsyntrax;
 
 
+import org.codehaus.groovy.control.CompilationFailedException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
@@ -61,9 +62,15 @@ public class Main {
             }
         }
 
-        // parse spec
-        Unit root = Parser.parse(scriptText);
-        //System.out.println(root);
+        Unit root;
+        try {
+            // parse spec
+            root = Parser.parse(scriptText);
+            //System.out.println(root);
+        } catch (CompilationFailedException e) {
+            System.out.println("Something was wrong with input script " + e.getMessage());
+            return;
+        }
 
         // generate SVG
         SVGCanvas c = new SVGCanvasBuilder(iArgs).generateSVG(root, urlMap);
