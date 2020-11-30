@@ -1,4 +1,11 @@
-== JSyntrax
+= JSyntrax
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+
+== User Guide
+
+=== What is JSyntrax?
 
 https://github.com/atp-mipt/jsyntrax[JSyntrax] is a railroad diagram generator. 
 It creates a visual illustration of the grammar used for programming languages.
