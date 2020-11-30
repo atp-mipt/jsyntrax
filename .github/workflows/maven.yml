@@ -34,4 +34,3 @@ jobs:
           build_dir: doc/target/generated-docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
