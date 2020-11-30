@@ -1,6 +1,6 @@
 == JSyntrax
 
-JSyntrax is a railroad diagram generator. 
+https://github.com/atp-mipt/jsyntrax[JSyntrax] is a railroad diagram generator. 
 It creates a visual illustration of the grammar used for programming languages.
 A specification file describes the syntax as a hierarchy of basic elements. 
 This is processed into an image representing the same syntax with interconnected nodes.
@@ -65,7 +65,6 @@ optional arguments:
                         Style config file
   --title TITLE         Diagram title
   -t, --transparent     Transparent background
-  --scale SCALE         Scale image
   -v, --version         Syntrax version
   --get-style           Create default style .ini
 ----
@@ -74,25 +73,6 @@ optional arguments:
 ==== Transparency
 
 By default the images have a white background. If you want a transparent background pass the `+-t+` option.
-
-==== Scaling
-
-You can control the scale of the resulting image with the `+--scale+`
-option. It takes a floating point scale factor. This is most useful for
-the PNG output to increase the resolution of the image or create
-thumbnails with less blurring than conventional bitmap resizing.
-
-----
-> JSyntrax -i scaling.spec -o scale_small.png --scale 0.5
-----
-
-image:images/scale_small.png[image]
-
-----
-> JSyntrax -i scaling.spec -o scale_big.png --scale 2.0
-----
-
-image:images/scale_big.png[image]
 
 ==== Titles
 
