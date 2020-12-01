@@ -4,8 +4,8 @@ import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.util.Algorithm;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.*;
-import java.net.URL;
+import java.awt.Color;
+import java.awt.Font;
 
 public class BubbleElementBase extends Element {
 

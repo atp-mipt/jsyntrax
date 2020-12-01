@@ -19,8 +19,12 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -109,8 +113,8 @@ public class SVGCanvasBuilder {
 
         Element e = new LineElement(new Pair<>(0, 0), new Pair<>(1, 0),
                 null, this.style.outline_width, tag);
-        e.setStart(new Pair<Integer, Integer>(0, 0));
-        e.setEnd(new Pair<Integer, Integer>(1, 0));
+        e.setStart(new Pair<>(0, 0));
+        e.setEnd(new Pair<>(1, 0));
         this.canvas.addElement(e);
 
         return new UnitEndPoint(tag, e.getEnd());
@@ -210,7 +214,7 @@ public class SVGCanvasBuilder {
         int width = this.style.line_width;
         Pair<Integer, Integer> pos = new Pair<>(0, 0);
 
-        ArrayList<Unit> units = line.getUnits();
+        List<Unit> units = line.getUnits();
 
         int unitNum = 0;
         int unitStep = 1;
@@ -569,7 +573,7 @@ public class SVGCanvasBuilder {
     }
 
     private UnitEndPoint parseOptx(Optx opt, boolean ltor) {
-        Choice c = new Choice(new ArrayList<Unit>(){{
+        Choice c = new Choice(new ArrayList<>() {{
             add(new Line(opt.getUnits()));
             add(new NoneNode());
         }});
@@ -577,7 +581,7 @@ public class SVGCanvasBuilder {
     }
 
     private UnitEndPoint parseOpt(Opt opt, boolean ltor) {
-        Choice c = new Choice(new ArrayList<Unit>(){{
+        Choice c = new Choice(new ArrayList<>() {{
             add(new NoneNode());
             add(new Line(opt.getUnits()));
         }});

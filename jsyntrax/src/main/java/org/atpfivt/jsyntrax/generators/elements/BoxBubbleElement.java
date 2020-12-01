@@ -4,8 +4,8 @@ import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.util.Algorithm;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.*;
-import java.net.URL;
+import java.awt.Color;
+import java.awt.Font;
 
 public class BoxBubbleElement extends BubbleElementBase {
     public BoxBubbleElement(Pair<Integer, Integer> start, Pair<Integer, Integer> end, String href,
