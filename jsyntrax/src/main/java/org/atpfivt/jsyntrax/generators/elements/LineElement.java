@@ -15,6 +15,7 @@ public class LineElement extends Element {
         this.width = width;
     }
 
+    @Override
     public void toSVG(StringBuilder sb, Style style) {
         String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " + "stroke-width=\"" + this.width + "\"";
 
@@ -44,6 +45,12 @@ public class LineElement extends Element {
                 .append(attributes).append(" />\n");
     }
 
-    String arrow = null;
-    int width = 3;
+    @Override
+    public void scale(double scale) {
+        super.scale(scale);
+        width *= scale;
+    }
+
+    String arrow;
+    int width;
 }

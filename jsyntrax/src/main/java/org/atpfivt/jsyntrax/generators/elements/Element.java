@@ -39,7 +39,14 @@ public class Element {
 
     public void toSVG(StringBuilder sb, Style style) {}
 
+    public void scale(double scale) {
+        start.f = (int)(start.f * scale);
+        start.s = (int)(start.s * scale);
+        end.f = (int)(end.f * scale);
+        end.s = (int)(end.s * scale);
+    }
+
     public Pair<Integer, Integer> start = null;
     public Pair<Integer, Integer> end = null;
-    HashSet<String> tags = new HashSet<String>();
+    HashSet<String> tags = new HashSet<>();
 }

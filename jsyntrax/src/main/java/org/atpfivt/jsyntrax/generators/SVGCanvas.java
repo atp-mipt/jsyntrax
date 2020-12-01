@@ -13,10 +13,11 @@ import java.util.Map;
 
 public class SVGCanvas {
 
-    public SVGCanvas(Style style) {
+    public SVGCanvas(Style style, Map<String, String> urlMap) {
+        this.urlMap = urlMap;
         this.style = style;
         this.tagcnt = new HashMap<>();
-        this.elements = new ArrayList<Element>();
+        this.elements = new ArrayList<>();
     }
 
     // default prefix = "x", default suffix = ""
@@ -24,7 +25,7 @@ public class SVGCanvas {
         String f = prefix + "___" + suffix;
         Integer value = tagcnt.getOrDefault(f, 0);
         tagcnt.put(f, value + 1);
-        return new String(prefix + value.toString() + suffix);
+        return prefix + value.toString() + suffix;
     }
 
     public void addElement(Element e) {
@@ -32,23 +33,19 @@ public class SVGCanvas {
     }
 
     public void addTagByTag(String addTag, String tag) {
-        for (Element e : this.elements) {
+        for (Element e : elements) {
             if (e.isTagged(tag)) {
                 e.addTag(addTag);
             }
         }
     }
 
-    public void dropTag(String tag) {
-        for (Element e : this.elements) {
+    public void dropTag(final String tag) {
+        for (Element e : elements) {
             if (e.isTagged(tag)) {
                 e.delTag(tag);
             }
         }
-    }
-
-    public void deleteByTag(String tag) {
-        elements.removeIf(e -> (e.isTagged(tag)));
     }
 
     public void moveByTag(String tag, int dx, int dy) {
@@ -58,6 +55,14 @@ public class SVGCanvas {
                 e.start.s += dy;
                 e.end.f += dx;
                 e.end.s += dy;
+            }
+        }
+    }
+
+    public void scaleByTag(String tag, double scale) {
+        for (Element e : elements) {
+            if (e.isTagged(tag)) {
+                e.scale(scale);
             }
         }
     }
@@ -89,20 +94,20 @@ public class SVGCanvas {
     public String generateSVG() {
         StringBuilder sb = new StringBuilder();
         // TODO: add title
+        double scale = style.scale;
 
-        Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> res = this.getBoundingBoxByTag("all");
-        Pair<Integer, Integer> start = res.f;
+        Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> res = getBoundingBoxByTag("all");
+
+        // move to picture to (0, 0)
+        moveByTag("all", -res.f.f, -res.f.s);
+        scaleByTag("all", scale);
+        moveByTag("all", style.padding, style.padding);
+
+        res = getBoundingBoxByTag("all");
         Pair<Integer, Integer> end = res.s;
 
-        // TODO: add scale as parameter
-        int scale = 1;
-
-        int W = (end.f - start.f + 2 * this.style.padding) * scale;
-        int H = (end.s - start.s + 2 * this.style.padding) * scale;
-
-        
-        // move to picture to (0, 0)
-        moveByTag("all", -start.f + this.style.padding, -start.s + this.style.padding);
+        int W = end.f + style.padding;
+        int H = end.s + style.padding;
 
         // collect fonts
         HashMap<String, Pair<Font, Color>> fonts = new HashMap<>();
@@ -113,7 +118,7 @@ public class SVGCanvas {
 
         // header
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n")
-                .append("<!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->\n");
+                .append("<!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->\n");
         sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\"\n");
         sb.append("xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n");
         sb.append("xml:space=\"preserve\"\n");
@@ -127,10 +132,9 @@ public class SVGCanvas {
         for (Map.Entry<String, Pair<Font, Color>> fontPair : fonts.entrySet()) {
             String fontName = fontPair.getKey();
             String fontFamily = fontPair.getValue().f.getName();
-            String fontSize = Integer.toString(fontPair.getValue().f.getSize());
+            String fontSize = Integer.toString((int)(fontPair.getValue().f.getSize() * scale));
             String fontWeight = "bold";
             String fontStyle = "normal";
-            // TODO: dirty...
             if (fontPair.getValue().f.getFontName().contains("italic")) {
                 fontWeight = "normal";
                 fontStyle = "italic";
@@ -175,6 +179,8 @@ public class SVGCanvas {
         sb.append("</svg>\n");
         return sb.toString();
     }
+
+    public final Map<String, String> urlMap;
 
     private final Style style;
 

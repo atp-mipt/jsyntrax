@@ -1,12 +1,12 @@
 package org.atpfivt.jsyntrax.styles;
 
-import org.atpfivt.jsyntrax.units.nodes.Node;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Style {
-    public Style() {
+    public Style(double scale, boolean transparent) {
         // default styles
         this.line_width = 2;
         this.line_color = new Color(0, 0, 0);
@@ -16,21 +16,20 @@ public class Style {
         this.h_sep = 17;
         this.v_sep = 9;
         this.arrows = true;
-        this.title_pos = new String("tl");
+        this.title_pos = "tl";
         this.bullet_fill = new Color(255, 255, 255);
         this.text_color = new Color(0, 0, 0);
         this.shadow = true;
         this.shadow_fill = new Color(0, 0, 0, 127);
         this.title_font = new Font("Sans",Font.BOLD, 22);
-        this.transparent = false;
+        this.scale = scale;
+        this.transparent = transparent;
 
-        // TODO: add custom Node styles
-        nodeStyles = new ArrayList<NodeStyle>(){{
-            add(new NodeBubbleStyle());
-            add(new NodeBoxStyle());
-            add(new NodeTokenStyle());
-            add(new NodeHexStyle());
-        }};
+        nodeStyles = new ArrayList<>(List.of(
+            new NodeBubbleStyle(),
+            new NodeBoxStyle(),
+            new NodeTokenStyle(),
+            new NodeHexStyle()));
     }
 
     public void addStyle(NodeStyle ns) {
@@ -60,7 +59,8 @@ public class Style {
     public boolean shadow;
     public Color shadow_fill;
     public Font title_font;
+    public double scale;
     public boolean transparent;
 
-    public final ArrayList<NodeStyle> nodeStyles;
+    public final List<NodeStyle> nodeStyles;
 }

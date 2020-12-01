@@ -4,8 +4,6 @@ import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.net.URL;
-
 public class Node implements Unit {
   Style style;
   String text;

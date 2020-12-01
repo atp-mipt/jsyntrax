@@ -1,37 +1,44 @@
 package org.atpfivt.jsyntrax.generators;
 
+import org.atpfivt.jsyntrax.InputArguments;
 import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
-import org.atpfivt.jsyntrax.units.nodes.*;
+import org.atpfivt.jsyntrax.units.nodes.Bullet;
+import org.atpfivt.jsyntrax.units.nodes.Node;
+import org.atpfivt.jsyntrax.units.nodes.NoneNode;
 import org.atpfivt.jsyntrax.units.tracks.Choice;
-import org.atpfivt.jsyntrax.units.tracks.loop.*;
-import org.atpfivt.jsyntrax.units.tracks.opt.*;
-import org.atpfivt.jsyntrax.units.tracks.stack.*;
-import org.atpfivt.jsyntrax.units.tracks.*;
+import org.atpfivt.jsyntrax.units.tracks.Line;
+import org.atpfivt.jsyntrax.units.tracks.loop.Loop;
+import org.atpfivt.jsyntrax.units.tracks.loop.Toploop;
+import org.atpfivt.jsyntrax.units.tracks.opt.Opt;
+import org.atpfivt.jsyntrax.units.tracks.opt.Optx;
+import org.atpfivt.jsyntrax.units.tracks.stack.Indentstack;
+import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
+import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.atpfivt.jsyntrax.util.Pair;
-import org.atpfivt.jsyntrax.visitors.CanvasBuilderVisitor;
-import groovy.json.internal.ArrayUtils;
-import sun.font.FontDesignMetrics;
 
-import javax.annotation.processing.SupportedSourceVersion;
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @brief class for building canvas by Unit
  */
 public class SVGCanvasBuilder {
-    public SVGCanvasBuilder() {
+    public SVGCanvasBuilder(InputArguments iArgs) {
+        this.iArgs = iArgs;
     }
 
-    public SVGCanvas generateSVG(Unit unit) {
-        this.style = new Style();
-        this.canvas = new SVGCanvas(this.style);
-        this.parseDiagram(unit, true);
+    public SVGCanvas generateSVG(Unit root, Map<String, String> urlMap) {
+        this.style = new Style(iArgs.getScale(), iArgs.transparent());
+        this.canvas = new SVGCanvas(this.style, urlMap);
+        this.parseDiagram(root, true);
         return this.canvas;
     }
 
@@ -106,8 +113,8 @@ public class SVGCanvasBuilder {
 
         Element e = new LineElement(new Pair<>(0, 0), new Pair<>(1, 0),
                 null, this.style.outline_width, tag);
-        e.setStart(new Pair<Integer, Integer>(0, 0));
-        e.setEnd(new Pair<Integer, Integer>(1, 0));
+        e.setStart(new Pair<>(0, 0));
+        e.setEnd(new Pair<>(1, 0));
         this.canvas.addElement(e);
 
         return new UnitEndPoint(tag, e.getEnd());
@@ -124,8 +131,6 @@ public class SVGCanvasBuilder {
 
         Color fill = ns.fill;
         Color textColor = ns.text_color;
-
-        // TODO: add url mapping
 
         Pair<Integer, Integer> textSize = getTextSize(txt, font);
         int x0 = -textSize.f / 2;
@@ -150,7 +155,6 @@ public class SVGCanvasBuilder {
         }
 
         if (lft > rgt) {
-            // TODO: they are equal ???
             lft = (x0 + x1) / 2;
             rgt = lft;
         }
@@ -161,23 +165,24 @@ public class SVGCanvasBuilder {
         Pair<Integer, Integer> end;
 
         BubbleElementBase b;
+        String href = this.canvas.urlMap.get(txt);
         switch (ns.shape) {
             case "bubble":
                 start = new Pair<>(lft - rad, top);
                 end = new Pair<>(rgt + rad, btm);
-                b = new BubbleElement(start, end, txt, new Pair<>(x0, y0), font,
+                b = new BubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
             case "hex":
                 start = new Pair<>(lft - rad, top);
                 end = new Pair<>(rgt + rad, btm);
-                b = new HexBubbleElement(start, end, txt, new Pair<>(x0, y0), font,
+                b = new HexBubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
             default:
                 start = new Pair<>(lft, top);
                 end = new Pair<>(rgt, btm);
-                b = new BoxBubbleElement(start, end, txt, new Pair<>(x0, y0), font,
+                b = new BoxBubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
         }
@@ -189,9 +194,6 @@ public class SVGCanvasBuilder {
         int width = x1 - x0;
 
         this.canvas.moveByTag(tag, -x0, 2);
-
-        //c.tag_raise(id1) # Bring text above any filled bubbles
-
         return new UnitEndPoint(tag, new Pair<>(width, 0));
     }
 
@@ -212,7 +214,7 @@ public class SVGCanvasBuilder {
         int width = this.style.line_width;
         Pair<Integer, Integer> pos = new Pair<>(0, 0);
 
-        ArrayList<Unit> units = line.getUnits();
+        List<Unit> units = line.getUnits();
 
         int unitNum = 0;
         int unitStep = 1;
@@ -571,7 +573,7 @@ public class SVGCanvasBuilder {
     }
 
     private UnitEndPoint parseOptx(Optx opt, boolean ltor) {
-        Choice c = new Choice(new ArrayList<Unit>(){{
+        Choice c = new Choice(new ArrayList<>() {{
             add(new Line(opt.getUnits()));
             add(new NoneNode());
         }});
@@ -579,7 +581,7 @@ public class SVGCanvasBuilder {
     }
 
     private UnitEndPoint parseOpt(Opt opt, boolean ltor) {
-        Choice c = new Choice(new ArrayList<Unit>(){{
+        Choice c = new Choice(new ArrayList<>() {{
             add(new NoneNode());
             add(new Line(opt.getUnits()));
         }});
@@ -841,9 +843,10 @@ public class SVGCanvasBuilder {
     }
 
     private static Pair<Integer, Integer> getTextSize(String text, Font font) {
-        FontMetrics metrics = FontDesignMetrics.getMetrics(font);
+        // TODO: dirty
+        //FontMetrics metrics = FontDesignMetrics.getMetrics(font);
+        FontMetrics metrics = new Canvas().getFontMetrics(font);
 
-        // TODO: dirty...
         return new Pair<>(metrics.stringWidth(text) + text.length() + 10, metrics.getHeight() + 10);
     }
 
@@ -861,6 +864,7 @@ public class SVGCanvasBuilder {
         public Pair<Integer, Integer> endpoint;
     }
 
+    private InputArguments iArgs;
     private Style style;
     private SVGCanvas canvas;
 }

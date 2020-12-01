@@ -1,12 +1,18 @@
 package org.atpfivt.jsyntrax.visitors;
 
-import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.units.Unit;
-import org.atpfivt.jsyntrax.units.tracks.*;
-import org.atpfivt.jsyntrax.units.tracks.loop.*;
-import org.atpfivt.jsyntrax.units.tracks.opt.*;
-import org.atpfivt.jsyntrax.units.tracks.stack.*;
-import org.atpfivt.jsyntrax.units.nodes.*;
+import org.atpfivt.jsyntrax.units.nodes.Bullet;
+import org.atpfivt.jsyntrax.units.nodes.Node;
+import org.atpfivt.jsyntrax.units.nodes.NoneNode;
+import org.atpfivt.jsyntrax.units.tracks.Choice;
+import org.atpfivt.jsyntrax.units.tracks.Line;
+import org.atpfivt.jsyntrax.units.tracks.loop.Loop;
+import org.atpfivt.jsyntrax.units.tracks.loop.Toploop;
+import org.atpfivt.jsyntrax.units.tracks.opt.Opt;
+import org.atpfivt.jsyntrax.units.tracks.opt.Optx;
+import org.atpfivt.jsyntrax.units.tracks.stack.Indentstack;
+import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
+import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 
 public interface Visitor {
   void visit(Line unit);
