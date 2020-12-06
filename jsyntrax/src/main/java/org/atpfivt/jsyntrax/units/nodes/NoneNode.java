@@ -9,6 +9,6 @@ public class NoneNode extends Node {
     public NoneNode() { super(""); }
 
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        visitor.visitNoneNode(this);
     }
 }

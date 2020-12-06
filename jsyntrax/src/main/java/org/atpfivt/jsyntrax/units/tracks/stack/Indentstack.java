@@ -28,6 +28,6 @@ public class Indentstack extends Stack {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitIndentstack(this);
   }
 }

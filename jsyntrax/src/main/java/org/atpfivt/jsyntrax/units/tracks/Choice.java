@@ -11,6 +11,6 @@ public class Choice extends ComplexTrack {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitChoice(this);
   }
 }
