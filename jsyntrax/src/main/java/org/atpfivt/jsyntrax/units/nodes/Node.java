@@ -37,6 +37,6 @@ public class Node implements Unit {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitNode(this);
   }
 }

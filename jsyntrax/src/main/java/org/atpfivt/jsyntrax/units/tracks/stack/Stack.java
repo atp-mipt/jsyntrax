@@ -21,6 +21,6 @@ public class Stack extends ComplexTrack {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitStack(this);
   }
 }

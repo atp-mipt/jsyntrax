@@ -54,7 +54,7 @@ public class SVGCanvasBuilder {
 
     public SVGCanvas generateSVG(Unit root) {
         this.canvas = new SVGCanvas(this.style, urlMap);
-        this.getDiagramParseResult(root, true);
+        parseDiagram(root, true);
         return this.canvas;
     }
 
@@ -77,7 +77,7 @@ public class SVGCanvasBuilder {
         }
 
         setLtor(ltor);
-        visit(unit);
+        unit.accept(this);
     }
 
     /**
@@ -90,7 +90,7 @@ public class SVGCanvasBuilder {
 
 
     @Override
-    public void visit(NoneNode unit) {
+    public void visitNoneNode(NoneNode unit) {
         String tag = this.canvas.new_tag("x", "");
 
         Element e = new LineElement(new Pair<>(0, 0), new Pair<>(1, 0),
@@ -103,7 +103,7 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Node unit) {
+    public void visitNode(Node unit) {
         String txt = unit.toString();
 
         NodeStyle ns = this.style.getNodeStyle(txt);
@@ -182,7 +182,7 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Bullet unit) {
+    public void visitBullet(Bullet unit) {
         String tag = this.canvas.new_tag("x", "");
         int w = this.style.outline_width;
         int r = w + 1;
@@ -194,7 +194,7 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Line line) {
+    public void visitLine(Line line) {
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.h_sep;
@@ -256,7 +256,7 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Toploop loop) {
+    public void visitToploop(Toploop loop) {
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.v_sep;
@@ -348,7 +348,7 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Loop loop) {
+    public void visitLoop(Loop loop) {
         String tag = this.canvas.new_tag("x", "");
         int sep = this.style.v_sep;
         int vsep = sep / 2;
@@ -452,7 +452,7 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Choice choice) {
+    public void visitChoice(Choice choice) {
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.v_sep;
@@ -564,7 +564,7 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Optx opt) {
+    public void visitOptx(Optx opt) {
         Choice c = new Choice(new ArrayList<>() {{
             add(new Line(opt.getUnits()));
             add(new NoneNode());
@@ -574,7 +574,7 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Opt opt) {
+    public void visitOpt(Opt opt) {
         Choice c = new Choice(new ArrayList<>() {{
             add(new NoneNode());
             add(new Line(opt.getUnits()));
@@ -741,19 +741,19 @@ public class SVGCanvasBuilder {
     }
 
     @Override
-    public void visit(Stack stack) {
+    public void visitStack(Stack stack) {
         setIndent(0);
         parseStack(stack);
     }
 
     @Override
-    public void visit(Rightstack unit) {
+    public void visitRightstack(Rightstack unit) {
         setIndent(-1);
         parseStack(unit);
     }
 
     @Override
-    public void visit(Indentstack unit) {
+    public void visitIndentstack(Indentstack unit) {
         int sep = this.style.h_sep * unit.getIndent();
         setIndent(unit.getIndent());
         parseStack(unit);
