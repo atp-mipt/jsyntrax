@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->
+<svg xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xml:space="preserve"
+width="209" height="104" version="1.1">
+<style type="text/css">
+<![CDATA[
+.title_font {fill:#000000; text-anchor:middle;
+font-family:Sans; font-size:22pt; font-weight:bold; font-style:normal; }
+.token_font {fill:#000000; text-anchor:middle;
+font-family:Sans; font-size:16pt; font-weight:bold; font-style:normal; }
+.box_font {fill:#000000; text-anchor:middle;
+font-family:Times; font-size:14pt; font-weight:bold; font-style:normal; }
+.bubble_font {fill:#000000; text-anchor:middle;
+font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
+.hex_font {fill:#000000; text-anchor:middle;
+font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
+.label {fill: #000; text-anchor:middle; font-size:16pt; font-weight:bold; font-family:Sans;}
+.link {fill: #0D47A1;}
+.link:hover {fill: #0D47A1; text-decoration:underline;}
+.link:visited {fill: #4A148C;}
+]]>
+</style>
+<defs>
+<marker id="arrow" markerWidth="5" markerHeight="4" refX="2.5" refY="2" orient="auto" markerUnits="strokeWidth">
+<path d="M0,0 L0.5,2 L0,4 L4.5,2 z" fill="#000000" />
+</marker>
+</defs>
+<rect width="100%" height="100%" fill="white"/>
+<path d="M15,36 H56 L63,22 L56,8 H15 L8,22 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M12,33 H53 L60,19 L53,5 H12 L5,19 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
+<text class="hex_font" x="32" y="25">top</text>
+<path d="M87,36 H132 L139,22 L132,8 H87 L80,22 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M84,33 H129 L136,19 L129,5 H84 L77,19 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
+<text class="hex_font" x="106" y="25">line</text>
+<line x1="59" y1="17" x2="73" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M51,102 H124 L131,88 L124,74 H51 L44,88 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M48,99 H121 L128,85 L121,71 H48 L41,85 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
+<text class="hex_font" x="84" y="91">bottom</text>
+<path d="M155,102 H200 L207,88 L200,74 H155 L148,88 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M152,99 H197 L204,85 L197,71 H152 L145,85 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
+<text class="hex_font" x="174" y="91">line</text>
+<line x1="127" y1="83" x2="141" y2="83" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="136" y1="17" x2="154" y2="17" stroke="#000000" stroke-width="2" />
+<path d="M163,26 A9,9 0 0,0 154,17" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="163" y1="26" x2="163" y2="43" stroke="#000000" stroke-width="2" />
+<path d="M154,52 A9,9 0 0,0 163,43" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="154" y1="52" x2="92" y2="52" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="88" y1="52" x2="23" y2="52" stroke="#000000" stroke-width="2" />
+<path d="M23,52 A9,9 0 0,0 14,61" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="14" y1="61" x2="14" y2="74" stroke="#000000" stroke-width="2" />
+<path d="M14,74 A9,9 0 0,0 23,83" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="23" y1="83" x2="37" y2="83" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+</svg>
