@@ -9,6 +9,14 @@ import java.nio.file.Paths;
 public class InputArguments {
 
     InputArguments() {}
+    public InputArguments(String i, String  o, boolean h, String t, boolean r, double s){
+        this.input = Paths.get(i);
+        this.output = Paths.get(o);
+        this.help = h;
+        this.title = t;
+        this.transparent = r;
+        this.scale = s;
+    }
 
     public static InputArguments parseArgs(String[] args) throws ParseException, NumberFormatException {
         // TODO: add style

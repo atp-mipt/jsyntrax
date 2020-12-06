@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->
+=======
+<!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->
+>>>>>>> added approval tests
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
@@ -28,6 +32,7 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 </marker>
 </defs>
 <rect width="100%" height="100%" fill="white"/>
+<<<<<<< HEAD
 <path d="M42,36 H67 L74,22 L67,8 H42 L35,22 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M39,33 H64 L71,19 L64,5 H39 L32,19 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
 <text class="hex_font" x="51" y="25">A</text>
@@ -38,6 +43,18 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 <path d="M153,36 H178 L185,22 L178,8 H153 L146,22 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M150,33 H175 L182,19 L175,5 H150 L143,19 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
 <text class="hex_font" x="162" y="25">C</text>
+=======
+<path d="M49,36 A14,14 0 0,1 49,8 H60 A14,14 0 0,1 60,36 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M46,33 A14,14 0 0,1 46,5 H57 A14,14 0 0,1 57,33 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="51" y="24">A</text>
+<path d="M105,36 A14,14 0 0,1 105,8 H115 A14,14 0 0,1 115,36 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M102,33 A14,14 0 0,1 102,5 H112 A14,14 0 0,1 112,33 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="107" y="24">B</text>
+<line x1="70" y1="17" x2="84" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M160,36 A14,14 0 0,1 160,8 H171 A14,14 0 0,1 171,36 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M157,33 A14,14 0 0,1 157,5 H168 A14,14 0 0,1 168,33 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="162" y="24">C</text>
+>>>>>>> added approval tests
 <line x1="125" y1="17" x2="139" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 <line x1="106" y1="37" x2="107" y2="37" stroke="#000000" stroke-width="2" />
 <line x1="14" y1="17" x2="32" y2="17" stroke="#000000" stroke-width="2" />

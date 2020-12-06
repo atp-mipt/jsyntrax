@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->
+=======
+<!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->
+>>>>>>> added approval tests
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
@@ -30,6 +34,7 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 <rect width="100%" height="100%" fill="white"/>
 <path d="M24,40 A16,16 0 0,1 24,8 H29 A16,16 0 0,1 29,40 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M21,37 A16,16 0 0,1 21,5 H26 A16,16 0 0,1 26,37 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<<<<<<< HEAD
 <text class="token_font" x="23" y="28">[</text>
 <path d="M69,39 H110 L117,25 L110,11 H69 L62,25 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M66,36 H107 L114,22 L107,8 H66 L59,22 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
@@ -46,5 +51,23 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 <path d="M261,40 A16,16 0 0,1 261,8 H266 A16,16 0 0,1 266,40 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M258,37 A16,16 0 0,1 258,5 H263 A16,16 0 0,1 263,37 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
 <text class="token_font" x="260" y="28">]</text>
+=======
+<text class="token_font" x="23" y="26">[</text>
+<path d="M76,39 A14,14 0 0,1 76,11 H103 A14,14 0 0,1 103,39 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M73,36 A14,14 0 0,1 73,8 H100 A14,14 0 0,1 100,36 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="86" y="27">foo</text>
+<line x1="41" y1="20" x2="55" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M150,40 A16,16 0 0,1 150,8 H153 A16,16 0 0,1 153,40 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M147,37 A16,16 0 0,1 147,5 H150 A16,16 0 0,1 150,37 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="token_font" x="148" y="26">,</text>
+<line x1="113" y1="20" x2="127" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<rect x="186" y="12" width="42" height="26" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="183" y="9" width="42" height="26" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="204" y="27">bar</text>
+<line x1="165" y1="20" x2="179" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M261,40 A16,16 0 0,1 261,8 H266 A16,16 0 0,1 266,40 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M258,37 A16,16 0 0,1 258,5 H263 A16,16 0 0,1 263,37 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="token_font" x="260" y="26">]</text>
+>>>>>>> added approval tests
 <line x1="224" y1="20" x2="238" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 </svg>

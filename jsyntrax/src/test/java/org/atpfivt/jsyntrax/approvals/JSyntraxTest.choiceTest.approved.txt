@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->
+=======
+<!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->
+>>>>>>> added approval tests
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
@@ -28,6 +32,7 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 </marker>
 </defs>
 <rect width="100%" height="100%" fill="white"/>
+<<<<<<< HEAD
 <path d="M52,36 H77 L84,22 L77,8 H52 L45,22 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M49,33 H74 L81,19 L74,5 H49 L42,19 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
 <text class="hex_font" x="61" y="25">A</text>
@@ -37,6 +42,17 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 <path d="M52,100 H77 L84,86 L77,72 H52 L45,86 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M49,97 H74 L81,83 L74,69 H49 L42,83 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
 <text class="hex_font" x="61" y="89">C</text>
+=======
+<path d="M59,36 A14,14 0 0,1 59,8 H70 A14,14 0 0,1 70,36 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M56,33 A14,14 0 0,1 56,5 H67 A14,14 0 0,1 67,33 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="61" y="24">A</text>
+<path d="M59,68 A14,14 0 0,1 59,40 H69 A14,14 0 0,1 69,68 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M56,65 A14,14 0 0,1 56,37 H66 A14,14 0 0,1 66,65 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="61" y="56">B</text>
+<path d="M59,100 A14,14 0 0,1 59,72 H70 A14,14 0 0,1 70,100 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M56,97 A14,14 0 0,1 56,69 H67 A14,14 0 0,1 67,97 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="61" y="88">C</text>
+>>>>>>> added approval tests
 <line x1="14" y1="17" x2="38" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 <line x1="81" y1="17" x2="110" y2="17" stroke="#000000" stroke-width="2" />
 <path d="M23,26 A9,9 0 0,0 14,17" stroke="#000000" stroke-width="2" fill="none"/>

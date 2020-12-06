@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->
+=======
+<!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->
+>>>>>>> added approval tests
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
@@ -30,6 +34,7 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 <rect width="100%" height="100%" fill="white"/>
 <rect x="33" y="9" width="71" height="26" fill="#000000" fill-opacity="0.4980392156862745" />
 <rect x="30" y="6" width="71" height="26" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<<<<<<< HEAD
 <text class="box_font" x="65" y="25">forward</text>
 <path d="M128,36 H178 L185,22 L178,8 H128 L121,22 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M125,33 H175 L182,19 L175,5 H125 L118,19 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
@@ -41,6 +46,19 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 <path d="M105,68 H195 L202,54 L195,40 H105 L98,54 z" fill="#000000" fill-opacity="0.4980392156862745" />
 <path d="M102,65 H192 L199,51 L192,37 H102 L95,51 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
 <text class="hex_font" x="147" y="57">backward</text>
+=======
+<text class="box_font" x="65" y="24">forward</text>
+<path d="M135,36 A14,14 0 0,1 135,8 H171 A14,14 0 0,1 171,36 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M132,33 A14,14 0 0,1 132,5 H168 A14,14 0 0,1 168,33 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="150" y="24">path</text>
+<line x1="100" y1="17" x2="114" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M31,68 A14,14 0 0,1 31,40 H67 A14,14 0 0,1 67,68 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M28,65 A14,14 0 0,1 28,37 H64 A14,14 0 0,1 64,65 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="46" y="56">path</text>
+<path d="M112,68 A14,14 0 0,1 112,40 H188 A14,14 0 0,1 188,68 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M109,65 A14,14 0 0,1 109,37 H185 A14,14 0 0,1 185,65 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="147" y="56">backward</text>
+>>>>>>> added approval tests
 <line x1="95" y1="49" x2="81" y2="49" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 <line x1="14" y1="17" x2="26" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 <line x1="182" y1="17" x2="199" y2="17" stroke="#000000" stroke-width="2" />

@@ -34,6 +34,11 @@ public class SVGCanvasBuilder {
     public SVGCanvasBuilder(InputArguments iArgs) {
         this.iArgs = iArgs;
     }
+    public SVGCanvasBuilder() {
+        this.iArgs = new InputArguments("/Users/ekaterina/Desktop/actual version of jsyntrax/jsyntrax/jsyntrax/src/main/java/org/atpfivt/jsyntrax/input.txt",
+                "/Users/ekaterina/Desktop/actual version of jsyntrax/jsyntrax/jsyntrax/src/main/java/org/atpfivt/jsyntrax/output.txt",
+                false, "", false, 1.0);
+    }
 
     public SVGCanvas generateSVG(Unit root, Map<String, String> urlMap) {
         this.style = new Style(iArgs.getScale(), iArgs.transparent());
