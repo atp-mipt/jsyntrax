@@ -18,6 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.main.class>org.atpfivt.jsyntrax.Main</java.main.class>
         <java.version>1.11</java.version>
+        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
     </properties>
 
     <dependencies>
@@ -172,6 +173,11 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+            </plugin>
         </plugins>
     </build>
 </project>
