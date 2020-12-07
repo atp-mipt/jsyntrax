@@ -91,6 +91,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitNoneNode(NoneNode unit) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         Element e = new LineElement(new Pair<>(0, 0), new Pair<>(1, 0),
@@ -104,6 +105,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitNode(Node unit) {
+        boolean ltor = getLtor();
         String txt = unit.toString();
 
         NodeStyle ns = this.style.getNodeStyle(txt);
@@ -183,6 +185,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitBullet(Bullet unit) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
         int w = this.style.outline_width;
         int r = w + 1;
@@ -195,6 +198,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitLine(Line line) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.h_sep;
@@ -257,6 +261,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitToploop(Toploop loop) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.v_sep;
@@ -349,6 +354,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitLoop(Loop loop) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
         int sep = this.style.v_sep;
         int vsep = sep / 2;
@@ -453,6 +459,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitChoice(Choice choice) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.v_sep;
@@ -565,6 +572,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitOptx(Optx opt) {
+        boolean ltor = getLtor();
         Choice c = new Choice(new ArrayList<>() {{
             add(new Line(opt.getUnits()));
             add(new NoneNode());
@@ -575,6 +583,7 @@ public class SVGCanvasBuilder {
 
     @Override
     public void visitOpt(Opt opt) {
+        boolean ltor = getLtor();
         Choice c = new Choice(new ArrayList<>() {{
             add(new NoneNode());
             add(new Line(opt.getUnits()));
@@ -587,6 +596,7 @@ public class SVGCanvasBuilder {
      * Unobvious fact: self.indent < 0 if (stack instanceof Rightstack)
      */
     private void parseStack(Stack stack) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.v_sep * 2;
