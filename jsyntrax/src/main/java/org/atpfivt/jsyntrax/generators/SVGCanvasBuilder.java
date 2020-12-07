@@ -19,10 +19,10 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +40,14 @@ public class SVGCanvasBuilder {
         this.canvas = new SVGCanvas(this.style, urlMap);
         this.parseDiagram(root, true);
         return this.canvas;
+    }
+
+    public void addNodeStyle(NodeStyle ns) {
+        style.addNodeStyle(ns);
+    }
+
+    public void clearNodeStyles() {
+        style.clearNodeStyles();
     }
 
     /**
@@ -843,11 +851,12 @@ public class SVGCanvasBuilder {
     }
 
     private static Pair<Integer, Integer> getTextSize(String text, Font font) {
-        // TODO: dirty
-        //FontMetrics metrics = FontDesignMetrics.getMetrics(font);
-        FontMetrics metrics = new Canvas().getFontMetrics(font);
 
-        return new Pair<>(metrics.stringWidth(text) + text.length() + 10, metrics.getHeight() + 10);
+        Rectangle2D r = font.getStringBounds(text,
+                new FontRenderContext(null, true, true));
+
+        return new Pair<>((int)(r.getMaxX() - r.getMinX() + text.length() + 10),
+                (int)(r.getMaxY() - r.getMinY() + 10));
     }
 
     /**

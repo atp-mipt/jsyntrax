@@ -32,8 +32,13 @@ public class Style {
             new NodeHexStyle()));
     }
 
-    public void addStyle(NodeStyle ns) {
+    public void addNodeStyle(NodeStyle ns) {
         nodeStyles.add(ns);
+    }
+
+    // for making custom node styles
+    public void clearNodeStyles() {
+        nodeStyles.clear();
     }
 
     public NodeStyle getNodeStyle(String txt) {
