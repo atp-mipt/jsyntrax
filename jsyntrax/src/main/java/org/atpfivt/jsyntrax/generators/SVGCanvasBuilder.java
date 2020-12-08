@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * @brief class for building canvas by Unit
  */
-public class SVGCanvasBuilder {
+public class SVGCanvasBuilder implements Visitor{
     private Map<String, String> urlMap;
     private Style style;
     private SVGCanvas canvas;
@@ -765,7 +765,7 @@ public class SVGCanvasBuilder {
     @Override
     public void visitIndentstack(Indentstack unit) {
         int sep = this.style.h_sep * unit.getIndent();
-        setIndent(unit.getIndent());
+        setIndent(sep);
         parseStack(unit);
     }
 
