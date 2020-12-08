@@ -3,6 +3,8 @@ package org.atpfivt.jsyntrax;
 import org.approvaltests.Approvals;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
+import org.atpfivt.jsyntrax.styles.NodeStyle;
+import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.tracks.Choice;
 import org.atpfivt.jsyntrax.units.tracks.Line;
 import org.atpfivt.jsyntrax.units.tracks.loop.Loop;
@@ -14,146 +16,128 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 
-<<<<<<< HEAD
-=======
-import java.util.Collections;
-
->>>>>>> added approval tests
 import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
 
 
 public class JSyntraxTest {
+
+    private final SVGCanvasBuilder canvasBuilder;
+    private final Font testFont;
+
+    public JSyntraxTest() {
+        testFont = getTestFont();
+
+        Style s = new Style(1, false);
+        s.title_font = testFont;
+
+        for (NodeStyle ns : s.nodeStyles) {
+            ns.font = testFont;
+        }
+        canvasBuilder = new SVGCanvasBuilder().withStyle(s);
+    }
+
+    private Font getTestFont() {
+        try {
+            return Font.createFont(Font.TRUETYPE_FONT,
+                    JSyntraxTest.class.getResourceAsStream("PTSans-Regular.ttf"))
+                    .deriveFont(12.f);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
     @Test
-    void lineTest(){
+    void lineTest() {
         Line l = line('[', "foo", ',', "/bar", ']');
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(l);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(l, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(l);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
     @Test
-    void difficultLoopTest(){
+    void difficultLoopTest() {
         Loop l = loop(line("/forward", "path"), line("backward", "path"));
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(l);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(l, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(l);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
     @Test
-    void toploopTest(){
+    void toploopTest() {
         Toploop l = toploop(line('(', "forward", ')'), line(')', "backward", '('));
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(l);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(l, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(l);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
     @Test
-    void choiceTest(){
+    void choiceTest() {
         Choice choice = choice('A', 'B', 'C');
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(choice);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(choice, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(choice);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
     @Test
-    void optTest(){
+    void optTest() {
         Opt opt = opt('A', 'B', 'C');
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(opt);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(opt, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(opt);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
     @Test
-    void optxTest(){
+    void optxTest() {
         Optx optx = optx('A', 'B', 'C');
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(optx);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(optx, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(optx);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
     @Test
-    void stackTest(){
+    void stackTest() {
         Stack s = stack(
                 line("top", "line"),
                 line("bottom", "line")
         );
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(s);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(s, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(s);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
 
     @Test
-    void verticalStackTest(){
+    void verticalStackTest() {
         Stack s = stack(
                 line('A', 'B'),
                 opt("bypass"),
                 line("finish")
         );
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(s);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(s, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(s);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
     @Test
-    void indentStackTest(){
+    void indentStackTest() {
         Indentstack indentStack = indentstack(3,
                 line("top", "line"),
                 line("bottom", "line")
         );
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(indentStack);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(indentStack, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(indentStack);
         String result = c.generateSVG();
         Approvals.verify(result);
     }
 
     @Test
-    void rightStackTest(){
+    void rightStackTest() {
         Rightstack rightStack = rightstack(
                 line("top", "line", "with", "more", "code"),
                 line("bottom", "line")
         );
-<<<<<<< HEAD
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(rightStack);
-=======
-        SVGCanvas c = new SVGCanvasBuilder().generateSVG(rightStack, Collections.emptyMap());
->>>>>>> added approval tests
+        SVGCanvas c = canvasBuilder.generateSVG(rightStack);
         String result = c.generateSVG();
         Approvals.verify(result);
     }

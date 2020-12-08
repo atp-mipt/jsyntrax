@@ -1,6 +1,7 @@
 package org.atpfivt.jsyntrax;
 
 
+import org.atpfivt.jsyntrax.styles.Style;
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +73,10 @@ public class Main {
         }
 
         // generate SVG
-        SVGCanvas c = new SVGCanvasBuilder(iArgs).generateSVG(root, urlMap);
+        SVGCanvas c = new SVGCanvasBuilder()
+                .withStyle(new Style(iArgs.scale, iArgs.transparent))
+                .withUrlMap(urlMap)
+                .generateSVG(root);
         String result = c.generateSVG();
 
         // write result to file
@@ -120,7 +124,7 @@ public class Main {
                 String key = it.next();
                 urlMap.put(key, map.getString(key));
             }
-        } catch(JSONException e) {
+        } catch (JSONException e) {
             System.out.println("Failed parse url map: " + e.getMessage());
             return false;
         }

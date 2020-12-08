@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< HEAD
-<!-- Created by Jyntrax https://github.com/atp-mipt/java-syntrax -->
-=======
 <!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->
->>>>>>> added approval tests
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
-width="213" height="70" version="1.1">
+width="184" height="66" version="1.1">
 <style type="text/css">
 <![CDATA[
 .title_font {fill:#000000; text-anchor:middle;
-font-family:Sans; font-size:22pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans; font-size:12pt; font-weight:normal; font-style:normal; }
 .token_font {fill:#000000; text-anchor:middle;
-font-family:Sans; font-size:16pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans; font-size:12pt; font-weight:normal; font-style:normal; }
 .box_font {fill:#000000; text-anchor:middle;
-font-family:Times; font-size:14pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans; font-size:12pt; font-weight:normal; font-style:normal; }
 .bubble_font {fill:#000000; text-anchor:middle;
-font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans; font-size:12pt; font-weight:normal; font-style:normal; }
 .hex_font {fill:#000000; text-anchor:middle;
-font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans; font-size:12pt; font-weight:normal; font-style:normal; }
 .label {fill: #000; text-anchor:middle; font-size:16pt; font-weight:bold; font-family:Sans;}
 .link {fill: #0D47A1;}
 .link:hover {fill: #0D47A1; text-decoration:underline;}
@@ -32,42 +28,28 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 </marker>
 </defs>
 <rect width="100%" height="100%" fill="white"/>
-<rect x="33" y="9" width="71" height="26" fill="#000000" fill-opacity="0.4980392156862745" />
-<rect x="30" y="6" width="71" height="26" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
-<<<<<<< HEAD
-<text class="box_font" x="65" y="25">forward</text>
-<path d="M128,36 H178 L185,22 L178,8 H128 L121,22 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M125,33 H175 L182,19 L175,5 H125 L118,19 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
-<text class="hex_font" x="150" y="25">path</text>
-<line x1="100" y1="17" x2="114" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<path d="M24,68 H74 L81,54 L74,40 H24 L17,54 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M21,65 H71 L78,51 L71,37 H21 L14,51 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
-<text class="hex_font" x="46" y="57">path</text>
-<path d="M105,68 H195 L202,54 L195,40 H105 L98,54 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M102,65 H192 L199,51 L192,37 H102 L95,51 z" stroke="#000000" stroke-width="2" fill="#ff0000" fill-opacity="0.4980392156862745" />
-<text class="hex_font" x="147" y="57">backward</text>
-=======
-<text class="box_font" x="65" y="24">forward</text>
-<path d="M135,36 A14,14 0 0,1 135,8 H171 A14,14 0 0,1 171,36 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M132,33 A14,14 0 0,1 132,5 H168 A14,14 0 0,1 168,33 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="150" y="24">path</text>
-<line x1="100" y1="17" x2="114" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<path d="M31,68 A14,14 0 0,1 31,40 H67 A14,14 0 0,1 67,68 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M28,65 A14,14 0 0,1 28,37 H64 A14,14 0 0,1 64,65 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="46" y="56">path</text>
-<path d="M112,68 A14,14 0 0,1 112,40 H188 A14,14 0 0,1 188,68 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M109,65 A14,14 0 0,1 109,37 H185 A14,14 0 0,1 185,65 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="147" y="56">backward</text>
->>>>>>> added approval tests
-<line x1="95" y1="49" x2="81" y2="49" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="14" y1="17" x2="26" y2="17" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="182" y1="17" x2="199" y2="17" stroke="#000000" stroke-width="2" />
-<line x1="5" y1="17" x2="14" y2="17" stroke="#000000" stroke-width="2" />
-<path d="M14,17 A9,9 0 0,0 5,26" stroke="#000000" stroke-width="2" fill="none"/>
-<line x1="5" y1="26" x2="5" y2="40" stroke="#000000" stroke-width="2" />
-<path d="M5,40 A9,9 0 0,0 13,49" stroke="#000000" stroke-width="2" fill="none"/>
-<path d="M208,26 A9,9 0 0,0 199,17" stroke="#000000" stroke-width="2" fill="none"/>
-<line x1="208" y1="26" x2="208" y2="40" stroke="#000000" stroke-width="2" />
-<path d="M199,49 A9,9 0 0,0 208,40" stroke="#000000" stroke-width="2" fill="none"/>
-<line x1="199" y1="17" x2="208" y2="17" stroke="#000000" stroke-width="2" />
+<rect x="26" y="8" width="66" height="26" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="23" y="5" width="66" height="26" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="56" y="23">forward</text>
+<path d="M122,34 A13,13 0 0,1 122,8 H151 A13,13 0 0,1 151,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M119,31 A13,13 0 0,1 119,5 H148 A13,13 0 0,1 148,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="133" y="23">path</text>
+<line x1="88" y1="16" x2="102" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M30,64 A13,13 0 0,1 30,38 H59 A13,13 0 0,1 59,64 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M27,61 A13,13 0 0,1 27,35 H56 A13,13 0 0,1 56,61 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="41" y="53">path</text>
+<path d="M102,64 A13,13 0 0,1 102,38 H160 A13,13 0 0,1 160,64 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M99,61 A13,13 0 0,1 99,35 H157 A13,13 0 0,1 157,61 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="128" y="53">backward</text>
+<line x1="86" y1="46" x2="72" y2="46" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="14" y1="16" x2="19" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="161" y1="16" x2="170" y2="16" stroke="#000000" stroke-width="2" />
+<line x1="5" y1="16" x2="14" y2="16" stroke="#000000" stroke-width="2" />
+<path d="M14,16 A9,9 0 0,0 5,25" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="5" y1="25" x2="5" y2="37" stroke="#000000" stroke-width="2" />
+<path d="M5,37 A9,9 0 0,0 13,46" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M179,25 A9,9 0 0,0 170,16" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="179" y1="25" x2="179" y2="37" stroke="#000000" stroke-width="2" />
+<path d="M170,46 A9,9 0 0,0 179,37" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="170" y1="16" x2="179" y2="16" stroke="#000000" stroke-width="2" />
 </svg>
