@@ -1,6 +1,7 @@
 package org.atpfivt.jsyntrax;
 
 import org.approvaltests.Approvals;
+import org.approvaltests.core.Options;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
@@ -23,6 +24,7 @@ import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
 
 public class JSyntraxTest {
 
+    private final static Options options = new Options().forFile().withExtension(".svg");
     private final SVGCanvasBuilder canvasBuilder;
     private final Font testFont;
 
@@ -53,7 +55,7 @@ public class JSyntraxTest {
         Line l = line('[', "foo", ',', "/bar", ']');
         SVGCanvas c = canvasBuilder.generateSVG(l);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
     @Test
@@ -61,7 +63,7 @@ public class JSyntraxTest {
         Loop l = loop(line("/forward", "path"), line("backward", "path"));
         SVGCanvas c = canvasBuilder.generateSVG(l);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
     @Test
@@ -69,7 +71,7 @@ public class JSyntraxTest {
         Toploop l = toploop(line('(', "forward", ')'), line(')', "backward", '('));
         SVGCanvas c = canvasBuilder.generateSVG(l);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
     @Test
@@ -77,7 +79,7 @@ public class JSyntraxTest {
         Choice choice = choice('A', 'B', 'C');
         SVGCanvas c = canvasBuilder.generateSVG(choice);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
     @Test
@@ -85,7 +87,7 @@ public class JSyntraxTest {
         Opt opt = opt('A', 'B', 'C');
         SVGCanvas c = canvasBuilder.generateSVG(opt);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
     @Test
@@ -93,7 +95,7 @@ public class JSyntraxTest {
         Optx optx = optx('A', 'B', 'C');
         SVGCanvas c = canvasBuilder.generateSVG(optx);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
     @Test
@@ -104,7 +106,7 @@ public class JSyntraxTest {
         );
         SVGCanvas c = canvasBuilder.generateSVG(s);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
 
@@ -117,7 +119,7 @@ public class JSyntraxTest {
         );
         SVGCanvas c = canvasBuilder.generateSVG(s);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
     @Test
@@ -128,7 +130,7 @@ public class JSyntraxTest {
         );
         SVGCanvas c = canvasBuilder.generateSVG(indentStack);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 
     @Test
@@ -139,6 +141,6 @@ public class JSyntraxTest {
         );
         SVGCanvas c = canvasBuilder.generateSVG(rightStack);
         String result = c.generateSVG();
-        Approvals.verify(result);
+        Approvals.verify(result, options);
     }
 }

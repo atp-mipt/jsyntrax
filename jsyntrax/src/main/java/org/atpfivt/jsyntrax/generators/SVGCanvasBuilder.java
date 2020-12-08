@@ -54,7 +54,9 @@ public class SVGCanvasBuilder implements Visitor{
 
     public SVGCanvas generateSVG(Unit root) {
         this.canvas = new SVGCanvas(this.style, urlMap);
-        parseDiagram(root, true);
+        parseDiagram(new Line(
+                new ArrayList<>(List.of(new Bullet(), root, new Bullet()))
+        ), true);
         return this.canvas;
     }
 
