@@ -133,12 +133,15 @@ public class SVGCanvas {
             String fontName = fontPair.getKey();
             String fontFamily = fontPair.getValue().f.getName();
             String fontSize = Integer.toString((int)(fontPair.getValue().f.getSize() * scale));
-            String fontWeight = "bold";
+            String fontWeight = "normal";
+            if ((fontPair.getValue().f.getStyle() & Font.BOLD) == Font.BOLD) {
+                fontWeight = "bold";
+            }
             String fontStyle = "normal";
-            if (fontPair.getValue().f.getFontName().contains("italic")) {
-                fontWeight = "normal";
+            if ((fontPair.getValue().f.getStyle() & Font.ITALIC) == Font.ITALIC) {
                 fontStyle = "italic";
             }
+
             String hex = Algorithm.toHex(fontPair.getValue().s);
 
             sb.append(".").append(fontName).append(" ");
