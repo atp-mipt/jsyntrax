@@ -3,7 +3,7 @@
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
-width="259" height="36" version="1.1">
+width="305" height="36" version="1.1">
 <style type="text/css">
 <![CDATA[
 .title_font {fill:#000000; text-anchor:middle;
@@ -28,23 +28,27 @@ font-family:PT Sans; font-size:12pt; font-weight:normal; font-style:normal; }
 </marker>
 </defs>
 <rect width="100%" height="100%" fill="white"/>
-<path d="M21,34 A13,13 0 0,1 21,8 H27 A13,13 0 0,1 27,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M18,31 A13,13 0 0,1 18,5 H24 A13,13 0 0,1 24,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="token_font" x="21" y="23">[</text>
-<path d="M70,34 A13,13 0 0,1 70,8 H91 A13,13 0 0,1 91,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M67,31 A13,13 0 0,1 67,5 H88 A13,13 0 0,1 88,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="77" y="23">foo</text>
-<line x1="36" y1="16" x2="50" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<path d="M134,34 A13,13 0 0,1 134,8 H139 A13,13 0 0,1 139,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M131,31 A13,13 0 0,1 131,5 H136 A13,13 0 0,1 136,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="token_font" x="133" y="23">,</text>
-<line x1="100" y1="16" x2="114" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<rect x="169" y="8" width="39" height="26" fill="#000000" fill-opacity="0.4980392156862745" />
-<rect x="166" y="5" width="39" height="26" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
-<text class="box_font" x="185" y="23">bar</text>
-<line x1="148" y1="16" x2="162" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<path d="M238,34 A13,13 0 0,1 238,8 H244 A13,13 0 0,1 244,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M235,31 A13,13 0 0,1 235,5 H241 A13,13 0 0,1 241,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="token_font" x="238" y="23">]</text>
-<line x1="204" y1="16" x2="218" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<circle cx="8" cy="16" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<path d="M44,34 A13,13 0 0,1 44,8 H50 A13,13 0 0,1 50,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M41,31 A13,13 0 0,1 41,5 H47 A13,13 0 0,1 47,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="token_font" x="44" y="23">[</text>
+<path d="M93,34 A13,13 0 0,1 93,8 H114 A13,13 0 0,1 114,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M90,31 A13,13 0 0,1 90,5 H111 A13,13 0 0,1 111,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="100" y="23">foo</text>
+<line x1="59" y1="16" x2="73" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M157,34 A13,13 0 0,1 157,8 H162 A13,13 0 0,1 162,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M154,31 A13,13 0 0,1 154,5 H159 A13,13 0 0,1 159,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="token_font" x="156" y="23">,</text>
+<line x1="123" y1="16" x2="137" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<rect x="192" y="8" width="39" height="26" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="189" y="5" width="39" height="26" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="208" y="23">bar</text>
+<line x1="171" y1="16" x2="185" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M261,34 A13,13 0 0,1 261,8 H267 A13,13 0 0,1 267,34 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M258,31 A13,13 0 0,1 258,5 H264 A13,13 0 0,1 264,31 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="token_font" x="261" y="23">]</text>
+<line x1="227" y1="16" x2="241" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="10" y1="16" x2="24" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<circle cx="297" cy="16" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<line x1="276" y1="16" x2="290" y2="16" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 </svg>
