@@ -27,7 +27,6 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Failed CommandLine parse");
             System.out.println(e.getMessage());
-            e.printStackTrace();
             return;
         }
 
