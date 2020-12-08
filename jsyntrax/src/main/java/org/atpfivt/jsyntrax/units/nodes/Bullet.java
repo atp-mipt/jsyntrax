@@ -6,8 +6,9 @@ import org.atpfivt.jsyntrax.visitors.Visitor;
 public class Bullet implements Unit {
     public Bullet() {}
 
+    @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        visitor.visitBullet(this);
     }
 }
 

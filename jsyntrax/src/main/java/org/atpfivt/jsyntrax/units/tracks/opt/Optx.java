@@ -16,6 +16,6 @@ public class Optx extends Opt {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitOptx(this);
   }
 }

@@ -16,6 +16,6 @@ public class Line extends Track {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitLine(this);
   }
 }

@@ -5,7 +5,7 @@ import org.atpfivt.jsyntrax.units.Unit;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Track implements Unit {
+public abstract class Track implements Unit {
   protected final ArrayList<Unit> units;
 
   public Track(ArrayList<Unit> units) {

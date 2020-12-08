@@ -3,3 +3,4 @@ target/
 *.iml
 /out
 syntrax_scripts/output.svg
+.DS_Store

@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Indentstack extends Stack {
-  public final int indent;
+  private final int indent;
+
+  public int getIndent() {
+    return indent;
+  }
 
   public Indentstack(int indent, ArrayList<Unit> units) {
     super(units);
@@ -24,6 +28,6 @@ public class Indentstack extends Stack {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitIndentstack(this);
   }
 }

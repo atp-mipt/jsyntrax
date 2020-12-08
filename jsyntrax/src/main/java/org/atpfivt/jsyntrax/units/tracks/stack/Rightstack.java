@@ -11,6 +11,6 @@ public class Rightstack extends Stack {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitRightstack(this);
   }
 }

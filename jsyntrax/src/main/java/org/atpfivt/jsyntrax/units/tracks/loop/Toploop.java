@@ -12,6 +12,6 @@ public class Toploop extends Loop {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitToploop(this);
   }
 }

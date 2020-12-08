@@ -15,18 +15,16 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 
 public interface Visitor {
-  void visit(Line unit);
-  void visit(Loop unit);
-  void visit(Toploop unit);
-  void visit(Choice unit);
-  void visit(Opt unit);
-  void visit(Optx unit);
-  void visit(Stack unit);
-  void visit(Rightstack unit);
-  void visit(Indentstack unit);
-  void visit(Bullet unit);
-  void visit(Node unit);
-  void visit(NoneNode unit);
-
-  default void visit(Unit unit) { assert false; }
+  void visitLine(Line unit);
+  void visitLoop(Loop unit);
+  void visitToploop(Toploop unit);
+  void visitChoice(Choice unit);
+  void visitOpt(Opt unit);
+  void visitOptx(Optx unit);
+  void visitStack(Stack unit);
+  void visitRightstack(Rightstack unit);
+  void visitIndentstack(Indentstack unit);
+  void visitBullet(Bullet unit);
+  void visitNode(Node unit);
+  void visitNoneNode(NoneNode unit);
 }

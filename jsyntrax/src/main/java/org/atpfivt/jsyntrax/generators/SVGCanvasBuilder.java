@@ -18,6 +18,7 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Indentstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.atpfivt.jsyntrax.util.Pair;
+import org.atpfivt.jsyntrax.visitors.Visitor;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -31,8 +32,10 @@ import java.util.Map;
 /**
  * @brief class for building canvas by Unit
  */
-public class SVGCanvasBuilder {
+public class SVGCanvasBuilder implements Visitor{
     private Map<String, String> urlMap;
+    private Style style;
+    private SVGCanvas canvas;
 
     public SVGCanvasBuilder() {
         this.style = new Style(1, false);
@@ -51,9 +54,10 @@ public class SVGCanvasBuilder {
 
     public SVGCanvas generateSVG(Unit root) {
         this.canvas = new SVGCanvas(this.style, urlMap);
-        this.parseDiagram(root, true);
+        parseDiagram(root, true);
         return this.canvas;
     }
+
 
     public void addNodeStyle(NodeStyle ns) {
         style.addNodeStyle(ns);
@@ -66,70 +70,28 @@ public class SVGCanvasBuilder {
     /**
      * @return tag of built Unit
      */
-    private UnitEndPoint parseDiagram(Unit unit, boolean ltor) {
+    private void parseDiagram(Unit unit, boolean ltor) {
         if (null == unit) {
-            return null;
+            setUnitEndPoint(null);
+            return;
         }
 
-        // CanvasBuilderVisitor visitor = new CanvasBuilderVisitor();
-        // visitor.visit(unit);
-        // return (UnitEndPoint) visitor.getTosValue();
-
-        if (unit instanceof NoneNode) {
-            return parseNoneNode((NoneNode) unit);
-        }
-
-        if (unit instanceof Node) {
-            return parseNode((Node) unit);
-        }
-
-        if (unit instanceof Bullet) {
-            return parseBullet((Bullet) unit);
-        }
-
-        if (unit instanceof Line) {
-            return parseLine((Line) unit, ltor);
-        }
-
-        if (unit instanceof Toploop) {
-            return parseToploop((Toploop) unit, ltor);
-        }
-
-        if (unit instanceof Loop) {
-            return parseLoop((Loop) unit, ltor);
-        }
-
-        if (unit instanceof Choice) {
-            return parseChoice((Choice) unit, ltor);
-        }
-
-        if (unit instanceof Optx) {
-            return parseOptx((Optx) unit, ltor);
-        }
-
-        if (unit instanceof Opt) {
-            return parseOpt((Opt) unit, ltor);
-        }
-
-        if (unit instanceof Indentstack) {
-            Indentstack stack = (Indentstack) unit;
-            int sep = this.style.h_sep * stack.indent;
-            return parseStack(stack, sep, ltor);
-        }
-
-        if (unit instanceof Rightstack) {
-            return parseStack((Stack) unit, -1, ltor);
-        }
-
-        if (unit instanceof Stack) {
-            return parseStack((Stack) unit, 0, ltor);
-        }
-
-        return null;
-
+        setLtor(ltor);
+        unit.accept(this);
     }
 
-    private UnitEndPoint parseNoneNode(NoneNode node) {
+    /**
+     * @return tag of built Unit
+     */
+    private UnitEndPoint getDiagramParseResult(Unit unit, boolean ltor) {
+        parseDiagram(unit, ltor);
+        return getUnitEndPoint();
+    }
+
+
+    @Override
+    public void visitNoneNode(NoneNode unit) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         Element e = new LineElement(new Pair<>(0, 0), new Pair<>(1, 0),
@@ -138,11 +100,13 @@ public class SVGCanvasBuilder {
         e.setEnd(new Pair<>(1, 0));
         this.canvas.addElement(e);
 
-        return new UnitEndPoint(tag, e.getEnd());
+        setUnitEndPoint(new UnitEndPoint(tag, e.getEnd()));
     }
 
-    private UnitEndPoint parseNode(Node node) {
-        String txt = node.toString();
+    @Override
+    public void visitNode(Node unit) {
+        boolean ltor = getLtor();
+        String txt = unit.toString();
 
         NodeStyle ns = this.style.getNodeStyle(txt);
         txt = ns.modify(txt);
@@ -215,20 +179,26 @@ public class SVGCanvasBuilder {
         int width = x1 - x0;
 
         this.canvas.moveByTag(tag, -x0, 2);
-        return new UnitEndPoint(tag, new Pair<>(width, 0));
+
+        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(width, 0)));
     }
 
-    private UnitEndPoint parseBullet(Bullet bullet) {
+    @Override
+    public void visitBullet(Bullet unit) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
         int w = this.style.outline_width;
         int r = w + 1;
         this.canvas.addElement(
                 new OvalElement(new Pair<>(0, -r), new Pair<>(2 * r, r),
                         w, this.style.bullet_fill, tag));
-        return new UnitEndPoint(tag, new Pair<>(2 * r, 0));
+
+        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(2 * r, 0)));
     }
 
-    private UnitEndPoint parseLine(Line line, boolean ltor) {
+    @Override
+    public void visitLine(Line line) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.h_sep;
@@ -248,7 +218,7 @@ public class SVGCanvasBuilder {
 
         for (; 0 <= unitNum && unitNum < size; unitNum += unitStep) {
             Unit unit = line.getUnits().get(unitNum);
-            UnitEndPoint endPoint = this.parseDiagram(unit, ltor);
+            UnitEndPoint endPoint = this.getDiagramParseResult(unit, ltor);
             if (endPoint == null) {
                 continue;
             }
@@ -286,17 +256,19 @@ public class SVGCanvasBuilder {
             pos.f = sep;
         }
 
-        return new UnitEndPoint(tag, pos);
+        setUnitEndPoint(new UnitEndPoint(tag, pos));
     }
 
-    private UnitEndPoint parseToploop(Toploop loop, boolean ltor) {
+    @Override
+    public void visitToploop(Toploop loop) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.v_sep;
         int vsep = sep / 2;
 
         // parse forward
-        UnitEndPoint fEndPoint = parseDiagram(loop.getForwardPart(), ltor);
+        UnitEndPoint fEndPoint = getDiagramParseResult(loop.getForwardPart(), ltor);
         String ft = fEndPoint.tag;
         int fexx = fEndPoint.endpoint.f;
         int fexy = fEndPoint.endpoint.s;
@@ -307,7 +279,7 @@ public class SVGCanvasBuilder {
         int fy1 = fBox.s.s;
 
         // parse backward
-        UnitEndPoint bEndPoint = parseDiagram(loop.getBackwardPart(), !ltor);
+        UnitEndPoint bEndPoint = getDiagramParseResult(loop.getBackwardPart(), !ltor);
         String bt = bEndPoint.tag;
         int bexx = bEndPoint.endpoint.f;
         int bexy = bEndPoint.endpoint.s;
@@ -376,16 +348,19 @@ public class SVGCanvasBuilder {
         this.canvas.addElement(
                 new LineElement(new Pair<>(mxx, fexy), new Pair<>(x1, fexy),
                         null, this.style.line_width, tag));
-        return new UnitEndPoint(tag, new Pair<>(x1, fexy));
+
+        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(x1, fexy)));
     }
 
-    private UnitEndPoint parseLoop(Loop loop, boolean ltor) {
+    @Override
+    public void visitLoop(Loop loop) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
         int sep = this.style.v_sep;
         int vsep = sep / 2;
 
         // parse forward
-        UnitEndPoint fEndPoint = parseDiagram(loop.getForwardPart(), ltor);
+        UnitEndPoint fEndPoint = getDiagramParseResult(loop.getForwardPart(), ltor);
         String ft = fEndPoint.tag;
         int fexx = fEndPoint.endpoint.f;
         int fexy = fEndPoint.endpoint.s;
@@ -396,7 +371,7 @@ public class SVGCanvasBuilder {
         int fy1 = fBox.s.s;
 
         // parse backward
-        UnitEndPoint bEndPoint = parseDiagram(loop.getBackwardPart(), !ltor);
+        UnitEndPoint bEndPoint = getDiagramParseResult(loop.getBackwardPart(), !ltor);
         String bt = bEndPoint.tag;
         int bexx = bEndPoint.endpoint.f;
         int bexy = bEndPoint.endpoint.s;
@@ -479,10 +454,12 @@ public class SVGCanvasBuilder {
                 new LineElement(new Pair<>(mxx, fexy), new Pair<>(exit_x, fexy),
                         null, this.style.line_width, tag));
 
-        return new UnitEndPoint(tag, new Pair<>(exit_x, fexy));
+        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(exit_x, fexy)));
     }
 
-    private UnitEndPoint parseChoice(Choice choice, boolean ltor) {
+    @Override
+    public void visitChoice(Choice choice) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.v_sep;
@@ -491,13 +468,14 @@ public class SVGCanvasBuilder {
         int n = choice.getUnits().size();
 
         if (n == 0) {
-            return null;
+            setUnitEndPoint(null);
+            return;
         }
         ArrayList<UnitEndPoint> res = new ArrayList<>();
         int mxw = 0;
 
         for (int i = 0; i < n; ++i) {
-            res.add(parseDiagram(choice.getUnits().get(i), ltor));
+            res.add(getDiagramParseResult(choice.getUnits().get(i), ltor));
 
             Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> box =
                     this.canvas.getBoundingBoxByTag(res.get(i).tag);
@@ -589,33 +567,44 @@ public class SVGCanvasBuilder {
             this.canvas.dropTag(t);
         }
 
-        return new UnitEndPoint(tag, new Pair<>(x5, exy));
+        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(x5, exy)));
     }
 
-    private UnitEndPoint parseOptx(Optx opt, boolean ltor) {
+    @Override
+    public void visitOptx(Optx opt) {
+        boolean ltor = getLtor();
         Choice c = new Choice(new ArrayList<>() {{
             add(new Line(opt.getUnits()));
             add(new NoneNode());
         }});
-        return parseDiagram(c, ltor);
+
+        parseDiagram(c, ltor);
     }
 
-    private UnitEndPoint parseOpt(Opt opt, boolean ltor) {
+    @Override
+    public void visitOpt(Opt opt) {
+        boolean ltor = getLtor();
         Choice c = new Choice(new ArrayList<>() {{
             add(new NoneNode());
             add(new Line(opt.getUnits()));
         }});
-        return parseDiagram(c, ltor);
+
+        parseDiagram(c, ltor);
     }
 
-    private UnitEndPoint parseStack(Stack stack, int indent, boolean ltor) {
+    /**
+     * Unobvious fact: self.indent < 0 if (stack instanceof Rightstack)
+     */
+    private void parseStack(Stack stack) {
+        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         int sep = this.style.v_sep * 2;
         int btm = 0;
         int n = stack.getUnits().size();
         if (n == 0) {
-            return null;
+            setUnitEndPoint(null);
+            return;
         }
         int next_bypass_y = 0;
         int bypass_x = 0;
@@ -647,7 +636,7 @@ public class SVGCanvasBuilder {
                 next_bypass_y = 0;
             }
 
-            UnitEndPoint ep = parseDiagram(term, ltor);
+            UnitEndPoint ep = getDiagramParseResult(term, ltor);
             String t = ep.tag;
             int exx = ep.endpoint.f;
             int exy = ep.endpoint.s;
@@ -758,7 +747,26 @@ public class SVGCanvasBuilder {
             exit_y = fwd_y;
         }
 
-        return new UnitEndPoint(tag, new Pair<>(exit_x, exit_y));
+        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(exit_x, exit_y)));
+    }
+
+    @Override
+    public void visitStack(Stack stack) {
+        setIndent(0);
+        parseStack(stack);
+    }
+
+    @Override
+    public void visitRightstack(Rightstack unit) {
+        setIndent(-1);
+        parseStack(unit);
+    }
+
+    @Override
+    public void visitIndentstack(Indentstack unit) {
+        int sep = this.style.h_sep * unit.getIndent();
+        setIndent(sep);
+        parseStack(unit);
     }
 
     private void drawLeftTurnBack(String tag, int x, int y0_, int y1_, String flow) {
@@ -882,6 +890,36 @@ public class SVGCanvasBuilder {
         public Pair<Integer, Integer> endpoint;
     }
 
-    private Style style;
-    private SVGCanvas canvas;
+    public UnitEndPoint getUnitEndPoint() {
+        return unitEndPoint;
+    }
+
+    public void setUnitEndPoint(UnitEndPoint unitEndPoint) {
+        this.unitEndPoint = unitEndPoint;
+    }
+
+    public boolean getLtor() {
+        return ltor;
+    }
+
+    public void setLtor(boolean ltor) {
+        this.ltor = ltor;
+    }
+
+    public Integer getIndent() {
+        return indent;
+    }
+
+    public void setIndent(Integer indent) {
+        this.indent = indent;
+    }
+
+
+    private UnitEndPoint unitEndPoint;
+    private boolean ltor;
+    private Integer indent;
+
+    private InputArguments iArgs;
+
+
 }

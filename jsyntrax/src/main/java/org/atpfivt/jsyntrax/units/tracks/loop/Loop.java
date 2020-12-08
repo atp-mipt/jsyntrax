@@ -34,6 +34,6 @@ public class Loop extends ComplexTrack {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitLoop(this);
   }
 }

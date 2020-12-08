@@ -36,6 +36,6 @@ public class Opt extends ComplexTrack {
   }
 
   public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitOpt(this);
   }
 }
