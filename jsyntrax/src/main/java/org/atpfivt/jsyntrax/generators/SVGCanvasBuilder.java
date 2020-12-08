@@ -24,6 +24,7 @@ import java.awt.Font;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -31,12 +32,24 @@ import java.util.Map;
  * @brief class for building canvas by Unit
  */
 public class SVGCanvasBuilder {
-    public SVGCanvasBuilder(InputArguments iArgs) {
-        this.iArgs = iArgs;
+    private Map<String, String> urlMap;
+
+    public SVGCanvasBuilder() {
+        this.style = new Style(1, false);
+        this.urlMap = Collections.emptyMap();
     }
 
-    public SVGCanvas generateSVG(Unit root, Map<String, String> urlMap) {
-        this.style = new Style(iArgs.getScale(), iArgs.transparent());
+    public SVGCanvasBuilder withStyle(Style style) {
+        this.style = style;
+        return this;
+    }
+
+    public SVGCanvasBuilder withUrlMap(Map<String, String> urlMap){
+        this.urlMap = urlMap;
+        return this;
+    }
+
+    public SVGCanvas generateSVG(Unit root) {
         this.canvas = new SVGCanvas(this.style, urlMap);
         this.parseDiagram(root, true);
         return this.canvas;
@@ -530,15 +543,14 @@ public class SVGCanvasBuilder {
                         new LineElement(new Pair<>(0, 0), new Pair<>(dx, 0),
                                 ltor && dx > x2 ? "last" : null, this.style.line_width, tag));
                 this.canvas.addElement(
-                        new LineElement(new Pair<>(texx, texy), new Pair<>(x5+1, texy),
+                        new LineElement(new Pair<>(texx, texy), new Pair<>(x5 + 1, texy),
                                 ltor ? null : "first", this.style.line_width, tag));
                 exy = texy;
                 this.canvas.addElement(
                         new ArcElement(new Pair<>(-sep, 0), new Pair<>(sep, sep * 2),
                                 this.style.line_width, 90, -90, tag));
                 btm = ty1;
-            }
-            else {
+            } else {
                 int dy = Math.max(btm - ty0 + vsep, 2 * sep);
                 this.canvas.moveByTag(t, 0, dy);
                 texy += dy;
@@ -556,17 +568,17 @@ public class SVGCanvasBuilder {
                                 this.style.line_width, 180, 90, tag));
                 int y2 = texy - 2 * sep;
                 this.canvas.addElement(
-                        new ArcElement(new Pair<>(x3-sep, y2), new Pair<>(x4, texy),
+                        new ArcElement(new Pair<>(x3 - sep, y2), new Pair<>(x4, texy),
                                 this.style.line_width, 270, 90, tag));
                 if (i + 1 == n) {
                     this.canvas.addElement(
-                            new ArcElement(new Pair<>(x4, exy), new Pair<>(x4+2*sep, exy+2*sep),
+                            new ArcElement(new Pair<>(x4, exy), new Pair<>(x4 + 2 * sep, exy + 2 * sep),
                                     this.style.line_width, 180, -90, tag));
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(x1, dy-sep), new Pair<>(x1, sep),
+                            new LineElement(new Pair<>(x1, dy - sep), new Pair<>(x1, sep),
                                     null, this.style.line_width, tag));
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(x4, texy-sep), new Pair<>(x4, exy+sep),
+                            new LineElement(new Pair<>(x4, texy - sep), new Pair<>(x4, exy + sep),
                                     null, this.style.line_width, tag));
                 }
                 btm = ty1 + dy;
@@ -629,8 +641,7 @@ public class SVGCanvasBuilder {
             if (i != 0 && indent >= 0 && unit.getUnits().size() != 0 && unit instanceof Opt) {
                 bypass = 1;
                 term = new Line(unit.getUnits());
-            }
-            else {
+            } else {
                 bypass = 0;
                 term = unit;
                 next_bypass_y = 0;
@@ -651,8 +662,7 @@ public class SVGCanvasBuilder {
                 btm = ty1;
                 exit_x = exx;
                 exit_y = exy;
-            }
-            else {
+            } else {
                 enter_y = btm - ty0 + sep * 2 + 2;
                 if (bypass == 1) {
                     next_bypass_y = enter_y - this.style.max_radius;
@@ -664,8 +674,7 @@ public class SVGCanvasBuilder {
                     if (ex2 > enter_x) {
                         enter_x = ex2;
                     }
-                }
-                else {
+                } else {
                     enter_x = sep * 2 + indent;
                 }
                 back_y = btm + sep + 1;
@@ -855,8 +864,8 @@ public class SVGCanvasBuilder {
         Rectangle2D r = font.getStringBounds(text,
                 new FontRenderContext(null, true, true));
 
-        return new Pair<>((int)(r.getMaxX() - r.getMinX() + text.length() + 10),
-                (int)(r.getMaxY() - r.getMinY() + 10));
+        return new Pair<>((int) (r.getMaxX() - r.getMinX() + text.length() + 10),
+                (int) (r.getMaxY() - r.getMinY() + 10));
     }
 
     /**
@@ -873,7 +882,6 @@ public class SVGCanvasBuilder {
         public Pair<Integer, Integer> endpoint;
     }
 
-    private InputArguments iArgs;
     private Style style;
     private SVGCanvas canvas;
 }
