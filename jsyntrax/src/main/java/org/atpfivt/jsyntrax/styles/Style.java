@@ -2,34 +2,14 @@ package org.atpfivt.jsyntrax.styles;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ArrayList;
+import java.nio.file.Path;
 import java.util.List;
 
 public class Style {
     public Style(double scale, boolean transparent) {
-        // default styles
-        this.line_width = 2;
-        this.line_color = new Color(0, 0, 0);
-        this.outline_width = 2;
-        this.padding = 5;
-        this.max_radius = 9;
-        this.h_sep = 17;
-        this.v_sep = 9;
-        this.arrows = true;
-        this.title_pos = "tl";
-        this.bullet_fill = new Color(255, 255, 255);
-        this.text_color = new Color(0, 0, 0);
-        this.shadow = true;
-        this.shadow_fill = new Color(0, 0, 0, 127);
-        this.title_font = new Font("Sans",Font.BOLD, 22);
+        updateByConfig(new StyleConfig());
         this.scale = scale;
         this.transparent = transparent;
-
-        nodeStyles = new ArrayList<>(List.of(
-            new NodeBubbleStyle(),
-            new NodeBoxStyle(),
-            new NodeTokenStyle(),
-            new NodeHexStyle()));
     }
 
     public void addNodeStyle(NodeStyle ns) {
@@ -47,7 +27,41 @@ public class Style {
                 return ns;
             }
         }
-        return nodeStyles.get(0);
+        return defNodeStyle;
+    }
+
+    public boolean updateByFile(Path style) {
+        StyleConfig cfg;
+        try {
+           cfg = new StyleConfig(style);
+        } catch (Exception e) {
+            System.out.println("Got Exception: " + e.getMessage());
+            return false;
+        }
+        updateByConfig(cfg);
+        return true;
+    }
+
+    private void updateByConfig(StyleConfig cfg) {
+        line_width = cfg.line_width;
+        line_color = cfg.line_color;
+        outline_width = cfg.outline_width;
+        padding = cfg.padding;
+        max_radius = cfg.max_radius;
+        h_sep = cfg.h_sep;
+        v_sep = cfg.v_sep;
+        arrows = cfg.arrows;
+        title_pos = cfg.title_pos;
+        bullet_fill = cfg.bullet_fill;
+        text_color = cfg.text_color;
+        shadow = cfg.shadow;
+        shadow_fill = cfg.shadow_fill;
+        title_font = cfg.title_font;
+        // TODO: fix rewriting by iArgs
+        scale = cfg.scale;
+        transparent = cfg.transparent;
+
+        nodeStyles = cfg.nodeStyles;
     }
 
     public int line_width;
@@ -67,5 +81,6 @@ public class Style {
     public double scale;
     public boolean transparent;
 
-    public final List<NodeStyle> nodeStyles;
+    public List<NodeStyle> nodeStyles;
+    private static final NodeStyle defNodeStyle = new NodeStyle();
 }
