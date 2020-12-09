@@ -145,7 +145,8 @@ public class JSyntraxStyleFileTest {
 
         Unit root = Parser.parse("stack(\n" +
                 "line('attribute', '/(attribute) identifier', 'of'),\n" +
-                "line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':')");
+                "line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':')\n" +
+                ")");
 
         SVGCanvas canvas = canvasBuilder.withStyle(s).generateSVG(root);
         String result = canvas.generateSVG();
