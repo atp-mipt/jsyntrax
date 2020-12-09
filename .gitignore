@@ -5,3 +5,4 @@ target/
 syntrax_scripts/output.svg
 .DS_Store
 jsyntrax/src/test/java/org/atpfivt/jsyntrax/approvals/*.received.svg
+jsyntrax/style.ini

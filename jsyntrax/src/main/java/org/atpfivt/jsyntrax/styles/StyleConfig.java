@@ -20,25 +20,28 @@ public class StyleConfig {
                 new NodeHexStyle()));
     }
 
-    public StyleConfig(Path style) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public StyleConfig(Path style) {
         this();
-        Wini ini = new Wini(style.toFile());
-        if (ini.containsKey("style")) {
-            parseStyleArgs(ini.get("style"));
-        }
-
-        nodeStyles.clear();
-
-        for (Section s : ini.values()) {
-            if (s.getName().equals("style")) {
-                continue;
+        try {
+            Wini ini = new Wini(style.toFile());
+            if (ini.containsKey("style")) {
+                parseStyleArgs(ini.get("style"));
             }
-            // this is custom node style
-            NodeStyle ns = new NodeStyle();
-            ns.name = s.getName();
-            parseNodeStyle(s, ns);
-            nodeStyles.add(ns);
+
+            nodeStyles.clear();
+
+            for (Section s : ini.values()) {
+                if (s.getName().equals("style")) {
+                    continue;
+                }
+                // this is custom node style
+                NodeStyle ns = new NodeStyle();
+                ns.name = s.getName();
+                parseNodeStyle(s, ns);
+                nodeStyles.add(ns);
+            }
         }
+        catch(NoSuchFieldException | IllegalAccessException | IOException e) {}
     }
 
     private void parseStyleArgs(Section s) throws NoSuchFieldException, IllegalAccessException {
