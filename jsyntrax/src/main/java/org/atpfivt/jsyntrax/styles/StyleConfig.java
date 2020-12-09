@@ -95,10 +95,10 @@ public class StyleConfig {
 
         String name = fields[0];
         int style = 0;
-        if (fields[2].toLowerCase().equals("bold")) {
+        if (fields[2].toLowerCase().contains("bold")) {
             style |= Font.BOLD;
         }
-        if (fields[2].toLowerCase().equals("italic")) {
+        if (fields[2].toLowerCase().contains("italic")) {
             style |= Font.ITALIC;
         }
         int size = Integer.parseInt(fields[1]);
