@@ -72,7 +72,7 @@ public class Style {
     public int h_sep;
     public int v_sep;
     public boolean arrows;
-    public String title_pos;
+    public TitlePosition title_pos;
     public Color bullet_fill;
     public Color text_color;
     public boolean shadow;

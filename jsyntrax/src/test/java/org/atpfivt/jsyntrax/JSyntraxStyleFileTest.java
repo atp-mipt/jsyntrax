@@ -1,7 +1,6 @@
 package org.atpfivt.jsyntrax;
 
 import org.approvaltests.Approvals;
-import org.approvaltests.core.ApprovalFailureReporter;
 import org.approvaltests.core.Options;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
@@ -10,8 +9,8 @@ import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
-import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -22,34 +21,17 @@ import java.nio.file.Paths;
 
 public class JSyntraxStyleFileTest {
 
-    private final static Options options = new Options().forFile().withExtension(".svg");
+    private final static Options options = JSyntraxUtils.getInstance().options;
     private final SVGCanvasBuilder canvasBuilder;
-    private final Font testFont;
 
     public JSyntraxStyleFileTest() {
-        testFont = getTestFont();
-
         Style s = new Style(1, false);
-        s.title_font = testFont;
-
-        for (NodeStyle ns : s.nodeStyles) {
-            ns.font = testFont;
-        }
+        JSyntraxUtils.getInstance().updateStyle(s);
         canvasBuilder = new SVGCanvasBuilder().withStyle(s);
     }
 
-    private Font getTestFont() {
-        try {
-            return Font.createFont(Font.TRUETYPE_FONT,
-                    JSyntraxTest.class.getResourceAsStream("PTSans-Regular.ttf"))
-                    .deriveFont(12.f);
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
     @Test
-    void configParserTest() throws IOException {
+    void configParserTest() throws IOException, NoSuchFieldException, IllegalAccessException {
         Path stylePath = Paths.get("style.ini");
         if (!Files.exists(stylePath)) {
             Files.createFile(stylePath);
@@ -69,31 +51,22 @@ public class JSyntraxStyleFileTest {
         Files.writeString(stylePath, config);
         StyleConfig cfg = new StyleConfig(stylePath);
 
-        Assertions.assertEquals(cfg.line_width, 50);
-        Assertions.assertEquals(cfg.v_sep, 42);
+        Assertions.assertAll(
+                () -> assertEquals(cfg.line_width, 50),
+                () -> assertEquals(cfg.v_sep, 42),
+                () -> assertEquals(cfg.text_color, new Color(30, 40, 50)),
+                () -> assertEquals(cfg.shadow_fill, new Color(35, 46, 57, 212)),
+                () -> assertEquals(cfg.nodeStyles.size(), 1)
+        );
 
-        Assertions.assertEquals(cfg.text_color.getRed(), 30);
-        Assertions.assertEquals(cfg.text_color.getGreen(), 40);
-        Assertions.assertEquals(cfg.text_color.getBlue(), 50);
-
-        Assertions.assertEquals(cfg.shadow_fill.getRed(), 35);
-        Assertions.assertEquals(cfg.shadow_fill.getGreen(), 46);
-        Assertions.assertEquals(cfg.shadow_fill.getBlue(), 57);
-        Assertions.assertEquals(cfg.shadow_fill.getAlpha(), 212);
-
-        Assertions.assertEquals(cfg.nodeStyles.size(), 1);
         NodeStyle ns = cfg.nodeStyles.get(0);
-        Assertions.assertEquals(ns.name, "hex_bubble");
-        Assertions.assertEquals(ns.shape, "hex");
 
-        Assertions.assertEquals(ns.font.getName(), "Sans");
-        Assertions.assertEquals(ns.font.getStyle(), 1);
-        Assertions.assertEquals(ns.font.getSize(), 14);
-
-        Assertions.assertEquals(ns.fill.getRed(), 255);
-        Assertions.assertEquals(ns.fill.getGreen(), 15);
-        Assertions.assertEquals(ns.fill.getBlue(), 3);
-        Assertions.assertEquals(ns.fill.getAlpha(), 129);
+        Assertions.assertAll(
+                () -> assertEquals(ns.name, "hex_bubble"),
+                () -> assertEquals(ns.shape, "hex"),
+                () -> assertEquals(ns.font, new Font("Sans", Font.BOLD, 14)),
+                () -> assertEquals(ns.fill, new Color(255, 15, 3, 129))
+        );
     }
 
     @Test
@@ -127,7 +100,7 @@ public class JSyntraxStyleFileTest {
                 .append("shape = 'box'\n")
                 .append("font = ('Sans', 14, 'bold')\n")
                 .append("text_color = (100, 100, 100)\n")
-                .append("fill = '(136, 170, 238)'\n")
+                .append("fill = (136, 170, 238)\n")
                 .append("[token]\n")
                 .append("pattern = '.'\n")
                 .append("shape = 'bubble'\n")
@@ -137,11 +110,7 @@ public class JSyntraxStyleFileTest {
 
         Style s = new Style(1, false);
         s.updateByFile(stylePath);
-        s.title_font = testFont;
-
-        for (NodeStyle ns : s.nodeStyles) {
-            ns.font = testFont;
-        }
+        JSyntraxUtils.getInstance().updateStyle(s);
 
         Unit root = Parser.parse("stack(\n" +
                 "line('attribute', '/(attribute) identifier', 'of'),\n" +

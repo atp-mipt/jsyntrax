@@ -24,30 +24,14 @@ import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
 
 public class JSyntraxTest {
 
-    private final static Options options = new Options().forFile().withExtension(".svg");
     private final SVGCanvasBuilder canvasBuilder;
-    private final Font testFont;
+
+    private final Options options = JSyntraxUtils.getInstance().options;
 
     public JSyntraxTest() {
-        testFont = getTestFont();
-
         Style s = new Style(1, false);
-        s.title_font = testFont;
-
-        for (NodeStyle ns : s.nodeStyles) {
-            ns.font = testFont;
-        }
+        JSyntraxUtils.getInstance().updateStyle(s);
         canvasBuilder = new SVGCanvasBuilder().withStyle(s);
-    }
-
-    private Font getTestFont() {
-        try {
-            return Font.createFont(Font.TRUETYPE_FONT,
-                    JSyntraxTest.class.getResourceAsStream("PTSans-Regular.ttf"))
-                    .deriveFont(12.f);
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
     }
 
     @Test
