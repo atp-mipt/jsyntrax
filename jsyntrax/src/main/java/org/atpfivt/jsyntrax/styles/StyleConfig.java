@@ -81,7 +81,7 @@ public class StyleConfig {
         }
     }
 
-    static Pattern numPattern = Pattern.compile(",?\\s*([0-9]+)\\s*,?");
+    final static Pattern numPattern = Pattern.compile(",?\\s*([0-9]+)\\s*,?");
 
     static Integer parseNum(String num) {
         if (num == null) {
@@ -95,12 +95,8 @@ public class StyleConfig {
         return Integer.parseInt(m.group(1));
     }
 
-    static Pattern fontPattern = Pattern.compile(
-            "\\s*\\(" +
-                "\\s*\\'([a-zA-Z]+)\\'\\s*," +
-                "\\s*([0-9]+)\\s*," +
-                "\\s*\\'([a-zA-Z]+)\\'\\s*" +
-            "\\)\\s*");
+    final static Pattern fontPattern = Pattern.compile(
+            "\\s*\\(\\s*'([a-zA-Z]+)'\\s*,\\s*([0-9]+)\\s*,\\s*'([a-zA-Z]+)'\\s*\\)\\s*");
 
     private static Font fontFromString(String txt) {
         Matcher matcher = fontPattern.matcher(txt);
@@ -111,7 +107,7 @@ public class StyleConfig {
 
         String name = matcher.group(1);
 
-        int style = 0;
+        int style = Font.PLAIN;
         String styleText = matcher.group(3).toLowerCase();
         if (styleText.contains("bold")) {
             style |= Font.BOLD;
@@ -125,13 +121,8 @@ public class StyleConfig {
         return new Font(name, style, size);
     }
 
-    static Pattern colorPattern = Pattern.compile(
-            "\\s*\\(" +
-                "(\\s*[0-9]+\\s*)," +
-                "(\\s*[0-9]+\\s*)," +
-                "(\\s*[0-9]+\\s*)" +
-                "(,\\s*[0-9]+\\s*)?" +
-            "\\)\\s*");
+    final static Pattern colorPattern = Pattern.compile(
+            "\\s*\\((\\s*[0-9]+\\s*),(\\s*[0-9]+\\s*),(\\s*[0-9]+\\s*)(,\\s*[0-9]+\\s*)?\\)\\s*");
 
     private static Color colorFromString(String txt) {
         Matcher matcher = colorPattern.matcher(txt);
@@ -165,5 +156,5 @@ public class StyleConfig {
     public double scale = 1;
     public boolean transparent = false;
 
-    public List<NodeStyle> nodeStyles;
+    public final List<NodeStyle> nodeStyles;
 }

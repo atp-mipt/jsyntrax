@@ -1,6 +1,5 @@
 package org.atpfivt.jsyntrax.generators;
 
-import org.atpfivt.jsyntrax.InputArguments;
 import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
@@ -93,7 +92,6 @@ public class SVGCanvasBuilder implements Visitor{
 
     @Override
     public void visitNoneNode(NoneNode unit) {
-        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
         Element e = new LineElement(new Pair<>(0, 0), new Pair<>(1, 0),
@@ -107,7 +105,6 @@ public class SVGCanvasBuilder implements Visitor{
 
     @Override
     public void visitNode(Node unit) {
-        boolean ltor = getLtor();
         String txt = unit.toString();
 
         NodeStyle ns = this.style.getNodeStyle(txt);
@@ -130,8 +127,7 @@ public class SVGCanvasBuilder implements Visitor{
 
         int lft = x0;
         int rgt = x1;
-        int btm = y1;
-        int top = btm - 2 * rad;
+        int top = y1 - 2 * rad;
 
         if (ns.shape.equals("bubble") || ns.shape.equals("hex")) {
             lft += rad / 2 - 2;
@@ -156,19 +152,19 @@ public class SVGCanvasBuilder implements Visitor{
         switch (ns.shape) {
             case "bubble":
                 start = new Pair<>(lft - rad, top);
-                end = new Pair<>(rgt + rad, btm);
+                end = new Pair<>(rgt + rad, y1);
                 b = new BubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
             case "hex":
                 start = new Pair<>(lft - rad, top);
-                end = new Pair<>(rgt + rad, btm);
+                end = new Pair<>(rgt + rad, y1);
                 b = new HexBubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
             default:
                 start = new Pair<>(lft, top);
-                end = new Pair<>(rgt, btm);
+                end = new Pair<>(rgt, y1);
                 b = new BoxBubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
@@ -187,7 +183,6 @@ public class SVGCanvasBuilder implements Visitor{
 
     @Override
     public void visitBullet(Bullet unit) {
-        boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
         int w = this.style.outline_width;
         int r = w + 1;
@@ -206,8 +201,6 @@ public class SVGCanvasBuilder implements Visitor{
         int sep = this.style.h_sep;
         int width = this.style.line_width;
         Pair<Integer, Integer> pos = new Pair<>(0, 0);
-
-        List<Unit> units = line.getUnits();
 
         int unitNum = 0;
         int unitStep = 1;
@@ -278,7 +271,6 @@ public class SVGCanvasBuilder implements Visitor{
         int fx0 = fBox.f.f;
         int fy0 = fBox.f.s;
         int fx1 = fBox.s.f;
-        int fy1 = fBox.s.s;
 
         // parse backward
         UnitEndPoint bEndPoint = getDiagramParseResult(loop.getBackwardPart(), !ltor);
@@ -287,7 +279,6 @@ public class SVGCanvasBuilder implements Visitor{
         int bexy = bEndPoint.endpoint.s;
         Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> bBox = this.canvas.getBoundingBoxByTag(bt);
         int bx0 = bBox.f.f;
-        int by0 = bBox.f.s;
         int bx1 = bBox.s.f;
         int by1 = bBox.s.s;
 
@@ -296,11 +287,8 @@ public class SVGCanvasBuilder implements Visitor{
         int bw = bx1 - bx0;
         int dy = -(by1 - fy0 + vsep);
         this.canvas.moveByTag(bt, 0, dy);
-        int biny = dy;
         bexy += dy;
-        by0 += dy;
-        by1 += dy;
-        int mxx = 0;
+        int mxx;
 
         int dx = Math.abs(fw - bw) / 2;
 
@@ -308,7 +296,7 @@ public class SVGCanvasBuilder implements Visitor{
             this.canvas.moveByTag(bt, dx, 0);
             bexx += dx;
             this.canvas.addElement(
-                    new LineElement(new Pair<>(0, biny), new Pair<>(dx, biny),
+                    new LineElement(new Pair<>(0, dy), new Pair<>(dx, dy),
                             null, this.style.line_width, bt));
             this.canvas.addElement(
                     new LineElement(new Pair<>(bexx, bexy), new Pair<>(fx1, bexy),
@@ -341,7 +329,7 @@ public class SVGCanvasBuilder implements Visitor{
                 new LineElement(new Pair<>(0, 0), new Pair<>(sep, 0),
                         null, this.style.line_width, tag));
 
-        drawLeftTurnBack(tag, sep, 0, biny, ltor ? "up" : "down");
+        drawLeftTurnBack(tag, sep, 0, dy, ltor ? "up" : "down");
         drawRightTurnBack(tag, mxx, fexy, bexy, ltor ? "down" : "up");
 
         Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> box = this.canvas.getBoundingBoxByTag(tag);
@@ -368,7 +356,6 @@ public class SVGCanvasBuilder implements Visitor{
         int fexy = fEndPoint.endpoint.s;
         Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> fBox = this.canvas.getBoundingBoxByTag(ft);
         int fx0 = fBox.f.f;
-        int fy0 = fBox.f.s;
         int fx1 = fBox.s.f;
         int fy1 = fBox.s.s;
 
@@ -381,18 +368,14 @@ public class SVGCanvasBuilder implements Visitor{
         int bx0 = bBox.f.f;
         int by0 = bBox.f.s;
         int bx1 = bBox.s.f;
-        int by1 = bBox.s.s;
 
         // move processes
         int fw = fx1 - fx0;
         int bw = bx1 - bx0;
         int dy = fy1 - by0 + vsep;
         this.canvas.moveByTag(bt, 0, dy);
-        int biny = dy;
         bexy += dy;
-        by0 += dy;
-        by1 += dy;
-        int mxx = 0;
+        int mxx;
 
         if (fw > bw) {
             int dx;
@@ -401,7 +384,7 @@ public class SVGCanvasBuilder implements Visitor{
                 this.canvas.moveByTag(bt, dx, 0);
                 bexx += dx;
                 this.canvas.addElement(
-                        new LineElement(new Pair<>(0, biny), new Pair<>(dx, biny),
+                        new LineElement(new Pair<>(0, dy), new Pair<>(dx, dy),
                                 null, this.style.line_width, bt));
                 this.canvas.addElement(
                         new LineElement(new Pair<>(bexx, bexy), new Pair<>(fexx, bexy),
@@ -412,7 +395,7 @@ public class SVGCanvasBuilder implements Visitor{
                 bexx += dx;
 
                 this.canvas.addElement(
-                        new LineElement(new Pair<>(0, biny), new Pair<>(dx, biny),
+                        new LineElement(new Pair<>(0, dy), new Pair<>(dx, dy),
                                 ltor || dx < 2 * vsep ? null : "last", this.style.line_width, bt));
                 this.canvas.addElement(
                         new LineElement(new Pair<>(bexx, bexy), new Pair<>(fx1, bexy),
@@ -448,7 +431,7 @@ public class SVGCanvasBuilder implements Visitor{
                 new LineElement(new Pair<>(0, 0), new Pair<>(sep, 0),
                         null, this.style.line_width, tag));
 
-        drawLeftTurnBack(tag, sep, 0, biny, ltor ? "up" : "down");
+        drawLeftTurnBack(tag, sep, 0, dy, ltor ? "up" : "down");
         drawRightTurnBack(tag, mxx, fexy, bexy, ltor ? "down" : "up");
 
         int exit_x = mxx + this.style.max_radius;
@@ -488,10 +471,7 @@ public class SVGCanvasBuilder implements Visitor{
             mxw = Math.max(mxw, w);
         }
 
-        int x0 = 0;
-        int x1 = sep;
         int x2 = sep * 2;
-        int xc = mxw / 2;
         int x3 = mxw + x2;
         int x4 = x3 + sep;
         int x5 = x4 + sep;
@@ -513,9 +493,7 @@ public class SVGCanvasBuilder implements Visitor{
             this.canvas.moveByTag(t, dx, 0);
             texx += dx;
             box = this.canvas.getBoundingBoxByTag(t);
-            int tx0 = box.f.f;
             int ty0 = box.f.s;
-            int tx1 = box.s.f;
             int ty1 = box.s.s;
 
             if (i == 0) {
@@ -544,7 +522,7 @@ public class SVGCanvasBuilder implements Visitor{
                 }
                 int y1 = dy - 2 * sep;
                 this.canvas.addElement(
-                        new ArcElement(new Pair<>(x1, y1), new Pair<>(x1 + 2 * sep, dy),
+                        new ArcElement(new Pair<>(sep, y1), new Pair<>(sep + 2 * sep, dy),
                                 this.style.line_width, 180, 90, tag));
                 int y2 = texy - 2 * sep;
                 this.canvas.addElement(
@@ -555,7 +533,7 @@ public class SVGCanvasBuilder implements Visitor{
                             new ArcElement(new Pair<>(x4, exy), new Pair<>(x4 + 2 * sep, exy + 2 * sep),
                                     this.style.line_width, 180, -90, tag));
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(x1, dy - sep), new Pair<>(x1, sep),
+                            new LineElement(new Pair<>(sep, dy - sep), new Pair<>(sep, sep),
                                     null, this.style.line_width, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(x4, texy - sep), new Pair<>(x4, exy + sep),
@@ -610,19 +588,17 @@ public class SVGCanvasBuilder implements Visitor{
         }
         int next_bypass_y = 0;
         int bypass_x = 0;
-        int bypass_y = 0;
+        int bypass_y;
         int exit_x = 0;
         int exit_y = 0;
-        int w = 0;
-        int e2 = 0;
-        int e3 = 0;
-        int ex2 = 0;
-        int enter_x = 0;
-        int enter_y = 0;
-        int back_x = 0;
-        int back_y = 0;
-        int mid_x = 0;
-        int mid_y = 0;
+        int w;
+        int e2;
+        int e3;
+        int ex2;
+        int enter_x;
+        int enter_y;
+        int back_y;
+        int mid_y;
         int bypass = 0;
 
         for (int i = 0; i < n; ++i) {
@@ -647,10 +623,8 @@ public class SVGCanvasBuilder implements Visitor{
             int tx0 = box.f.f;
             int ty0 = box.f.s;
             int tx1 = box.s.f;
-            int ty1 = box.s.s;
 
             if (i == 0) {
-                btm = ty1;
                 exit_x = exx;
                 exit_y = exy;
             } else {
@@ -916,12 +890,7 @@ public class SVGCanvasBuilder implements Visitor{
         this.indent = indent;
     }
 
-
     private UnitEndPoint unitEndPoint;
     private boolean ltor;
     private Integer indent;
-
-    private InputArguments iArgs;
-
-
 }

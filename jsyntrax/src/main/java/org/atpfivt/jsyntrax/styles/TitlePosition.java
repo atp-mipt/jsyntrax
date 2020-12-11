@@ -1,10 +1,30 @@
 package org.atpfivt.jsyntrax.styles;
 
 public enum TitlePosition {
-    tl, ///<- Top Left
-    tm, ///<- Top Middle
-    tr, ///<- Top Right
-    bl, ///<- Bottom Left
-    bm, ///<- Bottom Middle
-    br  ///<- Bottom Right
+    /**
+     * Top Left.
+     */
+    tl,
+    /**
+     * Top Middle.
+     */
+    tm,
+
+    /**
+     * Top Right.
+     */
+    tr,
+
+    /**
+     * Bottom Left.
+     */
+    bl,
+    /**
+     * Bottom Middle.
+     */
+    bm,
+    /**
+     * Bottom Right.
+     */
+    br
 }

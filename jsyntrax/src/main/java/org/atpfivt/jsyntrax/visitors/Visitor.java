@@ -1,6 +1,5 @@
 package org.atpfivt.jsyntrax.visitors;
 
-import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.nodes.Bullet;
 import org.atpfivt.jsyntrax.units.nodes.Node;
 import org.atpfivt.jsyntrax.units.nodes.NoneNode;
