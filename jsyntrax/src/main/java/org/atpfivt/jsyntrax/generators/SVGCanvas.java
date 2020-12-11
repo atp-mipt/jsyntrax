@@ -67,6 +67,13 @@ public class SVGCanvas {
         }
     }
 
+    public String getCanvasTag() {
+        if (elements.isEmpty()) {
+            return null;
+        }
+        return elements.get(0).getAnyTag();
+    }
+
     public Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getBoundingBoxByTag(String tag) {
         Pair<Integer, Integer> start = null;
         Pair<Integer, Integer> end = null;
@@ -93,7 +100,6 @@ public class SVGCanvas {
 
     public String generateSVG() {
         StringBuilder sb = new StringBuilder();
-        // TODO: add title
         double scale = style.scale;
 
         Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> res = getBoundingBoxByTag("all");

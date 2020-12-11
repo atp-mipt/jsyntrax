@@ -46,6 +46,13 @@ public class Element {
         end.s = (int)(end.s * scale);
     }
 
+    public String getAnyTag() {
+        if (tags.isEmpty()) {
+            return null;
+        }
+        return tags.iterator().next();
+    }
+
     public Pair<Integer, Integer> start = null;
     public Pair<Integer, Integer> end = null;
     HashSet<String> tags = new HashSet<>();

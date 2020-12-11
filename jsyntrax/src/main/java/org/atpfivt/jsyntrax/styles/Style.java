@@ -12,15 +12,6 @@ public class Style {
         this.transparent = transparent;
     }
 
-    public void addNodeStyle(NodeStyle ns) {
-        nodeStyles.add(ns);
-    }
-
-    // for making custom node styles
-    public void clearNodeStyles() {
-        nodeStyles.clear();
-    }
-
     public NodeStyle getNodeStyle(String txt) {
         for (NodeStyle ns : nodeStyles) {
             if (ns.match(txt)) {
@@ -57,9 +48,6 @@ public class Style {
         shadow = cfg.shadow;
         shadow_fill = cfg.shadow_fill;
         title_font = cfg.title_font;
-        // TODO: fix rewriting by iArgs
-        scale = cfg.scale;
-        transparent = cfg.transparent;
 
         nodeStyles = cfg.nodeStyles;
     }

@@ -4,6 +4,7 @@ import org.approvaltests.Approvals;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.tracks.Choice;
 import org.atpfivt.jsyntrax.units.tracks.Line;
 import org.atpfivt.jsyntrax.units.tracks.loop.Loop;
@@ -119,6 +120,23 @@ public class JSyntraxTest {
                 line("bottom", "line")
         );
         SVGCanvas c = canvasBuilder.generateSVG(rightStack);
+        String result = c.generateSVG();
+        Approvals.verify(result, OPTIONS);
+    }
+
+    @Test
+    void titleTest() {
+        Unit root = line("/create_grain", loop(";",
+                choice("/create_sequence",
+                        "/create_table",
+                        "/add_foreign_key",
+                        "/create_index",
+                        "/create_view",
+                        "/create_materialized_view",
+                        "/create_function"))
+        );
+
+        SVGCanvas c = canvasBuilder.withTitle("TestTitle").generateSVG(root);
         String result = c.generateSVG();
         Approvals.verify(result, OPTIONS);
     }

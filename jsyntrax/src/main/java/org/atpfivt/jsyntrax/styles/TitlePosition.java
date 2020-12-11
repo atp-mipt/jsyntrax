@@ -4,27 +4,108 @@ public enum TitlePosition {
     /**
      * Top Left.
      */
-    tl,
+    tl {
+        @Override
+        public boolean isLeft() {
+            return true;
+        }
+
+        @Override
+        public boolean isTop() {
+            return true;
+        }
+    },
     /**
      * Top Middle.
      */
-    tm,
+    tm {
+        @Override
+        public boolean isMiddle() {
+            return true;
+        }
+
+        @Override
+        public boolean isTop() {
+            return true;
+        }
+    },
 
     /**
      * Top Right.
      */
-    tr,
+    tr {
+        @Override
+        public boolean isRight() {
+            return true;
+        }
+
+        @Override
+        public boolean isTop() {
+            return true;
+        }
+    },
 
     /**
      * Bottom Left.
      */
-    bl,
+    bl {
+        @Override
+        public boolean isLeft() {
+            return true;
+        }
+
+        @Override
+        public boolean isBottom() {
+            return true;
+        }
+    },
     /**
      * Bottom Middle.
      */
-    bm,
+    bm {
+        @Override
+        public boolean isMiddle() {
+            return true;
+        }
+
+        @Override
+        public boolean isBottom() {
+            return true;
+        }
+    },
     /**
      * Bottom Right.
      */
-    br
+    br {
+        @Override
+        public boolean isRight() {
+            return true;
+        }
+
+        @Override
+        public boolean isBottom() {
+            return true;
+        }
+    };
+
+    public boolean isLeft() {
+        return false;
+    }
+
+    public boolean isMiddle() {
+        return false;
+    }
+
+    public boolean isRight() {
+        return false;
+    }
+
+    public boolean isTop() {
+        return false;
+    }
+
+    public boolean isBottom() {
+        return false;
+    }
+
 }

@@ -3,6 +3,7 @@ package org.atpfivt.jsyntrax.generators;
 import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.styles.TitlePosition;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.nodes.Bullet;
 import org.atpfivt.jsyntrax.units.nodes.Node;
@@ -46,8 +47,13 @@ public class SVGCanvasBuilder implements Visitor{
         return this;
     }
 
-    public SVGCanvasBuilder withUrlMap(Map<String, String> urlMap){
+    public SVGCanvasBuilder withUrlMap(Map<String, String> urlMap) {
         this.urlMap = urlMap;
+        return this;
+    }
+
+    public SVGCanvasBuilder withTitle(String title) {
+        this.title = title;
         return this;
     }
 
@@ -56,16 +62,41 @@ public class SVGCanvasBuilder implements Visitor{
         parseDiagram(new Line(
                 new ArrayList<>(List.of(new Bullet(), root, new Bullet()))
         ), true);
-        return this.canvas;
-    }
 
+        if (title == null) {
+            return canvas;
+        }
 
-    public void addNodeStyle(NodeStyle ns) {
-        style.addNodeStyle(ns);
-    }
+        String tag = canvas.getCanvasTag();
+        Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> bbox =
+                canvas.getBoundingBoxByTag(tag);
 
-    public void clearNodeStyles() {
-        style.clearNodeStyles();
+        String titleTag = canvas.new_tag("x", "-title");
+        Element e = new TitleElement(title, style.title_font, "title_font", titleTag);
+        canvas.addElement(e);
+
+        if (style.title_pos.isLeft()) {
+            canvas.moveByTag(titleTag, 2 * style.padding, 0);
+        }
+
+        if (style.title_pos.isMiddle()) {
+            canvas.moveByTag(titleTag, (bbox.f.f + bbox.s.f - e.end.f) / 2
+                            - 2 * style.padding, 0);
+        }
+
+        if (style.title_pos.isRight()) {
+            canvas.moveByTag(titleTag, bbox.s.f - e.end.f - 2 * style.padding, 0);
+        }
+
+        if (style.title_pos.isBottom()) {
+            canvas.moveByTag(titleTag, 0, bbox.s.s + 2 * style.padding);
+        }
+
+        if (style.title_pos.isTop()) {
+            canvas.moveByTag(tag, 0, e.end.s + 2 * style.padding);
+        }
+
+        return canvas;
     }
 
     /**
@@ -843,7 +874,7 @@ public class SVGCanvasBuilder implements Visitor{
         }
     }
 
-    private static Pair<Integer, Integer> getTextSize(String text, Font font) {
+    public static Pair<Integer, Integer> getTextSize(String text, Font font) {
 
         Rectangle2D r = font.getStringBounds(text,
                 new FontRenderContext(null, true, true));
@@ -893,4 +924,5 @@ public class SVGCanvasBuilder implements Visitor{
     private UnitEndPoint unitEndPoint;
     private boolean ltor;
     private Integer indent;
+    private String title;
 }

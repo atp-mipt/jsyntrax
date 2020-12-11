@@ -53,7 +53,9 @@ public class BubbleElementBase extends Element {
         width *= scale;
         textPos.f = (int)(textPos.f * scale);
         textPos.s = (int)(textPos.s * scale);
-        font = new Font(font.getName(), font.getStyle(), (int)(font.getSize() * scale));
+        if (font != null) {
+            font = new Font(font.getName(), font.getStyle(), (int) (font.getSize() * scale));
+        }
     }
 
     String href;

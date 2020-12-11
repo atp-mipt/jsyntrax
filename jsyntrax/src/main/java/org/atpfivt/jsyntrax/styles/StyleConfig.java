@@ -58,8 +58,6 @@ public class StyleConfig {
         parseField(s, this, "shadow", Boolean::parseBoolean);
         parseField(s, this, "shadow_fill", StyleConfig::colorFromString);
         parseField(s, this, "title_font", StyleConfig::fontFromString);
-        parseField(s, this, "scale", Double::parseDouble);
-        parseField(s, this, "transparent", Boolean::parseBoolean);
     }
 
     private void parseNodeStyle(Section s, NodeStyle ns)
@@ -144,8 +142,6 @@ public class StyleConfig {
     public boolean shadow = true;
     public Color shadow_fill = new Color(0, 0, 0, 127);
     public Font title_font = new Font("Sans", Font.BOLD, 22);
-    public double scale = 1;
-    public boolean transparent = false;
 
     public final List<NodeStyle> nodeStyles;
 }

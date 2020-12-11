@@ -84,6 +84,7 @@ public class Main {
         // generate SVG
         SVGCanvas c = new SVGCanvasBuilder()
                 .withStyle(style)
+                .withTitle(iArgs.title)
                 .withUrlMap(urlMap)
                 .generateSVG(root);
         String result = c.generateSVG();
