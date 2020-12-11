@@ -42,6 +42,15 @@ public class Main {
             return;
         }
 
+        // parse style file
+        Style style = new Style(iArgs.getScale(), iArgs.transparent());
+        if (iArgs.getStyle() != null) {
+            if (!style.updateByFile(iArgs.getStyle())) {
+                System.out.println("Failed parsing style file");
+                return;
+            }
+        }
+
         // read script
         String scriptText;
         try {
@@ -74,7 +83,7 @@ public class Main {
 
         // generate SVG
         SVGCanvas c = new SVGCanvasBuilder()
-                .withStyle(new Style(iArgs.scale, iArgs.transparent))
+                .withStyle(style)
                 .withUrlMap(urlMap)
                 .generateSVG(root);
         String result = c.generateSVG();
@@ -93,8 +102,11 @@ public class Main {
         try {
             Path input = iArgs.getInput();
             Path output = iArgs.getOutput();
+            Path style = iArgs.getStyle();
+
+            // check input path
             if (!Files.isRegularFile(input)) {
-                System.out.println("Got path " + input + " is not a regular file");
+                System.out.println("Got input path " + input + " is not a regular file");
                 return false;
             }
 
@@ -103,13 +115,33 @@ public class Main {
                 return false;
             }
 
+            // check output path
             if (!Files.exists(output)) {
                 Files.createFile(output);
+                System.out.println("Output file " + output + "was created");
+            }
+
+            if (!Files.isRegularFile(output)) {
+                System.out.println("Got output path " + input + " is not a regular file");
+                return false;
             }
 
             if (!Files.isWritable(output)) {
                 System.out.println("There is no write access for file: " + output);
                 return false;
+            }
+
+            // check style path
+            if (style != null) {
+                if (!Files.isRegularFile(style)) {
+                    System.out.println("Got style path " + style + " is not a regular file");
+                    return false;
+                }
+
+                if (!Files.isReadable(style)) {
+                    System.out.println("There is no read access for file: " + style);
+                    return false;
+                }
             }
         } catch (Exception e) {
             return false;
