@@ -81,28 +81,14 @@ public class StyleConfig {
         }
     }
 
-    final static Pattern numPattern = Pattern.compile(",?\\s*([0-9]+)\\s*,?");
-
-    static Integer parseNum(String num) {
-        if (num == null) {
-            return 255;
-        }
-        Matcher m = numPattern.matcher(num);
-        if (!m.matches()) {
-            // ILU, Java
-            return 0;
-        }
-        return Integer.parseInt(m.group(1));
-    }
-
     final static Pattern fontPattern = Pattern.compile(
-            "\\s*\\(\\s*'([a-zA-Z]+)'\\s*,\\s*([0-9]+)\\s*,\\s*'([a-zA-Z]+)'\\s*\\)\\s*");
+            "\\(\\s*'([a-zA-Z]+)'\\s*,\\s*(\\d+)\\s*,\\s*'([a-zA-Z ]+)'\\s*\\)");
 
-    private static Font fontFromString(String txt) {
-        Matcher matcher = fontPattern.matcher(txt);
+    static Font fontFromString(String txt) {
+        Matcher matcher = fontPattern.matcher(txt.trim());
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid color style in config");
+            throw new IllegalArgumentException("Invalid font style in config");
         }
 
         String name = matcher.group(1);
@@ -116,24 +102,29 @@ public class StyleConfig {
             style |= Font.ITALIC;
         }
 
-        int size = parseNum(matcher.group(2));
+        int size = Integer.parseInt(matcher.group(2));
 
         return new Font(name, style, size);
     }
 
     final static Pattern colorPattern = Pattern.compile(
-            "\\s*\\((\\s*[0-9]+\\s*),(\\s*[0-9]+\\s*),(\\s*[0-9]+\\s*)(,\\s*[0-9]+\\s*)?\\)\\s*");
+            "\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*(,\\s*(\\d+)\\s*)?\\)");
 
-    private static Color colorFromString(String txt) {
-        Matcher matcher = colorPattern.matcher(txt);
+    static Color colorFromString(String txt) {
+        Matcher matcher = colorPattern.matcher(txt.trim());
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Invalid color style in config");
         }
 
-        int r = parseNum(matcher.group(1));
-        int g = parseNum(matcher.group(2));
-        int b = parseNum(matcher.group(3));
-        int a = parseNum(matcher.group(4));
+        int r = Integer.parseInt(matcher.group(1));
+        int g = Integer.parseInt(matcher.group(2));
+        int b = Integer.parseInt(matcher.group(3));
+        int a;
+        if (matcher.group(5) == null) {
+            a = 255;
+        } else {
+            a = Integer.parseInt(matcher.group(5));
+        }
 
         return new Color(r, g, b, a);
     }

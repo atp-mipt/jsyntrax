@@ -1,6 +1,7 @@
-package org.atpfivt.jsyntrax;
+package org.atpfivt.jsyntrax.styles;
 
 import org.approvaltests.Approvals;
+import org.atpfivt.jsyntrax.JSyntraxTestUtils;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
@@ -15,6 +16,7 @@ import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.awt.*;
 import java.io.IOException;
@@ -37,6 +39,22 @@ public class JSyntraxStyleFileTest {
     @AfterEach
     void tearDown() throws IOException {
         Files.delete(stylePath);
+    }
+
+    @Test
+    void colorFromString(){
+        assertEquals(new Color(1, 2, 3, 4),
+                StyleConfig.colorFromString("(1, 2, 3, 4)"));
+        assertEquals(new Color(1, 2, 3),
+                StyleConfig.colorFromString(" (1,2, 3) "));
+    }
+
+    @Test
+    void fontFromString(){
+        assertEquals(new Font("FooFont", Font.BOLD, 12),
+                StyleConfig.fontFromString("('FooFont', 12, 'bold')"));
+        assertEquals(new Font("BarFont", Font.ITALIC | Font.BOLD, 10),
+                StyleConfig.fontFromString(" ('BarFont', 10, 'bold italic') "));
     }
 
     @Test
