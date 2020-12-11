@@ -1,7 +1,6 @@
 package org.atpfivt.jsyntrax;
 
 import org.approvaltests.Approvals;
-import org.approvaltests.core.Options;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
@@ -9,8 +8,12 @@ import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+
+import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -18,25 +21,26 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.FileAttribute;
 
 public class JSyntraxStyleFileTest {
-
-    private final static Options options = JSyntraxUtils.getInstance().options;
     private final SVGCanvasBuilder canvasBuilder;
+    private final Path stylePath =
+            Files.createTempFile("jsyntrax-test-style", ".ini");
 
-    public JSyntraxStyleFileTest() {
+    public JSyntraxStyleFileTest() throws IOException {
         Style s = new Style(1, false);
-        JSyntraxUtils.getInstance().updateStyle(s);
+        JSyntraxTestUtils.updateStyle(s);
         canvasBuilder = new SVGCanvasBuilder().withStyle(s);
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        Files.delete(stylePath);
     }
 
     @Test
     void configParserTest() throws IOException, NoSuchFieldException, IllegalAccessException {
-        Path stylePath = Paths.get("style.ini");
-        if (!Files.exists(stylePath)) {
-            Files.createFile(stylePath);
-        }
-        Assertions.assertTrue(Files.isRegularFile(stylePath));
         StringBuilder config = new StringBuilder();
         config.append("[style]\n")
                 .append("line_width = 50\n")
@@ -51,33 +55,25 @@ public class JSyntraxStyleFileTest {
         Files.writeString(stylePath, config);
         StyleConfig cfg = new StyleConfig(stylePath);
 
-        Assertions.assertAll(
-                () -> assertEquals(cfg.line_width, 50),
-                () -> assertEquals(cfg.v_sep, 42),
-                () -> assertEquals(cfg.text_color, new Color(30, 40, 50)),
-                () -> assertEquals(cfg.shadow_fill, new Color(35, 46, 57, 212)),
-                () -> assertEquals(cfg.nodeStyles.size(), 1)
-        );
-
         NodeStyle ns = cfg.nodeStyles.get(0);
-
         Assertions.assertAll(
-                () -> assertEquals(ns.name, "hex_bubble"),
-                () -> assertEquals(ns.shape, "hex"),
-                () -> assertEquals(ns.font, new Font("Sans", Font.BOLD, 14)),
-                () -> assertEquals(ns.fill, new Color(255, 15, 3, 129))
+                () -> assertEquals(50, cfg.line_width),
+                () -> assertEquals(42, cfg.v_sep),
+                () -> assertEquals(new Color(30, 40, 50), cfg.text_color),
+                () -> assertEquals(new Color(35, 46, 57, 212), cfg.shadow_fill),
+                () -> assertEquals(1, cfg.nodeStyles.size()),
+                () -> assertEquals("hex_bubble", ns.name),
+                () -> assertEquals("hex", ns.shape),
+                () -> assertEquals(new Font("Sans", Font.BOLD, 14), ns.font),
+                () -> assertEquals(new Color(255, 15, 3, 129), ns.fill)
         );
     }
 
     @Test
     void approvalTest() throws IOException {
-        Path stylePath = Paths.get("style.ini");
-        if (!Files.exists(stylePath)) {
-            Files.createFile(stylePath);
-        }
-        Assertions.assertTrue(Files.isRegularFile(stylePath));
-        StringBuilder config = new StringBuilder();
-        config.append("[style]\n")
+
+        StringBuilder config = new StringBuilder()
+                .append("[style]\n")
                 .append("line_width = 3\n")
                 .append("outline_width = 3\n")
                 .append("padding = 5\n")
@@ -110,7 +106,7 @@ public class JSyntraxStyleFileTest {
 
         Style s = new Style(1, false);
         s.updateByFile(stylePath);
-        JSyntraxUtils.getInstance().updateStyle(s);
+        JSyntraxTestUtils.updateStyle(s);
 
         Unit root = Parser.parse("stack(\n" +
                 "line('attribute', '/(attribute) identifier', 'of'),\n" +
@@ -119,6 +115,6 @@ public class JSyntraxStyleFileTest {
 
         SVGCanvas canvas = canvasBuilder.withStyle(s).generateSVG(root);
         String result = canvas.generateSVG();
-        Approvals.verify(result, options);
+        Approvals.verify(result, OPTIONS);
     }
 }

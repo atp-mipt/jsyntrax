@@ -3,19 +3,19 @@
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
-width="253" height="46" version="1.1">
+width="262" height="47" version="1.1">
 <style type="text/css">
 <![CDATA[
 .title_font {fill:#000000; text-anchor:middle;
-font-family:PT Sans Bold; font-size:12pt; font-weight:normal; font-style:normal; }
+font-family:PT Sans Bold; font-size:22pt; font-weight:bold; font-style:normal; }
 .token_font {fill:#000000; text-anchor:middle;
-font-family:PT Sans Bold; font-size:12pt; font-weight:normal; font-style:normal; }
+font-family:PT Sans Bold; font-size:16pt; font-weight:bold; font-style:normal; }
 .box_font {fill:#000000; text-anchor:middle;
-font-family:PT Sans Italic; font-size:12pt; font-weight:normal; font-style:normal; }
+font-family:PT Sans Italic; font-size:14pt; font-weight:normal; font-style:italic; }
 .bubble_font {fill:#000000; text-anchor:middle;
-font-family:PT Sans Bold; font-size:12pt; font-weight:normal; font-style:normal; }
+font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
 .hex_font {fill:#000000; text-anchor:middle;
-font-family:PT Sans Bold; font-size:12pt; font-weight:normal; font-style:normal; }
+font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
 .label {fill: #000; text-anchor:middle; font-size:16pt; font-weight:bold; font-family:Sans;}
 .link {fill: #0D47A1;}
 .link:hover {fill: #0D47A1; text-decoration:underline;}
@@ -29,29 +29,29 @@ font-family:PT Sans Bold; font-size:12pt; font-weight:normal; font-style:normal;
 </defs>
 <rect width="100%" height="100%" fill="white"/>
 <circle cx="8" cy="8" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
-<line x1="126" y1="8" x2="127" y2="8" stroke="#000000" stroke-width="2" />
-<path d="M72,44 A13,13 0 0,1 72,18 H82 A13,13 0 0,1 82,44 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M69,41 A13,13 0 0,1 69,15 H79 A13,13 0 0,1 79,41 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="74" y="33">A</text>
-<path d="M125,44 A13,13 0 0,1 125,18 H135 A13,13 0 0,1 135,44 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M122,41 A13,13 0 0,1 122,15 H132 A13,13 0 0,1 132,41 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="127" y="33">B</text>
-<line x1="91" y1="26" x2="105" y2="26" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<path d="M178,44 A13,13 0 0,1 178,18 H187 A13,13 0 0,1 187,44 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M175,41 A13,13 0 0,1 175,15 H184 A13,13 0 0,1 184,41 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="179" y="33">C</text>
-<line x1="144" y1="26" x2="158" y2="26" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="28" y1="8" x2="122" y2="8" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="127" y1="8" x2="226" y2="8" stroke="#000000" stroke-width="2" />
+<line x1="130" y1="8" x2="131" y2="8" stroke="#000000" stroke-width="2" />
+<path d="M74,45 A15,15 0 0,1 74,15 H83 A15,15 0 0,1 83,45 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M71,42 A15,15 0 0,1 71,12 H80 A15,15 0 0,1 80,42 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="75" y="32">A</text>
+<path d="M130,45 A15,15 0 0,1 130,15 H139 A15,15 0 0,1 139,45 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M127,42 A15,15 0 0,1 127,12 H136 A15,15 0 0,1 136,42 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="131" y="32">B</text>
+<line x1="94" y1="26" x2="108" y2="26" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M186,45 A15,15 0 0,1 186,15 H194 A15,15 0 0,1 194,45 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M183,42 A15,15 0 0,1 183,12 H191 A15,15 0 0,1 191,42 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="187" y="32">C</text>
+<line x1="150" y1="26" x2="164" y2="26" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="28" y1="8" x2="126" y2="8" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="131" y1="8" x2="235" y2="8" stroke="#000000" stroke-width="2" />
 <path d="M37,17 A9,9 0 0,0 28,8" stroke="#000000" stroke-width="2" fill="none"/>
 <line x1="46" y1="26" x2="52" y2="26" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="197" y1="26" x2="207" y2="26" stroke="#000000" stroke-width="2" />
+<line x1="206" y1="26" x2="216" y2="26" stroke="#000000" stroke-width="2" />
 <path d="M37,17 A9,9 0 0,0 46,26" stroke="#000000" stroke-width="2" fill="none"/>
-<path d="M207,26 A9,9 0 0,0 216,17" stroke="#000000" stroke-width="2" fill="none"/>
-<path d="M225,8 A9,9 0 0,0 216,17" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M216,26 A9,9 0 0,0 225,17" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M234,8 A9,9 0 0,0 225,17" stroke="#000000" stroke-width="2" fill="none"/>
 <line x1="37" y1="17" x2="37" y2="17" stroke="#000000" stroke-width="2" />
-<line x1="216" y1="17" x2="216" y2="17" stroke="#000000" stroke-width="2" />
+<line x1="225" y1="17" x2="225" y2="17" stroke="#000000" stroke-width="2" />
 <line x1="10" y1="8" x2="24" y2="8" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<circle cx="245" cy="8" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
-<line x1="224" y1="8" x2="238" y2="8" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<circle cx="254" cy="8" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<line x1="233" y1="8" x2="247" y2="8" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 </svg>
