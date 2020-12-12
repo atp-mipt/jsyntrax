@@ -137,6 +137,7 @@ public class JSyntraxTest {
         );
 
         SVGCanvas c = canvasBuilder.withTitle("TestTitle").generateSVG(root);
+        canvasBuilder.withTitle(null);
         String result = c.generateSVG();
         Approvals.verify(result, OPTIONS);
     }
