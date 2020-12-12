@@ -4,6 +4,7 @@ import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.util.HashSet;
+import java.util.Optional;
 
 public class Element {
     public Element(String tag) {
@@ -44,6 +45,10 @@ public class Element {
         start.s = (int)(start.s * scale);
         end.f = (int)(end.f * scale);
         end.s = (int)(end.s * scale);
+    }
+
+    public Optional<String> getAnyTag() {
+        return tags.stream().findAny();
     }
 
     public Pair<Integer, Integer> start = null;

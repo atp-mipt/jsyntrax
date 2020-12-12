@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class SVGCanvas {
 
@@ -67,6 +68,10 @@ public class SVGCanvas {
         }
     }
 
+    public Optional<String> getCanvasTag() {
+        return elements.stream().findAny().flatMap(Element::getAnyTag);
+    }
+
     public Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getBoundingBoxByTag(String tag) {
         Pair<Integer, Integer> start = null;
         Pair<Integer, Integer> end = null;
@@ -93,7 +98,6 @@ public class SVGCanvas {
 
     public String generateSVG() {
         StringBuilder sb = new StringBuilder();
-        // TODO: add title
         double scale = style.scale;
 
         Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> res = getBoundingBoxByTag("all");

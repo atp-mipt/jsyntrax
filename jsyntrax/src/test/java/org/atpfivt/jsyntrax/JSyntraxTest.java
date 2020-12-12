@@ -4,6 +4,7 @@ import org.approvaltests.Approvals;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.tracks.Choice;
 import org.atpfivt.jsyntrax.units.tracks.Line;
 import org.atpfivt.jsyntrax.units.tracks.loop.Loop;

@@ -19,10 +19,12 @@ public enum TitlePosition {
      * Bottom Left.
      */
     bl,
+
     /**
      * Bottom Middle.
      */
     bm,
+
     /**
      * Bottom Right.
      */
