@@ -20,6 +20,7 @@
         <java.version>1.11</java.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <junit.version>5.7.0</junit.version>
+        <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
     </properties>
 
     <dependencies>
@@ -80,20 +81,34 @@
                 </dependencies>
             </plugin>
 
-            <!-- maven-assembly-plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>2.1.0</version>
+                <configuration>
+                    <programs>
+                        <program>
+                            <mainClass>${java.main.class}</mainClass>
+                            <id>syntrax</id>
+                        </program>
+                    </programs>
+                    <repositoryName>lib</repositoryName>
+                    <repositoryLayout>flat</repositoryLayout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>${java.main.class}</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
+                <version>${maven.assembly.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -102,6 +117,11 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
             </plugin>
 
             <!-- maven-eclipse-plugin  -->
