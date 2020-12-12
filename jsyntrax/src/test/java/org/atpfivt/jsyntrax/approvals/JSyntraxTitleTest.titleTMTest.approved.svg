@@ -100,5 +100,5 @@ font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
 <line x1="10" y1="53" x2="24" y2="53" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 <circle cx="426" cy="53" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
 <line x1="405" y1="53" x2="419" y2="53" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<text class="title_font" x="66" y="26">TestTitle</text>
+<text class="title_font" x="207" y="26">&lt;TestTitle&gt;</text>
 </svg>

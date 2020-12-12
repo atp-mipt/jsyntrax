@@ -75,25 +75,35 @@ public class SVGCanvasBuilder implements Visitor{
         Element e = new TitleElement(title, style.title_font, "title_font", titleTag);
         canvas.addElement(e);
 
-        if (style.title_pos.isLeft()) {
-            canvas.moveByTag(titleTag, 2 * style.padding, 0);
+        // set left / middle / right location
+        switch (style.title_pos) {
+            case bl:
+            case tl:
+                canvas.moveByTag(titleTag, 2 * style.padding, 0);
+                break;
+            case bm:
+            case tm:
+                canvas.moveByTag(titleTag, (bbox.f.f + bbox.s.f - e.end.f) / 2
+                        - 2 * style.padding, 0);
+                break;
+            case br:
+            case tr:
+                canvas.moveByTag(titleTag, bbox.s.f - e.end.f - 2 * style.padding, 0);
+                break;
         }
 
-        if (style.title_pos.isMiddle()) {
-            canvas.moveByTag(titleTag, (bbox.f.f + bbox.s.f - e.end.f) / 2
-                            - 2 * style.padding, 0);
-        }
-
-        if (style.title_pos.isRight()) {
-            canvas.moveByTag(titleTag, bbox.s.f - e.end.f - 2 * style.padding, 0);
-        }
-
-        if (style.title_pos.isBottom()) {
-            canvas.moveByTag(titleTag, 0, bbox.s.s + 2 * style.padding);
-        }
-
-        if (style.title_pos.isTop()) {
-            canvas.moveByTag(tag, 0, e.end.s + 2 * style.padding);
+        // set top / bottom location
+        switch(style.title_pos) {
+            case tl:
+            case tm:
+            case tr:
+                canvas.moveByTag(tag, 0, e.end.s + 2 * style.padding);
+                break;
+            case bl:
+            case bm:
+            case br:
+                canvas.moveByTag(titleTag, 0, bbox.s.s + 2 * style.padding);
+                break;
         }
 
         return canvas;

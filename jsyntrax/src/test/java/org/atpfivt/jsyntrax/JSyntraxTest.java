@@ -123,22 +123,4 @@ public class JSyntraxTest {
         String result = c.generateSVG();
         Approvals.verify(result, OPTIONS);
     }
-
-    @Test
-    void titleTest() {
-        Unit root = line("/create_grain", loop(";",
-                choice("/create_sequence",
-                        "/create_table",
-                        "/add_foreign_key",
-                        "/create_index",
-                        "/create_view",
-                        "/create_materialized_view",
-                        "/create_function"))
-        );
-
-        SVGCanvas c = canvasBuilder.withTitle("TestTitle").generateSVG(root);
-        canvasBuilder.withTitle(null);
-        String result = c.generateSVG();
-        Approvals.verify(result, OPTIONS);
-    }
 }

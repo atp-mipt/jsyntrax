@@ -54,7 +54,7 @@ public class BubbleElementBase extends Element {
         textPos.f = (int)(textPos.f * scale);
         textPos.s = (int)(textPos.s * scale);
         if (font != null) {
-            font = new Font(font.getName(), font.getStyle(), (int) (font.getSize() * scale));
+            font = font.deriveFont((float) (font.getSize() * scale));
         }
     }
 
