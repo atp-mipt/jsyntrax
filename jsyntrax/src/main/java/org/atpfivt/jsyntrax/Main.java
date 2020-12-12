@@ -24,16 +24,16 @@ public class Main {
         // parse command line arguments
         InputArguments iArgs;
         try {
-            iArgs = InputArguments.parseArgs(args);
+            iArgs = new InputArguments(args);
         } catch (Exception e) {
-            System.out.println("Failed CommandLine parse");
-            System.out.println(e.getMessage());
+            System.out.println("Cannot parse command line");
+            InputArguments.writeHelp(new PrintWriter(System.out));
             return;
         }
 
         // write help if need
         if (iArgs.isHelp()) {
-            iArgs.writeHelp(new PrintWriter(System.out));
+            InputArguments.writeHelp(new PrintWriter(System.out));
             return;
         }
 
@@ -43,7 +43,7 @@ public class Main {
         }
 
         // parse style file
-        Style style = new Style(iArgs.getScale(), iArgs.transparent());
+        Style style = new Style(iArgs.getScale(), iArgs.isTransparent());
         if (iArgs.getStyle() != null) {
             if (!style.updateByFile(iArgs.getStyle())) {
                 System.out.println("Failed parsing style file");
@@ -84,7 +84,7 @@ public class Main {
         // generate SVG
         SVGCanvas c = new SVGCanvasBuilder()
                 .withStyle(style)
-                .withTitle(iArgs.title)
+                .withTitle(iArgs.getTitle())
                 .withUrlMap(urlMap)
                 .generateSVG(root);
         String result = c.generateSVG();
@@ -100,53 +100,44 @@ public class Main {
     }
 
     static boolean checkPathsFromArgs(InputArguments iArgs) {
-        try {
-            Path input = iArgs.getInput();
-            Path output = iArgs.getOutput();
-            Path style = iArgs.getStyle();
 
-            // check input path
-            if (!Files.isRegularFile(input)) {
-                System.out.println("Got input path " + input + " is not a regular file");
-                return false;
-            }
+        Path input = iArgs.getInput();
+        Path output = iArgs.getOutput();
+        Path style = iArgs.getStyle();
 
-            if (!Files.isReadable(input)) {
-                System.out.println("There is no read access for file: " + input);
-                return false;
-            }
-
-            // check output path
-            if (!Files.exists(output)) {
-                Files.createFile(output);
-                System.out.println("Output file " + output + "was created");
-            }
-
-            if (!Files.isRegularFile(output)) {
-                System.out.println("Got output path " + input + " is not a regular file");
-                return false;
-            }
-
-            if (!Files.isWritable(output)) {
-                System.out.println("There is no write access for file: " + output);
-                return false;
-            }
-
-            // check style path
-            if (style != null) {
-                if (!Files.isRegularFile(style)) {
-                    System.out.println("Got style path " + style + " is not a regular file");
-                    return false;
-                }
-
-                if (!Files.isReadable(style)) {
-                    System.out.println("There is no read access for file: " + style);
-                    return false;
-                }
-            }
-        } catch (Exception e) {
+        // check input path
+        if (!(input != null && Files.isRegularFile(input) && Files.isReadable(input))) {
+            System.out.printf("Cannot read input file %s%n", input);
             return false;
         }
+
+        // check output path
+        if (output == null) {
+            System.out.println("No output file set");
+            return false;
+        }
+
+        if (!Files.exists(output)) {
+            try {
+                Files.createFile(output);
+            } catch (IOException e) {
+                System.out.printf("Can't create file %s%n", output);
+                return false;
+            }
+            System.out.printf("Output file %s was created%n", output);
+        }
+
+        if (!(Files.isRegularFile(output) && Files.isWritable(output))) {
+            System.out.printf("Cannot write to %s%n", output);
+            return false;
+        }
+
+        // check style path
+        if (style != null && !(Files.isRegularFile(style) && Files.isReadable(style))) {
+            System.out.printf("Cannot read style file %s%n", style);
+            return false;
+        }
+
         return true;
     }
 
