@@ -67,7 +67,7 @@ public class SVGCanvasBuilder implements Visitor{
             return canvas;
         }
 
-        String tag = canvas.getCanvasTag();
+        String tag = canvas.getCanvasTag().orElse(null);
         Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> bbox =
                 canvas.getBoundingBoxByTag(tag);
 

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class SVGCanvas {
 
@@ -67,11 +68,8 @@ public class SVGCanvas {
         }
     }
 
-    public String getCanvasTag() {
-        if (elements.isEmpty()) {
-            return null;
-        }
-        return elements.get(0).getAnyTag();
+    public Optional<String> getCanvasTag() {
+        return elements.stream().findAny().flatMap(Element::getAnyTag);
     }
 
     public Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getBoundingBoxByTag(String tag) {

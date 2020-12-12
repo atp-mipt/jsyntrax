@@ -1,16 +1,19 @@
 package org.atpfivt.jsyntrax;
 
 import org.approvaltests.Approvals;
+import org.approvaltests.core.Options;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.styles.TitlePosition;
 import org.atpfivt.jsyntrax.units.Unit;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
-import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.choice;
 
 public class JSyntraxTitleTest {
     private final SVGCanvasBuilder canvasBuilder;
@@ -45,75 +48,23 @@ public class JSyntraxTitleTest {
         return "<TestTitle>";
     }
 
-    @Test
-    void titleTLTest() {
-        setTitlePosition(TitlePosition.tl);
+
+    @ParameterizedTest
+    @MethodSource("titlePosProvider")
+    void titleTest(TitlePosition pos) {
+        setTitlePosition(pos);
         Unit root = getSample();
         String title = getTitle();
-
         SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
         String result = c.generateSVG();
-
-        Approvals.verify(result, OPTIONS);
+        Approvals.verify(result, new Options()
+                .forFile()
+                .withName(JSyntraxTitleTest.class.getSimpleName() + '.' + pos.name(), ".svg")
+        );
     }
 
-    @Test
-    void titleTMTest() {
-        setTitlePosition(TitlePosition.tm);
-        Unit root = getSample();
-        String title = getTitle();
-
-        SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
-        String result = c.generateSVG();
-
-        Approvals.verify(result, OPTIONS);
+    static Stream<TitlePosition> titlePosProvider() {
+        return Arrays.stream(TitlePosition.values());
     }
 
-    @Test
-    void titleTRTest() {
-        setTitlePosition(TitlePosition.tr);
-        Unit root = getSample();
-        String title = getTitle();
-
-        SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
-        String result = c.generateSVG();
-
-        Approvals.verify(result, OPTIONS);
-    }
-
-    @Test
-    void titleBLTest() {
-        setTitlePosition(TitlePosition.bl);
-        Unit root = getSample();
-        String title = getTitle();
-
-        SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
-        String result = c.generateSVG();
-
-        Approvals.verify(result, OPTIONS);
-    }
-
-    @Test
-    void titleBMTest() {
-        setTitlePosition(TitlePosition.bm);
-        Unit root = getSample();
-        String title = getTitle();
-
-        SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
-        String result = c.generateSVG();
-
-        Approvals.verify(result, OPTIONS);
-    }
-
-    @Test
-    void titleBRTest() {
-        setTitlePosition(TitlePosition.br);
-        Unit root = getSample();
-        String title = getTitle();
-
-        SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
-        String result = c.generateSVG();
-
-        Approvals.verify(result, OPTIONS);
-    }
 }
