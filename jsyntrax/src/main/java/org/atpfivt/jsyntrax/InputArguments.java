@@ -60,7 +60,8 @@ public class InputArguments {
 
     public static void writeHelp(PrintWriter writer) {
         final HelpFormatter helpFormatter = new HelpFormatter();
-        helpFormatter.printHelp(writer, 80, "syntrax", "Options",
+        helpFormatter.printHelp(writer, 80, "syntrax",
+                "Railroad diagram generator.\n\nOptions",
                 options, 3, 5, null, true);
         writer.flush();
     }
