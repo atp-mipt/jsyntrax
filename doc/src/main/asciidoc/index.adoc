@@ -35,7 +35,7 @@ Then in JSyntrax it has been reimplemented in Java in order to simplify installa
 
 === Requirements
 
-JSyntrax requires JDK 11+.
+JSyntrax requires JDK 11+. No other software is required to run JSyntrax.
 
 === Licensing
 
@@ -48,7 +48,7 @@ https://github.com/atp-mipt/java-syntrax[Github].
 
 === Installation
 
-TODO: describe installation procedure here
+Unzip `jsyntrax-XXX.zip` file to any convenient folder. `/bin` directory will contain executable `syntrax` file.
 
 === Using JSyntrax
 
@@ -57,23 +57,17 @@ and it will generate a diagram in any of the supported output formats.
 
 
 ----
-usage: syntrax.py [-h] [-i INPUT] [-o OUTPUT] [-s STYLES] [--title TITLE] [-t]
-                  [--scale SCALE] [-v] [--get-style]
-
-Railroad diagram generator
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -i INPUT, --input INPUT
-                        Diagram spec file
-  -o OUTPUT, --output OUTPUT
-                        Output file
-  -s STYLES, --style STYLES
-                        Style config file
-  --title TITLE         Diagram title
-  -t, --transparent     Transparent background
-  -v, --version         Syntrax version
-  --get-style           Create default style .ini
+usage: syntrax [-h] [-i <arg>] [-o <arg>] [-s <arg>] [--scale <arg>] [-t]
+       [--title <arg>]
+Railroad diagram generator.
+Options
+   -h,--help             Show this help message and exit
+   -i,--input <arg>      Diagram spec file
+   -o,--output <arg>     Output file
+   -s,--style <arg>      Style config .ini file
+      --scale <arg>      Scale image
+   -t,--transparent      Transparent background
+      --title <arg>      Diagram title
 ----
 
 
@@ -108,9 +102,9 @@ The following functions are available for creating diagrams:
 
 [cols=",,",]
 |===
-|line() |loop() |toploop()
-|choice() |opt() |optx()
-|stack() |indentstack() |rightstack()
+|`line()`  |`loop()`       |`toploop()`
+|`choice()`|`opt()`        |`optx()`
+|`stack()` |`indentstack()`|`rightstack()`
 |===
 
 ==== line
