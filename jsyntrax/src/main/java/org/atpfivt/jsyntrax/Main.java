@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String... args) {
         // parse command line arguments
         InputArguments iArgs;
         try {
@@ -31,7 +31,7 @@ public class Main {
             return;
         }
 
-        // write help if need
+        // write help if needed
         if (iArgs.isHelp()) {
             InputArguments.writeHelp(new PrintWriter(System.out));
             return;
