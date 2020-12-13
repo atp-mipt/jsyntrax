@@ -46,10 +46,15 @@ public class InputArguments {
         for (Option o : optionsMap.keySet()) {
             options.addOption(o);
         }
-        CommandLineParser parser = new PosixParser();
-        for (Option o : parser.parse(options, args).getOptions()) {
+        CommandLine commandLine = new PosixParser().parse(options, args);
+
+        for (Option o : commandLine.getOptions()) {
             optionsMap.getOrDefault(o, (x, s) -> {
             }).accept(this, o.getValue());
+        }
+        //Any argument not associated with a flag is assumed to be the input file name
+        if (commandLine.getArgList().size() > 0) {
+            this.input = Paths.get(commandLine.getArgList().get(0).toString());
         }
     }
 

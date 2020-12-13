@@ -48,4 +48,11 @@ class InputArgumentsTest {
         InputArguments inputArguments = new InputArguments("-t");
         assertTrue(inputArguments.isTransparent());
     }
+
+    @Test
+    void testDefaultInputParam() throws ParseException{
+        InputArguments inputArguments = new InputArguments("-o", "test.svg", "test.spec");
+        assertEquals(Paths.get("test.spec"), inputArguments.getInput());
+
+    }
 }
