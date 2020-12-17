@@ -60,22 +60,15 @@ public class Main {
             return;
         }
 
-        // find url map
-        Map<String, String> urlMap = new HashMap<>();
-        Matcher m = Pattern.compile("^*url_map[ ]*=*").matcher(scriptText);
-        if (m.find()) {
-            String urlMapText = scriptText.substring(m.end());
-            scriptText = scriptText.substring(0, m.start());
-            if (!evaluateUrlMap(urlMapText, urlMap)) {
-                return;
-            }
-        }
-
+        // parse script
+        Map<String, String> urlMap;
         Unit root;
         try {
             // parse spec
-            root = Parser.parse(scriptText);
-            //System.out.println(root);
+            Parser parser = new Parser();
+            parser.parse(scriptText);
+            root = parser.getTrack();
+            urlMap = parser.getUrlMap();
         } catch (CompilationFailedException e) {
             System.out.println("Something was wrong with input script " + e.getMessage());
             return;

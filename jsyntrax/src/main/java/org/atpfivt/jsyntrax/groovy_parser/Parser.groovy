@@ -6,12 +6,19 @@ import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilerConfiguration
 
 class Parser {
-    static Unit parse(String scriptText) throws CompilationFailedException {
+    Track track
+    Map<String, String> urlMap
+
+    void parse(String scriptText) throws CompilationFailedException {
         def config = new CompilerConfiguration()
         config.setScriptBaseClass(SyntraxScript.class.name)
-        def shell = new GroovyShell(this.class.classLoader, new Binding(), config)
+        def sharedData = new Binding()
+        def shell = new GroovyShell(this.class.classLoader, sharedData, config)
         shell.setVariable("None", null)
 
-        return shell.evaluate(scriptText) as Track
+        shell.evaluate(scriptText)
+
+        this.track = sharedData.getProperty("track") as Track
+        this.urlMap = sharedData.getProperty("url_map") as Map<String, String>
     }
 }
