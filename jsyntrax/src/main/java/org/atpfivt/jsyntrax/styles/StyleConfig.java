@@ -68,6 +68,7 @@ public class StyleConfig {
         parseField(s, ns, "font", StyleConfig::fontFromString);
         parseField(s, ns, "text_color", StyleConfig::colorFromString);
         parseField(s, ns, "fill", StyleConfig::colorFromString);
+        parseField(s, ns, "capture_group", (String v) -> v.substring(1, v.length() - 1));
     }
 
     private static void parseField(Section s, Object obj,
@@ -104,6 +105,7 @@ public class StyleConfig {
 
         return new Font(name, style, size);
     }
+
 
     final static Pattern colorPattern = Pattern.compile(
             "\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*(,\\s*(\\d+)\\s*)?\\)");
