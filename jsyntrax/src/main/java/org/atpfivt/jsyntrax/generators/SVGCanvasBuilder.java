@@ -3,7 +3,6 @@ package org.atpfivt.jsyntrax.generators;
 import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.styles.TitlePosition;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.nodes.Bullet;
 import org.atpfivt.jsyntrax.units.nodes.Node;

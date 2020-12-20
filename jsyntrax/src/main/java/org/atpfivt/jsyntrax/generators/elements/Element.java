@@ -5,6 +5,7 @@ import org.atpfivt.jsyntrax.util.Pair;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public class Element {
     public Element(String tag) {
@@ -53,5 +54,5 @@ public class Element {
 
     public Pair<Integer, Integer> start = null;
     public Pair<Integer, Integer> end = null;
-    HashSet<String> tags = new HashSet<>();
+    final Set<String> tags = new HashSet<>();
 }
