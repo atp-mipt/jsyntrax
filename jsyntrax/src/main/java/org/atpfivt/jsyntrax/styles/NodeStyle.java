@@ -17,18 +17,18 @@ public class NodeStyle {
         this.capture_group = capture_group;
     }
 
-    public String extractCaptureGroupText(String txt) throws MatchException {
-        if (capture_group.equals("all")){
+    public String extractCaptureGroupText(String txt){
+        if (capture_group == null){
             return txt;
         }
         String patternString = pattern.toString();
         if(!patternString.contains("?<" + capture_group + ">") || !match(txt))
-            throw new MatchException("String does not match with pattern!");
+            throw new IllegalStateException("Entered named group does not match with entered pattern!");
         Matcher matcher = pattern.matcher(txt);
         if(matcher.find())
             return matcher.group(capture_group);
         else
-            throw new MatchException("String does not match with pattern!");
+            throw new IllegalStateException("Entered named group does not match with entered pattern!");
     }
 
     public String modify(String txt) { return txt; }
@@ -39,5 +39,5 @@ public class NodeStyle {
     public Color text_color = new Color(0,0,0);
     public Color fill = new Color(144,164,174);
     public Pattern pattern = null;
-    public String capture_group = "all";
+    public String capture_group = null;
 }
