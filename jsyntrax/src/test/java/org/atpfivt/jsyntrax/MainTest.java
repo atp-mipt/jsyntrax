@@ -2,8 +2,11 @@ package org.atpfivt.jsyntrax;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +23,21 @@ class MainTest {
             assertTrue(Files.readString(outPath).contains("JSYNTRAX"));
         } finally {
             Files.delete(outPath);
+        }
+    }
+
+    @Test
+    void testWriteHelp() {
+        final PrintStream standardOut = System.out;
+        final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+        try {
+            Main.main("-h");
+            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).contains(
+                    "Railroad diagram generator."
+            ));
+        } finally {
+            System.setOut(standardOut);
         }
     }
 }
