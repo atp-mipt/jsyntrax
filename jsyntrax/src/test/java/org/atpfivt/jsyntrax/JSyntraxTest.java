@@ -16,6 +16,8 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
 import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
 
@@ -120,6 +122,20 @@ public class JSyntraxTest {
                 line("bottom", "line")
         );
         SVGCanvas c = canvasBuilder.generateSVG(rightStack);
+        String result = c.generateSVG();
+        Approvals.verify(result, OPTIONS);
+    }
+
+    @Test
+    void urlMapTest() {
+        Configuration urlMapped = jsyntrax(stack(
+                line("attribute", "/(attribute) identifier", "of"),
+                line(choice(toploop("/entity_designator", ","), "others", "all"), ':'),
+                line("/entity_class", "is", "/expression", ';')
+                ),
+                Map.of("entity_class", "https://www.google.com/#q=vhdl+entity+class",
+                        "(attribute) identifier", "http://en.wikipedia.com/wiki/VHDL"));
+        SVGCanvas c = canvasBuilder.generateSVG(urlMapped);
         String result = c.generateSVG();
         Approvals.verify(result, OPTIONS);
     }

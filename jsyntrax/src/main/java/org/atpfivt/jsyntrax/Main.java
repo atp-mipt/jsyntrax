@@ -56,14 +56,11 @@ public class Main {
         }
 
         // parse script
-        Map<String, String> urlMap;
-
         Unit root;
         try {
             // parse spec
             Configuration config = Parser.parse(scriptText);
             root = config.getTrack();
-            urlMap = config.getUrlMap();
         } catch (CompilationFailedException e) {
             System.out.println("Something was wrong with input script " + e.getMessage());
             return;
@@ -73,7 +70,6 @@ public class Main {
         SVGCanvas c = new SVGCanvasBuilder()
                 .withStyle(style)
                 .withTitle(iArgs.getTitle())
-                .withUrlMap(urlMap)
                 .generateSVG(root);
         String result = c.generateSVG();
 

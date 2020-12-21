@@ -1,5 +1,6 @@
 package org.atpfivt.jsyntrax.visitors;
 
+import org.atpfivt.jsyntrax.Configuration;
 import org.atpfivt.jsyntrax.units.nodes.Bullet;
 import org.atpfivt.jsyntrax.units.nodes.Node;
 import org.atpfivt.jsyntrax.units.nodes.NoneNode;
@@ -26,4 +27,5 @@ public interface Visitor {
   void visitBullet(Bullet unit);
   void visitNode(Node unit);
   void visitNoneNode(NoneNode unit);
+  void visitConfiguration(Configuration unit);
 }

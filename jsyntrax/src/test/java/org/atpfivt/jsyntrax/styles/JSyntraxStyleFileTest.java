@@ -6,27 +6,18 @@ import org.atpfivt.jsyntrax.JSyntraxTestUtils;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
-import org.atpfivt.jsyntrax.styles.NodeStyle;
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-
-import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
-import java.util.HashMap;
-import java.util.Map;
+
+import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JSyntraxStyleFileTest {
     private final SVGCanvasBuilder canvasBuilder;

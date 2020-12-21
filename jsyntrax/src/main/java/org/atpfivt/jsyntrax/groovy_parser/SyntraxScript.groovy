@@ -65,7 +65,7 @@ class SyntraxScript extends Script {
   }
 
   static Configuration jsyntrax(Unit track,
-                                HashMap<String, String> url_map = []) {
+                                Map<String, String> url_map = [:]) {
     return new Configuration(track, url_map)
   }
 

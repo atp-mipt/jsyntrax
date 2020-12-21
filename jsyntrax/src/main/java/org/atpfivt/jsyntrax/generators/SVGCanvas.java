@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class SVGCanvas {
 
-    public SVGCanvas(Style style, Map<String, String> urlMap) {
+    public SVGCanvas(Style style, Function<String, String> urlMap) {
         this.urlMap = urlMap;
         this.style = style;
         this.tagcnt = new HashMap<>();
@@ -187,7 +188,7 @@ public class SVGCanvas {
         return sb.toString();
     }
 
-    public final Map<String, String> urlMap;
+    public final Function<String, String> urlMap;
 
     private final Style style;
 
