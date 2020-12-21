@@ -1,14 +1,16 @@
 package org.atpfivt.jsyntrax;
 
 import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.visitors.Visitor;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class Configuration {
-  Unit track;
-  HashMap<String, String>  urlMap;
+public class Configuration implements Unit{
+  private final Unit track;
+  private final Map<String, String>  urlMap;
 
-  public Configuration(Unit track, HashMap<String, String> urlMap) {
+  public Configuration(Unit track, Map<String, String> urlMap) {
     this.track = track;
     this.urlMap = urlMap;
   }
@@ -22,15 +24,17 @@ public class Configuration {
     return track;
   }
 
-  public void setTrack(Unit track) {
-    this.track = track;
-  }
-
-  public HashMap<String, String> getUrlMap() {
+  public Map<String, String> getUrlMap() {
     return urlMap;
   }
 
-  public void setUrlMap(HashMap<String, String> urlMap) {
-    this.urlMap = urlMap;
+  @Override
+  public void accept(Visitor visitor) {
+
+  }
+
+  @Override
+  public Configuration getConfiguration() {
+    return this;
   }
 }

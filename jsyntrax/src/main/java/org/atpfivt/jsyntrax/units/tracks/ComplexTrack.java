@@ -2,10 +2,10 @@ package org.atpfivt.jsyntrax.units.tracks;
 
 import org.atpfivt.jsyntrax.units.Unit;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ComplexTrack extends Track {
-  public ComplexTrack(ArrayList<Unit> units) {
+  public ComplexTrack(List<Unit> units) {
     super(units);
 
     for (int i = 0; i < units.size(); i++) {

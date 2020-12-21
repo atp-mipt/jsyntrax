@@ -3,10 +3,10 @@ package org.atpfivt.jsyntrax.units.tracks.opt;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Optx extends Opt {
-  public Optx(ArrayList<Unit> units) {
+  public Optx(List<Unit> units) {
     super(units);
   }
 

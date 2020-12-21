@@ -13,15 +13,7 @@ class Parser {
         def sharedData = new Binding()
         def shell = new GroovyShell(this.class.classLoader, sharedData, config)
         shell.setVariable("None", null)
-
-        Object result = shell.evaluate(scriptText)
-
-        if (result instanceof Configuration) {
-            return result as Configuration
-        } else if (result instanceof Unit) {
-            return new Configuration((Unit) result)
-        } else {
-            assert false
-        }
+        Unit result = shell.evaluate(scriptText) as Unit
+        result.getConfiguration()
     }
 }

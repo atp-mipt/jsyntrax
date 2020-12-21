@@ -4,13 +4,13 @@ import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.tracks.ComplexTrack;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Opt extends ComplexTrack {
   boolean stacked = false;
 
-  public Opt(ArrayList<Unit> units) {
+  public Opt(List<Unit> units) {
     super(units);
   }
 

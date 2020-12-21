@@ -6,10 +6,10 @@ import org.atpfivt.jsyntrax.units.tracks.ComplexTrack;
 import org.atpfivt.jsyntrax.units.tracks.Track;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Loop extends ComplexTrack {
-  public Loop(ArrayList<Unit> units) throws LoopNotTwoArgsException {
+  public Loop(List<Unit> units) throws LoopNotTwoArgsException {
     super(units);
 
     if (units.size() != 2) {

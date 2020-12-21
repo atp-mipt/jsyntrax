@@ -26,6 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.FileAttribute;
 import java.util.HashMap;
+import java.util.Map;
 
 public class JSyntraxStyleFileTest {
     private final SVGCanvasBuilder canvasBuilder;
@@ -134,11 +135,9 @@ public class JSyntraxStyleFileTest {
                 ")");
 
         Unit root = configuration.getTrack();
-        HashMap<String, String> urlMap = configuration.getUrlMap();
-
-
         SVGCanvas canvas = canvasBuilder.withStyle(s).generateSVG(root);
         String result = canvas.generateSVG();
         Approvals.verify(result, OPTIONS);
+
     }
 }
