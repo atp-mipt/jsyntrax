@@ -61,14 +61,13 @@ public class Main {
         }
 
         // parse script
-        Map<String, String> urlMap;
+        HashMap<String, String> urlMap;
         Unit root;
         try {
             // parse spec
-            Parser parser = new Parser();
-            parser.parse(scriptText);
-            root = parser.getTrack();
-            urlMap = parser.getUrlMap();
+            Configuration config = Parser.parse(scriptText);
+            root = config.getTrack();
+            urlMap = config.getUrlMap();
         } catch (CompilationFailedException e) {
             System.out.println("Something was wrong with input script " + e.getMessage());
             return;

@@ -1,5 +1,6 @@
 package org.atpfivt.jsyntrax.groovy_parser
 
+import org.atpfivt.jsyntrax.Configuration
 import org.atpfivt.jsyntrax.units.Unit
 import org.atpfivt.jsyntrax.units.nodes.Node
 import org.atpfivt.jsyntrax.units.nodes.NoneNode
@@ -61,6 +62,11 @@ class SyntraxScript extends Script {
 
   static Rightstack rightstack(Object... units) {
     return new Rightstack(unitsToString(units) as ArrayList<Unit>)
+  }
+
+  static Configuration jsyntrax(Unit track,
+                                HashMap<String, String> url_map = []) {
+    return new Configuration(track, url_map)
   }
 
   @Override

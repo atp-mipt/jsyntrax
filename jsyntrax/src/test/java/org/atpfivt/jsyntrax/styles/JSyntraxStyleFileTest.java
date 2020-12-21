@@ -1,6 +1,7 @@
 package org.atpfivt.jsyntrax.styles;
 
 import org.approvaltests.Approvals;
+import org.atpfivt.jsyntrax.Configuration;
 import org.atpfivt.jsyntrax.JSyntraxTestUtils;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
@@ -24,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.FileAttribute;
+import java.util.HashMap;
 
 public class JSyntraxStyleFileTest {
     private final SVGCanvasBuilder canvasBuilder;
@@ -126,12 +128,14 @@ public class JSyntraxStyleFileTest {
         s.updateByFile(stylePath);
         JSyntraxTestUtils.updateStyle(s);
 
-        Parser parser = new Parser();
-        parser.parse("stack(\n" +
+        Configuration configuration = Parser.parse("stack(\n" +
                 "line('attribute', '/(attribute) identifier', 'of'),\n" +
                 "line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':')\n" +
                 ")");
-        Unit root = parser.getTrack();
+
+        Unit root = configuration.getTrack();
+        HashMap<String, String> urlMap = configuration.getUrlMap();
+
 
         SVGCanvas canvas = canvasBuilder.withStyle(s).generateSVG(root);
         String result = canvas.generateSVG();
