@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MainTest {
@@ -17,7 +18,10 @@ class MainTest {
         Path outPath = Files.createTempFile("jsyntrax-test-output", ".svg");
         try {
             Main.main("-o", outPath.toString(), inputPath.toString());
-            assertTrue(Files.readString(outPath).contains("JSYNTRAX"));
+            String svg = Files.readString(outPath);
+            assertAll(
+                    () -> assertTrue(svg.contains("JSYNTRAX")),
+                    () -> assertTrue(svg.contains("href=\"https://github.com/atp-mipt/jsyntrax\"")));
         } finally {
             Files.delete(outPath);
         }

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
 
 public class Main {
     public static void main(String... args) {
@@ -59,8 +58,7 @@ public class Main {
         Unit root;
         try {
             // parse spec
-            Configuration config = Parser.parse(scriptText);
-            root = config.getTrack();
+            root = Parser.parse(scriptText);
         } catch (CompilationFailedException e) {
             System.out.println("Something was wrong with input script " + e.getMessage());
             return;
