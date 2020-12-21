@@ -1,29 +1,23 @@
 package org.atpfivt.jsyntrax.styles;
 
 import org.approvaltests.Approvals;
+import org.atpfivt.jsyntrax.Configuration;
 import org.atpfivt.jsyntrax.JSyntraxTestUtils;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
-import org.atpfivt.jsyntrax.styles.NodeStyle;
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-
-import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
+
+import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JSyntraxStyleFileTest {
     private final SVGCanvasBuilder canvasBuilder;
@@ -126,13 +120,15 @@ public class JSyntraxStyleFileTest {
         s.updateByFile(stylePath);
         JSyntraxTestUtils.updateStyle(s);
 
-        Unit root = Parser.parse("stack(\n" +
+        Configuration configuration = Parser.parse("stack(\n" +
                 "line('attribute', '/(attribute) identifier', 'of'),\n" +
                 "line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':')\n" +
                 ")");
 
+        Unit root = configuration.getTrack();
         SVGCanvas canvas = canvasBuilder.withStyle(s).generateSVG(root);
         String result = canvas.generateSVG();
         Approvals.verify(result, OPTIONS);
+
     }
 }

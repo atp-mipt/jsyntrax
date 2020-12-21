@@ -1,23 +1,17 @@
 package org.atpfivt.jsyntrax;
 
 
-import org.atpfivt.jsyntrax.styles.Style;
-import org.codehaus.groovy.control.CompilationFailedException;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
+import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
+import org.codehaus.groovy.control.CompilationFailedException;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String... args) {
@@ -60,22 +54,11 @@ public class Main {
             return;
         }
 
-        // find url map
-        Map<String, String> urlMap = new HashMap<>();
-        Matcher m = Pattern.compile("^*url_map[ ]*=*").matcher(scriptText);
-        if (m.find()) {
-            String urlMapText = scriptText.substring(m.end());
-            scriptText = scriptText.substring(0, m.start());
-            if (!evaluateUrlMap(urlMapText, urlMap)) {
-                return;
-            }
-        }
-
+        // parse script
         Unit root;
         try {
             // parse spec
             root = Parser.parse(scriptText);
-            //System.out.println(root);
         } catch (CompilationFailedException e) {
             System.out.println("Something was wrong with input script " + e.getMessage());
             return;
@@ -85,7 +68,6 @@ public class Main {
         SVGCanvas c = new SVGCanvasBuilder()
                 .withStyle(style)
                 .withTitle(iArgs.getTitle())
-                .withUrlMap(urlMap)
                 .generateSVG(root);
         String result = c.generateSVG();
 
@@ -138,20 +120,6 @@ public class Main {
             return false;
         }
 
-        return true;
-    }
-
-    static boolean evaluateUrlMap(String text, Map<String, String> urlMap) {
-        try {
-            JSONObject map = new JSONObject(text);
-            for (Iterator<String> it = map.keys(); it.hasNext(); ) {
-                String key = it.next();
-                urlMap.put(key, map.getString(key));
-            }
-        } catch (JSONException e) {
-            System.out.println("Failed parse url map: " + e.getMessage());
-            return false;
-        }
         return true;
     }
 }

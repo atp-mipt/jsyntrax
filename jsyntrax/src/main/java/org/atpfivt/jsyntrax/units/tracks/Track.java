@@ -2,18 +2,18 @@ package org.atpfivt.jsyntrax.units.tracks;
 
 import org.atpfivt.jsyntrax.units.Unit;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class Track implements Unit {
-  protected final ArrayList<Unit> units;
+  protected final List<Unit> units;
 
-  public Track(ArrayList<Unit> units) {
+  public Track(List<Unit> units) {
     this.units = units;
   }
 
   @Override
-  public ArrayList<Unit> getUnits() {
+  public List<Unit> getUnits() {
     return units;
   }
 

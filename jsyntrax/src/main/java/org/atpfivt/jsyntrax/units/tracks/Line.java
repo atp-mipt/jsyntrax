@@ -3,16 +3,16 @@ package org.atpfivt.jsyntrax.units.tracks;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Line extends Track {
-  public Line(ArrayList<Unit> units) {
+  public Line(List<Unit> units) {
     super(units);
   }
 
   public Line(Unit unit) {
-    super(new ArrayList<>());
-    units.add(unit);
+    super(Collections.singletonList(unit));
   }
 
   public void accept(Visitor visitor) {

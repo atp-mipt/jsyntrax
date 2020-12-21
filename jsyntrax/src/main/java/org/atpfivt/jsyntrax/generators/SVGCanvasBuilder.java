@@ -1,5 +1,6 @@
 package org.atpfivt.jsyntrax.generators;
 
+import org.atpfivt.jsyntrax.Configuration;
 import org.atpfivt.jsyntrax.generators.elements.*;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
@@ -27,11 +28,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * @brief class for building canvas by Unit
  */
-public class SVGCanvasBuilder implements Visitor{
+public class SVGCanvasBuilder implements Visitor {
     private Map<String, String> urlMap;
     private Style style;
     private SVGCanvas canvas;
@@ -46,18 +48,13 @@ public class SVGCanvasBuilder implements Visitor{
         return this;
     }
 
-    public SVGCanvasBuilder withUrlMap(Map<String, String> urlMap) {
-        this.urlMap = urlMap;
-        return this;
-    }
-
     public SVGCanvasBuilder withTitle(String title) {
         this.title = title;
         return this;
     }
 
     public SVGCanvas generateSVG(Unit root) {
-        this.canvas = new SVGCanvas(this.style, urlMap);
+        this.canvas = new SVGCanvas(this.style, s -> urlMap.get(s));
         parseDiagram(new Line(
                 new ArrayList<>(List.of(new Bullet(), root, new Bullet()))
         ), true);
@@ -92,7 +89,7 @@ public class SVGCanvasBuilder implements Visitor{
         }
 
         // set top / bottom location
-        switch(style.title_pos) {
+        switch (style.title_pos) {
             case tl:
             case tm:
             case tr:
@@ -144,6 +141,12 @@ public class SVGCanvasBuilder implements Visitor{
     }
 
     @Override
+    public void visitConfiguration(Configuration unit) {
+        urlMap = unit.getUrlMap();
+        unit.getTrack().accept(this);
+    }
+
+    @Override
     public void visitNode(Node unit) {
         String txt = unit.toString();
 
@@ -188,7 +191,7 @@ public class SVGCanvasBuilder implements Visitor{
         Pair<Integer, Integer> end;
 
         BubbleElementBase b;
-        String href = this.canvas.urlMap.get(txt);
+        String href = this.canvas.urlMap.apply(txt);
         switch (ns.shape) {
             case "bubble":
                 start = new Pair<>(lft - rad, top);
