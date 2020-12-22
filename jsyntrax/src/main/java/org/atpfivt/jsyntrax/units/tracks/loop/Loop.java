@@ -18,11 +18,11 @@ public class Loop extends ComplexTrack {
   }
 
   public Track getForwardPart() {
-    return (Track) getUnits().get(0);
+    return getUnits().get(0).getTrack();
   }
 
   public Track getBackwardPart() {
-    return (Track) getUnits().get(1);
+    return getUnits().get(1).getTrack();
   }
 
   public boolean isForwardNull() {

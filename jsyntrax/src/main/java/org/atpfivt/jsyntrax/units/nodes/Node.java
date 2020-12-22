@@ -2,6 +2,8 @@ package org.atpfivt.jsyntrax.units.nodes;
 
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.units.tracks.Line;
+import org.atpfivt.jsyntrax.units.tracks.Track;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
 public class Node implements Unit {
@@ -38,5 +40,9 @@ public class Node implements Unit {
 
   public void accept(Visitor visitor) {
     visitor.visitNode(this);
+  }
+
+  public Track getTrack() {
+    return new Line(this);
   }
 }

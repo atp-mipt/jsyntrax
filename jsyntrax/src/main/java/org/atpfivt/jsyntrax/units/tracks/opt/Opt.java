@@ -8,27 +8,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Opt extends ComplexTrack {
-  boolean stacked = false;
-
   public Opt(List<Unit> units) {
     super(units);
   }
-
-  public void setStacked() {
-    stacked = true;
-  }
-
-  public boolean isStacked() {
-    return stacked;
-  }
-
   public Opt toOpt() {
     return this;
   }
 
   @Override
   public String toString() {
-    return "< " + this.getClass().getSimpleName() + ", stacked = " + stacked +
+    return "< " + this.getClass().getSimpleName() +
         " [ " +
         units.stream().map(Object::toString)
             .collect(Collectors.joining("\n"))

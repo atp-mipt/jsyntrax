@@ -12,7 +12,7 @@ public class Optx extends Opt {
 
   @Override
   public Opt toOpt() {
-    return new Opt(units);
+    return this;
   }
 
   public void accept(Visitor visitor) {
