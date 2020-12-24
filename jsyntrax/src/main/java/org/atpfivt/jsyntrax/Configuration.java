@@ -4,7 +4,7 @@ import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.tracks.Track;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 public class Configuration implements Unit {
@@ -18,7 +18,7 @@ public class Configuration implements Unit {
 
     public Configuration(Track track) {
         this.track = track;
-        this.urlMap = new HashMap<>();
+        this.urlMap = Collections.emptyMap();
     }
 
     public Track getTrack() {

@@ -64,7 +64,7 @@ class SyntraxScript extends Script {
     return new Rightstack(unitsToString(units) as ArrayList<Unit>)
   }
 
-  static Configuration jsyntrax(Unit track,
+  static Configuration jsyntrax(Track track,
                                 Map<String, String> url_map = [:]) {
     return new Configuration(track, url_map)
   }

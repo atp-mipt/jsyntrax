@@ -11,9 +11,6 @@ public class Opt extends ComplexTrack {
   public Opt(List<Unit> units) {
     super(units);
   }
-  public Opt toOpt() {
-    return this;
-  }
 
   @Override
   public String toString() {

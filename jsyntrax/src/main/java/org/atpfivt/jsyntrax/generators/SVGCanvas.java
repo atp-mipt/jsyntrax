@@ -99,7 +99,7 @@ public class SVGCanvas {
 
     public String generateSVG() {
         StringBuilder sb = new StringBuilder();
-        double scale = style.scale;
+        double scale = style.getScale();
 
         Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> res = getBoundingBoxByTag("all");
 
@@ -173,7 +173,7 @@ public class SVGCanvas {
         sb.append("</marker>\n</defs>\n");
 
         // elements
-        if (!style.transparent) {
+        if (!style.getTransparent()) {
             sb.append("<rect width=\"100%\" height=\"100%\" fill=\"white\"/>\n");
         }
         for (Element e : this.elements) {
