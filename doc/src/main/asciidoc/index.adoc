@@ -30,23 +30,30 @@ image:images/json_number.svg[JSON number syntax]
 JSyntrax can render to SVG vector images, the output can have <<hyperlinked,hyperlinked text>> allowing users to quickly navigate to documentation of different syntax
 elements.
 
-The https://github.com/kevinpt/JSyntrax[original Syntrax] was a heavily modified version of the railroad diagram generator used for the https://www.sqlite.org/lang.html[SQLite documentation] implemented in Python.
+The https://github.com/kevinpt/JSyntrax[original Syntrax] was a heavily modified version of the railroad diagram generator used for the https://www.sqlite.org/lang.html[SQLite documentation] implemented in Python. 
 Then in JSyntrax it has been reimplemented in Java in order to simplify installation, get rid of required libraries and make it easily portable to any operating system.
 
-=== Requirements
+==== JSyntrax vs. Syntrax
 
-JSyntrax requires JDK 11+. No other software is required to run JSyntrax.
+Why did you reimplement Syntrax?:: The problem with Syntrax is that it requires Pycairo and Pango which may be difficult to install, especially on Windows. JSyntrax requires only JDK 11, which is easily available for many platforms.
 
-=== Licensing
+What output formats are supported?:: Unlike original Syntrax, that can output to many bitmap and vector formats, JSyntrax only produces SVG. This can be changed in the future.
+
+Can I build my Syntrax specs with JSyntrax?:: Yes, after only a couple of minor tweaks. If you use url maps, refer to <<hyperlinked,hyperlinked text>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax.
+
+Why your executable file is called `syntrax`?:: This is made intentionally in order to use https://asciidoctor.org/docs/asciidoctor-diagram/[AsciiDoctor Diagram] integration facility. JSyntrax executable has exactly the same command line arguments as Syntrax.
+
+==== Licensing
 
 JSyntrax is licensed for free commercial and non-commercial use under the terms of the MIT license.
 
-=== Download
+
+=== Requirements, download and installation
+
+JSyntrax requires JDK 11+. No other software is required to run JSyntrax.
 
 You can access the JSyntrax Git repository from
 https://github.com/atp-mipt/java-syntrax[Github]. 
-
-=== Installation
 
 Unzip `jsyntrax-XXX.zip` file to any convenient folder. `/bin` directory will contain executable `syntrax` file.
 
@@ -81,7 +88,7 @@ You can include a title in the generated diagram by passing a string to the `+--
 The `+title_font+` entry is used to style the font.
 
 ----
-> JSyntrax -i titling.spec -o svg --title="Diagram with title"
+> syntrax -i titling.spec -o svg --title="Diagram with title"
 ----
 
 image:images/titling.svg[image]
@@ -488,23 +495,28 @@ title_font = ('Helvetica', 14, 'bold')
 [hyperlinked]
 === Hyperlinked SVG
 
-SVG images can have hyperlinked node text. This is implemented by adding a `+url_map+` dictionary after the diagram specification. 
+SVG images can have hyperlinked node text. This is implemented by adding a `+url_map+` parameter to `jsyntrax` wrapper function. 
 The keys of the dictionary are the text identifying the node and their values are the URL for the link. 
 The text key should not include any leading "/" character for the box nodes.
 
 [source,Groovy]
 ----
-stack(
+jsyntrax(stack(
  line('attribute', '/(attribute) identifier', 'of'),
  line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':'),
  line('/entity_class', 'is', '/expression', ';')
-)
-
-url_map = {
+), 
+[
   'entity_class': 'https://www.google.com/#q=vhdl+entity+class',
   '(attribute) identifier': 'http://en.wikipedia.com/wiki/VHDL'
-}
+])
 ----
+
+[NOTE]
+.Note for Syntrax (Python) users
+====
+Note that in Groovy, unlike Python, maps are enclosed in brackets `[]`, not braces `{}`.
+====
 
 Current browser policies lump SVG hyperlinks together with embedded
 Javascript. 
