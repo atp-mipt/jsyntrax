@@ -78,7 +78,7 @@ public class Style {
         return scale;
     }
 
-    public boolean getTransparent() {
+    public boolean isTransparent() {
         return transparent;
     }
 }

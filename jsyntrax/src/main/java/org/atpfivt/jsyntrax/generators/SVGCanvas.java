@@ -11,15 +11,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 
 public class SVGCanvas {
+    private final Style style;
+    private final HashMap<String, Integer> tagcnt = new HashMap<>();
+    private final ArrayList<Element> elements = new ArrayList<>();
 
-    public SVGCanvas(Style style, Function<String, String> urlMap) {
-        this.urlMap = urlMap;
+    public SVGCanvas(Style style) {
         this.style = style;
-        this.tagcnt = new HashMap<>();
-        this.elements = new ArrayList<>();
     }
 
     // default prefix = "x", default suffix = ""
@@ -173,7 +172,7 @@ public class SVGCanvas {
         sb.append("</marker>\n</defs>\n");
 
         // elements
-        if (!style.getTransparent()) {
+        if (!style.isTransparent()) {
             sb.append("<rect width=\"100%\" height=\"100%\" fill=\"white\"/>\n");
         }
         for (Element e : this.elements) {
@@ -187,12 +186,4 @@ public class SVGCanvas {
         sb.append("</svg>\n");
         return sb.toString();
     }
-
-    public final Function<String, String> urlMap;
-
-    private final Style style;
-
-    private final HashMap<String, Integer> tagcnt;
-
-    private final ArrayList<Element> elements;
 }
