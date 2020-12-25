@@ -32,7 +32,7 @@ public class BubbleElementBase extends Element {
         int y1 = super.end.s;
 
         int x = (x0 + x1) / 2;
-        int y = (y0 + y1) / 2 + (int)(Math.abs(textPos.s) * 0.25 + style.scale * 2);
+        int y = (y0 + y1) / 2 + (int)(Math.abs(textPos.s) * 0.25 + style.getScale() * 2);
 
         String txt = Algorithm.escapeXML(text);
         if (this.href == null) {

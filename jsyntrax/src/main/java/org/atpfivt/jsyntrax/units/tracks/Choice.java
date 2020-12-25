@@ -3,10 +3,10 @@ package org.atpfivt.jsyntrax.units.tracks;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Choice extends ComplexTrack {
-  public Choice(ArrayList<Unit> units) {
+  public Choice(List<Unit> units) {
     super(units);
   }
 

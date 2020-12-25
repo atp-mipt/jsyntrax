@@ -10,11 +10,6 @@ public class Optx extends Opt {
     super(units);
   }
 
-  @Override
-  public Opt toOpt() {
-    return new Opt(units);
-  }
-
   public void accept(Visitor visitor) {
     visitor.visitOptx(this);
   }

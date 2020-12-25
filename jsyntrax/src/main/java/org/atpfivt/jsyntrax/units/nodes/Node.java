@@ -2,11 +2,13 @@ package org.atpfivt.jsyntrax.units.nodes;
 
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.units.tracks.Line;
+import org.atpfivt.jsyntrax.units.tracks.Track;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
 public class Node implements Unit {
-  Style style;
-  String text;
+  private Style style;
+  private final String text;
   boolean is_link = false;
 
   public Node(String text) {
@@ -38,5 +40,17 @@ public class Node implements Unit {
 
   public void accept(Visitor visitor) {
     visitor.visitNode(this);
+  }
+
+  public Track getTrack() {
+    return new Line(this);
+  }
+
+  public Style getStyle() {
+    return style;
+  }
+
+  public void setStyle(Style style) {
+    this.style = style;
   }
 }

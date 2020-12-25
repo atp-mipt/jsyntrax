@@ -3,7 +3,7 @@ package org.atpfivt.jsyntrax.units.tracks.stack;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Indentstack extends Stack {
@@ -13,7 +13,7 @@ public class Indentstack extends Stack {
     return indent;
   }
 
-  public Indentstack(int indent, ArrayList<Unit> units) {
+  public Indentstack(int indent, List<Unit> units) {
     super(units);
     this.indent = indent;
   }

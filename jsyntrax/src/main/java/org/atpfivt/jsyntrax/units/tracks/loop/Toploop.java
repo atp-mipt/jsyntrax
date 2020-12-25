@@ -4,10 +4,10 @@ import org.atpfivt.jsyntrax.exceptions.LoopNotTwoArgsException;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Toploop extends Loop {
-  public Toploop(ArrayList<Unit> units) throws LoopNotTwoArgsException {
+  public Toploop(List<Unit> units) throws LoopNotTwoArgsException {
     super(units);
   }
 

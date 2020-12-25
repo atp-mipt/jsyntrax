@@ -25,4 +25,8 @@ public abstract class Track implements Unit {
             .collect(Collectors.joining("\n"))
         + " ]" + " >";
   }
+
+  public Track getTrack() {
+    return this;
+  }
 }

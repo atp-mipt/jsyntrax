@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 /**
  * @brief class for building canvas by Unit
@@ -54,7 +53,7 @@ public class SVGCanvasBuilder implements Visitor {
     }
 
     public SVGCanvas generateSVG(Unit root) {
-        this.canvas = new SVGCanvas(this.style, s -> urlMap.get(s));
+        this.canvas = new SVGCanvas(this.style);
         parseDiagram(new Line(
                 new ArrayList<>(List.of(new Bullet(), root, new Bullet()))
         ), true);
@@ -126,7 +125,6 @@ public class SVGCanvasBuilder implements Visitor {
         return getUnitEndPoint();
     }
 
-
     @Override
     public void visitNoneNode(NoneNode unit) {
         String tag = this.canvas.new_tag("x", "");
@@ -191,7 +189,7 @@ public class SVGCanvasBuilder implements Visitor {
         Pair<Integer, Integer> end;
 
         BubbleElementBase b;
-        String href = this.canvas.urlMap.apply(txt);
+        String href = this.urlMap.get(txt);
         switch (ns.shape) {
             case "bubble":
                 start = new Pair<>(lft - rad, top);

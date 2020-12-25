@@ -66,9 +66,19 @@ public class Style {
     public boolean shadow;
     public Color shadow_fill;
     public Font title_font;
-    public double scale;
-    public boolean transparent;
+
+    private final double scale;
+    private final boolean transparent;
 
     public List<NodeStyle> nodeStyles;
+
     private static final NodeStyle defNodeStyle = new NodeStyle();
+
+    public double getScale() {
+        return scale;
+    }
+
+    public boolean isTransparent() {
+        return transparent;
+    }
 }
