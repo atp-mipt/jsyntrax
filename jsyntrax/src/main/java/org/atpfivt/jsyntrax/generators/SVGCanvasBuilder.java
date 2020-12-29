@@ -748,7 +748,7 @@ public class SVGCanvasBuilder implements Visitor {
                     new ArcElement(new Pair<>(descender_x, fwd_y - 2 * this.style.max_radius),
                             new Pair<>(descender_x + 2 * this.style.max_radius, fwd_y),
                             this.style.line_width, 180, 90, tag));
-            exit_x -= 2 * this.style.max_radius;
+            exit_x += 2 * this.style.max_radius;
             int half_x = (exit_x + indent) / 2;
             this.canvas.addElement(
                     new LineElement(new Pair<>(bypass_x + this.style.max_radius, fwd_y),
@@ -758,7 +758,7 @@ public class SVGCanvasBuilder implements Visitor {
                     new LineElement(new Pair<>(half_x, fwd_y), new Pair<>(exit_x, fwd_y),
                             null, this.style.line_width, tag));
             this.canvas.addElement(
-                    new LineElement(new Pair<>(descender_x, exit_x + this.style.max_radius),
+                    new LineElement(new Pair<>(descender_x, exit_y + this.style.max_radius),
                             new Pair<>(descender_x, fwd_y - this.style.max_radius),
                             "last", this.style.line_width, tag));
             exit_y = fwd_y;
