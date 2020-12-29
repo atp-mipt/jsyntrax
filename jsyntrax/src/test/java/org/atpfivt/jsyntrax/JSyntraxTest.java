@@ -4,7 +4,6 @@ import org.approvaltests.Approvals;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.tracks.Choice;
 import org.atpfivt.jsyntrax.units.tracks.Line;
 import org.atpfivt.jsyntrax.units.tracks.loop.Loop;
@@ -136,6 +135,19 @@ public class JSyntraxTest {
                 Map.of("entity_class", "https://www.google.com/#q=vhdl+entity+class",
                         "(attribute) identifier", "http://en.wikipedia.com/wiki/VHDL"));
         SVGCanvas c = canvasBuilder.generateSVG(urlMapped);
+        String result = c.generateSVG();
+        Approvals.verify(result, OPTIONS);
+    }
+
+    @Test
+    void testOptAsLastStackUnit() {
+        Configuration opt = jsyntrax(stack(
+                line("attribute", "/(attribute) identifier", "of"),
+                line(choice(toploop("/entity_designator", ","), "others", "all"), ":"),
+                line("/entity_class", "is", "expression", ';'),
+                opt("None")
+        ));
+        SVGCanvas c = canvasBuilder.generateSVG(opt);
         String result = c.generateSVG();
         Approvals.verify(result, OPTIONS);
     }
