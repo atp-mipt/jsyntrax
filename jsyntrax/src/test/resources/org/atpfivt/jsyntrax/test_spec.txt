@@ -1,0 +1,19 @@
+rightstack(
+  line(
+   '<bubble>SELECT',
+    opt('<bubble>DISTINCT'),
+    loop(
+        choice(
+            line('<box>term</box>',
+                 opt('AS', '/<field alias>')),
+            line('<box>aggregate</box>')
+        ),
+        ',')
+   ),
+   line(
+    'FROM',
+    '<token>from_clause',
+    optx('WHERE', '<token>condition'),
+    optx('<token>group_by')
+   )
+)

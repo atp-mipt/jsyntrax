@@ -8,7 +8,7 @@ public class NodeTokenStyle extends NodeStyle {
         super();
         super.name = "token";
         super.shape = "bubble";
-        this.pattern = Pattern.compile(".");
+        this.pattern = Pattern.compile("(.*)");
         super.font = new Font("Sans",Font.BOLD, 16);
         super.fill = new Color(179, 229, 252);
     }
