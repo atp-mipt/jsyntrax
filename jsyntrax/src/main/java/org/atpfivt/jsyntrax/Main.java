@@ -45,10 +45,6 @@ public class Main {
             }
         }
 
-        for (var i : style.nodeStyles) {
-            System.out.println(i.name + " " + i.pattern);
-        }
-
         // read script
         String scriptText;
         try {
