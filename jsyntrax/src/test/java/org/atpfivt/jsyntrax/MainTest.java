@@ -31,7 +31,7 @@ class MainTest {
     }
 
     @Test
-    void testWriteHelp() {
+    void testWriteHelp() throws IOException, URISyntaxException {
         final PrintStream standardOut = System.out;
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));

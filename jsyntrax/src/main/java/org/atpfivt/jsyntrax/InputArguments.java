@@ -18,8 +18,10 @@ public class InputArguments {
     private Path output;
     private Path style;
     private String title;
+    private String version;
     private boolean transparent;
     private double scale = 1.0;
+    private boolean getDefaultStyle = false;
 
     static {
         options = new Options();
@@ -38,6 +40,16 @@ public class InputArguments {
                 (o, s) -> o.transparent = true);
         optionsMap.put(new Option(null, "scale", true, "Scale image"),
                 (o, s) -> o.scale = Double.parseDouble(s)
+        );
+        optionsMap.put(new Option(null, "get-style", false, "Get default style config"),
+                (o, s) -> {o.getDefaultStyle = true;}
+        );
+        optionsMap.put(new Option("v", "version", false, "Release version"),
+                (o, s) -> {
+                    o.version = Main.class
+                            .getPackage()
+                            .getImplementationVersion();
+                }
         );
     }
 
@@ -92,4 +104,8 @@ public class InputArguments {
     public double getScale() {
         return scale;
     }
+
+    public String getVersion() {return version;}
+
+    public boolean getDefaultStyleProperty() {return getDefaultStyle;}
 }

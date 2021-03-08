@@ -8,13 +8,15 @@ import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.codehaus.groovy.control.CompilationFailedException;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String... args) {
+    public static void main(String... args) throws IOException {
         // parse command line arguments
         InputArguments iArgs;
         try {
@@ -22,6 +24,27 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Cannot parse command line");
             InputArguments.writeHelp(new PrintWriter(System.out));
+            return;
+        }
+
+        // print version if specified
+        if (iArgs.getVersion() != null) {
+            System.out.println(iArgs.getVersion());
+            return;
+        }
+
+        // get-style
+        if (iArgs.getDefaultStyleProperty()) {
+            var defaultConfigReader = new BufferedReader(
+                    new InputStreamReader(
+                            Main.class.getResourceAsStream("/default_style_config.ini")
+                    ));
+            String config = defaultConfigReader
+                    .lines()
+                    .collect(Collectors.joining("\n"))
+                    + "\n";
+            Path destPath = Path.of(System.getProperty("user.dir") + "/default_config.ini");
+            Files.writeString(destPath, config);
             return;
         }
 
