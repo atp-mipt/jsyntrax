@@ -84,21 +84,27 @@ public class JSyntraxStyleFileTest {
     }
 
     @Test
+    public void mustPass() throws URISyntaxException, IOException {
+        Path.of(this.getClass()
+                .getResource("/org/atpfivt/jsyntrax/test_style_config.ini")
+                .toURI());
+
+    }
+
+    @Test
     public void svgFromConfigTest() throws IOException, URISyntaxException {
         // Given
         String config  = Files.readString(
                 Path.of(this
                         .getClass()
                         .getResource("/org/atpfivt/jsyntrax/test_style_config.ini")
-                        .toURI()
-                        .getPath())
+                        .toURI())
         );
         String spec  = Files.readString(
                 Path.of(this
                         .getClass()
                         .getResource("/org/atpfivt/jsyntrax/test_spec.txt")
-                        .toURI()
-                        .getPath())
+                        .toURI())
         );
         Style s        = new Style(1, false);
         Configuration configuration = Parser.parse(spec);
