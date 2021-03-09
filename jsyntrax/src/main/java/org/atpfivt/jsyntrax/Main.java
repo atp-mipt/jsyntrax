@@ -9,10 +9,8 @@ import org.atpfivt.jsyntrax.units.Unit;
 import org.codehaus.groovy.control.CompilationFailedException;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -28,22 +26,25 @@ public class Main {
         }
 
         // print version if specified
-        if (iArgs.getVersion() != null) {
-            System.out.println(iArgs.getVersion());
+        String version = iArgs.getVersion();
+        if (version != null) {
+            if (version.contains("null")) {
+                System.out.println("JSyntrax version is not available. "
+                        + "Make sure you're running valid .jar distribution.");
+            } else {
+                System.out.println(iArgs.getVersion());
+            }
             return;
         }
 
         // get-style
         if (iArgs.getDefaultStyleProperty()) {
-            var defaultConfigReader = new BufferedReader(
-                    new InputStreamReader(
-                            Main.class.getResourceAsStream("/default_style_config.ini")
-                    ));
-            String config = defaultConfigReader
+            String config = new BufferedReader(new InputStreamReader(
+                    Main.class.getResourceAsStream("/default_style_config.ini")))
                     .lines()
                     .collect(Collectors.joining("\n"))
                     + "\n";
-            Path destPath = Path.of(System.getProperty("user.dir") + "/default_config.ini");
+            Path destPath = Path.of(System.getProperty("user.dir") + "/default_style_config.ini");
             Files.writeString(destPath, config);
             return;
         }

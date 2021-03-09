@@ -2,14 +2,14 @@ package org.atpfivt.jsyntrax;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -42,6 +42,44 @@ class MainTest {
             ));
         } finally {
             System.setOut(standardOut);
+        }
+    }
+
+    @Test
+    void printVersionTest() throws IOException {
+        final PrintStream standardOut = System.out;
+        final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+        try {
+            Main.main("-v");
+            // There is a problem, that version retrieving method
+            // relies on .jar manifest file, which is unavailable when maven runs tests
+            // Should I run .jar with shell invocation to test, or it is fine?
+            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).contains(
+                    "JSyntrax version is not available. "
+                            + "Make sure you're running valid .jar distribution."
+            ));
+        } finally {
+            System.setOut(standardOut);
+        }
+    }
+
+    @Test
+    void getStyleTest() throws IOException {
+        Main.main("--get-style");
+        Path expectedPath = Path.of(
+                System.getProperty("user.dir"),
+                "default_style_config.ini"
+        );
+        byte[] configExpected  = Main
+                .class
+                .getResourceAsStream("/default_style_config.ini")
+                .readAllBytes();
+        try {
+            byte[] configActual = Files.readAllBytes(expectedPath);
+            assertTrue(Arrays.equals(configExpected, configActual));
+        } finally {
+            Files.delete(expectedPath);
         }
     }
 }

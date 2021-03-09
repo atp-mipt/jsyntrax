@@ -140,7 +140,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Implementation-Version>1.2.0</Implementation-Version>
+                            <Implementation-Version>${revision}</Implementation-Version>
                         </manifestEntries>>
                         <manifest>
                             <addClasspath>true</addClasspath>
@@ -156,8 +156,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
             </plugin>
-
-
         </plugins>
     </build>
 </project>

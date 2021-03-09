@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -39,17 +40,13 @@ public class InputArguments {
         optionsMap.put(new Option("t", "transparent", false, "Transparent background"),
                 (o, s) -> o.transparent = true);
         optionsMap.put(new Option(null, "scale", true, "Scale image"),
-                (o, s) -> o.scale = Double.parseDouble(s)
-        );
+                (o, s) -> o.scale = Double.parseDouble(s));
         optionsMap.put(new Option(null, "get-style", false, "Get default style config"),
-                (o, s) -> {o.getDefaultStyle = true;}
-        );
+                (o, s) -> o.getDefaultStyle = true);
         optionsMap.put(new Option("v", "version", false, "Release version"),
-                (o, s) -> {
-                    o.version = Main.class
+                (o, s) -> o.version = "JSyntrax " + Main.class
                             .getPackage()
-                            .getImplementationVersion();
-                }
+                            .getImplementationVersion()
         );
     }
 
