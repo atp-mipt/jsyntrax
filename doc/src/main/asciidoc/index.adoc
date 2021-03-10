@@ -35,11 +35,16 @@ Then in JSyntrax it has been reimplemented in Java in order to simplify installa
 
 ==== JSyntrax vs. Syntrax
 
-Why did you reimplement Syntrax?:: The problem with Syntrax is that it requires Pycairo and Pango which may be difficult to install, especially on Windows. JSyntrax requires only JDK 11, which is easily available for many platforms.
+Why did you reimplement Syntrax?:: The problem with Syntrax is that it requires Pycairo and Pango which may be difficult to install, especially on Windows.
+JSyntrax requires only JDK 11, which is easily available for many platforms.
 
-What output formats are supported?:: Unlike original Syntrax, that can output to many bitmap and vector formats, JSyntrax only produces SVG. This can be changed in the future.
+What output formats are supported?:: Unlike original Syntrax, that can output to many bitmap and vector formats, JSyntrax only produces SVG.
+This can be changed in the future.
 
-Can I build my Syntrax specs with JSyntrax?:: Yes, after only a couple of minor tweaks. If you use url maps, refer to <<hyperlinked,hyperlinked text>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax.
+Can I build my Syntrax specs with JSyntrax?:: Yes, after only a couple of minor tweaks. 
+If you use url maps, refer to <<Specification language>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax. 
+Also, `text_mod` attribute in  <<Styling diagrams>> is not supported (the author of the original Syntrax warned about potential security issues with this attribute). 
+Instead, if a style regexp pattern contains a capturing group, the node text will contain the contents of this capturing group only.
 
 Why your executable file is called `syntrax`?:: This is made intentionally in order to use https://asciidoctor.org/docs/asciidoctor-diagram/[AsciiDoctor Diagram] integration facility. JSyntrax executable has exactly the same command line arguments as Syntrax.
 
@@ -64,10 +69,11 @@ and it will generate a diagram in any of the supported output formats.
 
 
 ----
-usage: syntrax [-h] [-i <arg>] [-o <arg>] [-s <arg>] [--scale <arg>] [-t]
-       [--title <arg>]
+usage: syntrax [--get-style] [-h] [-i <arg>] [-o <arg>] [-s <arg>] [--scale
+       <arg>] [-t] [--title <arg>] [-v]
 Railroad diagram generator.
 Options
+      --get-style        Create default style .ini
    -h,--help             Show this help message and exit
    -i,--input <arg>      Diagram spec file
    -o,--output <arg>     Output file
@@ -75,6 +81,7 @@ Options
       --scale <arg>      Scale image
    -t,--transparent      Transparent background
       --title <arg>      Diagram title
+   -v,--version          JSyntrax version
 ----
 
 
@@ -300,25 +307,22 @@ shadow_fill = (0, 0, 0, 127)
 title_font = ('Sans', 22, 'bold')
 
 [bubble]
-pattern = '^\w'
+pattern = '^(\w+)'
 shape = 'bubble'
-text_mod = None
 font = ('Sans', 14, 'bold')
 text_color = (0, 0, 0)
 fill = (179, 229, 252)
 
 [box]
-pattern = '^/'
+pattern = '^/(.*)'
 shape = 'box'
-text_mod = 'lambda txt: txt[1:]'
 font = ('Times', 14, 'italic')
 text_color = (0, 0, 0)
 fill = (144, 164, 174)
 
 [token]
-pattern = '.'
+pattern = '(.*)'
 shape = 'bubble'
-text_mod = None
 font = ('Sans', 16, 'bold')
 text_color = (0, 0, 0)
 fill = (179, 229, 252)
@@ -346,21 +350,20 @@ shadow_fill = (0, 0, 0, 127)
 title_font = ('Sans', 22, 'bold')
 
 [hex_bubble]                 ; User-defined style name
-pattern = '^\w'
+pattern = '^(\w+)'
 shape = 'hex'                ; Hexagon shape for node
 font = ('Sans', 14, 'bold')
 fill = (255,0,0,127)         ; Alpha component for transparent fills
 
 [box]
-pattern = '^/'
+pattern = '^/(.*)'
 shape = 'box'
-text_mod = 'lambda txt: txt[1:]'
 font = ('Sans', 14, 'bold')
 text_color = (100, 100, 100)
 fill = '#88AAEE'
 
 [token]
-pattern = '.'
+pattern = '(.*)'
 shape = 'bubble'
 font = ('Times', 16, 'italic')
 fill = (0,255,0,127)
@@ -369,9 +372,11 @@ fill = (0,255,0,127)
 image:images/vhdl_attribute_alt.svg[image]
 
 The style configuration file has a main section named "[style]" followed by user-defined sections for various node types. 
-The node style is chosen based on a regex pattern applied to the text. The first matched pattern sets the style for a node. 
+The node style is chosen based on a regex pattern applied to the text. 
+The first matched pattern sets the style for a node. 
 Patterns are tested in the same order they appear in the configuration file. 
 The first node style is used by default if no pattern matched the text.
+If the pattern contains a capturing group, then the resulting text in the node will be equal to the contents of this group (otherwise, the full text will be used).
 
 The `+[style]+` section contains the following keys:
 
@@ -437,15 +442,17 @@ Any number of node types can be defined provided they have distinct patterns to 
 The node sections contain the following keys:
 
 pattern::
-A regex pattern to match the node text to a style.
+A regex pattern to match the node text to a style. Notes about pattern format:
+ - Must satisfy https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html[regex java semantics]
+ - Matches the whole input sequence exclusively (input `"</>Hello"` corresponds to this: `"</>.*"`, not this: `"</>"`)
+ - You may not want to see control characters of your regex in diagram output. To omit them, use https://docs.oracle.com/javase/tutorial/essential/regex/groups.html[capture groups] to wrap the content you want to display. Examples:
+ ** `<b>(.*)</b>` - matches `<b>my_text</b>` and will display `my_text`
+ ** `^/(.+)` --> `/my_text` --> `my_text`
+ ** `"^</(.*)>"` --> `"</my_text>"` --> `"my_text"`
+ - If given input sequence does not match specified expression, default style will be used.
 
 shape::
 Node outline shape. Must be "bubble", "box", or "hex".
-
-text_mod::
-Optional lambda expression for transforming text from the specification into the output diagram. 
-This allows you to include additional characters to match against to select the node type and then remove them from the final diagram. 
-It takes the node text string as a single argument and returns the modified text.
 
 font::
 Font style for the node.

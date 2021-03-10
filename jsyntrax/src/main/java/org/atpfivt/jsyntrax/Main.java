@@ -8,13 +8,16 @@ import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.codehaus.groovy.control.CompilationFailedException;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String... args) {
+
+    public static final String JSYNTRAX_INI = "jsyntrax.ini";
+
+    public static void main(String... args) throws IOException {
         // parse command line arguments
         InputArguments iArgs;
         try {
@@ -22,6 +25,30 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Cannot parse command line");
             InputArguments.writeHelp(new PrintWriter(System.out));
+            return;
+        }
+
+        // print version if specified
+        String version = iArgs.getVersion();
+        if (version != null) {
+            System.out.println(iArgs.getVersion());
+            return;
+        }
+
+        // get-style
+        if (iArgs.getDefaultStyleProperty()) {
+            String config = new BufferedReader(new InputStreamReader(
+                    Main.class.getResourceAsStream("/" + JSYNTRAX_INI)))
+                    .lines()
+                    .collect(Collectors.joining("\n"))
+                    + "\n";
+            Path destPath = Path.of(System.getProperty("user.dir"), JSYNTRAX_INI);
+            if (Files.exists(destPath)) {
+                System.out.printf("Ini file \"%s\" exists%n", JSYNTRAX_INI);
+            } else {
+                System.out.printf("Creating ini with default styles in \"%s\"%n", JSYNTRAX_INI);
+                Files.writeString(destPath, config);
+            }
             return;
         }
 

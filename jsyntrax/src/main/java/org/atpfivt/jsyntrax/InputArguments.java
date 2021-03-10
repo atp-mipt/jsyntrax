@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -18,8 +19,10 @@ public class InputArguments {
     private Path output;
     private Path style;
     private String title;
+    private String version;
     private boolean transparent;
     private double scale = 1.0;
+    private boolean getDefaultStyle = false;
 
     static {
         options = new Options();
@@ -37,8 +40,13 @@ public class InputArguments {
         optionsMap.put(new Option("t", "transparent", false, "Transparent background"),
                 (o, s) -> o.transparent = true);
         optionsMap.put(new Option(null, "scale", true, "Scale image"),
-                (o, s) -> o.scale = Double.parseDouble(s)
-        );
+                (o, s) -> o.scale = Double.parseDouble(s));
+        optionsMap.put(new Option("v", "version", false, "JSyntrax version"),
+                (o, s) -> o.version = "JSyntrax " + Main.class
+                        .getPackage()
+                        .getImplementationVersion());
+        optionsMap.put(new Option(null, "get-style", false, "Create default style .ini"),
+                (o, s) -> o.getDefaultStyle = true);
     }
 
     InputArguments(String... args) throws ParseException {
@@ -91,5 +99,13 @@ public class InputArguments {
 
     public double getScale() {
         return scale;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public boolean getDefaultStyleProperty() {
+        return getDefaultStyle;
     }
 }

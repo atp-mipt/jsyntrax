@@ -12,6 +12,7 @@
     <artifactId>jsyntrax</artifactId>
     <packaging>jar</packaging>
     <name>jsyntrax</name>
+
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -138,6 +139,9 @@
                 <version>3.2.0</version>
                 <configuration>
                     <archive>
+                        <manifestEntries>
+                            <Implementation-Version>${revision}</Implementation-Version>
+                        </manifestEntries>>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>

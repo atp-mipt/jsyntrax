@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -60,7 +62,7 @@ public class JSyntraxStyleFileTest {
                 .append("text_color = (30, 40, 50)\n")
                 .append("shadow_fill = (35, 46, 57, 212)\n")
                 .append("[hex_bubble]\n")
-                .append("pattern = '^\\w'\n")
+                .append("pattern = '^(\\w.*)'\n")
                 .append("shape = 'hex'\n")
                 .append("font = ('Sans', 14, 'bold')\n")
                 .append("fill = (255,15,3,129)");
@@ -82,53 +84,42 @@ public class JSyntraxStyleFileTest {
     }
 
     @Test
-    void approvalTest() throws IOException {
+    public void mustPass() throws URISyntaxException, IOException {
+        Path.of(this.getClass()
+                .getResource("/org/atpfivt/jsyntrax/test_style_config.ini")
+                .toURI());
 
-        StringBuilder config = new StringBuilder()
-                .append("[style]\n")
-                .append("line_width = 3\n")
-                .append("outline_width = 3\n")
-                .append("padding = 5\n")
-                .append("line_color = (0, 0, 0)\n")
-                .append("max_radius = 29\n")
-                .append("h_sep = 17\n")
-                .append("v_sep = 9\n")
-                .append("arrows = False\n")
-                .append("text_color = (0, 0, 0)\n")
-                .append("shadow = True\n")
-                .append("shadow_fill = (0, 0, 0, 127)\n")
-                .append("title_font = ('Sans', 22, 'bold')\n")
-                .append("[hex_bubble]\n")
-                .append("pattern = '^\\w'\n")
-                .append("shape = 'hex'\n")
-                .append("font = ('Sans', 14, 'bold')\n")
-                .append("fill = (255,0,0,127)\n")
-                .append("[box]\n")
-                .append("pattern = '^/'\n")
-                .append("shape = 'box'\n")
-                .append("font = ('Sans', 14, 'bold')\n")
-                .append("text_color = (100, 100, 100)\n")
-                .append("fill = (136, 170, 238)\n")
-                .append("[token]\n")
-                .append("pattern = '.'\n")
-                .append("shape = 'bubble'\n")
-                .append("font = ('Times', 16, 'italic')\n")
-                .append("fill = (0, 255, 0, 127)");
+    }
+
+    @Test
+    public void svgFromConfigTest() throws IOException, URISyntaxException {
+        // Given
+        String config  = Files.readString(
+                Path.of(this
+                        .getClass()
+                        .getResource("/org/atpfivt/jsyntrax/test_style_config.ini")
+                        .toURI())
+        );
+        String spec  = Files.readString(
+                Path.of(this
+                        .getClass()
+                        .getResource("/org/atpfivt/jsyntrax/test_spec.txt")
+                        .toURI())
+        );
+        Style s        = new Style(1, false);
+        Configuration configuration = Parser.parse(spec);
+
         Files.writeString(stylePath, config);
 
-        Style s = new Style(1, false);
         s.updateByFile(stylePath);
         JSyntraxTestUtils.updateStyle(s);
 
-        Configuration configuration = Parser.parse("stack(\n" +
-                "line('attribute', '/(attribute) identifier', 'of'),\n" +
-                "line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':')\n" +
-                ")");
-
+        //When
         Unit root = configuration.getTrack();
         SVGCanvas canvas = canvasBuilder.withStyle(s).generateSVG(root);
+
+        //Then
         String result = canvas.generateSVG();
         Approvals.verify(result, OPTIONS);
-
     }
 }

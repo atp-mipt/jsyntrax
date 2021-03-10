@@ -149,7 +149,7 @@ public class SVGCanvasBuilder implements Visitor {
         String txt = unit.toString();
 
         NodeStyle ns = this.style.getNodeStyle(txt);
-        txt = ns.modify(txt);
+        txt = ns.unwrapTextContent(txt);
 
         Font font = ns.font;
         String fontName = ns.name + "_font";

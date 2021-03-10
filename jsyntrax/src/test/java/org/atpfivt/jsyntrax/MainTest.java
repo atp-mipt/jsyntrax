@@ -2,14 +2,13 @@ package org.atpfivt.jsyntrax;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +30,7 @@ class MainTest {
     }
 
     @Test
-    void testWriteHelp() {
+    void testWriteHelp() throws IOException, URISyntaxException {
         final PrintStream standardOut = System.out;
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -42,6 +41,38 @@ class MainTest {
             ));
         } finally {
             System.setOut(standardOut);
+        }
+    }
+
+    @Test
+    void printVersionTest() throws IOException {
+        final PrintStream standardOut = System.out;
+        final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+        try {
+            Main.main("-v");
+            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).startsWith("JSyntrax "));
+        } finally {
+            System.setOut(standardOut);
+        }
+    }
+
+    @Test
+    void getStyleTest() throws IOException {
+        Main.main("--get-style");
+        Path expectedPath = Path.of(
+                System.getProperty("user.dir"),
+                Main.JSYNTRAX_INI
+        );
+        byte[] configExpected = Main
+                .class
+                .getResourceAsStream("/" + Main.JSYNTRAX_INI)
+                .readAllBytes();
+        try {
+            byte[] configActual = Files.readAllBytes(expectedPath);
+            assertTrue(Arrays.equals(configExpected, configActual));
+        } finally {
+            Files.delete(expectedPath);
         }
     }
 }
