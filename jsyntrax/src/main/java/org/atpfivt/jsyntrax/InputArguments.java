@@ -41,13 +41,12 @@ public class InputArguments {
                 (o, s) -> o.transparent = true);
         optionsMap.put(new Option(null, "scale", true, "Scale image"),
                 (o, s) -> o.scale = Double.parseDouble(s));
-        optionsMap.put(new Option(null, "get-style", false, "Get default style config"),
-                (o, s) -> o.getDefaultStyle = true);
-        optionsMap.put(new Option("v", "version", false, "Release version"),
+        optionsMap.put(new Option("v", "version", false, "JSyntrax version"),
                 (o, s) -> o.version = "JSyntrax " + Main.class
-                            .getPackage()
-                            .getImplementationVersion()
-        );
+                        .getPackage()
+                        .getImplementationVersion());
+        optionsMap.put(new Option(null, "get-style", false, "Create default style .ini"),
+                (o, s) -> o.getDefaultStyle = true);
     }
 
     InputArguments(String... args) throws ParseException {
@@ -102,7 +101,11 @@ public class InputArguments {
         return scale;
     }
 
-    public String getVersion() {return version;}
+    public String getVersion() {
+        return version;
+    }
 
-    public boolean getDefaultStyleProperty() {return getDefaultStyle;}
+    public boolean getDefaultStyleProperty() {
+        return getDefaultStyle;
+    }
 }

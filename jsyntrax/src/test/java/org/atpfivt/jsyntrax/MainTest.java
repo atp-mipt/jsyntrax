@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -52,13 +51,7 @@ class MainTest {
         System.setOut(new PrintStream(outputStreamCaptor));
         try {
             Main.main("-v");
-            // There is a problem, that version retrieving method
-            // relies on .jar manifest file, which is unavailable when maven runs tests
-            // Should I run .jar with shell invocation to test, or it is fine?
-            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).contains(
-                    "JSyntrax version is not available. "
-                            + "Make sure you're running valid .jar distribution."
-            ));
+            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).startsWith("JSyntrax "));
         } finally {
             System.setOut(standardOut);
         }
@@ -69,11 +62,11 @@ class MainTest {
         Main.main("--get-style");
         Path expectedPath = Path.of(
                 System.getProperty("user.dir"),
-                "default_style_config.ini"
+                Main.JSYNTRAX_INI
         );
-        byte[] configExpected  = Main
+        byte[] configExpected = Main
                 .class
-                .getResourceAsStream("/default_style_config.ini")
+                .getResourceAsStream("/" + Main.JSYNTRAX_INI)
                 .readAllBytes();
         try {
             byte[] configActual = Files.readAllBytes(expectedPath);
