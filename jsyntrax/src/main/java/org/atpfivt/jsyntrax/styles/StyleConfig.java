@@ -1,6 +1,5 @@
 package org.atpfivt.jsyntrax.styles;
 
-import lombok.Data;
 import org.ini4j.Profile.Section;
 import org.ini4j.Wini;
 
@@ -14,8 +13,8 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Data
-public class StyleConfig {
+
+public final class StyleConfig {
     public StyleConfig() {
         nodeStyles = new ArrayList<>(List.of(
                 new NodeBubbleStyle(),
@@ -145,10 +144,66 @@ public class StyleConfig {
     private final boolean shadow = true;
     private final Color shadowFill = new Color(0, 0, 0, 127);
     private final Font titleFont = new Font("Sans", Font.BOLD, 22);
-
-    public final List<NodeStyle> nodeStyles;
+    private final List<NodeStyle> nodeStyles;
 
     public boolean getArrows() {
         return arrows;
     }
+
+    public int getLineWidth() {
+        return lineWidth;
+    }
+
+    public int getOutlineWidth() {
+        return outlineWidth;
+    }
+
+    public int getPadding() {
+        return padding;
+    }
+
+    public Color getLineColor() {
+        return lineColor;
+    }
+
+    public int getMaxRadius() {
+        return maxRadius;
+    }
+
+    public int getHSep() {
+        return hSep;
+    }
+
+    public int getVSep() {
+        return vSep;
+    }
+
+    public TitlePosition getTitlePos() {
+        return titlePos;
+    }
+
+    public Color getBulletFill() {
+        return bulletFill;
+    }
+
+    public Color getTextColor() {
+        return textColor;
+    }
+
+    public boolean isShadow() {
+        return shadow;
+    }
+
+    public Color getShadowFill() {
+        return shadowFill;
+    }
+
+    public Font getTitleFont() {
+        return titleFont;
+    }
+
+    public List<NodeStyle> getNodeStyles() {
+        return nodeStyles;
+    }
 }
+

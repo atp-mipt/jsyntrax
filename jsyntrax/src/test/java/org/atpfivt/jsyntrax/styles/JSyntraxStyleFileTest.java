@@ -68,13 +68,13 @@ public class JSyntraxStyleFileTest {
         Files.writeString(stylePath, config);
         StyleConfig cfg = new StyleConfig(stylePath);
 
-        NodeStyle ns = cfg.nodeStyles.get(0);
+        NodeStyle ns = cfg.getNodeStyles().get(0);
         Assertions.assertAll(
                 () -> assertEquals(50, cfg.getLineWidth()),
                 () -> assertEquals(42, cfg.getVSep()),
                 () -> assertEquals(new Color(30, 40, 50), cfg.getTextColor()),
                 () -> assertEquals(new Color(35, 46, 57, 212), cfg.getShadowFill()),
-                () -> assertEquals(1, cfg.nodeStyles.size()),
+                () -> assertEquals(1, cfg.getNodeStyles().size()),
                 () -> assertEquals("hex_bubble", ns.name),
                 () -> assertEquals("hex", ns.shape),
                 () -> assertEquals(new Font("Sans", Font.BOLD, 14), ns.font),

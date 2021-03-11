@@ -48,7 +48,7 @@ public class Style {
         shadow_fill = cfg.getShadowFill();
         title_font = cfg.getTitleFont();
 
-        nodeStyles = cfg.nodeStyles;
+        nodeStyles = cfg.getNodeStyles();
     }
 
     public int line_width;

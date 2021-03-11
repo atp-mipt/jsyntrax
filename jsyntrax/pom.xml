@@ -68,13 +68,6 @@
             <version>${checkstyle.maven.plugin.version}</version>
             <type>maven-plugin</type>
         </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
 
@@ -90,14 +83,6 @@
                     <target>11</target>
                     <compilerId>groovy-eclipse-compiler</compilerId>
                     <verbose>true</verbose>
-
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -154,7 +139,7 @@
                 </configuration>
             </plugin>
 
-            <!-- maven-eclipse-plugin  -->
+            <!-- maven-eclipse-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
