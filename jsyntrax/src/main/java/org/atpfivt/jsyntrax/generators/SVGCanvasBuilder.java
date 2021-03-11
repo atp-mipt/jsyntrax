@@ -1,7 +1,15 @@
 package org.atpfivt.jsyntrax.generators;
 
 import org.atpfivt.jsyntrax.Configuration;
-import org.atpfivt.jsyntrax.generators.elements.*;
+import org.atpfivt.jsyntrax.generators.elements.ArcElement;
+import org.atpfivt.jsyntrax.generators.elements.BoxBubbleElement;
+import org.atpfivt.jsyntrax.generators.elements.BubbleElement;
+import org.atpfivt.jsyntrax.generators.elements.BubbleElementBase;
+import org.atpfivt.jsyntrax.generators.elements.Element;
+import org.atpfivt.jsyntrax.generators.elements.HexBubbleElement;
+import org.atpfivt.jsyntrax.generators.elements.LineElement;
+import org.atpfivt.jsyntrax.generators.elements.OvalElement;
+import org.atpfivt.jsyntrax.generators.elements.TitleElement;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.units.Unit;
@@ -32,7 +40,7 @@ import java.util.Map;
 /**
  * @brief class for building canvas by Unit
  */
-public class SVGCanvasBuilder implements Visitor {
+public final class SVGCanvasBuilder implements Visitor {
     private Map<String, String> urlMap;
     private Style style;
     private SVGCanvas canvas;
@@ -42,13 +50,13 @@ public class SVGCanvasBuilder implements Visitor {
         this.urlMap = Collections.emptyMap();
     }
 
-    public SVGCanvasBuilder withStyle(Style style) {
-        this.style = style;
+    public SVGCanvasBuilder withStyle(Style s) {
+        this.style = s;
         return this;
     }
 
-    public SVGCanvasBuilder withTitle(String title) {
-        this.title = title;
+    public SVGCanvasBuilder withTitle(String t) {
+        this.title = t;
         return this;
     }
 
@@ -67,7 +75,12 @@ public class SVGCanvasBuilder implements Visitor {
                 canvas.getBoundingBoxByTag(tag);
 
         String titleTag = canvas.new_tag("x", "-title");
-        Element e = new TitleElement(title, style.title_font, "title_font", titleTag);
+        Element e = new TitleElement(
+                title,
+                style.title_font,
+                "title_font",
+                titleTag
+        );
         canvas.addElement(e);
 
         // set left / middle / right location
@@ -78,12 +91,14 @@ public class SVGCanvasBuilder implements Visitor {
                 break;
             case bm:
             case tm:
-                canvas.moveByTag(titleTag, (bbox.f.f + bbox.s.f - e.end.f) / 2
+                canvas.moveByTag(titleTag,
+                        (bbox.f.f + bbox.s.f - e.getEnd().f) / 2
                         - 2 * style.padding, 0);
                 break;
             case br:
             case tr:
-                canvas.moveByTag(titleTag, bbox.s.f - e.end.f - 2 * style.padding, 0);
+                canvas.moveByTag(titleTag,
+                        bbox.s.f - e.getEnd().f - 2 * style.padding, 0);
                 break;
         }
 
@@ -92,7 +107,7 @@ public class SVGCanvasBuilder implements Visitor {
             case tl:
             case tm:
             case tr:
-                canvas.moveByTag(tag, 0, e.end.s + 2 * style.padding);
+                canvas.moveByTag(tag, 0, e.getEnd().s + 2 * style.padding);
                 break;
             case bl:
             case bm:
@@ -100,7 +115,6 @@ public class SVGCanvasBuilder implements Visitor {
                 canvas.moveByTag(titleTag, 0, bbox.s.s + 2 * style.padding);
                 break;
         }
-
         return canvas;
     }
 
@@ -184,41 +198,43 @@ public class SVGCanvasBuilder implements Visitor {
         }
 
         String tag = this.canvas.new_tag("x", "-box");
-
         Pair<Integer, Integer> start;
         Pair<Integer, Integer> end;
 
         BubbleElementBase b;
         String href = this.urlMap.get(txt);
         switch (ns.shape) {
-            case "bubble":
+            case "bubble": {
                 start = new Pair<>(lft - rad, top);
                 end = new Pair<>(rgt + rad, y1);
-                b = new BubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
+                b = new BubbleElement(start, end, href,
+                        txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
-            case "hex":
+            }
+            case "hex": {
                 start = new Pair<>(lft - rad, top);
                 end = new Pair<>(rgt + rad, y1);
-                b = new HexBubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
+                b = new HexBubbleElement(start, end, href,
+                        txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
-            default:
+            }
+            default: {
                 start = new Pair<>(lft, top);
                 end = new Pair<>(rgt, y1);
-                b = new BoxBubbleElement(start, end, href, txt, new Pair<>(x0, y0), font,
+                b = new BoxBubbleElement(start, end, href,
+                        txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.outline_width, fill, tag);
                 break;
+            }
         }
         this.canvas.addElement(b);
 
         x0 = start.f;
         x1 = end.f;
-
         int width = x1 - x0;
-
         this.canvas.moveByTag(tag, -x0, 2);
-
         setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(width, 0)));
     }
 

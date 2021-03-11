@@ -16,6 +16,11 @@ public class LineElement extends Element {
     }
 
     @Override
+    public void addShadow(StringBuilder sb, Style style) {
+
+    }
+
+    @Override
     public void toSVG(StringBuilder sb, Style style) {
         String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " + "stroke-width=\"" + this.width + "\"";
 
@@ -28,18 +33,18 @@ public class LineElement extends Element {
                 super.end = tmp;
             }
             double len = Math.sqrt(
-                    (super.end.f - super.start.f) * (super.end.f - super.start.f) +
-                            (super.end.s - super.start.s) * (super.end.s - super.start.s)
+                    (super.end.f - super.getStart().f) * (super.end.f - super.getStart().f) +
+                            (super.end.s - super.getStart().s) * (super.end.s - super.getStart().s)
             );
             len -= 4;
-            double angle = Math.atan2(super.end.s - super.start.s, super.end.f - super.start.f);
+            double angle = Math.atan2(super.end.s - super.getStart().s, super.end.f - super.getStart().f);
 
-            super.end.f = (int)(super.start.f + len * Math.cos(angle));
-            super.end.s = (int)(super.start.s + len * Math.sin(angle));
+            super.end.f = (int)(super.getStart().f + len * Math.cos(angle));
+            super.end.s = (int)(super.getStart().s + len * Math.sin(angle));
         }
         sb.append("<line ")
-                .append("x1=\"").append(super.start.f).append("\" ")
-                .append("y1=\"").append(super.start.s).append("\" ")
+                .append("x1=\"").append(super.getStart().f).append("\" ")
+                .append("y1=\"").append(super.getStart().s).append("\" ")
                 .append("x2=\"").append(super.end.f).append("\" ")
                 .append("y2=\"").append(super.end.s).append("\" ")
                 .append(attributes).append(" />\n");

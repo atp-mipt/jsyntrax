@@ -4,10 +4,9 @@ import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.util.Algorithm;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 
-public class BubbleElementBase extends Element {
+public abstract class BubbleElementBase extends Element {
 
     public BubbleElementBase(Pair<Integer, Integer> start, Pair<Integer, Integer> end, String href,
                              String text, Pair<Integer, Integer> textPos, Font font, String fontName,
@@ -26,8 +25,8 @@ public class BubbleElementBase extends Element {
     }
 
     void addXMLText(StringBuilder sb, Style style) {
-        int x0 = super.start.f;
-        int y0 = super.start.s;
+        int x0 = super.getStart().f;
+        int y0 = super.getStart().s;
         int x1 = super.end.f;
         int y1 = super.end.s;
 

@@ -4,8 +4,7 @@ import org.atpfivt.jsyntrax.styles.Style;
 import org.atpfivt.jsyntrax.util.Algorithm;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 
 public class BubbleElement extends BubbleElementBase {
     public BubbleElement(Pair<Integer, Integer> start, Pair<Integer, Integer> end, String href,
@@ -16,8 +15,8 @@ public class BubbleElement extends BubbleElementBase {
 
     @Override
     public void addShadow(StringBuilder sb, Style style) {
-        int x0 = super.start.f + this.width + 1;
-        int y0 = super.start.s + this.width + 1;
+        int x0 = super.getStart().f + this.width + 1;
+        int y0 = super.getStart().s + this.width + 1;
         int x1 = super.end.f + this.width + 1;
         int y1 = super.end.s + this.width + 1;
 
@@ -52,8 +51,8 @@ public class BubbleElement extends BubbleElementBase {
 
     @Override
     public void toSVG(StringBuilder sb, Style style) {
-        int x0 = super.start.f;
-        int y0 = super.start.s;
+        int x0 = super.getStart().f;
+        int y0 = super.getStart().s;
         int x1 = super.end.f;
         int y1 = super.end.s;
 

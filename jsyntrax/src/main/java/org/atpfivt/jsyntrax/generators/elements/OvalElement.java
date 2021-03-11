@@ -19,9 +19,14 @@ public class OvalElement extends Element {
     }
 
     @Override
+    public void addShadow(StringBuilder sb, Style style) {
+
+    }
+
+    @Override
     public void toSVG(StringBuilder sb, Style style) {
-        int x0 = super.start.f;
-        int y0 = super.start.s;
+        int x0 = super.getStart().f;
+        int y0 = super.getStart().s;
         int x1 = super.end.f;
         int y1 = super.end.s;
 

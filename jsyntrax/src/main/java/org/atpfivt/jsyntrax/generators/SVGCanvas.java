@@ -52,10 +52,10 @@ public class SVGCanvas {
     public void moveByTag(String tag, int dx, int dy) {
         for (Element e : elements) {
             if (e.isTagged(tag)) {
-                e.start.f += dx;
-                e.start.s += dy;
-                e.end.f += dx;
-                e.end.s += dy;
+                e.getStart().f += dx;
+                e.getStart().s += dy;
+                e.getEnd().f += dx;
+                e.getEnd().s += dy;
             }
         }
     }
@@ -79,18 +79,18 @@ public class SVGCanvas {
         {
             if (e.isTagged(tag)) {
                 if (start == null) {
-                    start = new Pair<>(e.start);
-                    end = new Pair<>(e.end);
+                    start = new Pair<>(e.getStart());
+                    end = new Pair<>(e.getEnd());
                 }
-                start.f = Math.min(start.f, e.start.f);
-                start.f = Math.min(start.f, e.end.f);
-                start.s = Math.min(start.s, e.start.s);
-                start.s = Math.min(start.s, e.end.s);
+                start.f = Math.min(start.f, e.getStart().f);
+                start.f = Math.min(start.f, e.getEnd().f);
+                start.s = Math.min(start.s, e.getStart().s);
+                start.s = Math.min(start.s, e.getEnd().s);
 
-                end.f = Math.max(end.f, e.start.f);
-                end.f = Math.max(end.f, e.end.f);
-                end.s = Math.max(end.s, e.start.s);
-                end.s = Math.max(end.s, e.end.s);
+                end.f = Math.max(end.f, e.getStart().f);
+                end.f = Math.max(end.f, e.getEnd().f);
+                end.s = Math.max(end.s, e.getStart().s);
+                end.s = Math.max(end.s, e.getEnd().s);
             }
         }
         return new Pair<>(start, end);

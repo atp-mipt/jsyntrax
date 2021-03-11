@@ -1,7 +1,6 @@
 package org.atpfivt.jsyntrax.styles;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -34,20 +33,20 @@ public class Style {
     }
 
     private void updateByConfig(StyleConfig cfg) {
-        line_width = cfg.line_width;
-        line_color = cfg.line_color;
-        outline_width = cfg.outline_width;
-        padding = cfg.padding;
-        max_radius = cfg.max_radius;
-        h_sep = cfg.h_sep;
-        v_sep = cfg.v_sep;
-        arrows = cfg.arrows;
-        title_pos = cfg.title_pos;
-        bullet_fill = cfg.bullet_fill;
-        text_color = cfg.text_color;
-        shadow = cfg.shadow;
-        shadow_fill = cfg.shadow_fill;
-        title_font = cfg.title_font;
+        line_width = cfg.getLineWidth();
+        line_color = cfg.getLineColor();
+        outline_width = cfg.getOutlineWidth();
+        padding = cfg.getPadding();
+        max_radius = cfg.getMaxRadius();
+        h_sep = cfg.getHSep();
+        v_sep = cfg.getVSep();
+        arrows = cfg.getArrows();
+        title_pos = cfg.getTitlePos();
+        bullet_fill = cfg.getBulletFill();
+        text_color = cfg.getTextColor();
+        shadow = cfg.isShadow();
+        shadow_fill = cfg.getShadowFill();
+        title_font = cfg.getTitleFont();
 
         nodeStyles = cfg.nodeStyles;
     }

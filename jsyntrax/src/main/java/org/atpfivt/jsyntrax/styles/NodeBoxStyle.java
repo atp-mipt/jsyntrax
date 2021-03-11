@@ -1,7 +1,7 @@
 package org.atpfivt.jsyntrax.styles;
 
 import java.awt.*;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 
 public class NodeBoxStyle extends NodeStyle {
     public NodeBoxStyle() {

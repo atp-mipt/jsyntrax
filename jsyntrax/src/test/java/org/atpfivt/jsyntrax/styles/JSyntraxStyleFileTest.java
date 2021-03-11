@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -71,10 +70,10 @@ public class JSyntraxStyleFileTest {
 
         NodeStyle ns = cfg.nodeStyles.get(0);
         Assertions.assertAll(
-                () -> assertEquals(50, cfg.line_width),
-                () -> assertEquals(42, cfg.v_sep),
-                () -> assertEquals(new Color(30, 40, 50), cfg.text_color),
-                () -> assertEquals(new Color(35, 46, 57, 212), cfg.shadow_fill),
+                () -> assertEquals(50, cfg.getLineWidth()),
+                () -> assertEquals(42, cfg.getVSep()),
+                () -> assertEquals(new Color(30, 40, 50), cfg.getTextColor()),
+                () -> assertEquals(new Color(35, 46, 57, 212), cfg.getShadowFill()),
                 () -> assertEquals(1, cfg.nodeStyles.size()),
                 () -> assertEquals("hex_bubble", ns.name),
                 () -> assertEquals("hex", ns.shape),

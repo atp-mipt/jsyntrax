@@ -15,6 +15,11 @@ public class TitleElement extends BubbleElementBase {
     }
 
     @Override
+    public void addShadow(StringBuilder sb, Style style) {
+
+    }
+
+    @Override
     public void toSVG(StringBuilder sb, Style style) {
         // Add text
         addXMLText(sb, style);
