@@ -33,7 +33,7 @@ public class NodeStyle {
     public String name = "unknown";
     public String shape = "bubble";
     public Font font = new Font("Sans",Font.BOLD, 14);
-    public Color text_color = new Color(0,0,0);
+    public Color textColor = new Color(0,0,0);
     public Color fill = new Color(144,164,174);
     public Pattern pattern = null;
 }

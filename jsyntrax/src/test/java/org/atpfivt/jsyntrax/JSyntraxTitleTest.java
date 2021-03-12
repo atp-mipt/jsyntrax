@@ -4,12 +4,13 @@ import org.approvaltests.Approvals;
 import org.approvaltests.core.Options;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
-import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.styles.TitlePosition;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -18,16 +19,17 @@ import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
 public class JSyntraxTitleTest {
     private final SVGCanvasBuilder canvasBuilder;
 
-    private final Style style;
+    private final StyleConfig style;
 
-    public JSyntraxTitleTest() {
-        style = new Style(1, false);
+    public JSyntraxTitleTest()
+            throws IllegalAccessException, NoSuchFieldException, IOException {
+        style = new StyleConfig(1, false);
         JSyntraxTestUtils.updateStyle(style);
         canvasBuilder = new SVGCanvasBuilder().withStyle(style);
     }
 
     private void setTitlePosition(TitlePosition pos) {
-        style.titlePos = pos;
+        style.setTitlePos(pos);
         JSyntraxTestUtils.updateStyle(style);
         canvasBuilder.withStyle(style);
     }

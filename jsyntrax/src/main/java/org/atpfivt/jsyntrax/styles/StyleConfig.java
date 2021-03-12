@@ -1,56 +1,53 @@
 package org.atpfivt.jsyntrax.styles;
 
+import org.atpfivt.jsyntrax.Main;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.ini4j.Profile.Section;
 import org.ini4j.Wini;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public final class StyleConfig {
-    public StyleConfig() {
-        nodeStyles = new ArrayList<>(List.of(
-                new NodeBubbleStyle(),
-                new NodeBoxStyle(),
-                new NodeTokenStyle(),
-                new NodeHexStyle()));
-    }
+    private int lineWidth = 2;
+    private int outlineWidth = 2;
+    private int padding = 5;
+    private Color lineColor = new Color(0, 0, 0);
+    private int maxRadius = 9;
+    private int hSep = 17;
+    private int vSep = 9;
+    private boolean arrows = true;
+    private TitlePosition titlePos = TitlePosition.tl;
+    private Color bulletFill = new Color(255, 255, 255);
+    private Color textColor = new Color(0, 0, 0);
+    private boolean shadow = true;
+    private Color shadowFill = new Color(0, 0, 0, 127);
+    private Font titleFont = new Font("Sans", Font.BOLD, 22);
+    private double scale;
+    private boolean transparency;
+    private NodeStyle defNodeStyle = new NodeStyle();
+    private List<NodeStyle> nodeStyles = new ArrayList<>(List.of(
+            new NodeBubbleStyle(),
+            new NodeBoxStyle(),
+            new NodeTokenStyle(),
+            new NodeHexStyle()
+    ));
 
-    public StyleConfig(Path style)
-            throws IllegalAccessException, NoSuchFieldException, IOException {
-        this();
-        Wini ini = new Wini(style.toFile());
-        if (ini.containsKey("style")) {
-            parseStyleArgs(ini.get("style"));
-        }
-
-        nodeStyles.clear();
-
-        for (Section s : ini.values()) {
-            if (s.getName().equals("style")) {
-                continue;
-            }
-            // this is custom node style
-            NodeStyle ns = new NodeStyle();
-            ns.name = s.getName();
-            parseNodeStyle(s, ns);
-            nodeStyles.add(ns);
-        }
-    }
 
     private void parseStyleArgs(Section s)
             throws NoSuchFieldException, IllegalAccessException {
         parseField(s, this, "line_width", Integer::parseInt);
         parseField(s, this, "outline_width", Integer::parseInt);
         parseField(s, this, "padding", Integer::parseInt);
-        parseField(s, this, "line_color", StyleConfig::colorFromString);
+        parseField(s, this, "line_color", StringUtils::colorFromString);
         parseField(s, this, "max_radius", Integer::parseInt);
         parseField(s, this, "h_sep", Integer::parseInt);
         parseField(s, this, "v_sep", Integer::parseInt);
@@ -58,12 +55,13 @@ public final class StyleConfig {
         parseField(s, this, "title_pos", (String v) -> {
             return TitlePosition.valueOf(v.substring(1, v.length() - 1));
         });
-        parseField(s, this, "bullet_fill", StyleConfig::colorFromString);
-        parseField(s, this, "text_color", StyleConfig::colorFromString);
+        parseField(s, this, "bullet_fill", StringUtils::colorFromString);
+        parseField(s, this, "text_color", StringUtils::colorFromString);
         parseField(s, this, "shadow", Boolean::parseBoolean);
-        parseField(s, this, "shadow_fill", StyleConfig::colorFromString);
-        parseField(s, this, "title_font", StyleConfig::fontFromString);
+        parseField(s, this, "shadow_fill", StringUtils::colorFromString);
+        parseField(s, this, "title_font", StringUtils::fontFromString);
     }
+
 
     private void parseNodeStyle(Section s, NodeStyle ns)
             throws NoSuchFieldException, IllegalAccessException {
@@ -74,80 +72,73 @@ public final class StyleConfig {
         parseField(s, ns, "shape", (String v) -> {
             return v.substring(1, v.length() - 1);
         });
-        parseField(s, ns, "font", StyleConfig::fontFromString);
-        parseField(s, ns, "text_color", StyleConfig::colorFromString);
-        parseField(s, ns, "fill", StyleConfig::colorFromString);
+        parseField(s, ns, "font", StringUtils::fontFromString);
+        parseField(s, ns, "text_color", StringUtils::colorFromString);
+        parseField(s, ns, "fill", StringUtils::colorFromString);
     }
+
 
     private void parseField(Section s, Object obj,
-                                   String name, Function<String, Object> parser)
+                            String propertyName, Function<String, Object> parser)
             throws NoSuchFieldException, IllegalAccessException {
-        if (s.containsKey(name)) {
-            obj.getClass().getDeclaredField(name).set(obj,
-                    parser.apply(s.get(name)));
+        if (s.containsKey(propertyName)) {
+            Field field = obj.getClass()
+                    .getDeclaredField(StringUtils.snakeToCamelCase(propertyName));
+            field.setAccessible(true);
+            field.set(obj, parser.apply(s.get(propertyName)));
         }
     }
 
-    public static Font fontFromString(String txt) {
-        Pattern fontPattern = Pattern.compile(
-                "\\(\\s*'([a-zA-Z]+)'\\s*,\\s*(\\d+)\\s*,\\s*'([a-zA-Z ]+)'\\s*\\)");
-        Matcher matcher = fontPattern.matcher(txt.trim());
 
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid font style in config");
-        }
-        String name = matcher.group(1);
+    public StyleConfig(double scale, boolean transparency) throws
+            IOException, NoSuchFieldException, IllegalAccessException {
+        this.setTransparency(transparency);
+        this.setScale(scale);
 
-        int style = Font.PLAIN;
-        String styleText = matcher.group(3).toLowerCase();
-        if (styleText.contains("bold")) {
-            style |= Font.BOLD;
+        Wini config = new Wini(Main.class
+                .getResourceAsStream("/default_style_config.ini")
+        );
+        if (config.containsKey("style")) {
+            parseStyleArgs(config.get("style"));
         }
-        if (styleText.contains("italic")) {
-            style |= Font.ITALIC;
-        }
-        int size = Integer.parseInt(matcher.group(2));
-        return new Font(name, style, size);
-    }
-
-    public static Color colorFromString(String txt) {
-        Pattern colorPattern = Pattern.compile(
-                "\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*(,\\s*(\\d+)\\s*)?\\)");
-        Matcher matcher = colorPattern.matcher(txt.trim());
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid color style in config");
-        }
-        int r = Integer.parseInt(matcher.group(1));
-        int g = Integer.parseInt(matcher.group(2));
-        int b = Integer.parseInt(matcher.group(3));
-        int a;
-        if (matcher.group(5) == null) {
-            a = 255;
-        } else {
-            a = Integer.parseInt(matcher.group(5));
-        }
-        return new Color(r, g, b, a);
     }
 
 
-    private final int lineWidth = 2;
-    private final int outlineWidth = 2;
-    private final int padding = 5;
-    private final Color lineColor = new Color(0, 0, 0);
-    private final int maxRadius = 9;
-    private final int hSep = 17;
-    private final int vSep = 9;
-    private final boolean arrows = true;
-    private final TitlePosition titlePos = TitlePosition.tl;
-    private final Color bulletFill = new Color(255, 255, 255);
-    private final Color textColor = new Color(0, 0, 0);
-    private final boolean shadow = true;
-    private final Color shadowFill = new Color(0, 0, 0, 127);
-    private final Font titleFont = new Font("Sans", Font.BOLD, 22);
-    private final List<NodeStyle> nodeStyles;
+    public StyleConfig(double scale, boolean transparency, Path style)
+            throws IllegalAccessException, NoSuchFieldException, IOException {
+        this.setTransparency(transparency);
+        this.setScale(scale);
+
+        Wini ini = new Wini(style.toFile());
+        if (ini.containsKey("style")) {
+            parseStyleArgs(ini.get("style"));
+        }
+        getNodeStyles().clear();
+        for (Section s : ini.values()) {
+            if (s.getName().equals("style")) {
+                continue;
+            }
+            // this is custom node style
+            NodeStyle ns = new NodeStyle();
+            ns.name = s.getName();
+            parseNodeStyle(s, ns);
+            getNodeStyles().add(ns);
+        }
+    }
+
+
+    public NodeStyle getNodeStyle(String txt) {
+        for (NodeStyle ns : getNodeStyles()) {
+            if (ns.match(txt)) {
+                return ns;
+            }
+        }
+        return getDefNodeStyle();
+    }
+
 
     public boolean getArrows() {
-        return arrows;
+        return isArrows();
     }
 
     public int getLineWidth() {
@@ -171,11 +162,11 @@ public final class StyleConfig {
     }
 
     public int getHSep() {
-        return hSep;
+        return gethSep();
     }
 
     public int getVSep() {
-        return vSep;
+        return getvSep();
     }
 
     public TitlePosition getTitlePos() {
@@ -204,6 +195,106 @@ public final class StyleConfig {
 
     public List<NodeStyle> getNodeStyles() {
         return nodeStyles;
+    }
+
+    public double getScale() {
+        return scale;
+    }
+
+    public boolean isTransparent() {
+        return isTransparency();
+    }
+
+    public int gethSep() {
+        return hSep;
+    }
+
+    public int getvSep() {
+        return vSep;
+    }
+
+    public boolean isArrows() {
+        return arrows;
+    }
+
+    public boolean isTransparency() {
+        return transparency;
+    }
+
+    public void setLineWidth(int lineWidth) {
+        this.lineWidth = lineWidth;
+    }
+
+    public void setOutlineWidth(int outlineWidth) {
+        this.outlineWidth = outlineWidth;
+    }
+
+    public void setPadding(int padding) {
+        this.padding = padding;
+    }
+
+    public void setLineColor(Color lineColor) {
+        this.lineColor = lineColor;
+    }
+
+    public void setMaxRadius(int maxRadius) {
+        this.maxRadius = maxRadius;
+    }
+
+    public void sethSep(int hSep) {
+        this.hSep = hSep;
+    }
+
+    public void setvSep(int vSep) {
+        this.vSep = vSep;
+    }
+
+    public void setArrows(boolean arrows) {
+        this.arrows = arrows;
+    }
+
+    public void setTitlePos(TitlePosition titlePos) {
+        this.titlePos = titlePos;
+    }
+
+    public void setBulletFill(Color bulletFill) {
+        this.bulletFill = bulletFill;
+    }
+
+    public void setTextColor(Color textColor) {
+        this.textColor = textColor;
+    }
+
+    public void setShadow(boolean shadow) {
+        this.shadow = shadow;
+    }
+
+    public void setShadowFill(Color shadowFill) {
+        this.shadowFill = shadowFill;
+    }
+
+    public void setTitleFont(Font titleFont) {
+        this.titleFont = titleFont;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
+    }
+
+    public void setTransparency(boolean transparency) {
+        this.transparency = transparency;
+    }
+
+    public NodeStyle getDefNodeStyle() {
+        return defNodeStyle;
+    }
+
+    public void setDefNodeStyle(NodeStyle defNodeStyle) {
+        this.defNodeStyle = defNodeStyle;
+    }
+
+    public void setNodeStyles(List<NodeStyle> nodeStyles) {
+        this.nodeStyles = nodeStyles;
     }
 }
 

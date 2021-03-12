@@ -9,14 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MainTest {
     @Test
-    void testEnd2EndHappyPath() throws URISyntaxException, IOException {
+    void testEnd2EndHappyPath() throws URISyntaxException, IOException,
+            NoSuchFieldException, IllegalAccessException {
         Path inputPath = Paths.get(MainTest.class.getResource("jsyntrax.spec").toURI());
         Path outPath = Files.createTempFile("jsyntrax-test-output", ".svg");
         try {
@@ -31,7 +31,8 @@ class MainTest {
     }
 
     @Test
-    void testWriteHelp() throws IOException, URISyntaxException {
+    void testWriteHelp() throws IOException,
+            NoSuchFieldException, IllegalAccessException {
         final PrintStream standardOut = System.out;
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -46,15 +47,13 @@ class MainTest {
     }
 
     @Test
-    void printVersionTest() throws IOException {
+    void printVersionTest() throws IOException,
+            NoSuchFieldException, IllegalAccessException {
         final PrintStream standardOut = System.out;
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
         try {
             Main.main("-v");
-            // There is a problem, that version retrieving method
-            // relies on .jar manifest file, which is unavailable when maven runs tests
-            // Should I run .jar with shell invocation to test, or it is fine?
             assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).contains(
                     "JSyntrax version is not available. "
                             + "Make sure you're running valid .jar distribution."
@@ -65,7 +64,8 @@ class MainTest {
     }
 
     @Test
-    void getStyleTest() throws IOException {
+    void getStyleTest() throws IOException,
+            NoSuchFieldException, IllegalAccessException {
         Main.main("--get-style");
         Path expectedPath = Path.of(
                 System.getProperty("user.dir"),

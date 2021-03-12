@@ -1,6 +1,6 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
-import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.util.HashSet;
@@ -43,9 +43,9 @@ public class Element {
         return tags.contains(tag);
     }
 
-    public void addShadow(StringBuilder sb, Style style) { }
+    public void addShadow(StringBuilder sb, StyleConfig style) { }
 
-    public void toSVG(StringBuilder sb, Style style) { }
+    public void toSVG(StringBuilder sb, StyleConfig style) { }
 
     public void scale(double scale) {
         getStart().f = (int)(getStart().f * scale);

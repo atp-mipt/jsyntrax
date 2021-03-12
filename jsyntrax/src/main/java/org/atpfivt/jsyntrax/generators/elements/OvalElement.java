@@ -1,7 +1,7 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.awt.*;
@@ -19,20 +19,20 @@ public class OvalElement extends Element {
     }
 
     @Override
-    public void addShadow(StringBuilder sb, Style style) {
+    public void addShadow(StringBuilder sb, StyleConfig style) {
 
     }
 
     @Override
-    public void toSVG(StringBuilder sb, Style style) {
+    public void toSVG(StringBuilder sb, StyleConfig style) {
         int x0 = super.getStart().f;
         int y0 = super.getStart().s;
         int x1 = super.end.f;
         int y1 = super.end.s;
 
-        String attributes = "stroke=\"" + Algorithm.toHex(style.lineColor) + "\" " +
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" " +
                 "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + Algorithm.toHex(this.fill) + "\"";
+                "fill=\"" + StringUtils.toHex(this.fill) + "\"";
 
         int xc = (x0 + x1) / 2;
         int yc = (y0 + y1) / 2;

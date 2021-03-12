@@ -4,7 +4,7 @@ package org.atpfivt.jsyntrax;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
-import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.codehaus.groovy.control.CompilationFailedException;
 
@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) throws IOException, NoSuchFieldException, IllegalAccessException {
         // parse command line arguments
         InputArguments iArgs;
         try {
@@ -64,12 +64,21 @@ public class Main {
         }
 
         // parse style file
-        Style style = new Style(iArgs.getScale(), iArgs.isTransparent());
+        StyleConfig style;
         if (iArgs.getStyle() != null) {
-            if (!style.updateByFile(iArgs.getStyle())) {
+            try {
+                style = new StyleConfig(
+                        iArgs.getScale(),
+                        iArgs.isTransparent(),
+                        iArgs.getStyle());
+            } catch (Exception e) {
                 System.out.println("Failed parsing style file");
                 return;
             }
+        } else {
+            style = new StyleConfig(
+                    iArgs.getScale(),
+                    iArgs.isTransparent());
         }
 
         // read script

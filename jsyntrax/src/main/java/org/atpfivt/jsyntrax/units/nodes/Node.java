@@ -1,13 +1,13 @@
 package org.atpfivt.jsyntrax.units.nodes;
 
-import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.units.tracks.Line;
 import org.atpfivt.jsyntrax.units.tracks.Track;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
 public class Node implements Unit {
-  private Style style;
+  private StyleConfig style;
   private final String text;
   boolean is_link = false;
 
@@ -15,11 +15,11 @@ public class Node implements Unit {
     this.text = text;
   }
 
-  public Node(Style style, String text) {
-    this.style = style;
-    this.text = text;
-    this.is_link = false;  // FIXME: replace with slash checker
-  }
+//  public Node(StyleConfig style, String text) {
+//    this.style = style;
+//    this.text = text;
+//    this.is_link = false;  // FIXME: replace with slash checker
+//  }
 
   public boolean isLink() {
     return is_link;
@@ -46,11 +46,11 @@ public class Node implements Unit {
     return new Line(this);
   }
 
-  public Style getStyle() {
+  public StyleConfig getStyle() {
     return style;
   }
 
-  public void setStyle(Style style) {
+  public void setStyle(StyleConfig style) {
     this.style = style;
   }
 }

@@ -2,22 +2,23 @@ package org.atpfivt.jsyntrax.generators;
 
 import org.atpfivt.jsyntrax.generators.elements.Element;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class SVGCanvas {
-    private final Style style;
+    private final StyleConfig style;
     private final HashMap<String, Integer> tagcnt = new HashMap<>();
     private final ArrayList<Element> elements = new ArrayList<>();
 
-    public SVGCanvas(Style style) {
+    public SVGCanvas(StyleConfig style) {
         this.style = style;
     }
 
@@ -105,19 +106,19 @@ public class SVGCanvas {
         // move to picture to (0, 0)
         moveByTag("all", -res.f.f, -res.f.s);
         scaleByTag("all", scale);
-        moveByTag("all", style.padding, style.padding);
+        moveByTag("all", style.getPadding(), style.getPadding());
 
         res = getBoundingBoxByTag("all");
         Pair<Integer, Integer> end = res.s;
 
-        int W = end.f + style.padding;
-        int H = end.s + style.padding;
+        int W = end.f + style.getPadding();
+        int H = end.s + style.getPadding();
 
         // collect fonts
         HashMap<String, Pair<Font, Color>> fonts = new HashMap<>();
-        fonts.put("title_font", new Pair<>(this.style.titleFont, this.style.textColor));
-        for (NodeStyle ns : this.style.nodeStyles) {
-            fonts.put(ns.name + "_font", new Pair<>(ns.font, ns.text_color));
+        fonts.put("title_font", new Pair<>(this.style.getTitleFont(), this.style.getTextColor()));
+        for (NodeStyle ns : this.style.getNodeStyles()) {
+            fonts.put(ns.name + "_font", new Pair<>(ns.font, ns.textColor));
         }
 
         // header
@@ -146,7 +147,7 @@ public class SVGCanvas {
                 fontStyle = "italic";
             }
 
-            String hex = Algorithm.toHex(fontPair.getValue().s);
+            String hex = StringUtils.toHex(fontPair.getValue().s);
 
             sb.append(".").append(fontName).append(" ");
             sb.append("{fill:").append(hex).append("; text-anchor:middle;\n");
@@ -167,7 +168,7 @@ public class SVGCanvas {
         sb.append("<defs>\n");
         sb.append("<marker id=\"arrow\" markerWidth=\"5\" markerHeight=\"4\" ")
                 .append("refX=\"2.5\" refY=\"2\" orient=\"auto\" markerUnits=\"strokeWidth\">\n");
-        String hex = Algorithm.toHex(this.style.lineColor);
+        String hex = StringUtils.toHex(this.style.getLineColor());
         sb.append("<path d=\"M0,0 L0.5,2 L0,4 L4.5,2 z\" fill=\"").append(hex).append("\" />\n");
         sb.append("</marker>\n</defs>\n");
 
@@ -177,8 +178,8 @@ public class SVGCanvas {
         }
         for (Element e : this.elements) {
 
-            if (style.shadow) {
-                e.addShadow(sb, this.style);
+            if (style.isShadow()) {
+                e.addShadow(sb,  this.style);
             }
             e.toSVG(sb, this.style);
         }

@@ -1,7 +1,7 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.awt.*;
@@ -24,7 +24,7 @@ public abstract class BubbleElementBase extends Element {
         this.fill = fill;
     }
 
-    void addXMLText(StringBuilder sb, Style style) {
+    void addXMLText(StringBuilder sb, StyleConfig style) {
         int x0 = super.getStart().f;
         int y0 = super.getStart().s;
         int x1 = super.end.f;
@@ -33,13 +33,13 @@ public abstract class BubbleElementBase extends Element {
         int x = (x0 + x1) / 2;
         int y = (y0 + y1) / 2 + (int)(Math.abs(textPos.s) * 0.25 + style.getScale() * 2);
 
-        String txt = Algorithm.escapeXML(text);
+        String txt = StringUtils.escapeXML(text);
         if (this.href == null) {
             sb.append("<text class=\"").append(fontName).append("\" x=\"").append(x)
                     .append("\" y=\"").append(y).append("\">").append(txt).append("</text>\n");
         }
         else {
-            String link = Algorithm.escapeXML(this.href);
+            String link = StringUtils.escapeXML(this.href);
             sb.append("<a xlink:href=\"").append(link).append("\" target=\"_parent\">")
                     .append("<text class=\"").append(fontName).append(" link\" x=\"").append(x)
                     .append("\" y=\"").append(y).append("\">").append(txt).append("</text></a>\n");

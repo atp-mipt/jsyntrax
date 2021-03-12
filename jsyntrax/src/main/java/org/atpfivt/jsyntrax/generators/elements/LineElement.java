@@ -1,7 +1,7 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
 
 public class LineElement extends Element {
@@ -16,13 +16,13 @@ public class LineElement extends Element {
     }
 
     @Override
-    public void addShadow(StringBuilder sb, Style style) {
+    public void addShadow(StringBuilder sb, StyleConfig style) {
 
     }
 
     @Override
-    public void toSVG(StringBuilder sb, Style style) {
-        String attributes = "stroke=\"" + Algorithm.toHex(style.lineColor) + "\" " + "stroke-width=\"" + this.width + "\"";
+    public void toSVG(StringBuilder sb, StyleConfig style) {
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" " + "stroke-width=\"" + this.width + "\"";
 
         if (arrow != null) {
             attributes += " marker-end=\"url(#arrow)\"";

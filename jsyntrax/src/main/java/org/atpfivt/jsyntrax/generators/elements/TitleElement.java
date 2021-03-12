@@ -1,7 +1,7 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
-import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.awt.*;
@@ -15,12 +15,12 @@ public class TitleElement extends BubbleElementBase {
     }
 
     @Override
-    public void addShadow(StringBuilder sb, Style style) {
+    public void addShadow(StringBuilder sb, StyleConfig style) {
 
     }
 
     @Override
-    public void toSVG(StringBuilder sb, Style style) {
+    public void toSVG(StringBuilder sb, StyleConfig style) {
         // Add text
         addXMLText(sb, style);
     }

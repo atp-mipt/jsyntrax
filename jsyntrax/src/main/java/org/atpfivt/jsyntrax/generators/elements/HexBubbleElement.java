@@ -1,7 +1,7 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.awt.Color;
@@ -15,14 +15,14 @@ public class HexBubbleElement extends BubbleElementBase {
     }
 
     @Override
-    public void addShadow(StringBuilder sb, Style style) {
+    public void addShadow(StringBuilder sb, StyleConfig style) {
         int x0 = super.getStart().f + super.width + 1;
         int y0 = super.getStart().s + super.width + 1;
         int x1 = super.end.f + super.width + 1;
         int y1 = super.end.s + super.width + 1;
 
-        String attributes = "fill=\"" + Algorithm.toHex(style.shadowFill) + "\" " +
-                "fill-opacity=\"" + Algorithm.fillOpacity(style.shadowFill) + "\"";
+        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" " +
+                "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;
@@ -46,16 +46,16 @@ public class HexBubbleElement extends BubbleElementBase {
     }
 
     @Override
-    public void toSVG(StringBuilder sb, Style style) {
+    public void toSVG(StringBuilder sb, StyleConfig style) {
         int x0 = super.getStart().f;
         int y0 = super.getStart().s;
         int x1 = super.end.f;
         int y1 = super.end.s;
 
-        String attributes = "stroke=\"" + Algorithm.toHex(style.lineColor) + "\" "
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" "
                 + "stroke-width=\"" + this.width + "\" "
-                + "fill=\"" + Algorithm.toHex(this.fill) + "\" "
-                + "fill-opacity=\"" + Algorithm.fillOpacity(this.fill) + "\"";
+                + "fill=\"" + StringUtils.toHex(this.fill) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(this.fill) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;
