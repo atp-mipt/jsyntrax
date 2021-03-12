@@ -22,7 +22,7 @@ public class LineElement extends Element {
 
     @Override
     public void toSVG(StringBuilder sb, Style style) {
-        String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " + "stroke-width=\"" + this.width + "\"";
+        String attributes = "stroke=\"" + Algorithm.toHex(style.lineColor) + "\" " + "stroke-width=\"" + this.width + "\"";
 
         if (arrow != null) {
             attributes += " marker-end=\"url(#arrow)\"";

@@ -30,7 +30,7 @@ public class OvalElement extends Element {
         int x1 = super.end.f;
         int y1 = super.end.s;
 
-        String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
+        String attributes = "stroke=\"" + Algorithm.toHex(style.lineColor) + "\" " +
                 "stroke-width=\"" + this.width + "\" " +
                 "fill=\"" + Algorithm.toHex(this.fill) + "\"";
 

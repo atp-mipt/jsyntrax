@@ -1,10 +1,11 @@
 package org.atpfivt.jsyntrax.styles;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.nio.file.Path;
 import java.util.List;
 
-public class Style {
+public final class Style {
     public Style(double scale, boolean transparent) {
         updateByConfig(new StyleConfig());
         this.scale = scale;
@@ -33,38 +34,38 @@ public class Style {
     }
 
     private void updateByConfig(StyleConfig cfg) {
-        line_width = cfg.getLineWidth();
-        line_color = cfg.getLineColor();
-        outline_width = cfg.getOutlineWidth();
+        lineWidth = cfg.getLineWidth();
+        lineColor = cfg.getLineColor();
+        outlineWidth = cfg.getOutlineWidth();
         padding = cfg.getPadding();
-        max_radius = cfg.getMaxRadius();
-        h_sep = cfg.getHSep();
-        v_sep = cfg.getVSep();
+        maxRadius = cfg.getMaxRadius();
+        hSep = cfg.getHSep();
+        vSep = cfg.getVSep();
         arrows = cfg.getArrows();
-        title_pos = cfg.getTitlePos();
-        bullet_fill = cfg.getBulletFill();
-        text_color = cfg.getTextColor();
+        titlePos = cfg.getTitlePos();
+        bulletFill = cfg.getBulletFill();
+        textColor = cfg.getTextColor();
         shadow = cfg.isShadow();
-        shadow_fill = cfg.getShadowFill();
-        title_font = cfg.getTitleFont();
+        shadowFill = cfg.getShadowFill();
+        titleFont = cfg.getTitleFont();
 
         nodeStyles = cfg.getNodeStyles();
     }
 
-    public int line_width;
-    public Color line_color;
-    public int outline_width;
-    public int padding;
-    public int max_radius;
-    public int h_sep;
-    public int v_sep;
-    public boolean arrows;
-    public TitlePosition title_pos;
-    public Color bullet_fill;
-    public Color text_color;
-    public boolean shadow;
-    public Color shadow_fill;
-    public Font title_font;
+    private int lineWidth;
+    private Color lineColor;
+    private int outlineWidth;
+    private int padding;
+    private int maxRadius;
+    private int hSep;
+    private int vSep;
+    private boolean arrows;
+    private TitlePosition titlePos;
+    private Color bulletFill;
+    private Color textColor;
+    private boolean shadow;
+    private Color shadowFill;
+    private Font titleFont;
 
     private final double scale;
     private final boolean transparent;
@@ -79,5 +80,33 @@ public class Style {
 
     public boolean isTransparent() {
         return transparent;
+    }
+
+    public int getLineWidth() {
+        return lineWidth;
+    }
+
+    public Color getLineColor() {
+        return lineColor;
+    }
+
+    public int getOutlineWidth() {
+        return outlineWidth;
+    }
+
+    public int getPadding() {
+        return padding;
+    }
+
+    public int getMaxRadius() {
+        return maxRadius;
+    }
+
+    public void setMaxRadius(int maxRadius) {
+        this.getMaxRadius() = maxRadius;
+    }
+
+    public int gethSep() {
+        return hSep;
     }
 }

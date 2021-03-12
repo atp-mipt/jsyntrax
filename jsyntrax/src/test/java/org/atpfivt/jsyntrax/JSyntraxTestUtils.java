@@ -30,7 +30,7 @@ public class JSyntraxTestUtils {
     }
 
     public static void updateStyle(Style s) {
-        s.title_font = transformFont(s.title_font);
+        s.titleFont = transformFont(s.titleFont);
         for (NodeStyle ns : s.nodeStyles) {
             ns.font = transformFont(ns.font);
         }

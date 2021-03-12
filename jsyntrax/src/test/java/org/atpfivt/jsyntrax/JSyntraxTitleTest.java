@@ -27,7 +27,7 @@ public class JSyntraxTitleTest {
     }
 
     private void setTitlePosition(TitlePosition pos) {
-        style.title_pos = pos;
+        style.titlePos = pos;
         JSyntraxTestUtils.updateStyle(style);
         canvasBuilder.withStyle(style);
     }

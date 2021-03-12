@@ -20,8 +20,8 @@ public class BubbleElement extends BubbleElementBase {
         int x1 = super.end.f + this.width + 1;
         int y1 = super.end.s + this.width + 1;
 
-        String attributes = "fill=\"" + Algorithm.toHex(style.shadow_fill) + "\" " +
-                "fill-opacity=\"" + Algorithm.fillOpacity(style.shadow_fill) + "\"";
+        String attributes = "fill=\"" + Algorithm.toHex(style.shadowFill) + "\" " +
+                "fill-opacity=\"" + Algorithm.fillOpacity(style.shadowFill) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;
@@ -56,7 +56,7 @@ public class BubbleElement extends BubbleElementBase {
         int x1 = super.end.f;
         int y1 = super.end.s;
 
-        String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
+        String attributes = "stroke=\"" + Algorithm.toHex(style.lineColor) + "\" " +
                 "stroke-width=\"" + this.width + "\" " +
                 "fill=\"" + Algorithm.toHex(this.fill) + "\" " +
                 "fill-opacity=\"" + Algorithm.fillOpacity(this.fill) + "\"";

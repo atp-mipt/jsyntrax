@@ -41,7 +41,7 @@ public class ArcElement extends Element {
         double startRad = Math.toRadians(this.startAngle);
         double stopRad = Math.toRadians(stop);
 
-        String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
+        String attributes = "stroke=\"" + Algorithm.toHex(style.lineColor) + "\" " +
                 "stroke-width=\"" + this.width + "\" fill=\"none\"";
 
         int xs = (int) (xc + rad * Math.cos(startRad));

@@ -115,7 +115,7 @@ public class SVGCanvas {
 
         // collect fonts
         HashMap<String, Pair<Font, Color>> fonts = new HashMap<>();
-        fonts.put("title_font", new Pair<>(this.style.title_font, this.style.text_color));
+        fonts.put("title_font", new Pair<>(this.style.titleFont, this.style.textColor));
         for (NodeStyle ns : this.style.nodeStyles) {
             fonts.put(ns.name + "_font", new Pair<>(ns.font, ns.text_color));
         }
@@ -167,7 +167,7 @@ public class SVGCanvas {
         sb.append("<defs>\n");
         sb.append("<marker id=\"arrow\" markerWidth=\"5\" markerHeight=\"4\" ")
                 .append("refX=\"2.5\" refY=\"2\" orient=\"auto\" markerUnits=\"strokeWidth\">\n");
-        String hex = Algorithm.toHex(this.style.line_color);
+        String hex = Algorithm.toHex(this.style.lineColor);
         sb.append("<path d=\"M0,0 L0.5,2 L0,4 L4.5,2 z\" fill=\"").append(hex).append("\" />\n");
         sb.append("</marker>\n</defs>\n");
 

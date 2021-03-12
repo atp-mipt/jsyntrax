@@ -77,14 +77,14 @@ public final class SVGCanvasBuilder implements Visitor {
         String titleTag = canvas.new_tag("x", "-title");
         Element e = new TitleElement(
                 title,
-                style.title_font,
+                style.titleFont,
                 "title_font",
                 titleTag
         );
         canvas.addElement(e);
 
         // set left / middle / right location
-        switch (style.title_pos) {
+        switch (style.titlePos) {
             case bl:
             case tl:
                 canvas.moveByTag(titleTag, 2 * style.padding, 0);
@@ -103,7 +103,7 @@ public final class SVGCanvasBuilder implements Visitor {
         }
 
         // set top / bottom location
-        switch (style.title_pos) {
+        switch (style.titlePos) {
             case tl:
             case tm:
             case tr:
@@ -144,7 +144,7 @@ public final class SVGCanvasBuilder implements Visitor {
         String tag = this.canvas.new_tag("x", "");
 
         Element e = new LineElement(new Pair<>(0, 0), new Pair<>(1, 0),
-                null, this.style.outline_width, tag);
+                null, this.style.outlineWidth, tag);
         e.setStart(new Pair<>(0, 0));
         e.setEnd(new Pair<>(1, 0));
         this.canvas.addElement(e);
@@ -209,7 +209,7 @@ public final class SVGCanvasBuilder implements Visitor {
                 end = new Pair<>(rgt + rad, y1);
                 b = new BubbleElement(start, end, href,
                         txt, new Pair<>(x0, y0), font,
-                        fontName, textColor, this.style.outline_width, fill, tag);
+                        fontName, textColor, this.style.outlineWidth, fill, tag);
                 break;
             }
             case "hex": {
@@ -217,7 +217,7 @@ public final class SVGCanvasBuilder implements Visitor {
                 end = new Pair<>(rgt + rad, y1);
                 b = new HexBubbleElement(start, end, href,
                         txt, new Pair<>(x0, y0), font,
-                        fontName, textColor, this.style.outline_width, fill, tag);
+                        fontName, textColor, this.style.outlineWidth, fill, tag);
                 break;
             }
             default: {
@@ -225,7 +225,7 @@ public final class SVGCanvasBuilder implements Visitor {
                 end = new Pair<>(rgt, y1);
                 b = new BoxBubbleElement(start, end, href,
                         txt, new Pair<>(x0, y0), font,
-                        fontName, textColor, this.style.outline_width, fill, tag);
+                        fontName, textColor, this.style.outlineWidth, fill, tag);
                 break;
             }
         }
@@ -241,11 +241,11 @@ public final class SVGCanvasBuilder implements Visitor {
     @Override
     public void visitBullet(Bullet unit) {
         String tag = this.canvas.new_tag("x", "");
-        int w = this.style.outline_width;
+        int w = this.style.outlineWidth;
         int r = w + 1;
         this.canvas.addElement(
                 new OvalElement(new Pair<>(0, -r), new Pair<>(2 * r, r),
-                        w, this.style.bullet_fill, tag));
+                        w, this.style.bulletFill, tag));
 
         setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(2 * r, 0)));
     }
@@ -255,8 +255,8 @@ public final class SVGCanvasBuilder implements Visitor {
         boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
-        int sep = this.style.h_sep;
-        int width = this.style.line_width;
+        int sep = this.style.hSep;
+        int width = this.style.lineWidth;
         Pair<Integer, Integer> pos = new Pair<>(0, 0);
 
         int unitNum = 0;
@@ -316,7 +316,7 @@ public final class SVGCanvasBuilder implements Visitor {
         boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
-        int sep = this.style.v_sep;
+        int sep = this.style.vSep;
         int vsep = sep / 2;
 
         // parse forward
@@ -354,20 +354,20 @@ public final class SVGCanvasBuilder implements Visitor {
             bexx += dx;
             this.canvas.addElement(
                     new LineElement(new Pair<>(0, dy), new Pair<>(dx, dy),
-                            null, this.style.line_width, bt));
+                            null, this.style.lineWidth, bt));
             this.canvas.addElement(
                     new LineElement(new Pair<>(bexx, bexy), new Pair<>(fx1, bexy),
-                            (ltor || dx < 2 * vsep ? null : "first"), this.style.line_width, bt));
+                            (ltor || dx < 2 * vsep ? null : "first"), this.style.lineWidth, bt));
             mxx = fexx;
         } else if (bw > fw) {
             this.canvas.moveByTag(ft, dx, 0);
             fexx += dx;
             this.canvas.addElement(
                     new LineElement(new Pair<>(0, 0), new Pair<>(dx, fexy),
-                            null, this.style.line_width, ft));
+                            null, this.style.lineWidth, ft));
             this.canvas.addElement(
                     new LineElement(new Pair<>(fexx, fexy), new Pair<>(bx1, fexy),
-                            null, this.style.line_width, ft));
+                            null, this.style.lineWidth, ft));
             mxx = bexx;
         } else {
             mxx = fexx;
@@ -384,7 +384,7 @@ public final class SVGCanvasBuilder implements Visitor {
         mxx += sep;
         this.canvas.addElement(
                 new LineElement(new Pair<>(0, 0), new Pair<>(sep, 0),
-                        null, this.style.line_width, tag));
+                        null, this.style.lineWidth, tag));
 
         drawLeftTurnBack(tag, sep, 0, dy, ltor ? "up" : "down");
         drawRightTurnBack(tag, mxx, fexy, bexy, ltor ? "down" : "up");
@@ -394,7 +394,7 @@ public final class SVGCanvasBuilder implements Visitor {
 
         this.canvas.addElement(
                 new LineElement(new Pair<>(mxx, fexy), new Pair<>(x1, fexy),
-                        null, this.style.line_width, tag));
+                        null, this.style.lineWidth, tag));
 
         setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(x1, fexy)));
     }
@@ -403,7 +403,7 @@ public final class SVGCanvasBuilder implements Visitor {
     public void visitLoop(Loop loop) {
         boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
-        int sep = this.style.v_sep;
+        int sep = this.style.vSep;
         int vsep = sep / 2;
 
         // parse forward
@@ -442,10 +442,10 @@ public final class SVGCanvasBuilder implements Visitor {
                 bexx += dx;
                 this.canvas.addElement(
                         new LineElement(new Pair<>(0, dy), new Pair<>(dx, dy),
-                                null, this.style.line_width, bt));
+                                null, this.style.lineWidth, bt));
                 this.canvas.addElement(
                         new LineElement(new Pair<>(bexx, bexy), new Pair<>(fexx, bexy),
-                                "first", this.style.line_width, bt));
+                                "first", this.style.lineWidth, bt));
             } else {
                 dx = (fw - bw) / 2;
                 this.canvas.moveByTag(bt, dx, 0);
@@ -453,10 +453,10 @@ public final class SVGCanvasBuilder implements Visitor {
 
                 this.canvas.addElement(
                         new LineElement(new Pair<>(0, dy), new Pair<>(dx, dy),
-                                ltor || dx < 2 * vsep ? null : "last", this.style.line_width, bt));
+                                ltor || dx < 2 * vsep ? null : "last", this.style.lineWidth, bt));
                 this.canvas.addElement(
                         new LineElement(new Pair<>(bexx, bexy), new Pair<>(fx1, bexy),
-                                !ltor || dx < 2 * vsep ? null : "first", this.style.line_width, bt));
+                                !ltor || dx < 2 * vsep ? null : "first", this.style.lineWidth, bt));
             }
             mxx = fexx;
         } else if (bw > fw) {
@@ -465,10 +465,10 @@ public final class SVGCanvasBuilder implements Visitor {
             fexx += dx;
             this.canvas.addElement(
                     new LineElement(new Pair<>(0, 0), new Pair<>(dx, fexy),
-                            ltor ? "last" : "first", this.style.line_width, ft));
+                            ltor ? "last" : "first", this.style.lineWidth, ft));
             this.canvas.addElement(
                     new LineElement(new Pair<>(fexx, fexy), new Pair<>(bx1, fexy),
-                            null, this.style.line_width, ft));
+                            null, this.style.lineWidth, ft));
             mxx = bexx;
         } else {
             mxx = fexx;
@@ -486,15 +486,15 @@ public final class SVGCanvasBuilder implements Visitor {
         mxx += sep;
         this.canvas.addElement(
                 new LineElement(new Pair<>(0, 0), new Pair<>(sep, 0),
-                        null, this.style.line_width, tag));
+                        null, this.style.lineWidth, tag));
 
         drawLeftTurnBack(tag, sep, 0, dy, ltor ? "up" : "down");
         drawRightTurnBack(tag, mxx, fexy, bexy, ltor ? "down" : "up");
 
-        int exit_x = mxx + this.style.max_radius;
+        int exit_x = mxx + this.style.getMaxRadius();
         this.canvas.addElement(
                 new LineElement(new Pair<>(mxx, fexy), new Pair<>(exit_x, fexy),
-                        null, this.style.line_width, tag));
+                        null, this.style.lineWidth, tag));
 
         setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(exit_x, fexy)));
     }
@@ -504,7 +504,7 @@ public final class SVGCanvasBuilder implements Visitor {
         boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
-        int sep = this.style.v_sep;
+        int sep = this.style.vSep;
         int vsep = sep / 2;
 
         int n = choice.getUnits().size();
@@ -556,14 +556,14 @@ public final class SVGCanvasBuilder implements Visitor {
             if (i == 0) {
                 this.canvas.addElement(
                         new LineElement(new Pair<>(0, 0), new Pair<>(dx, 0),
-                                ltor && dx > x2 ? "last" : null, this.style.line_width, tag));
+                                ltor && dx > x2 ? "last" : null, this.style.lineWidth, tag));
                 this.canvas.addElement(
                         new LineElement(new Pair<>(texx, texy), new Pair<>(x5 + 1, texy),
-                                ltor ? null : "first", this.style.line_width, tag));
+                                ltor ? null : "first", this.style.lineWidth, tag));
                 exy = texy;
                 this.canvas.addElement(
                         new ArcElement(new Pair<>(-sep, 0), new Pair<>(sep, sep * 2),
-                                this.style.line_width, 90, -90, tag));
+                                this.style.lineWidth, 90, -90, tag));
                 btm = ty1;
             } else {
                 int dy = Math.max(btm - ty0 + vsep, 2 * sep);
@@ -572,29 +572,29 @@ public final class SVGCanvasBuilder implements Visitor {
                 if (dx > x2) {
                     this.canvas.addElement(
                             new LineElement(new Pair<>(x2, dy), new Pair<>(dx, dy),
-                                    ltor ? "last" : null, this.style.line_width, tag));
+                                    ltor ? "last" : null, this.style.lineWidth, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(texx, texy), new Pair<>(x3, texy),
-                                    ltor ? null : "first", this.style.line_width, tag));
+                                    ltor ? null : "first", this.style.lineWidth, tag));
                 }
                 int y1 = dy - 2 * sep;
                 this.canvas.addElement(
                         new ArcElement(new Pair<>(sep, y1), new Pair<>(sep + 2 * sep, dy),
-                                this.style.line_width, 180, 90, tag));
+                                this.style.lineWidth, 180, 90, tag));
                 int y2 = texy - 2 * sep;
                 this.canvas.addElement(
                         new ArcElement(new Pair<>(x3 - sep, y2), new Pair<>(x4, texy),
-                                this.style.line_width, 270, 90, tag));
+                                this.style.lineWidth, 270, 90, tag));
                 if (i + 1 == n) {
                     this.canvas.addElement(
                             new ArcElement(new Pair<>(x4, exy), new Pair<>(x4 + 2 * sep, exy + 2 * sep),
-                                    this.style.line_width, 180, -90, tag));
+                                    this.style.lineWidth, 180, -90, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(sep, dy - sep), new Pair<>(sep, sep),
-                                    null, this.style.line_width, tag));
+                                    null, this.style.lineWidth, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(x4, texy - sep), new Pair<>(x4, exy + sep),
-                                    null, this.style.line_width, tag));
+                                    null, this.style.lineWidth, tag));
                 }
                 btm = ty1 + dy;
             }
@@ -636,7 +636,7 @@ public final class SVGCanvasBuilder implements Visitor {
         boolean ltor = getLtor();
         String tag = this.canvas.new_tag("x", "");
 
-        int sep = this.style.v_sep * 2;
+        int sep = this.style.vSep * 2;
         int btm = 0;
         int n = stack.getUnits().size();
         if (n == 0) {
@@ -687,7 +687,7 @@ public final class SVGCanvasBuilder implements Visitor {
             } else {
                 enter_y = btm - ty0 + sep * 2 + 2;
                 if (bypass == 1) {
-                    next_bypass_y = enter_y - this.style.max_radius;
+                    next_bypass_y = enter_y - this.style.getMaxRadius();
                 }
                 if (indent < 0) {
                     w = tx1 - tx0;
@@ -702,35 +702,35 @@ public final class SVGCanvasBuilder implements Visitor {
                 back_y = btm + sep + 1;
 
                 if (bypass_y > 0) {
-                    mid_y = (bypass_y + this.style.max_radius + back_y) / 2;
+                    mid_y = (bypass_y + this.style.getMaxRadius() + back_y) / 2;
                     this.canvas.addElement(
                             new LineElement(new Pair<>(bypass_x, bypass_y), new Pair<>(bypass_x, mid_y),
-                                    "last", this.style.line_width, tag));
+                                    "last", this.style.lineWidth, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(bypass_x, mid_y),
-                                    new Pair<>(bypass_x, back_y + this.style.max_radius),
-                                    null, this.style.line_width, tag));
+                                    new Pair<>(bypass_x, back_y + this.style.getMaxRadius()),
+                                    null, this.style.lineWidth, tag));
                 }
 
                 this.canvas.moveByTag(t, enter_x, enter_y);
                 e2 = exit_x + sep;
                 this.canvas.addElement(
                         new LineElement(new Pair<>(exit_x, exit_y), new Pair<>(e2, exit_y),
-                                null, this.style.line_width, tag));
+                                null, this.style.lineWidth, tag));
                 drawRightTurnBack(tag, e2, exit_y, back_y, "down");
                 e3 = enter_x - sep;
-                bypass_x = e3 - this.style.max_radius;
+                bypass_x = e3 - this.style.getMaxRadius();
                 int emid = (e2 + e3) / 2;
                 this.canvas.addElement(
                         new LineElement(new Pair<>(e2, back_y), new Pair<>(emid, back_y),
-                                "last", this.style.line_width, tag));
+                                "last", this.style.lineWidth, tag));
                 this.canvas.addElement(
                         new LineElement(new Pair<>(emid, back_y), new Pair<>(e3, back_y),
-                                null, this.style.line_width, tag));
+                                null, this.style.lineWidth, tag));
                 drawLeftTurnBack(tag, e3, back_y, enter_y, "down");
                 this.canvas.addElement(
                         new LineElement(new Pair<>(e3, enter_y), new Pair<>(enter_x, enter_y),
-                                "last", this.style.line_width, tag));
+                                "last", this.style.lineWidth, tag));
                 exit_x = enter_x + exx;
                 exit_y = enter_y + exy;
             }
@@ -743,40 +743,40 @@ public final class SVGCanvasBuilder implements Visitor {
 
         if (bypass == 1) {
             int fwd_y = btm + sep + 1;
-            mid_y = (next_bypass_y + this.style.max_radius + fwd_y) / 2;
-            int descender_x = exit_x + this.style.max_radius;
+            mid_y = (next_bypass_y + this.style.getMaxRadius() + fwd_y) / 2;
+            int descender_x = exit_x + this.style.getMaxRadius();
             this.canvas.addElement(
                     new LineElement(new Pair<>(bypass_x, next_bypass_y), new Pair<>(bypass_x, mid_y),
-                            "last", this.style.line_width, tag));
+                            "last", this.style.lineWidth, tag));
             this.canvas.addElement(
                     new LineElement(new Pair<>(bypass_x, mid_y),
-                            new Pair<>(bypass_x, fwd_y - this.style.max_radius),
-                            null, this.style.line_width, tag));
+                            new Pair<>(bypass_x, fwd_y - this.style.getMaxRadius()),
+                            null, this.style.lineWidth, tag));
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(bypass_x, fwd_y - 2 * this.style.max_radius),
-                            new Pair<>(bypass_x + 2 * this.style.max_radius, fwd_y),
-                            this.style.line_width, 180, 90, tag));
+                    new ArcElement(new Pair<>(bypass_x, fwd_y - 2 * this.style.getMaxRadius()),
+                            new Pair<>(bypass_x + 2 * this.style.getMaxRadius(), fwd_y),
+                            this.style.lineWidth, 180, 90, tag));
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(exit_x - this.style.max_radius, exit_y),
-                            new Pair<>(descender_x, exit_y + 2 * this.style.max_radius),
-                            this.style.line_width, 90, -90, tag));
+                    new ArcElement(new Pair<>(exit_x - this.style.getMaxRadius(), exit_y),
+                            new Pair<>(descender_x, exit_y + 2 * this.style.getMaxRadius()),
+                            this.style.lineWidth, 90, -90, tag));
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(descender_x, fwd_y - 2 * this.style.max_radius),
-                            new Pair<>(descender_x + 2 * this.style.max_radius, fwd_y),
-                            this.style.line_width, 180, 90, tag));
-            exit_x += 2 * this.style.max_radius;
+                    new ArcElement(new Pair<>(descender_x, fwd_y - 2 * this.style.getMaxRadius()),
+                            new Pair<>(descender_x + 2 * this.style.getMaxRadius(), fwd_y),
+                            this.style.lineWidth, 180, 90, tag));
+            exit_x += 2 * this.style.getMaxRadius();
             int half_x = (exit_x + indent) / 2;
             this.canvas.addElement(
-                    new LineElement(new Pair<>(bypass_x + this.style.max_radius, fwd_y),
+                    new LineElement(new Pair<>(bypass_x + this.style.getMaxRadius(), fwd_y),
                             new Pair<>(half_x, fwd_y),
-                            "last", this.style.line_width, tag));
+                            "last", this.style.lineWidth, tag));
             this.canvas.addElement(
                     new LineElement(new Pair<>(half_x, fwd_y), new Pair<>(exit_x, fwd_y),
-                            null, this.style.line_width, tag));
+                            null, this.style.lineWidth, tag));
             this.canvas.addElement(
-                    new LineElement(new Pair<>(descender_x, exit_y + this.style.max_radius),
-                            new Pair<>(descender_x, fwd_y - this.style.max_radius),
-                            "last", this.style.line_width, tag));
+                    new LineElement(new Pair<>(descender_x, exit_y + this.style.getMaxRadius()),
+                            new Pair<>(descender_x, fwd_y - this.style.getMaxRadius()),
+                            "last", this.style.lineWidth, tag));
             exit_y = fwd_y;
         }
 
@@ -797,7 +797,7 @@ public final class SVGCanvasBuilder implements Visitor {
 
     @Override
     public void visitIndentstack(Indentstack unit) {
-        int sep = this.style.h_sep * unit.getIndent();
+        int sep = this.style.hSep * unit.getIndent();
         setIndent(sep);
         parseStack(unit);
     }
@@ -806,47 +806,47 @@ public final class SVGCanvasBuilder implements Visitor {
         int y0 = Math.min(y0_, y1_);
         int y1 = Math.max(y0_, y1_);
 
-        if (y1 - y0 > 3 * this.style.max_radius) {
-            int xr0 = x - this.style.max_radius;
-            int xr1 = x + this.style.max_radius;
+        if (y1 - y0 > 3 * this.style.getMaxRadius()) {
+            int xr0 = x - this.style.getMaxRadius();
+            int xr1 = x + this.style.getMaxRadius();
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(xr0, y0), new Pair<>(xr1, y0 + 2 * this.style.max_radius),
-                            this.style.line_width, 90, 90, tag));
-            int yr0 = y0 + this.style.max_radius;
-            int yr1 = y1 - this.style.max_radius;
-            if (Math.abs(yr1 - yr0) > 2 * this.style.max_radius) {
+                    new ArcElement(new Pair<>(xr0, y0), new Pair<>(xr1, y0 + 2 * this.style.getMaxRadius()),
+                            this.style.lineWidth, 90, 90, tag));
+            int yr0 = y0 + this.style.getMaxRadius();
+            int yr1 = y1 - this.style.getMaxRadius();
+            if (Math.abs(yr1 - yr0) > 2 * this.style.getMaxRadius()) {
                 int half_y = (yr0 + yr1) / 2;
                 if (flow.equals("down")) {
                     this.canvas.addElement(
                             new LineElement(new Pair<>(xr0, yr0), new Pair<>(xr0, half_y),
-                                    "last", this.style.line_width, tag));
+                                    "last", this.style.lineWidth, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(xr0, half_y), new Pair<>(xr0, yr1),
-                                    null, this.style.line_width, tag));
+                                    null, this.style.lineWidth, tag));
                 } else {
                     this.canvas.addElement(
                             new LineElement(new Pair<>(xr0, yr1), new Pair<>(xr0, half_y),
-                                    "last", this.style.line_width, tag));
+                                    "last", this.style.lineWidth, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(xr0, half_y), new Pair<>(xr0, yr0),
-                                    null, this.style.line_width, tag));
+                                    null, this.style.lineWidth, tag));
                 }
             } else {
                 this.canvas.addElement(
                         new LineElement(new Pair<>(xr0, yr0), new Pair<>(xr0, yr1),
-                                null, this.style.line_width, tag));
+                                null, this.style.lineWidth, tag));
             }
 
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(xr0, y1 - 2 * this.style.max_radius), new Pair<>(xr1, y1),
-                            this.style.line_width, 180, 90, tag));
+                    new ArcElement(new Pair<>(xr0, y1 - 2 * this.style.getMaxRadius()), new Pair<>(xr1, y1),
+                            this.style.lineWidth, 180, 90, tag));
         } else {
             int r = (y1 - y0) / 2;
             int x0 = x - r;
             int x1 = x + r;
             this.canvas.addElement(
                     new ArcElement(new Pair<>(x0, y0), new Pair<>(x1, y1),
-                            this.style.line_width, 90, 180, tag));
+                            this.style.lineWidth, 90, 180, tag));
         }
     }
 
@@ -854,49 +854,49 @@ public final class SVGCanvasBuilder implements Visitor {
         int y0 = Math.min(y0_, y1_);
         int y1 = Math.max(y0_, y1_);
 
-        if (y1 - y0 > 3 * this.style.max_radius) {
-            int xr0 = x - this.style.max_radius;
-            int xr1 = x + this.style.max_radius;
+        if (y1 - y0 > 3 * this.style.getMaxRadius()) {
+            int xr0 = x - this.style.getMaxRadius();
+            int xr1 = x + this.style.getMaxRadius();
 
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(xr0, y0), new Pair<>(xr1, y0 + 2 * this.style.max_radius),
-                            this.style.line_width, 90, -90, tag));
-            int yr0 = y0 + this.style.max_radius;
-            int yr1 = y1 - this.style.max_radius;
+                    new ArcElement(new Pair<>(xr0, y0), new Pair<>(xr1, y0 + 2 * this.style.getMaxRadius()),
+                            this.style.lineWidth, 90, -90, tag));
+            int yr0 = y0 + this.style.getMaxRadius();
+            int yr1 = y1 - this.style.getMaxRadius();
 
-            if (Math.abs(yr1 - yr0) > 2 * this.style.max_radius) {
+            if (Math.abs(yr1 - yr0) > 2 * this.style.getMaxRadius()) {
                 int half_y = (yr1 + yr0) / 2;
                 if (flow.equals("down")) {
                     this.canvas.addElement(
                             new LineElement(new Pair<>(xr1, yr0), new Pair<>(xr1, half_y),
-                                    "last", this.style.line_width, tag));
+                                    "last", this.style.lineWidth, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(xr1, half_y), new Pair<>(xr1, yr1),
-                                    null, this.style.line_width, tag));
+                                    null, this.style.lineWidth, tag));
                 } else {
                     this.canvas.addElement(
                             new LineElement(new Pair<>(xr1, yr1), new Pair<>(xr1, half_y),
-                                    "last", this.style.line_width, tag));
+                                    "last", this.style.lineWidth, tag));
                     this.canvas.addElement(
                             new LineElement(new Pair<>(xr1, half_y), new Pair<>(xr1, yr0),
-                                    null, this.style.line_width, tag));
+                                    null, this.style.lineWidth, tag));
                 }
             } else {
                 this.canvas.addElement(
                         new LineElement(new Pair<>(xr1, yr0), new Pair<>(xr1, yr1),
-                                null, this.style.line_width, tag));
+                                null, this.style.lineWidth, tag));
             }
 
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(xr0, y1 - 2 * this.style.max_radius), new Pair<>(xr1, y1),
-                            this.style.line_width, 0, -90, tag));
+                    new ArcElement(new Pair<>(xr0, y1 - 2 * this.style.getMaxRadius()), new Pair<>(xr1, y1),
+                            this.style.lineWidth, 0, -90, tag));
         } else {
             int r = (y1 - y0) / 2;
             int x0 = x - r;
             int x1 = x + r;
             this.canvas.addElement(
                     new ArcElement(new Pair<>(x0, y0), new Pair<>(x1, y1),
-                            this.style.line_width, 90, -180, tag));
+                            this.style.lineWidth, 90, -180, tag));
         }
     }
 
