@@ -96,7 +96,7 @@ public final class StyleConfig {
         this.setScale(scale);
 
         Wini config = new Wini(Main.class
-                .getResourceAsStream("/default_style_config.ini")
+                .getResourceAsStream("/jsyntrax.ini")
         );
         if (config.containsKey("style")) {
             parseStyleArgs(config.get("style"));

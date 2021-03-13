@@ -45,8 +45,6 @@ public class InputArguments {
                 (o, s) -> o.transparent = true);
         OPTIONS_MAP.put(new Option(null, "scale", true, "Scale image"),
                 (o, s) -> o.scale = Double.parseDouble(s));
-        OPTIONS_MAP.put(new Option(null, "get-style", false, "Get default style config"),
-                (o, s) -> o.getDefaultStyle = true);
         OPTIONS_MAP.put(new Option("v", "version", false, "Release version"),
                 (o, s) -> {
                     o.version = "JSyntrax " + Main.class
@@ -54,6 +52,8 @@ public class InputArguments {
                             .getImplementationVersion();
                 }
         );
+        OPTIONS_MAP.put(new Option(null, "get-style", false, "Create default style .ini"),
+                (o, s) -> o.getDefaultStyle = true);
     }
 
     InputArguments(String... args) throws ParseException {

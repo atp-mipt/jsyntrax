@@ -17,6 +17,8 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 
 public final class Main {
+    public static final String JSYNTRAX_INI = "jsyntrax.ini";
+
     private Main() { }
 
     public static void main(String... args) throws IOException, NoSuchFieldException, IllegalAccessException {
@@ -33,24 +35,24 @@ public final class Main {
         // print version if specified
         String version = iArgs.getVersion();
         if (version != null) {
-            if (version.contains("null")) {
-                System.out.println("JSyntrax version is not available. "
-                        + "Make sure you're running valid .jar distribution.");
-            } else {
-                System.out.println(iArgs.getVersion());
-            }
+            System.out.println(iArgs.getVersion());
             return;
         }
 
         // get-style
         if (iArgs.getDefaultStyleProperty()) {
             String config = new BufferedReader(new InputStreamReader(
-                    Main.class.getResourceAsStream("/default_style_config.ini")))
+                    Main.class.getResourceAsStream("/" + JSYNTRAX_INI)))
                     .lines()
                     .collect(Collectors.joining("\n"))
                     + "\n";
-            Path destPath = Path.of(System.getProperty("user.dir") + "/default_style_config.ini");
-            Files.writeString(destPath, config);
+            Path destPath = Path.of(System.getProperty("user.dir"), JSYNTRAX_INI);
+            if (Files.exists(destPath)) {
+                System.out.printf("Ini file \"%s\" exists%n", JSYNTRAX_INI);
+            } else {
+                System.out.printf("Creating ini with default styles in \"%s\"%n", JSYNTRAX_INI);
+                Files.writeString(destPath, config);
+            }
             return;
         }
 

@@ -54,10 +54,7 @@ class MainTest {
         System.setOut(new PrintStream(outputStreamCaptor));
         try {
             Main.main("-v");
-            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).contains(
-                    "JSyntrax version is not available. "
-                            + "Make sure you're running valid .jar distribution."
-            ));
+            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).startsWith("JSyntrax "));
         } finally {
             System.setOut(standardOut);
         }
@@ -69,11 +66,11 @@ class MainTest {
         Main.main("--get-style");
         Path expectedPath = Path.of(
                 System.getProperty("user.dir"),
-                "default_style_config.ini"
+                Main.JSYNTRAX_INI
         );
         byte[] configExpected  = Main
                 .class
-                .getResourceAsStream("/default_style_config.ini")
+                .getResourceAsStream("/" + Main.JSYNTRAX_INI)
                 .readAllBytes();
         try {
             byte[] configActual = Files.readAllBytes(expectedPath);
