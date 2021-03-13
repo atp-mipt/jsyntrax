@@ -16,13 +16,13 @@ public class BubbleElement extends BubbleElementBase {
 
     @Override
     public void addShadow(StringBuilder sb, StyleConfig style) {
-        int x0 = super.getStart().f + this.width + 1;
-        int y0 = super.getStart().s + this.width + 1;
-        int x1 = super.end.f + this.width + 1;
-        int y1 = super.end.s + this.width + 1;
+        int x0 = super.getStart().f + this.getWidth() + 1;
+        int y0 = super.getStart().s + this.getWidth() + 1;
+        int x1 = super.getEnd().f + this.getWidth() + 1;
+        int y1 = super.getEnd().s + this.getWidth() + 1;
 
-        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" " +
-                "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
+        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;
@@ -38,8 +38,7 @@ public class BubbleElement extends BubbleElementBase {
                     .append("cy=\"").append(yc).append("\" ")
                     .append("r=\"").append(rad).append("\" ")
                     .append(attributes).append(" />\n");
-        }
-        else {
+        } else {
             // Rounded bubble
             sb.append("<path d=\"M").append(lft).append(",").append(y1)
                     .append(" A").append(rad).append(",").append(rad)
@@ -54,13 +53,13 @@ public class BubbleElement extends BubbleElementBase {
     public void toSVG(StringBuilder sb, StyleConfig style) {
         int x0 = super.getStart().f;
         int y0 = super.getStart().s;
-        int x1 = super.end.f;
-        int y1 = super.end.s;
+        int x1 = super.getEnd().f;
+        int y1 = super.getEnd().s;
 
-        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" " +
-                "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + StringUtils.toHex(this.fill) + "\" " +
-                "fill-opacity=\"" + StringUtils.fillOpacity(this.fill) + "\"";
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" "
+                + "stroke-width=\"" + this.getWidth() + "\" "
+                + "fill=\"" + StringUtils.toHex(this.getFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(this.getFill()) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;
@@ -76,8 +75,7 @@ public class BubbleElement extends BubbleElementBase {
                 .append("cy=\"").append(yc).append("\" ")
                 .append("r=\"").append(rad).append("\" ")
                 .append(attributes).append(" />\n");
-        }
-        else {
+        } else {
             // Rounded bubble
             sb.append("<path d=\"M").append(lft).append(",").append(y1)
                     .append(" A").append(rad).append(",").append(rad)

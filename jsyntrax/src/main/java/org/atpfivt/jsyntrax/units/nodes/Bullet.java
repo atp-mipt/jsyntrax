@@ -6,7 +6,7 @@ import org.atpfivt.jsyntrax.units.tracks.Track;
 import org.atpfivt.jsyntrax.visitors.Visitor;
 
 public class Bullet implements Unit {
-    public Bullet() {}
+    public Bullet() { }
 
     @Override
     public void accept(Visitor visitor) {

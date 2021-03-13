@@ -5,12 +5,13 @@ import org.atpfivt.jsyntrax.visitors.Visitor;
 
 import java.util.List;
 
-public class Rightstack extends Stack {
+public final class Rightstack extends Stack {
   public Rightstack(List<Unit> units) {
     super(units);
   }
 
-  public void accept(Visitor visitor) {
-    visitor.visitRightstack(this);
-  }
+    @Override
+    public void accept(Visitor visitor) {
+      visitor.visitRightstack(this);
+    }
 }

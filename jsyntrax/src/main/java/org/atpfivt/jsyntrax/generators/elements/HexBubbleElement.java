@@ -16,13 +16,13 @@ public class HexBubbleElement extends BubbleElementBase {
 
     @Override
     public void addShadow(StringBuilder sb, StyleConfig style) {
-        int x0 = super.getStart().f + super.width + 1;
-        int y0 = super.getStart().s + super.width + 1;
-        int x1 = super.end.f + super.width + 1;
-        int y1 = super.end.s + super.width + 1;
+        int x0 = super.getStart().f + super.getWidth() + 1;
+        int y0 = super.getStart().s + super.getWidth() + 1;
+        int x1 = super.getEnd().f + super.getWidth() + 1;
+        int y1 = super.getEnd().s + super.getWidth() + 1;
 
-        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" " +
-                "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
+        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;
@@ -49,13 +49,13 @@ public class HexBubbleElement extends BubbleElementBase {
     public void toSVG(StringBuilder sb, StyleConfig style) {
         int x0 = super.getStart().f;
         int y0 = super.getStart().s;
-        int x1 = super.end.f;
-        int y1 = super.end.s;
+        int x1 = super.getEnd().f;
+        int y1 = super.getEnd().s;
 
         String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" "
-                + "stroke-width=\"" + this.width + "\" "
-                + "fill=\"" + StringUtils.toHex(this.fill) + "\" "
-                + "fill-opacity=\"" + StringUtils.fillOpacity(this.fill) + "\"";
+                + "stroke-width=\"" + this.getWidth() + "\" "
+                + "fill=\"" + StringUtils.toHex(this.getFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(this.getFill()) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;

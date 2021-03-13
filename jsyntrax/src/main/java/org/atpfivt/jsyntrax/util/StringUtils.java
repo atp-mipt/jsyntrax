@@ -1,17 +1,21 @@
 package org.atpfivt.jsyntrax.util;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtils {
-    private static char Hex(int val) {
+
+public final class StringUtils {
+    private StringUtils() { }
+
+    private static char hex(int val) {
         if (val < 10) {
-            return (char)(val + (int)('0'));
+            return (char) (val + (int) ('0'));
         }
         if (val < 16) {
-            return (char)(val - 10 + (int)('a'));
+            return (char) (val - 10 + (int) ('a'));
         }
         return '@';
     }
@@ -66,10 +70,10 @@ public class StringUtils {
                 .replace("\"", "&quot;");
     }
 
-    public static String snakeToCamelCase(String snakeCase){
+    public static String snakeToCamelCase(String snakeCase) {
         String[] parts = snakeCase.split("_");
         StringBuilder camelCaseString = new StringBuilder(parts[0]);
-        for (String part : Arrays.copyOfRange(parts, 1, parts.length)){
+        for (String part : Arrays.copyOfRange(parts, 1, parts.length)) {
             camelCaseString
                     .append(Character.toUpperCase(part.charAt(0)))
                     .append(part.substring(1));
@@ -78,9 +82,9 @@ public class StringUtils {
     }
 
     public static String toHex(Color c) {
-        return "#" + Hex(c.getRed() / 16) + Hex(c.getRed() % 16)
-                + Hex(c.getGreen() / 16) + Hex(c.getGreen() % 16)
-                + Hex(c.getBlue() / 16) + Hex(c.getBlue() % 16);
+        return "#" + hex(c.getRed() / 16) + hex(c.getRed() % 16)
+                + hex(c.getGreen() / 16) + hex(c.getGreen() % 16)
+                + hex(c.getBlue() / 16) + hex(c.getBlue() % 16);
     }
 
     public static Double fillOpacity(Color c) {

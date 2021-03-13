@@ -76,7 +76,7 @@ public final class SVGCanvasBuilder implements Visitor {
         Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> bbox =
                 canvas.getBoundingBoxByTag(tag);
 
-        String titleTag = canvas.new_tag("x", "-title");
+        String titleTag = canvas.newTag("x", "-title");
         Element e = new TitleElement(
                 title,
                 style.getTitleFont(),
@@ -143,7 +143,7 @@ public final class SVGCanvasBuilder implements Visitor {
 
     @Override
     public void visitNoneNode(NoneNode unit) {
-        String tag = this.canvas.new_tag("x", "");
+        String tag = this.canvas.newTag("x", "");
 
         Element e = new LineElement(new Pair<>(0, 0), new Pair<>(1, 0),
                 null, this.style.getOutlineWidth(), tag);
@@ -167,11 +167,11 @@ public final class SVGCanvasBuilder implements Visitor {
         NodeStyle ns = this.style.getNodeStyle(txt);
         txt = ns.unwrapTextContent(txt);
 
-        Font font = ns.font;
-        String fontName = ns.name + "_font";
+        Font font = ns.getFont();
+        String fontName = ns.getName() + "_font";
 
-        Color fill = ns.fill;
-        Color textColor = ns.textColor;
+        Color fill = ns.getFill();
+        Color textColor = ns.getTextColor();
 
         Pair<Integer, Integer> textSize = getTextSize(txt, font);
         int x0 = -textSize.f / 2;
@@ -186,7 +186,7 @@ public final class SVGCanvasBuilder implements Visitor {
         int rgt = x1;
         int top = y1 - 2 * rad;
 
-        if (ns.shape.equals("bubble") || ns.shape.equals("hex")) {
+        if (ns.getShape().equals("bubble") || ns.getShape().equals("hex")) {
             lft += rad / 2 - 2;
             rgt -= rad / 2 - 2;
         } else {
@@ -199,29 +199,27 @@ public final class SVGCanvasBuilder implements Visitor {
             rgt = lft;
         }
 
-        String tag = this.canvas.new_tag("x", "-box");
+        String tag = this.canvas.newTag("x", "-box");
         Pair<Integer, Integer> start;
         Pair<Integer, Integer> end;
 
         BubbleElementBase b;
         String href = this.urlMap.get(txt);
-        switch (ns.shape) {
-            case "bubble": {
+        switch (ns.getShape()) {
+            case "bubble":
                 start = new Pair<>(lft - rad, top);
                 end = new Pair<>(rgt + rad, y1);
                 b = new BubbleElement(start, end, href,
                         txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.getOutlineWidth(), fill, tag);
                 break;
-            }
-            case "hex": {
+            case "hex":
                 start = new Pair<>(lft - rad, top);
                 end = new Pair<>(rgt + rad, y1);
                 b = new HexBubbleElement(start, end, href,
                         txt, new Pair<>(x0, y0), font,
                         fontName, textColor, this.style.getOutlineWidth(), fill, tag);
                 break;
-            }
             default: {
                 start = new Pair<>(lft, top);
                 end = new Pair<>(rgt, y1);
@@ -242,7 +240,7 @@ public final class SVGCanvasBuilder implements Visitor {
 
     @Override
     public void visitBullet(Bullet unit) {
-        String tag = this.canvas.new_tag("x", "");
+        String tag = this.canvas.newTag("x", "");
         int w = this.style.getOutlineWidth();
         int r = w + 1;
         this.canvas.addElement(
@@ -255,7 +253,7 @@ public final class SVGCanvasBuilder implements Visitor {
     @Override
     public void visitLine(Line line) {
         boolean ltor = getLtor();
-        String tag = this.canvas.new_tag("x", "");
+        String tag = this.canvas.newTag("x", "");
 
         int sep = this.style.getHSep();
         int width = this.style.getLineWidth();
@@ -316,7 +314,7 @@ public final class SVGCanvasBuilder implements Visitor {
     @Override
     public void visitToploop(Toploop loop) {
         boolean ltor = getLtor();
-        String tag = this.canvas.new_tag("x", "");
+        String tag = this.canvas.newTag("x", "");
 
         int sep = this.style.getVSep();
         int vsep = sep / 2;
@@ -358,17 +356,24 @@ public final class SVGCanvasBuilder implements Visitor {
                     new LineElement(new Pair<>(0, dy), new Pair<>(dx, dy),
                             null, this.style.getLineWidth(), bt));
             this.canvas.addElement(
-                    new LineElement(new Pair<>(bexx, bexy), new Pair<>(fx1, bexy),
-                            (ltor || dx < 2 * vsep ? null : "first"), this.style.getLineWidth(), bt));
+                    new LineElement(
+                            new Pair<>(bexx, bexy),
+                            new Pair<>(fx1, bexy),
+                            ltor || dx < 2 * vsep ? null : "first",
+                            this.style.getLineWidth(), bt));
             mxx = fexx;
         } else if (bw > fw) {
             this.canvas.moveByTag(ft, dx, 0);
             fexx += dx;
             this.canvas.addElement(
-                    new LineElement(new Pair<>(0, 0), new Pair<>(dx, fexy),
+                    new LineElement(
+                            new Pair<>(0, 0),
+                            new Pair<>(dx, fexy),
                             null, this.style.getLineWidth(), ft));
             this.canvas.addElement(
-                    new LineElement(new Pair<>(fexx, fexy), new Pair<>(bx1, fexy),
+                    new LineElement(
+                            new Pair<>(fexx, fexy),
+                            new Pair<>(bx1, fexy),
                             null, this.style.getLineWidth(), ft));
             mxx = bexx;
         } else {
@@ -404,7 +409,7 @@ public final class SVGCanvasBuilder implements Visitor {
     @Override
     public void visitLoop(Loop loop) {
         boolean ltor = getLtor();
-        String tag = this.canvas.new_tag("x", "");
+        String tag = this.canvas.newTag("x", "");
         int sep = this.style.getVSep();
         int vsep = sep / 2;
 
@@ -493,18 +498,18 @@ public final class SVGCanvasBuilder implements Visitor {
         drawLeftTurnBack(tag, sep, 0, dy, ltor ? "up" : "down");
         drawRightTurnBack(tag, mxx, fexy, bexy, ltor ? "down" : "up");
 
-        int exit_x = mxx + this.style.getMaxRadius();
+        int exitX = mxx + this.style.getMaxRadius();
         this.canvas.addElement(
-                new LineElement(new Pair<>(mxx, fexy), new Pair<>(exit_x, fexy),
+                new LineElement(new Pair<>(mxx, fexy), new Pair<>(exitX, fexy),
                         null, this.style.getLineWidth(), tag));
 
-        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(exit_x, fexy)));
+        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(exitX, fexy)));
     }
 
     @Override
     public void visitChoice(Choice choice) {
         boolean ltor = getLtor();
-        String tag = this.canvas.new_tag("x", "");
+        String tag = this.canvas.newTag("x", "");
 
         int sep = this.style.getVSep();
         int vsep = sep / 2;
@@ -636,7 +641,7 @@ public final class SVGCanvasBuilder implements Visitor {
      */
     private void parseStack(Stack stack) {
         boolean ltor = getLtor();
-        String tag = this.canvas.new_tag("x", "");
+        String tag = this.canvas.newTag("x", "");
 
         int sep = this.style.getVSep() * 2;
         int btm = 0;
@@ -645,32 +650,32 @@ public final class SVGCanvasBuilder implements Visitor {
             setUnitEndPoint(null);
             return;
         }
-        int next_bypass_y = 0;
-        int bypass_x = 0;
-        int bypass_y;
-        int exit_x = 0;
-        int exit_y = 0;
+        int nextBypassY = 0;
+        int bypassX = 0;
+        int bypassY;
+        int exitX = 0;
+        int exitY = 0;
         int w;
         int e2;
         int e3;
         int ex2;
-        int enter_x;
-        int enter_y;
-        int back_y;
-        int mid_y;
+        int enterX;
+        int enterY;
+        int backY;
+        int midY;
         int bypass = 0;
 
         for (int i = 0; i < n; ++i) {
             Unit unit = stack.getUnits().get(i);
             Unit term;
-            bypass_y = next_bypass_y;
+            bypassY = nextBypassY;
             if (i != 0 && indent >= 0 && unit.getUnits().size() != 0 && unit instanceof Opt) {
                 bypass = 1;
                 term = new Line(unit.getUnits());
             } else {
                 bypass = 0;
                 term = unit;
-                next_bypass_y = 0;
+                nextBypassY = 0;
             }
 
             UnitEndPoint ep = getDiagramParseResult(term, ltor);
@@ -684,57 +689,57 @@ public final class SVGCanvasBuilder implements Visitor {
             int tx1 = box.s.f;
 
             if (i == 0) {
-                exit_x = exx;
-                exit_y = exy;
+                exitX = exx;
+                exitY = exy;
             } else {
-                enter_y = btm - ty0 + sep * 2 + 2;
+                enterY = btm - ty0 + sep * 2 + 2;
                 if (bypass == 1) {
-                    next_bypass_y = enter_y - this.style.getMaxRadius();
+                    nextBypassY = enterY - this.style.getMaxRadius();
                 }
                 if (indent < 0) {
                     w = tx1 - tx0;
-                    enter_x = exit_x - w + sep * indent;
+                    enterX = exitX - w + sep * indent;
                     ex2 = sep * 2 - indent;
-                    if (ex2 > enter_x) {
-                        enter_x = ex2;
+                    if (ex2 > enterX) {
+                        enterX = ex2;
                     }
                 } else {
-                    enter_x = sep * 2 + indent;
+                    enterX = sep * 2 + indent;
                 }
-                back_y = btm + sep + 1;
+                backY = btm + sep + 1;
 
-                if (bypass_y > 0) {
-                    mid_y = (bypass_y + this.style.getMaxRadius() + back_y) / 2;
+                if (bypassY > 0) {
+                    midY = (bypassY + this.style.getMaxRadius() + backY) / 2;
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(bypass_x, bypass_y), new Pair<>(bypass_x, mid_y),
+                            new LineElement(new Pair<>(bypassX, bypassY), new Pair<>(bypassX, midY),
                                     "last", this.style.getLineWidth(), tag));
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(bypass_x, mid_y),
-                                    new Pair<>(bypass_x, back_y + this.style.getMaxRadius()),
+                            new LineElement(new Pair<>(bypassX, midY),
+                                    new Pair<>(bypassX, backY + this.style.getMaxRadius()),
                                     null, this.style.getLineWidth(), tag));
                 }
 
-                this.canvas.moveByTag(t, enter_x, enter_y);
-                e2 = exit_x + sep;
+                this.canvas.moveByTag(t, enterX, enterY);
+                e2 = exitX + sep;
                 this.canvas.addElement(
-                        new LineElement(new Pair<>(exit_x, exit_y), new Pair<>(e2, exit_y),
+                        new LineElement(new Pair<>(exitX, exitY), new Pair<>(e2, exitY),
                                 null, this.style.getLineWidth(), tag));
-                drawRightTurnBack(tag, e2, exit_y, back_y, "down");
-                e3 = enter_x - sep;
-                bypass_x = e3 - this.style.getMaxRadius();
+                drawRightTurnBack(tag, e2, exitY, backY, "down");
+                e3 = enterX - sep;
+                bypassX = e3 - this.style.getMaxRadius();
                 int emid = (e2 + e3) / 2;
                 this.canvas.addElement(
-                        new LineElement(new Pair<>(e2, back_y), new Pair<>(emid, back_y),
+                        new LineElement(new Pair<>(e2, backY), new Pair<>(emid, backY),
                                 "last", this.style.getLineWidth(), tag));
                 this.canvas.addElement(
-                        new LineElement(new Pair<>(emid, back_y), new Pair<>(e3, back_y),
+                        new LineElement(new Pair<>(emid, backY), new Pair<>(e3, backY),
                                 null, this.style.getLineWidth(), tag));
-                drawLeftTurnBack(tag, e3, back_y, enter_y, "down");
+                drawLeftTurnBack(tag, e3, backY, enterY, "down");
                 this.canvas.addElement(
-                        new LineElement(new Pair<>(e3, enter_y), new Pair<>(enter_x, enter_y),
+                        new LineElement(new Pair<>(e3, enterY), new Pair<>(enterX, enterY),
                                 "last", this.style.getLineWidth(), tag));
-                exit_x = enter_x + exx;
-                exit_y = enter_y + exy;
+                exitX = enterX + exx;
+                exitY = enterY + exy;
             }
 
             // retag
@@ -744,45 +749,45 @@ public final class SVGCanvasBuilder implements Visitor {
         }
 
         if (bypass == 1) {
-            int fwd_y = btm + sep + 1;
-            mid_y = (next_bypass_y + this.style.getMaxRadius() + fwd_y) / 2;
-            int descender_x = exit_x + this.style.getMaxRadius();
+            int fwdY = btm + sep + 1;
+            midY = (nextBypassY + this.style.getMaxRadius() + fwdY) / 2;
+            int descenderX = exitX + this.style.getMaxRadius();
             this.canvas.addElement(
-                    new LineElement(new Pair<>(bypass_x, next_bypass_y), new Pair<>(bypass_x, mid_y),
+                    new LineElement(new Pair<>(bypassX, nextBypassY), new Pair<>(bypassX, midY),
                             "last", this.style.getLineWidth(), tag));
             this.canvas.addElement(
-                    new LineElement(new Pair<>(bypass_x, mid_y),
-                            new Pair<>(bypass_x, fwd_y - this.style.getMaxRadius()),
+                    new LineElement(new Pair<>(bypassX, midY),
+                            new Pair<>(bypassX, fwdY - this.style.getMaxRadius()),
                             null, this.style.getLineWidth(), tag));
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(bypass_x, fwd_y - 2 * this.style.getMaxRadius()),
-                            new Pair<>(bypass_x + 2 * this.style.getMaxRadius(), fwd_y),
+                    new ArcElement(new Pair<>(bypassX, fwdY - 2 * this.style.getMaxRadius()),
+                            new Pair<>(bypassX + 2 * this.style.getMaxRadius(), fwdY),
                             this.style.getLineWidth(), 180, 90, tag));
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(exit_x - this.style.getMaxRadius(), exit_y),
-                            new Pair<>(descender_x, exit_y + 2 * this.style.getMaxRadius()),
+                    new ArcElement(new Pair<>(exitX - this.style.getMaxRadius(), exitY),
+                            new Pair<>(descenderX, exitY + 2 * this.style.getMaxRadius()),
                             this.style.getLineWidth(), 90, -90, tag));
             this.canvas.addElement(
-                    new ArcElement(new Pair<>(descender_x, fwd_y - 2 * this.style.getMaxRadius()),
-                            new Pair<>(descender_x + 2 * this.style.getMaxRadius(), fwd_y),
+                    new ArcElement(new Pair<>(descenderX, fwdY - 2 * this.style.getMaxRadius()),
+                            new Pair<>(descenderX + 2 * this.style.getMaxRadius(), fwdY),
                             this.style.getLineWidth(), 180, 90, tag));
-            exit_x += 2 * this.style.getMaxRadius();
-            int half_x = (exit_x + indent) / 2;
+            exitX += 2 * this.style.getMaxRadius();
+            int halfX = (exitX + indent) / 2;
             this.canvas.addElement(
-                    new LineElement(new Pair<>(bypass_x + this.style.getMaxRadius(), fwd_y),
-                            new Pair<>(half_x, fwd_y),
+                    new LineElement(new Pair<>(bypassX + this.style.getMaxRadius(), fwdY),
+                            new Pair<>(halfX, fwdY),
                             "last", this.style.getLineWidth(), tag));
             this.canvas.addElement(
-                    new LineElement(new Pair<>(half_x, fwd_y), new Pair<>(exit_x, fwd_y),
+                    new LineElement(new Pair<>(halfX, fwdY), new Pair<>(exitX, fwdY),
                             null, this.style.getLineWidth(), tag));
             this.canvas.addElement(
-                    new LineElement(new Pair<>(descender_x, exit_y + this.style.getMaxRadius()),
-                            new Pair<>(descender_x, fwd_y - this.style.getMaxRadius()),
+                    new LineElement(new Pair<>(descenderX, exitY + this.style.getMaxRadius()),
+                            new Pair<>(descenderX, fwdY - this.style.getMaxRadius()),
                             "last", this.style.getLineWidth(), tag));
-            exit_y = fwd_y;
+            exitY = fwdY;
         }
 
-        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(exit_x, exit_y)));
+        setUnitEndPoint(new UnitEndPoint(tag, new Pair<>(exitX, exitY)));
     }
 
     @Override
@@ -804,9 +809,9 @@ public final class SVGCanvasBuilder implements Visitor {
         parseStack(unit);
     }
 
-    private void drawLeftTurnBack(String tag, int x, int y0_, int y1_, String flow) {
-        int y0 = Math.min(y0_, y1_);
-        int y1 = Math.max(y0_, y1_);
+    private void drawLeftTurnBack(String tag, int x, int yy0, int yy1, String flow) {
+        int y0 = Math.min(yy0, yy1);
+        int y1 = Math.max(yy0, yy1);
 
         if (y1 - y0 > 3 * this.style.getMaxRadius()) {
             int xr0 = x - this.style.getMaxRadius();
@@ -817,20 +822,20 @@ public final class SVGCanvasBuilder implements Visitor {
             int yr0 = y0 + this.style.getMaxRadius();
             int yr1 = y1 - this.style.getMaxRadius();
             if (Math.abs(yr1 - yr0) > 2 * this.style.getMaxRadius()) {
-                int half_y = (yr0 + yr1) / 2;
-                if (flow.equals("down")) {
+                int halfY = (yr0 + yr1) / 2;
+                if ("down".equals(flow)) {
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(xr0, yr0), new Pair<>(xr0, half_y),
+                            new LineElement(new Pair<>(xr0, yr0), new Pair<>(xr0, halfY),
                                     "last", this.style.getLineWidth(), tag));
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(xr0, half_y), new Pair<>(xr0, yr1),
+                            new LineElement(new Pair<>(xr0, halfY), new Pair<>(xr0, yr1),
                                     null, this.style.getLineWidth(), tag));
                 } else {
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(xr0, yr1), new Pair<>(xr0, half_y),
+                            new LineElement(new Pair<>(xr0, yr1), new Pair<>(xr0, halfY),
                                     "last", this.style.getLineWidth(), tag));
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(xr0, half_y), new Pair<>(xr0, yr0),
+                            new LineElement(new Pair<>(xr0, halfY), new Pair<>(xr0, yr0),
                                     null, this.style.getLineWidth(), tag));
                 }
             } else {
@@ -852,9 +857,9 @@ public final class SVGCanvasBuilder implements Visitor {
         }
     }
 
-    private void drawRightTurnBack(String tag, int x, int y0_, int y1_, String flow) {
-        int y0 = Math.min(y0_, y1_);
-        int y1 = Math.max(y0_, y1_);
+    private void drawRightTurnBack(String tag, int x, int yy0, int yy1, String flow) {
+        int y0 = Math.min(yy0, yy1);
+        int y1 = Math.max(yy0, yy1);
 
         if (y1 - y0 > 3 * this.style.getMaxRadius()) {
             int xr0 = x - this.style.getMaxRadius();
@@ -867,20 +872,20 @@ public final class SVGCanvasBuilder implements Visitor {
             int yr1 = y1 - this.style.getMaxRadius();
 
             if (Math.abs(yr1 - yr0) > 2 * this.style.getMaxRadius()) {
-                int half_y = (yr1 + yr0) / 2;
-                if (flow.equals("down")) {
+                int halfY = (yr1 + yr0) / 2;
+                if ("down".equals(flow)) {
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(xr1, yr0), new Pair<>(xr1, half_y),
+                            new LineElement(new Pair<>(xr1, yr0), new Pair<>(xr1, halfY),
                                     "last", this.style.getLineWidth(), tag));
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(xr1, half_y), new Pair<>(xr1, yr1),
+                            new LineElement(new Pair<>(xr1, halfY), new Pair<>(xr1, yr1),
                                     null, this.style.getLineWidth(), tag));
                 } else {
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(xr1, yr1), new Pair<>(xr1, half_y),
+                            new LineElement(new Pair<>(xr1, yr1), new Pair<>(xr1, halfY),
                                     "last", this.style.getLineWidth(), tag));
                     this.canvas.addElement(
-                            new LineElement(new Pair<>(xr1, half_y), new Pair<>(xr1, yr0),
+                            new LineElement(new Pair<>(xr1, halfY), new Pair<>(xr1, yr0),
                                     null, this.style.getLineWidth(), tag));
                 }
             } else {

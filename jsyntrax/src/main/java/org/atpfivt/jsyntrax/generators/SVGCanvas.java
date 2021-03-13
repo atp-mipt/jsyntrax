@@ -23,7 +23,7 @@ public class SVGCanvas {
     }
 
     // default prefix = "x", default suffix = ""
-    public String new_tag(String prefix, String suffix) {
+    public String newTag(String prefix, String suffix) {
         String f = prefix + "___" + suffix;
         Integer value = tagcnt.getOrDefault(f, 0);
         tagcnt.put(f, value + 1);
@@ -76,8 +76,7 @@ public class SVGCanvas {
     public Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getBoundingBoxByTag(String tag) {
         Pair<Integer, Integer> start = null;
         Pair<Integer, Integer> end = null;
-        for (Element e: this.elements)
-        {
+        for (Element e: this.elements) {
             if (e.isTagged(tag)) {
                 if (start == null) {
                     start = new Pair<>(e.getStart());
@@ -111,14 +110,14 @@ public class SVGCanvas {
         res = getBoundingBoxByTag("all");
         Pair<Integer, Integer> end = res.s;
 
-        int W = end.f + style.getPadding();
-        int H = end.s + style.getPadding();
+        int w = end.f + style.getPadding();
+        int h = end.s + style.getPadding();
 
         // collect fonts
         HashMap<String, Pair<Font, Color>> fonts = new HashMap<>();
         fonts.put("title_font", new Pair<>(this.style.getTitleFont(), this.style.getTextColor()));
         for (NodeStyle ns : this.style.getNodeStyles()) {
-            fonts.put(ns.name + "_font", new Pair<>(ns.font, ns.textColor));
+            fonts.put(ns.getName() + "_font", new Pair<>(ns.getFont(), ns.getTextColor()));
         }
 
         // header
@@ -127,8 +126,8 @@ public class SVGCanvas {
         sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\"\n");
         sb.append("xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n");
         sb.append("xml:space=\"preserve\"\n");
-        sb.append("width=\"").append(W).append("\" ")
-                .append("height=\"").append(H).append("\" ")
+        sb.append("width=\"").append(w).append("\" ")
+                .append("height=\"").append(h).append("\" ")
                 .append("version=\"1.1\">\n");
         // styles
         sb.append("<style type=\"text/css\">\n");
@@ -137,7 +136,7 @@ public class SVGCanvas {
         for (Map.Entry<String, Pair<Font, Color>> fontPair : fonts.entrySet()) {
             String fontName = fontPair.getKey();
             String fontFamily = fontPair.getValue().f.getName();
-            String fontSize = Integer.toString((int)(fontPair.getValue().f.getSize() * scale));
+            String fontSize = Integer.toString((int) (fontPair.getValue().f.getSize() * scale));
             String fontWeight = "normal";
             if ((fontPair.getValue().f.getStyle() & Font.BOLD) == Font.BOLD) {
                 fontWeight = "bold";

@@ -8,8 +8,8 @@ public class ArcElement extends Element {
     public ArcElement(Pair<Integer, Integer> start, Pair<Integer, Integer> end,
                       int width, int startAngle, int extentAngle, String tag) {
         super(tag);
-        super.start = start;
-        super.end = end;
+        super.setStart(start);
+        super.setEnd(end);
         this.width = width;
         this.startAngle = startAngle;
         this.extentAngle = extentAngle;
@@ -22,8 +22,8 @@ public class ArcElement extends Element {
     public void toSVG(StringBuilder sb, StyleConfig style) {
         int x0 = super.getStart().f;
         int y0 = super.getStart().s;
-        int x1 = super.end.f;
-        int y1 = super.end.s;
+        int x1 = super.getEnd().f;
+        int y1 = super.getEnd().s;
 
         int xc = (x0 + x1) / 2;
         int yc = (y0 + y1) / 2;
@@ -41,8 +41,8 @@ public class ArcElement extends Element {
         double startRad = Math.toRadians(this.startAngle);
         double stopRad = Math.toRadians(stop);
 
-        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" " +
-                "stroke-width=\"" + this.width + "\" fill=\"none\"";
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" "
+                + "stroke-width=\"" + this.width + "\" fill=\"none\"";
 
         int xs = (int) (xc + rad * Math.cos(startRad));
         int ys = (int) (yc - rad * Math.sin(startRad));
@@ -61,7 +61,7 @@ public class ArcElement extends Element {
         width *= scale;
     }
 
-    int width;
-    int startAngle;
-    int extentAngle;
+    private int width;
+    private int startAngle;
+    private final int extentAngle;
 }

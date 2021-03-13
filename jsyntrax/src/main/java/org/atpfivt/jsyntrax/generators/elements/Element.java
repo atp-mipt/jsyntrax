@@ -37,7 +37,7 @@ public class Element {
     }
 
     public boolean isTagged(String tag) {
-        if (tag.equals("all")) {
+        if ("all".equals(tag)) {
             return true;
         }
         return tags.contains(tag);
@@ -48,17 +48,17 @@ public class Element {
     public void toSVG(StringBuilder sb, StyleConfig style) { }
 
     public void scale(double scale) {
-        getStart().f = (int)(getStart().f * scale);
-        getStart().s = (int)(getStart().s * scale);
-        getEnd().f = (int)(getEnd().f * scale);
-        getEnd().s = (int)(getEnd().s * scale);
+        getStart().f = (int) (getStart().f * scale);
+        getStart().s = (int) (getStart().s * scale);
+        getEnd().f = (int) (getEnd().f * scale);
+        getEnd().s = (int) (getEnd().s * scale);
     }
 
     public Optional<String> getAnyTag() {
         return tags.stream().findAny();
     }
 
-    protected Pair<Integer, Integer> start = null;
-    protected Pair<Integer, Integer> end = null;
+    private Pair<Integer, Integer> start = null;
+    private Pair<Integer, Integer> end = null;
     private final Set<String> tags = new HashSet<>();
 }

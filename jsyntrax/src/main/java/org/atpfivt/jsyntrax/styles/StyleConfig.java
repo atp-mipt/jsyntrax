@@ -120,7 +120,7 @@ public final class StyleConfig {
             }
             // this is custom node style
             NodeStyle ns = new NodeStyle();
-            ns.name = s.getName();
+            ns.setName(s.getName());
             parseNodeStyle(s, ns);
             getNodeStyles().add(ns);
         }

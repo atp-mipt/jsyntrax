@@ -16,13 +16,13 @@ public class BoxBubbleElement extends BubbleElementBase {
 
     @Override
     public void addShadow(StringBuilder sb, StyleConfig style) {
-        int x0 = super.getStart().f + super.width + 1;
-        int y0 = super.getStart().s + super.width + 1;
-        int x1 = super.end.f + super.width + 1;
-        int y1 = super.end.s + super.width + 1;
+        int x0 = super.getStart().f + super.getWidth() + 1;
+        int y0 = super.getStart().s + super.getWidth() + 1;
+        int x1 = super.getEnd().f + super.getWidth() + 1;
+        int y1 = super.getEnd().s + super.getWidth() + 1;
 
-        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" " +
-                "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
+        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
 
         sb.append("<rect x=\"").append(x0).append("\" y=\"").append(y0)
                 .append("\" width=\"").append(x1 - x0).append("\" height=\"").append(y1 - y0)
@@ -33,13 +33,13 @@ public class BoxBubbleElement extends BubbleElementBase {
     public void toSVG(StringBuilder sb, StyleConfig style) {
         int x0 = super.getStart().f;
         int y0 = super.getStart().s;
-        int x1 = super.end.f;
-        int y1 = super.end.s;
+        int x1 = super.getEnd().f;
+        int y1 = super.getEnd().s;
 
-        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" " +
-                "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + StringUtils.toHex(this.fill) + "\" " +
-                "fill-opacity=\"" + StringUtils.fillOpacity(this.fill) + "\"";
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" "
+                + "stroke-width=\"" + this.getWidth() + "\" "
+                + "fill=\"" + StringUtils.toHex(this.getFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(this.getFill()) + "\"";
 
         sb.append("<rect x=\"").append(x0).append("\" y=\"").append(y0)
                 .append("\" width=\"").append(x1 - x0).append("\" height=\"").append(y1 - y0)

@@ -9,7 +9,7 @@ import org.atpfivt.jsyntrax.visitors.Visitor;
 public class Node implements Unit {
   private StyleConfig style;
   private final String text;
-  boolean is_link = false;
+  private boolean isLink = false;
 
   public Node(String text) {
     this.text = text;
@@ -22,15 +22,15 @@ public class Node implements Unit {
 //  }
 
   public boolean isLink() {
-    return is_link;
+    return isLink;
   }
 
   public void setLink() {
-    is_link = true;
+    isLink = true;
   }
 
   public void unsetLink() {
-    is_link = false;
+    isLink = false;
   }
 
   @Override

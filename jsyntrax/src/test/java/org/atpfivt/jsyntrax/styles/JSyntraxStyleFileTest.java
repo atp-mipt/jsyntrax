@@ -12,7 +12,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.Style;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -78,20 +77,13 @@ public class JSyntraxStyleFileTest {
                 () -> assertEquals(new Color(30, 40, 50), cfg.getTextColor()),
                 () -> assertEquals(new Color(35, 46, 57, 212), cfg.getShadowFill()),
                 () -> assertEquals(1, cfg.getNodeStyles().size()),
-                () -> assertEquals("hex_bubble", ns.name),
-                () -> assertEquals("hex", ns.shape),
-                () -> assertEquals(new Font("Sans", Font.BOLD, 14), ns.font),
-                () -> assertEquals(new Color(255, 15, 3, 129), ns.fill)
+                () -> assertEquals("hex_bubble", ns.getName()),
+                () -> assertEquals("hex", ns.getShape()),
+                () -> assertEquals(new Font("Sans", Font.BOLD, 14), ns.getFont()),
+                () -> assertEquals(new Color(255, 15, 3, 129), ns.getFill())
         );
     }
 
-    @Test
-    public void mustPass() throws URISyntaxException, IOException {
-        Path.of(this.getClass()
-                .getResource("/org/atpfivt/jsyntrax/test_style_config.ini")
-                .toURI());
-
-    }
 
     @Test
     public void svgFromConfigTest()

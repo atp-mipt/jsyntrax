@@ -1,15 +1,10 @@
 package org.atpfivt.jsyntrax;
 
 import org.approvaltests.core.Options;
-import org.atpfivt.jsyntrax.styles.JSyntraxStyleFileTest;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 
 import java.awt.Font;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,7 +32,7 @@ public class JSyntraxTestUtils {
     public static void updateStyle(StyleConfig s) {
         s.setTitleFont(transformFont(s.getTitleFont()));
         for (NodeStyle ns : s.getNodeStyles()) {
-            ns.font = transformFont(ns.font);
+            ns.setFont(transformFont(ns.getFont()));
         }
     }
 }

@@ -4,12 +4,13 @@ import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 
 public class TitleElement extends BubbleElementBase {
     public TitleElement(String text, Font textFont, String fontName, String tag) {
 
-        super(new Pair<>(0, 0), SVGCanvasBuilder.getTextSize(text,textFont),
+        super(new Pair<>(0, 0), SVGCanvasBuilder.getTextSize(text, textFont),
                 null, text, new Pair<>(0, 0), null, fontName, new Color(0, 0, 0),
                 0, new Color(255, 255, 255), tag);
     }

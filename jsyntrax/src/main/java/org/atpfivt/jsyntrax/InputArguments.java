@@ -1,6 +1,11 @@
 package org.atpfivt.jsyntrax;
 
-import groovyjarjarcommonscli.*;
+import groovyjarjarcommonscli.CommandLine;
+import groovyjarjarcommonscli.HelpFormatter;
+import groovyjarjarcommonscli.Option;
+import groovyjarjarcommonscli.Options;
+import groovyjarjarcommonscli.ParseException;
+import groovyjarjarcommonscli.PosixParser;
 
 import java.io.PrintWriter;
 import java.nio.file.Path;
@@ -11,8 +16,8 @@ import java.util.function.BiConsumer;
 
 public class InputArguments {
 
-    private static final Options options;
-    private static final Map<Option, BiConsumer<InputArguments, String>> optionsMap;
+    private static final Options OPTIONS;
+    private static final Map<Option, BiConsumer<InputArguments, String>> OPTIONS_MAP;
     private boolean help;
     private Path input;
     private Path output;
@@ -24,39 +29,41 @@ public class InputArguments {
     private boolean getDefaultStyle = false;
 
     static {
-        options = new Options();
-        optionsMap = new LinkedHashMap<>();
-        optionsMap.put(new Option("h", "help", false, "Show this help message and exit"),
+        OPTIONS = new Options();
+        OPTIONS_MAP = new LinkedHashMap<>();
+        OPTIONS_MAP.put(new Option("h", "help", false, "Show this help message and exit"),
                 (o, s) -> o.help = true);
-        optionsMap.put(new Option("i", "input", true, "Diagram spec file"),
+        OPTIONS_MAP.put(new Option("i", "input", true, "Diagram spec file"),
                 (o, s) -> o.input = Paths.get(s));
-        optionsMap.put(new Option("o", "output", true, "Output file"),
+        OPTIONS_MAP.put(new Option("o", "output", true, "Output file"),
                 (o, s) -> o.output = Paths.get(s));
-        optionsMap.put(new Option("s", "style", true, "Style config .ini file"),
+        OPTIONS_MAP.put(new Option("s", "style", true, "Style config .ini file"),
                 (o, s) -> o.style = Paths.get(s));
-        optionsMap.put(new Option(null, "title", true, "Diagram title"),
+        OPTIONS_MAP.put(new Option(null, "title", true, "Diagram title"),
                 (o, s) -> o.title = s);
-        optionsMap.put(new Option("t", "transparent", false, "Transparent background"),
+        OPTIONS_MAP.put(new Option("t", "transparent", false, "Transparent background"),
                 (o, s) -> o.transparent = true);
-        optionsMap.put(new Option(null, "scale", true, "Scale image"),
+        OPTIONS_MAP.put(new Option(null, "scale", true, "Scale image"),
                 (o, s) -> o.scale = Double.parseDouble(s));
-        optionsMap.put(new Option(null, "get-style", false, "Get default style config"),
+        OPTIONS_MAP.put(new Option(null, "get-style", false, "Get default style config"),
                 (o, s) -> o.getDefaultStyle = true);
-        optionsMap.put(new Option("v", "version", false, "Release version"),
-                (o, s) -> o.version = "JSyntrax " + Main.class
+        OPTIONS_MAP.put(new Option("v", "version", false, "Release version"),
+                (o, s) -> {
+                    o.version = "JSyntrax " + Main.class
                             .getPackage()
-                            .getImplementationVersion()
+                            .getImplementationVersion();
+                }
         );
     }
 
     InputArguments(String... args) throws ParseException {
-        for (Option o : optionsMap.keySet()) {
-            options.addOption(o);
+        for (Option o : OPTIONS_MAP.keySet()) {
+            OPTIONS.addOption(o);
         }
-        CommandLine commandLine = new PosixParser().parse(options, args);
+        CommandLine commandLine = new PosixParser().parse(OPTIONS, args);
 
         for (Option o : commandLine.getOptions()) {
-            optionsMap.getOrDefault(o, (x, s) -> {
+            OPTIONS_MAP.getOrDefault(o, (x, s) -> {
             }).accept(this, o.getValue());
         }
         //Any argument not associated with a flag is assumed to be the input file name
@@ -69,7 +76,7 @@ public class InputArguments {
         final HelpFormatter helpFormatter = new HelpFormatter();
         helpFormatter.printHelp(writer, 80, "syntrax",
                 "Railroad diagram generator.\n\nOptions",
-                options, 3, 5, null, true);
+                OPTIONS, 3, 5, null, true);
         writer.flush();
     }
 
@@ -101,7 +108,11 @@ public class InputArguments {
         return scale;
     }
 
-    public String getVersion() {return version;}
+    public String getVersion() {
+        return version;
+    }
 
-    public boolean getDefaultStyleProperty() {return getDefaultStyle;}
+    public boolean getDefaultStyleProperty() {
+        return getDefaultStyle;
+    }
 }
