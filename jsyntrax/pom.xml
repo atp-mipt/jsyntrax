@@ -20,7 +20,7 @@
         <java.main.class>org.atpfivt.jsyntrax.Main</java.main.class>
         <java.version>1.11</java.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
-        <junit.version>5.7.0</junit.version>
+        <junit.version>5.7.1</junit.version>
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
 
         <assertj.core.version>3.19.0</assertj.core.version>
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.approvaltests</groupId>
             <artifactId>approvaltests</artifactId>
-            <version>${approvaltests.version}</version>
+            <version>10.2.0</version>
             <scope>test</scope>
         </dependency>
 

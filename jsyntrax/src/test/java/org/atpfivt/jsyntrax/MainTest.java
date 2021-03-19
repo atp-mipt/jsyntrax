@@ -68,7 +68,7 @@ class MainTest {
                 System.getProperty("user.dir"),
                 Main.JSYNTRAX_INI
         );
-        byte[] configExpected  = Main
+        byte[] configExpected = Main
                 .class
                 .getResourceAsStream("/" + Main.JSYNTRAX_INI)
                 .readAllBytes();

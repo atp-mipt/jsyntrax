@@ -36,15 +36,17 @@ Then in JSyntrax it has been reimplemented in Java in order to simplify installa
 ==== JSyntrax vs. Syntrax
 
 Why did you reimplement Syntrax?:: The problem with Syntrax is that it requires Pycairo and Pango which may be difficult to install, especially on Windows.
- JSyntrax requires only JDK 11, which is easily available for many platforms.
+
+JSyntrax requires only JDK 11, which is easily available for many platforms.
 
 What output formats are supported?:: Unlike original Syntrax, that can output to many bitmap and vector formats, JSyntrax only produces SVG.
- This can be changed in the future.
+This can be changed in the future.
 
-Can I build my Syntrax specs with JSyntrax?:: Yes, after only a couple of minor tweaks.
- If you use url maps, refer to <<Specification language>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax.
- Also, `text_mod` attribute in  <<Styling diagrams>> is not supported (the author of the original Syntrax warned about potential security issues with this attribute).
- Instead, if a style regexp pattern contains a capturing group, the node text will contain the contents of this capturing group only.
+Can I build my Syntrax specs with JSyntrax?:: Yes, after only a couple of minor tweaks. 
+If you use url maps, refer to <<Specification language>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax. 
+Also, `text_mod` attribute in  <<Styling diagrams>> is not supported (the author of the original Syntrax warned about potential security issues with this attribute). 
+Instead, if a style regexp pattern contains a capturing group, the node text will contain the contents of this capturing group only.
+
 
 Why your executable file is called `syntrax`?:: This is made intentionally in order to use https://asciidoctor.org/docs/asciidoctor-diagram/[AsciiDoctor Diagram] integration facility. JSyntrax executable has exactly the same command line arguments as Syntrax.
 
@@ -372,9 +374,11 @@ fill = (0,255,0,127)
 image:images/vhdl_attribute_alt.svg[image]
 
 The style configuration file has a main section named "[style]" followed by user-defined sections for various node types. 
-The node style is chosen based on a regex pattern applied to the text. The first matched pattern sets the style for a node. 
+The node style is chosen based on a regex pattern applied to the text. 
+The first matched pattern sets the style for a node. 
 Patterns are tested in the same order they appear in the configuration file. 
 The first node style is used by default if no pattern matched the text.
+If the pattern contains a capturing group, then the resulting text in the node will be equal to the contents of this group (otherwise, the full text will be used).
 
 The `+[style]+` section contains the following keys:
 

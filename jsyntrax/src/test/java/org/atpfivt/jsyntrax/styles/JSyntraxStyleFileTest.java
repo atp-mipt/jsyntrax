@@ -84,7 +84,6 @@ public class JSyntraxStyleFileTest {
         );
     }
 
-
     @Test
     public void svgFromConfigTest()
             throws IOException, URISyntaxException,

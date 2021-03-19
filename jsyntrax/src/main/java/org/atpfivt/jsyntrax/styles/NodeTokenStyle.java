@@ -9,7 +9,7 @@ public class NodeTokenStyle extends NodeStyle {
         super();
         super.setName("token");
         super.setShape("bubble");
-        this.setPattern(Pattern.compile("(.)"));
+        this.setPattern(Pattern.compile("(.*)"));
         super.setFont(new Font("Sans", Font.BOLD, 16));
         super.setFill(new Color(179, 229, 252));
     }
