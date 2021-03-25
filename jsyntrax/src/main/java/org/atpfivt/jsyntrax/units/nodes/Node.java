@@ -15,12 +15,6 @@ public class Node implements Unit {
     this.text = text;
   }
 
-//  public Node(StyleConfig style, String text) {
-//    this.style = style;
-//    this.text = text;
-//    this.is_link = false;  // FIXME: replace with slash checker
-//  }
-
   public boolean isLink() {
     return isLink;
   }

@@ -160,7 +160,7 @@
         <module name="EqualsAvoidNull"/>
         <module name="StringLiteralEquality"/>
         <module name="UnnecessaryParentheses"/>
-
+        <module name="EmptyStatement"/>
 
         <!-- Prohibited (outdated) APIs -->
         <module name="IllegalType">

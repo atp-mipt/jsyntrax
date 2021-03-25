@@ -42,7 +42,7 @@ import java.util.Map;
  * @brief class for building canvas by Unit
  */
 public final class SVGCanvasBuilder implements Visitor {
-    private Map<String, String> urlMap = Collections.emptyMap();;
+    private Map<String, String> urlMap;
     private StyleConfig style;
     private SVGCanvas canvas;
 
