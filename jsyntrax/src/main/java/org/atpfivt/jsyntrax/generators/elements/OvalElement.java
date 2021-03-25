@@ -1,10 +1,9 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
-
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @details Need only for bullets
@@ -12,22 +11,27 @@ import java.awt.*;
 public class OvalElement extends Element {
     public OvalElement(Pair<Integer, Integer> start, Pair<Integer, Integer> end, int width, Color fill, String tag) {
         super(tag);
-        super.start = start;
-        super.end = end;
-        this.width = width;
-        this.fill = fill;
+        super.setStart(start);
+        super.setEnd(end);
+        this.setWidth(width);
+        this.setFill(fill);
     }
 
     @Override
-    public void toSVG(StringBuilder sb, Style style) {
-        int x0 = super.start.f;
-        int y0 = super.start.s;
-        int x1 = super.end.f;
-        int y1 = super.end.s;
+    public void addShadow(StringBuilder sb, StyleConfig style) {
 
-        String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
-                "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + Algorithm.toHex(this.fill) + "\"";
+    }
+
+    @Override
+    public void toSVG(StringBuilder sb, StyleConfig style) {
+        int x0 = super.getStart().f;
+        int y0 = super.getStart().s;
+        int x1 = super.getEnd().f;
+        int y1 = super.getEnd().s;
+
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" "
+                + "stroke-width=\"" + this.getWidth() + "\" "
+                + "fill=\"" + StringUtils.toHex(this.getFill()) + "\"";
 
         int xc = (x0 + x1) / 2;
         int yc = (y0 + y1) / 2;
@@ -41,9 +45,25 @@ public class OvalElement extends Element {
     @Override
     public void scale(double scale) {
         super.scale(scale);
-        width *= scale;
+        setWidth((int) (getWidth() * scale));
     }
 
-    int width;
-    Color fill;
+    private int width;
+    private Color fill;
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public Color getFill() {
+        return fill;
+    }
+
+    public void setFill(Color fill) {
+        this.fill = fill;
+    }
 }

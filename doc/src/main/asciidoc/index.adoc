@@ -36,6 +36,7 @@ Then in JSyntrax it has been reimplemented in Java in order to simplify installa
 ==== JSyntrax vs. Syntrax
 
 Why did you reimplement Syntrax?:: The problem with Syntrax is that it requires Pycairo and Pango which may be difficult to install, especially on Windows.
+
 JSyntrax requires only JDK 11, which is easily available for many platforms.
 
 What output formats are supported?:: Unlike original Syntrax, that can output to many bitmap and vector formats, JSyntrax only produces SVG.
@@ -45,6 +46,7 @@ Can I build my Syntrax specs with JSyntrax?:: Yes, after only a couple of minor 
 If you use url maps, refer to <<Specification language>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax. 
 Also, `text_mod` attribute in  <<Styling diagrams>> is not supported (the author of the original Syntrax warned about potential security issues with this attribute). 
 Instead, if a style regexp pattern contains a capturing group, the node text will contain the contents of this capturing group only.
+
 
 Why your executable file is called `syntrax`?:: This is made intentionally in order to use https://asciidoctor.org/docs/asciidoctor-diagram/[AsciiDoctor Diagram] integration facility. JSyntrax executable has exactly the same command line arguments as Syntrax.
 

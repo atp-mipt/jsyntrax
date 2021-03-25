@@ -2,27 +2,28 @@ package org.atpfivt.jsyntrax.generators;
 
 import org.atpfivt.jsyntrax.generators.elements.Element;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class SVGCanvas {
-    private final Style style;
+    private final StyleConfig style;
     private final HashMap<String, Integer> tagcnt = new HashMap<>();
     private final ArrayList<Element> elements = new ArrayList<>();
 
-    public SVGCanvas(Style style) {
+    public SVGCanvas(StyleConfig style) {
         this.style = style;
     }
 
     // default prefix = "x", default suffix = ""
-    public String new_tag(String prefix, String suffix) {
+    public String newTag(String prefix, String suffix) {
         String f = prefix + "___" + suffix;
         Integer value = tagcnt.getOrDefault(f, 0);
         tagcnt.put(f, value + 1);
@@ -52,10 +53,10 @@ public class SVGCanvas {
     public void moveByTag(String tag, int dx, int dy) {
         for (Element e : elements) {
             if (e.isTagged(tag)) {
-                e.start.f += dx;
-                e.start.s += dy;
-                e.end.f += dx;
-                e.end.s += dy;
+                e.getStart().f += dx;
+                e.getStart().s += dy;
+                e.getEnd().f += dx;
+                e.getEnd().s += dy;
             }
         }
     }
@@ -75,22 +76,21 @@ public class SVGCanvas {
     public Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getBoundingBoxByTag(String tag) {
         Pair<Integer, Integer> start = null;
         Pair<Integer, Integer> end = null;
-        for (Element e: this.elements)
-        {
+        for (Element e: this.elements) {
             if (e.isTagged(tag)) {
                 if (start == null) {
-                    start = new Pair<>(e.start);
-                    end = new Pair<>(e.end);
+                    start = new Pair<>(e.getStart());
+                    end = new Pair<>(e.getEnd());
                 }
-                start.f = Math.min(start.f, e.start.f);
-                start.f = Math.min(start.f, e.end.f);
-                start.s = Math.min(start.s, e.start.s);
-                start.s = Math.min(start.s, e.end.s);
+                start.f = Math.min(start.f, e.getStart().f);
+                start.f = Math.min(start.f, e.getEnd().f);
+                start.s = Math.min(start.s, e.getStart().s);
+                start.s = Math.min(start.s, e.getEnd().s);
 
-                end.f = Math.max(end.f, e.start.f);
-                end.f = Math.max(end.f, e.end.f);
-                end.s = Math.max(end.s, e.start.s);
-                end.s = Math.max(end.s, e.end.s);
+                end.f = Math.max(end.f, e.getStart().f);
+                end.f = Math.max(end.f, e.getEnd().f);
+                end.s = Math.max(end.s, e.getStart().s);
+                end.s = Math.max(end.s, e.getEnd().s);
             }
         }
         return new Pair<>(start, end);
@@ -105,19 +105,19 @@ public class SVGCanvas {
         // move to picture to (0, 0)
         moveByTag("all", -res.f.f, -res.f.s);
         scaleByTag("all", scale);
-        moveByTag("all", style.padding, style.padding);
+        moveByTag("all", style.getPadding(), style.getPadding());
 
         res = getBoundingBoxByTag("all");
         Pair<Integer, Integer> end = res.s;
 
-        int W = end.f + style.padding;
-        int H = end.s + style.padding;
+        int w = end.f + style.getPadding();
+        int h = end.s + style.getPadding();
 
         // collect fonts
         HashMap<String, Pair<Font, Color>> fonts = new HashMap<>();
-        fonts.put("title_font", new Pair<>(this.style.title_font, this.style.text_color));
-        for (NodeStyle ns : this.style.nodeStyles) {
-            fonts.put(ns.name + "_font", new Pair<>(ns.font, ns.text_color));
+        fonts.put("title_font", new Pair<>(this.style.getTitleFont(), this.style.getTextColor()));
+        for (NodeStyle ns : this.style.getNodeStyles()) {
+            fonts.put(ns.getName() + "_font", new Pair<>(ns.getFont(), ns.getTextColor()));
         }
 
         // header
@@ -126,8 +126,8 @@ public class SVGCanvas {
         sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\"\n");
         sb.append("xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n");
         sb.append("xml:space=\"preserve\"\n");
-        sb.append("width=\"").append(W).append("\" ")
-                .append("height=\"").append(H).append("\" ")
+        sb.append("width=\"").append(w).append("\" ")
+                .append("height=\"").append(h).append("\" ")
                 .append("version=\"1.1\">\n");
         // styles
         sb.append("<style type=\"text/css\">\n");
@@ -136,7 +136,7 @@ public class SVGCanvas {
         for (Map.Entry<String, Pair<Font, Color>> fontPair : fonts.entrySet()) {
             String fontName = fontPair.getKey();
             String fontFamily = fontPair.getValue().f.getName();
-            String fontSize = Integer.toString((int)(fontPair.getValue().f.getSize() * scale));
+            String fontSize = Integer.toString((int) (fontPair.getValue().f.getSize() * scale));
             String fontWeight = "normal";
             if ((fontPair.getValue().f.getStyle() & Font.BOLD) == Font.BOLD) {
                 fontWeight = "bold";
@@ -146,7 +146,7 @@ public class SVGCanvas {
                 fontStyle = "italic";
             }
 
-            String hex = Algorithm.toHex(fontPair.getValue().s);
+            String hex = StringUtils.toHex(fontPair.getValue().s);
 
             sb.append(".").append(fontName).append(" ");
             sb.append("{fill:").append(hex).append("; text-anchor:middle;\n");
@@ -167,7 +167,7 @@ public class SVGCanvas {
         sb.append("<defs>\n");
         sb.append("<marker id=\"arrow\" markerWidth=\"5\" markerHeight=\"4\" ")
                 .append("refX=\"2.5\" refY=\"2\" orient=\"auto\" markerUnits=\"strokeWidth\">\n");
-        String hex = Algorithm.toHex(this.style.line_color);
+        String hex = StringUtils.toHex(this.style.getLineColor());
         sb.append("<path d=\"M0,0 L0.5,2 L0,4 L4.5,2 z\" fill=\"").append(hex).append("\" />\n");
         sb.append("</marker>\n</defs>\n");
 
@@ -177,8 +177,8 @@ public class SVGCanvas {
         }
         for (Element e : this.elements) {
 
-            if (style.shadow) {
-                e.addShadow(sb, this.style);
+            if (style.isShadow()) {
+                e.addShadow(sb,  this.style);
             }
             e.toSVG(sb, this.style);
         }

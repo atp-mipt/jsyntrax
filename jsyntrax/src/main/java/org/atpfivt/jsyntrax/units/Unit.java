@@ -9,17 +9,17 @@ import java.util.Collections;
 import java.util.List;
 
 public interface Unit {
-  void accept(Visitor visitor);
+    void accept(Visitor visitor);
 
-  default List<Unit> getUnits() {
-    return Collections.emptyList();
-  }
+    default List<Unit> getUnits() {
+      return Collections.emptyList();
+    }
 
-  default Configuration getConfiguration(){
-    return new Configuration(this.getTrack());
-  }
+    default Configuration getConfiguration() {
+        return new Configuration(this.getTrack());
+    }
 
-  default Track getTrack() {
-    return new Line(this);
-  }
+    default Track getTrack() {
+      return new Line(this);
+    }
 }

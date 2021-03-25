@@ -1,7 +1,7 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.awt.Color;
@@ -15,14 +15,14 @@ public class BubbleElement extends BubbleElementBase {
     }
 
     @Override
-    public void addShadow(StringBuilder sb, Style style) {
-        int x0 = super.start.f + this.width + 1;
-        int y0 = super.start.s + this.width + 1;
-        int x1 = super.end.f + this.width + 1;
-        int y1 = super.end.s + this.width + 1;
+    public void addShadow(StringBuilder sb, StyleConfig style) {
+        int x0 = super.getStart().f + this.getWidth() + 1;
+        int y0 = super.getStart().s + this.getWidth() + 1;
+        int x1 = super.getEnd().f + this.getWidth() + 1;
+        int y1 = super.getEnd().s + this.getWidth() + 1;
 
-        String attributes = "fill=\"" + Algorithm.toHex(style.shadow_fill) + "\" " +
-                "fill-opacity=\"" + Algorithm.fillOpacity(style.shadow_fill) + "\"";
+        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;
@@ -38,8 +38,7 @@ public class BubbleElement extends BubbleElementBase {
                     .append("cy=\"").append(yc).append("\" ")
                     .append("r=\"").append(rad).append("\" ")
                     .append(attributes).append(" />\n");
-        }
-        else {
+        } else {
             // Rounded bubble
             sb.append("<path d=\"M").append(lft).append(",").append(y1)
                     .append(" A").append(rad).append(",").append(rad)
@@ -51,16 +50,16 @@ public class BubbleElement extends BubbleElementBase {
     }
 
     @Override
-    public void toSVG(StringBuilder sb, Style style) {
-        int x0 = super.start.f;
-        int y0 = super.start.s;
-        int x1 = super.end.f;
-        int y1 = super.end.s;
+    public void toSVG(StringBuilder sb, StyleConfig style) {
+        int x0 = super.getStart().f;
+        int y0 = super.getStart().s;
+        int x1 = super.getEnd().f;
+        int y1 = super.getEnd().s;
 
-        String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
-                "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + Algorithm.toHex(this.fill) + "\" " +
-                "fill-opacity=\"" + Algorithm.fillOpacity(this.fill) + "\"";
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" "
+                + "stroke-width=\"" + this.getWidth() + "\" "
+                + "fill=\"" + StringUtils.toHex(this.getFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(this.getFill()) + "\"";
 
         int rad = (y1 - y0) / 2;
         int lft = x0 + rad;
@@ -76,8 +75,7 @@ public class BubbleElement extends BubbleElementBase {
                 .append("cy=\"").append(yc).append("\" ")
                 .append("r=\"").append(rad).append("\" ")
                 .append(attributes).append(" />\n");
-        }
-        else {
+        } else {
             // Rounded bubble
             sb.append("<path d=\"M").append(lft).append(",").append(y1)
                     .append(" A").append(rad).append(",").append(rad)

@@ -1,7 +1,7 @@
 package org.atpfivt.jsyntrax.generators.elements;
 
-import org.atpfivt.jsyntrax.styles.Style;
-import org.atpfivt.jsyntrax.util.Algorithm;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.atpfivt.jsyntrax.util.Pair;
 
 import java.awt.Color;
@@ -15,14 +15,14 @@ public class BoxBubbleElement extends BubbleElementBase {
     }
 
     @Override
-    public void addShadow(StringBuilder sb, Style style) {
-        int x0 = super.start.f + super.width + 1;
-        int y0 = super.start.s + super.width + 1;
-        int x1 = super.end.f + super.width + 1;
-        int y1 = super.end.s + super.width + 1;
+    public void addShadow(StringBuilder sb, StyleConfig style) {
+        int x0 = super.getStart().f + super.getWidth() + 1;
+        int y0 = super.getStart().s + super.getWidth() + 1;
+        int x1 = super.getEnd().f + super.getWidth() + 1;
+        int y1 = super.getEnd().s + super.getWidth() + 1;
 
-        String attributes = "fill=\"" + Algorithm.toHex(style.shadow_fill) + "\" " +
-                "fill-opacity=\"" + Algorithm.fillOpacity(style.shadow_fill) + "\"";
+        String attributes = "fill=\"" + StringUtils.toHex(style.getShadowFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(style.getShadowFill()) + "\"";
 
         sb.append("<rect x=\"").append(x0).append("\" y=\"").append(y0)
                 .append("\" width=\"").append(x1 - x0).append("\" height=\"").append(y1 - y0)
@@ -30,16 +30,16 @@ public class BoxBubbleElement extends BubbleElementBase {
     }
 
     @Override
-    public void toSVG(StringBuilder sb, Style style) {
-        int x0 = super.start.f;
-        int y0 = super.start.s;
-        int x1 = super.end.f;
-        int y1 = super.end.s;
+    public void toSVG(StringBuilder sb, StyleConfig style) {
+        int x0 = super.getStart().f;
+        int y0 = super.getStart().s;
+        int x1 = super.getEnd().f;
+        int y1 = super.getEnd().s;
 
-        String attributes = "stroke=\"" + Algorithm.toHex(style.line_color) + "\" " +
-                "stroke-width=\"" + this.width + "\" " +
-                "fill=\"" + Algorithm.toHex(this.fill) + "\" " +
-                "fill-opacity=\"" + Algorithm.fillOpacity(this.fill) + "\"";
+        String attributes = "stroke=\"" + StringUtils.toHex(style.getLineColor()) + "\" "
+                + "stroke-width=\"" + this.getWidth() + "\" "
+                + "fill=\"" + StringUtils.toHex(this.getFill()) + "\" "
+                + "fill-opacity=\"" + StringUtils.fillOpacity(this.getFill()) + "\"";
 
         sb.append("<rect x=\"").append(x0).append("\" y=\"").append(y0)
                 .append("\" width=\"").append(x1 - x0).append("\" height=\"").append(y1 - y0)

@@ -2,7 +2,6 @@ package org.atpfivt.jsyntrax.groovy_parser
 
 import org.atpfivt.jsyntrax.Configuration
 import org.atpfivt.jsyntrax.units.Unit
-import org.atpfivt.jsyntrax.units.tracks.Track
 import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilerConfiguration
 

@@ -7,6 +7,7 @@ import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
 import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.util.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -26,8 +26,9 @@ public class JSyntraxStyleFileTest {
     private final Path stylePath =
             Files.createTempFile("jsyntrax-test-style", ".ini");
 
-    public JSyntraxStyleFileTest() throws IOException {
-        Style s = new Style(1, false);
+    public JSyntraxStyleFileTest()
+            throws IOException, NoSuchFieldException, IllegalAccessException {
+        StyleConfig s = new StyleConfig(1, false);
         JSyntraxTestUtils.updateStyle(s);
         canvasBuilder = new SVGCanvasBuilder().withStyle(s);
     }
@@ -40,17 +41,17 @@ public class JSyntraxStyleFileTest {
     @Test
     void colorFromString(){
         assertEquals(new Color(1, 2, 3, 4),
-                StyleConfig.colorFromString("(1, 2, 3, 4)"));
+                StringUtils.colorFromString("(1, 2, 3, 4)"));
         assertEquals(new Color(1, 2, 3),
-                StyleConfig.colorFromString(" (1,2, 3) "));
+                StringUtils.colorFromString(" (1,2, 3) "));
     }
 
     @Test
     void fontFromString(){
         assertEquals(new Font("FooFont", Font.BOLD, 12),
-                StyleConfig.fontFromString("('FooFont', 12, 'bold')"));
+                StringUtils.fontFromString("('FooFont', 12, 'bold')"));
         assertEquals(new Font("BarFont", Font.ITALIC | Font.BOLD, 10),
-                StyleConfig.fontFromString(" ('BarFont', 10, 'bold italic') "));
+                StringUtils.fontFromString(" ('BarFont', 10, 'bold italic') "));
     }
 
     @Test
@@ -67,32 +68,26 @@ public class JSyntraxStyleFileTest {
                 .append("font = ('Sans', 14, 'bold')\n")
                 .append("fill = (255,15,3,129)");
         Files.writeString(stylePath, config);
-        StyleConfig cfg = new StyleConfig(stylePath);
+        StyleConfig cfg = new StyleConfig(1, false, stylePath);
 
-        NodeStyle ns = cfg.nodeStyles.get(0);
+        NodeStyle ns = cfg.getNodeStyles().get(0);
         Assertions.assertAll(
-                () -> assertEquals(50, cfg.line_width),
-                () -> assertEquals(42, cfg.v_sep),
-                () -> assertEquals(new Color(30, 40, 50), cfg.text_color),
-                () -> assertEquals(new Color(35, 46, 57, 212), cfg.shadow_fill),
-                () -> assertEquals(1, cfg.nodeStyles.size()),
-                () -> assertEquals("hex_bubble", ns.name),
-                () -> assertEquals("hex", ns.shape),
-                () -> assertEquals(new Font("Sans", Font.BOLD, 14), ns.font),
-                () -> assertEquals(new Color(255, 15, 3, 129), ns.fill)
+                () -> assertEquals(50, cfg.getLineWidth()),
+                () -> assertEquals(42, cfg.getVSep()),
+                () -> assertEquals(new Color(30, 40, 50), cfg.getTextColor()),
+                () -> assertEquals(new Color(35, 46, 57, 212), cfg.getShadowFill()),
+                () -> assertEquals(1, cfg.getNodeStyles().size()),
+                () -> assertEquals("hex_bubble", ns.getName()),
+                () -> assertEquals("hex", ns.getShape()),
+                () -> assertEquals(new Font("Sans", Font.BOLD, 14), ns.getFont()),
+                () -> assertEquals(new Color(255, 15, 3, 129), ns.getFill())
         );
     }
 
     @Test
-    public void mustPass() throws URISyntaxException, IOException {
-        Path.of(this.getClass()
-                .getResource("/org/atpfivt/jsyntrax/test_style_config.ini")
-                .toURI());
-
-    }
-
-    @Test
-    public void svgFromConfigTest() throws IOException, URISyntaxException {
+    public void svgFromConfigTest()
+            throws IOException, URISyntaxException,
+            NoSuchFieldException, IllegalAccessException {
         // Given
         String config  = Files.readString(
                 Path.of(this
@@ -106,12 +101,10 @@ public class JSyntraxStyleFileTest {
                         .getResource("/org/atpfivt/jsyntrax/test_spec.txt")
                         .toURI())
         );
-        Style s        = new Style(1, false);
         Configuration configuration = Parser.parse(spec);
-
         Files.writeString(stylePath, config);
 
-        s.updateByFile(stylePath);
+        StyleConfig s = new StyleConfig(1, false, stylePath);
         JSyntraxTestUtils.updateStyle(s);
 
         //When

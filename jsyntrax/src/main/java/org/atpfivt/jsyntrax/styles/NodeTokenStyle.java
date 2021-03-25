@@ -1,15 +1,16 @@
 package org.atpfivt.jsyntrax.styles;
 
-import java.awt.*;
-import java.util.regex.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.regex.Pattern;
 
 public class NodeTokenStyle extends NodeStyle {
     public NodeTokenStyle() {
         super();
-        super.name = "token";
-        super.shape = "bubble";
-        this.pattern = Pattern.compile("(.*)");
-        super.font = new Font("Sans",Font.BOLD, 16);
-        super.fill = new Color(179, 229, 252);
+        super.setName("token");
+        super.setShape("bubble");
+        this.setPattern(Pattern.compile("(.*)"));
+        super.setFont(new Font("Sans", Font.BOLD, 16));
+        super.setFill(new Color(179, 229, 252));
     }
 }

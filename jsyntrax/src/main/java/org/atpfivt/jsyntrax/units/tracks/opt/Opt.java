@@ -14,11 +14,10 @@ public class Opt extends ComplexTrack {
 
   @Override
   public String toString() {
-    return "< " + this.getClass().getSimpleName() +
-        " [ " +
-        units.stream().map(Object::toString)
+    return "< " + this.getClass().getSimpleName()
+            + " [ " + getUnits().stream().map(Object::toString)
             .collect(Collectors.joining("\n"))
-        + " ]" + " >";
+            + " ]" + " >";
   }
 
   public void accept(Visitor visitor) {

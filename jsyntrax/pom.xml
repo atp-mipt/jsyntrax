@@ -22,13 +22,20 @@
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <junit.version>5.7.1</junit.version>
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
+
+        <assertj.core.version>3.19.0</assertj.core.version>
+        <approvaltests.version>9.5.0</approvaltests.version>
+        <jacoco.maven.plugin.version>0.8.6</jacoco.maven.plugin.version>
+        <checkstyle.maven.plugin.version>3.1.2</checkstyle.maven.plugin.version>
+        <checkstyle.version>8.40</checkstyle.version>
+        <lombok.version>1.18.16</lombok.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.21</version>
+            <artifactId>groovy</artifactId>
+            <version>2.5.14</version>
         </dependency>
         <dependency>
             <groupId>org.ini4j</groupId>
@@ -39,6 +46,13 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -83,6 +97,7 @@
                             <id>syntrax</id>
                         </program>
                     </programs>
+
                     <!--silence reflective access warnings for Java 11-->
                     <extraJvmArguments>--add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED</extraJvmArguments>
                     <repositoryName>lib</repositoryName>
@@ -117,7 +132,7 @@
                 </configuration>
             </plugin>
 
-            <!-- maven-eclipse-plugin  -->
+            <!-- maven-eclipse-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -155,6 +170,45 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>verify-style</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${checkstyle.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

@@ -2,9 +2,9 @@ package org.atpfivt.jsyntrax;
 
 import org.approvaltests.core.Options;
 import org.atpfivt.jsyntrax.styles.NodeStyle;
-import org.atpfivt.jsyntrax.styles.Style;
+import org.atpfivt.jsyntrax.styles.StyleConfig;
 
-import java.awt.*;
+import java.awt.Font;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,10 +29,10 @@ public class JSyntraxTestUtils {
         return testFonts.get(f.getStyle()).deriveFont(f.getStyle(), f.getSize());
     }
 
-    public static void updateStyle(Style s) {
-        s.title_font = transformFont(s.title_font);
-        for (NodeStyle ns : s.nodeStyles) {
-            ns.font = transformFont(ns.font);
+    public static void updateStyle(StyleConfig s) {
+        s.setTitleFont(transformFont(s.getTitleFont()));
+        for (NodeStyle ns : s.getNodeStyles()) {
+            ns.setFont(transformFont(ns.getFont()));
         }
     }
 }

@@ -15,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MainTest {
     @Test
-    void testEnd2EndHappyPath() throws URISyntaxException, IOException {
+    void testEnd2EndHappyPath() throws URISyntaxException, IOException,
+            NoSuchFieldException, IllegalAccessException {
         Path inputPath = Paths.get(MainTest.class.getResource("jsyntrax.spec").toURI());
         Path outPath = Files.createTempFile("jsyntrax-test-output", ".svg");
         try {
@@ -30,7 +31,8 @@ class MainTest {
     }
 
     @Test
-    void testWriteHelp() throws IOException, URISyntaxException {
+    void testWriteHelp() throws IOException,
+            NoSuchFieldException, IllegalAccessException {
         final PrintStream standardOut = System.out;
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -45,7 +47,8 @@ class MainTest {
     }
 
     @Test
-    void printVersionTest() throws IOException {
+    void printVersionTest() throws IOException,
+            NoSuchFieldException, IllegalAccessException {
         final PrintStream standardOut = System.out;
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -58,7 +61,8 @@ class MainTest {
     }
 
     @Test
-    void getStyleTest() throws IOException {
+    void getStyleTest() throws IOException,
+            NoSuchFieldException, IllegalAccessException {
         Main.main("--get-style");
         Path expectedPath = Path.of(
                 System.getProperty("user.dir"),
