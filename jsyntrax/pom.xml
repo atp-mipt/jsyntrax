@@ -86,7 +86,7 @@
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.5.14-02</version>
+                        <version>3.0.7-03</version>
                     </dependency>
                 </dependencies>
             </plugin>
