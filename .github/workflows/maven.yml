@@ -27,7 +27,7 @@ jobs:
       - name: Build jsyntrax
         run: mvn -B verify --file pom.xml -pl jsyntrax
       - name: Install jsyntrax
-        run: ln -s jsyntrax\target\appassembler\bin\syntrax \usr\local\bin\syntrax
+        run: ln -s jsyntrax\target\appassembler\bin\syntrax \usr\local\bin\syntrax && syntrax --version
       - name: Build documentation
         run: mvn -B verify --file pom.xml -pl doc
       - name: Deploy to GitHub Pages
