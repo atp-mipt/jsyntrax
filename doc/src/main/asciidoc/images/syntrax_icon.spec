@@ -1,1 +1,0 @@
-optx('SYNTRAX')

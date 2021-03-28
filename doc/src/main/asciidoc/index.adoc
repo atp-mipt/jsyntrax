@@ -2,6 +2,7 @@
 :source-highlighter: highlightjs
 :toc: left
 :toclevels: 4
+:icons: font
 
 == User Guide
 
@@ -25,7 +26,14 @@ indentstack(10,
 
 This is processed by JSyntrax to generate an SVG image:
 
-image:images/json_number.svg[JSON number syntax]
+[syntrax,example,svg,opts=interactive]
+....
+indentstack(10,
+  line(opt('-'), choice('0', line('1-9', loop(None, '0-9'))),
+    opt('.', loop('0-9', None))),
+  line(opt(choice('e', 'E'), choice(None, '+', '-'), loop('0-9', None)))
+)
+....
 
 JSyntrax can render to SVG vector images, the output can have <<hyperlinked,hyperlinked text>> allowing users to quickly navigate to documentation of different syntax
 elements.
@@ -91,16 +99,45 @@ Options
 
 By default the images have a white background. If you want a transparent background pass the `+-t+` option.
 
+==== Scaling
+
+You can control the scale of the resulting image with the `--scale` option. 
+It takes a floating point scale factor. 
+This is most useful for the PNG output to increase the resolution of the image or create thumbnails with less blurring than conventional bitmap resizing.
+
+----
+> syntrax -i scaling.spec -o small.svg --scale 0.5
+----
+
+[syntrax,small,svg,scale=0.5,opts=interactive]
+....
+line('[', 'Scaled', ']') 
+....
+
+----
+> syntrax -i scaling.spec -o big.svg --scale 2.0
+----
+
+[syntrax,big,svg,scale=1.5,opts=interactive]
+....
+line('[', 'Scaled', ']') 
+....
+
 ==== Titles
 
-You can include a title in the generated diagram by passing a string to the `+--title+` option. The position of the title is controlled by the `+title_pos+` entry in the styling configuration. It defaults to the top left. 
+You can include a title in the generated diagram by passing a string to the `+--title+` option. 
+The position of the title is controlled by the `+title_pos+` entry in the styling configuration. 
+It defaults to the top left. 
 The `+title_font+` entry is used to style the font.
 
 ----
 > syntrax -i titling.spec -o svg --title="Diagram with title"
 ----
 
-image:images/titling.svg[image]
+[syntrax,titling,svg,heading="Diagram with title",opts=interactive]
+....
+line('diagram', 'with', 'title') 
+....
 
 === Specification language
 
@@ -133,7 +170,11 @@ to right.
 line('[', 'foo', ',', '/bar', ']')
 ----
 
-image:images/syntax_line.svg[image]
+[syntrax,line,svg,opts=interactive]
+....
+line('[', 'foo', ',', '/bar', ']')
+....
+
 
 ==== loop
 
@@ -147,7 +188,11 @@ rendered with nodes ordered from right to left.
 loop(line('/forward', 'path'), line('backward', 'path'))
 ----
 
-image:images/syntax_loop.svg[image]
+[syntrax,loop,svg,opts=interactive]
+....
+loop(line('/forward', 'path'), line('backward', 'path'))
+....
+
 
 Either the forward or backward path can be `+None+` to represent no
 nodes on that portion of the loop.
@@ -157,7 +202,10 @@ nodes on that portion of the loop.
 loop('forward', None)
 ----
 
-image:images/syntax_loop_none.svg[image]
+[syntrax,loopnone,svg,opts=interactive]
+....
+loop('forward', None)
+....
 
 ==== toploop
 
@@ -169,7 +217,10 @@ above the forward path.
 toploop(line('(', 'forward', ')'), line(')', 'backward', '('))
 ----
 
-image:images/syntax_toploop.svg[image]
+[syntrax,looptop,svg,opts=interactive]
+....
+toploop(line('(', 'forward', ')'), line(')', 'backward', '('))
+....
 
 ==== choice
 
@@ -181,7 +232,11 @@ options.
 choice('A', 'B', 'C')
 ----
 
-image:images/syntax_choice.svg[image]
+[syntrax,choice,svg,opts=interactive]
+....
+choice('A', 'B', 'C')
+....
+
 
 ==== opt
 
@@ -193,7 +248,10 @@ main path bypasses the optional portion positioned below.
 opt('A', 'B', 'C')
 ----
 
-image:images/syntax_opt.svg[image]
+[syntrax,opt,svg,opts=interactive]
+....
+opt('A', 'B', 'C')
+....
 
 `+opt()+` is a special case of the `+choice()+` function where the first
 choice is `+None+` and the remaining nodes are put into a single line
@@ -214,7 +272,10 @@ passing through the nodes.
 optx('A', 'B', 'C')
 ----
 
-image:images/syntax_optx.svg[image]
+[syntrax,optx,svg,opts=interactive]
+....
+optx('A', 'B', 'C')
+....
 
 ==== stack
 
@@ -231,7 +292,14 @@ stack(
 )
 ----
 
-image:images/syntax_stack.svg[image]
+[syntrax,stack,svg,opts=interactive]
+....
+stack(
+  line('top', 'line'),
+  line('bottom', 'line')
+)
+....
+
 
 When an inner element of a stack argument list is an `+opt()+` or an
 `+optx()+` it will be rendered with a special vertical bypass.
@@ -245,7 +313,14 @@ stack(
 )
 ----
 
-image:images/syntax_bypass.svg[image]
+[syntrax,bypass,svg,opts=interactive]
+....
+stack(
+  line('A', 'B'),
+  opt('bypass'),
+  line('finish')
+)
+....
 
 ==== indentstack
 
@@ -262,7 +337,13 @@ indentstack(3,
 )
 ----
 
-image:images/syntax_indentstack.svg[image]
+[syntrax,indentstack,svg,opts=interactive]
+....
+indentstack(3,
+  line('top', 'line'),
+  line('bottom', 'line')
+)
+....
 
 ==== rightstack
 
@@ -277,13 +358,20 @@ rightstack(
 )
 ----
 
-image:images/syntax_rightstack.svg[image]
+
+[syntrax,rightstack,svg,opts=interactive]
+....
+rightstack(
+  line('top', 'line', 'with', 'more', 'code'),
+  line('bottom', 'line')
+)
+....
 
 === Styling diagrams
 
 You can control the styling of the generated diagrams by passing in a
 style INI file with the `+-s+` option. By default JSyntrax will look for
-a file named "JSyntrax.ini" in the current directory and use that if it
+a file named "jsyntrax.ini" in the current directory and use that if it
 exists. Otherwise it will fall back to its internal defaults.
 
 You can use the `+--get-style+` option to generate a copy of the default
@@ -291,6 +379,7 @@ styles in the current directory so you can quickly make modifications.
 
 Here is the default styling:
 
+[source,ini]
 ----
 [style]
 line_width = 2
@@ -309,14 +398,14 @@ shadow_fill = (0, 0, 0, 127)
 title_font = ('Sans', 22, 'bold')
 
 [bubble]
-pattern = '^(\w+)'
+pattern = '(^\w+)'
 shape = 'bubble'
 font = ('Sans', 14, 'bold')
 text_color = (0, 0, 0)
 fill = (179, 229, 252)
 
 [box]
-pattern = '^/(.*)'
+pattern = '^/(.+)'
 shape = 'box'
 font = ('Times', 14, 'italic')
 text_color = (0, 0, 0)
@@ -330,48 +419,64 @@ text_color = (0, 0, 0)
 fill = (179, 229, 252)
 ----
 
-image:images/vhdl_attribute_spec.svg[image]
+[syntrax,vhdl_attribute_spec,svg,opts=interactive]
+....
+stack(
+ line('attribute', '/(attribute) identifier', 'of'),
+ line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':'),
+ line('/entity_class', 'is', '/expression', ';')
+)
+....
 
 Here is the same diagram with modified styling:
 
+[source,ini]
 ----
 [style]
-line_width = 3               ; Thicker lines
+; Thicker lines
+line_width = 3               
 outline_width = 3
 padding = 5
 line_color = (0, 0, 0)
-max_radius = 29              ; Larger radii
+; Larger radii
+max_radius = 29              
 h_sep = 17
 v_sep = 9
-arrows = False               ; Remove arrows
+; Remove arrows
+arrows = False               
 title_pos = 'tl'
-bullet_fill = 'yellow'       ; Requires optional webcolors package to be installed
+; yellow
+bullet_fill = (255,255,0)    
 text_color = (0, 0, 0)
 shadow = True
 shadow_fill = (0, 0, 0, 127)
 title_font = ('Sans', 22, 'bold')
 
-[hex_bubble]                 ; User-defined style name
-pattern = '^(\w+)'
-shape = 'hex'                ; Hexagon shape for node
+; User-defined style name
+[hex_bubble]                 
+pattern = '(^\w+)'     
+; Hexagon shape for node
+shape = 'hex'                
 font = ('Sans', 14, 'bold')
-fill = (255,0,0,127)         ; Alpha component for transparent fills
+; Alpha component for transparent fills
+fill = (255,0,0,127)                 
 
 [box]
 pattern = '^/(.*)'
 shape = 'box'
 font = ('Sans', 14, 'bold')
 text_color = (100, 100, 100)
-fill = '#88AAEE'
+fill = (144, 164, 174)
 
 [token]
 pattern = '(.*)'
 shape = 'bubble'
 font = ('Times', 16, 'italic')
 fill = (0,255,0,127)
+
 ----
 
-image:images/vhdl_attribute_alt.svg[image]
+image:images/vhdl_attribute_spec.svg[image]
 
 The style configuration file has a main section named "[style]" followed by user-defined sections for various node types. 
 The node style is chosen based on a regex pattern applied to the text. 
@@ -466,15 +571,6 @@ If omitted, the `+text_color+` from the `+[style]+` section is used.
 fill::
 Shape fill color for the node.
 
-[NOTE]
-.Note
-====
-The `+text_mod+` value is passed through `+eval()+` to create an
-executable code object. 
-This is a potential security hole if an
-untrusted user is allowed to control the style settings file.
-====
-
 ==== Colors
 
 The various keys controlling coloration can use a variety of color
@@ -487,8 +583,6 @@ All channels are an integer ranging from 0 to 255.
 
 (255,100,0)     ; RGB 
 (255,100,0,100) ; RGBA 
-'#AABBCC'       ; Hex string 
-'red'           ; Named web color
 ----
 
 ==== Fonts
