@@ -1,11 +1,13 @@
 package org.atpfivt.jsyntrax;
 
 
+import org.apache.batik.transcoder.TranscoderException;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.util.SVGTranscoder;
 import org.codehaus.groovy.control.CompilationFailedException;
 
 import java.io.BufferedReader;
@@ -77,6 +79,7 @@ public final class Main {
                         iArgs.getStyle());
             } catch (Exception e) {
                 System.out.println("Failed parsing style file");
+                System.out.println("Exception: " + e.getMessage());
                 return;
             }
         } else {
@@ -113,10 +116,16 @@ public final class Main {
 
         // write result to file
         try {
-            Files.writeString(iArgs.getOutput(), result);
+            if (iArgs.getPngProperty()) {
+                Files.write(iArgs.getOutput(), SVGTranscoder.svg2Png(result));
+            } else {
+                Files.writeString(iArgs.getOutput(), result);
+            }
         } catch (IOException e) {
             System.out.println("Failed to write: " + e.getMessage());
             return;
+        } catch (TranscoderException e) {
+            System.out.println("Failed to transcode .svg image: " + e.getMessage());
         }
         System.out.println("Done!");
     }
