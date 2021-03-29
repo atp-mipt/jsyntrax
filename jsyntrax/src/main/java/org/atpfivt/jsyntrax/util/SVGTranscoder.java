@@ -4,8 +4,10 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+
 
 public final class SVGTranscoder {
     private static final int INIT_STREAM_SIZE = 1024;
