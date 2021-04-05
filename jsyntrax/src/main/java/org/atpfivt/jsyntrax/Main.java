@@ -29,7 +29,8 @@ public final class Main {
         try {
             iArgs = new InputArguments(args);
         } catch (Exception e) {
-            System.out.println("Cannot parse command line");
+            System.out.println("Got exception when parsing input arguments:");
+            System.out.println("\t" + e.getMessage());
             InputArguments.writeHelp(new PrintWriter(System.out));
             return;
         }
@@ -78,7 +79,7 @@ public final class Main {
                         iArgs.isTransparent(),
                         iArgs.getStyle());
             } catch (Exception e) {
-                System.out.println("Failed parsing style file");
+                System.out.println("Failed parsing style file.");
                 System.out.println("Exception: " + e.getMessage());
                 return;
             }
@@ -103,7 +104,8 @@ public final class Main {
             // parse spec
             root = Parser.parse(scriptText);
         } catch (CompilationFailedException e) {
-            System.out.println("Something was wrong with input script " + e.getMessage());
+            System.out.println("Something was wrong with input script:");
+            System.out.println("\t" + e.getMessage());
             return;
         }
 
@@ -116,7 +118,7 @@ public final class Main {
 
         // write result to file
         try {
-            if (iArgs.getPngProperty()) {
+            if (iArgs.getOutput().toString().endsWith(".png")) {
                 Files.write(iArgs.getOutput(), SVGTranscoder.svg2Png(result));
             } else {
                 Files.writeString(iArgs.getOutput(), result);
