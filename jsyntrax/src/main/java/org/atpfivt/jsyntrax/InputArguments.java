@@ -55,8 +55,6 @@ public class InputArguments {
         );
         OPTIONS_MAP.put(new Option(null, "get-style", false, "Create default style .ini"),
                 (o, s) -> o.getDefaultStyle = true);
-        OPTIONS_MAP.put(new Option(null, "png", false, "Generate output as .png image"),
-                (o, s) -> o.png = true);
     }
 
     InputArguments(String... args) throws ParseException {
@@ -117,9 +115,5 @@ public class InputArguments {
 
     public boolean getDefaultStyleProperty() {
         return getDefaultStyle;
-    }
-
-    public boolean getPngProperty() {
-        return png;
     }
 }

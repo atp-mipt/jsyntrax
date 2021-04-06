@@ -10,11 +10,16 @@ import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.util.SVGTranscoder;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Base64;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class SVGTranscoderTest {
@@ -50,10 +55,13 @@ public class SVGTranscoderTest {
         SVGCanvas canvas = new SVGCanvasBuilder().withStyle(s).generateSVG(root);
 
         //Then
-        String resultSVG = canvas.generateSVG();
-        String resultPNG = Base64.getEncoder()
-                .encodeToString(SVGTranscoder.svg2Png(resultSVG));
-
-        Approvals.verify(resultPNG);
+        Path inputPath = Paths.get(MainTest.class.getResource("test_spec.txt").toURI());
+        Path outPath = Files.createTempFile("jsyntrax-test-output", ".png");
+        try {
+            Main.main("-o", outPath.toString(), inputPath.toString());
+            Approvals.verify(outPath.toFile());
+        } finally {
+            Files.deleteIfExists(outPath);
+        }
     }
 }
