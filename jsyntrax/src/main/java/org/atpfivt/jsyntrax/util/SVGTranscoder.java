@@ -17,14 +17,11 @@ public final class SVGTranscoder {
     }
 
     public static byte[] svg2Png(String svgString) throws TranscoderException {
-        var transcoder = new PNGTranscoder();
-        var svgStream = new ByteArrayInputStream(svgString.getBytes());
-        var input = new TranscoderInput(svgStream);
-
-        ByteArrayOutputStream ostream = new ByteArrayOutputStream(INIT_STREAM_SIZE);
-        TranscoderOutput output = new TranscoderOutput(ostream);
-
-        transcoder.transcode(input, output);
-        return ostream.toByteArray();
+        PNGTranscoder transcoder = new PNGTranscoder();
+        ByteArrayInputStream svgStream = new ByteArrayInputStream(svgString.getBytes());
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream(INIT_STREAM_SIZE);
+        transcoder.transcode(new TranscoderInput(svgStream),
+                new TranscoderOutput(outStream));
+        return outStream.toByteArray();
     }
 }

@@ -1,18 +1,20 @@
 package org.atpfivt.jsyntrax;
 
-import org.approvaltests.awt.AwtApprovals;
+import org.approvaltests.Approvals;
+import org.approvaltests.namer.NamedEnvironment;
 import org.approvaltests.namer.NamerFactory;
+import org.approvaltests.writers.ApprovalBinaryFileWriter;
 import org.junit.jupiter.api.Test;
 
-import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-public class SVGTranscoderTest {
+public class PngOutputTest {
     @Test
     public void transcodeTest() throws IllegalAccessException, NoSuchFieldException,
             IOException, URISyntaxException {
@@ -25,9 +27,9 @@ public class SVGTranscoderTest {
         Main.main("-o", outPath.toString(), inputPath.toString(), "-s", configPath.toString());
 
         // Then
-        try {
-            NamerFactory.asOsSpecificTest();
-            AwtApprovals.verify(ImageIO.read(outPath.toFile()));
+        try (NamedEnvironment ignored = NamerFactory.asOsSpecificTest();
+            InputStream inputStream = Files.newInputStream(outPath)) {
+            Approvals.verify(new ApprovalBinaryFileWriter(inputStream, "png"));
         } finally {
             Files.deleteIfExists(outPath);
         }

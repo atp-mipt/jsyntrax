@@ -89,7 +89,19 @@ public class InputArguments {
         return input;
     }
 
+    private static Path changeExtension(Path p, String ext) {
+        String path = p.toString();
+        return Paths.get(path.substring(0, path.lastIndexOf('.'))
+                + "." + ext);
+    }
+
     public Path getOutput() {
+        if (output == null) {
+            output = changeExtension(input, "svg");
+        } else if ("png".equalsIgnoreCase(output.toString())
+                || "svg".equalsIgnoreCase(output.toString())) {
+            output = changeExtension(input, output.toString());
+        }
         return output;
     }
 

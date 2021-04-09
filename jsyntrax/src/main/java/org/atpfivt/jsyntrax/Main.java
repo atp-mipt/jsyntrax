@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 public final class Main {
     public static final String JSYNTRAX_INI = "jsyntrax.ini";
 
-    private Main() { }
+    private Main() {
+    }
 
     public static void main(String... args) throws IOException, NoSuchFieldException, IllegalAccessException {
         // parse command line arguments
@@ -80,7 +81,7 @@ public final class Main {
                         iArgs.getStyle());
             } catch (Exception e) {
                 System.out.println("Failed parsing style file.");
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage());
                 return;
             }
         } else {
@@ -118,10 +119,11 @@ public final class Main {
 
         // write result to file
         try {
-            if (iArgs.getOutput().toString().endsWith(".png")) {
-                Files.write(iArgs.getOutput(), SVGTranscoder.svg2Png(result));
+            Path output = iArgs.getOutput();
+            if (output.toString().toLowerCase().endsWith(".png")) {
+                Files.write(output, SVGTranscoder.svg2Png(result));
             } else {
-                Files.writeString(iArgs.getOutput(), result);
+                Files.writeString(output, result);
             }
         } catch (IOException e) {
             System.out.println("Failed to write: " + e.getMessage());
@@ -146,6 +148,7 @@ public final class Main {
             System.out.println("No output file set");
             return false;
         }
+
         if (!Files.exists(output)) {
             try {
                 Files.createFile(output);
