@@ -476,7 +476,14 @@ fill = (0,255,0,127)
 
 ----
 
-image:images/vhdl_attribute_spec.svg[image]
+[syntrax,vhdl_attribute_spec_styled,svg,opts=interactive,style-file=doc/src/main/asciidoc/modified-style.ini]
+....
+stack(
+ line('attribute', '/(attribute) identifier', 'of'),
+ line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':'),
+ line('/entity_class', 'is', '/expression', ';')
+)
+....
 
 The style configuration file has a main section named "[style]" followed by user-defined sections for various node types. 
 The node style is chosen based on a regex pattern applied to the text. 
