@@ -1,11 +1,13 @@
 package org.atpfivt.jsyntrax;
 
 
+import org.apache.batik.transcoder.TranscoderException;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.groovy_parser.Parser;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.util.SVGTranscoder;
 import org.codehaus.groovy.control.CompilationFailedException;
 
 import java.io.BufferedReader;
@@ -19,7 +21,8 @@ import java.util.stream.Collectors;
 public final class Main {
     public static final String JSYNTRAX_INI = "jsyntrax.ini";
 
-    private Main() { }
+    private Main() {
+    }
 
     public static void main(String... args) throws IOException, NoSuchFieldException, IllegalAccessException {
         // parse command line arguments
@@ -27,7 +30,8 @@ public final class Main {
         try {
             iArgs = new InputArguments(args);
         } catch (Exception e) {
-            System.out.println("Cannot parse command line");
+            System.out.println("Got exception when parsing input arguments:");
+            System.out.println("\t" + e.getMessage());
             InputArguments.writeHelp(new PrintWriter(System.out));
             return;
         }
@@ -76,7 +80,8 @@ public final class Main {
                         iArgs.isTransparent(),
                         iArgs.getStyle());
             } catch (Exception e) {
-                System.out.println("Failed parsing style file");
+                System.out.println("Failed parsing style file.");
+                System.out.println("Error: " + e.getMessage());
                 return;
             }
         } else {
@@ -100,7 +105,8 @@ public final class Main {
             // parse spec
             root = Parser.parse(scriptText);
         } catch (CompilationFailedException e) {
-            System.out.println("Something was wrong with input script " + e.getMessage());
+            System.out.println("Something was wrong with input script:");
+            System.out.println("\t" + e.getMessage());
             return;
         }
 
@@ -113,10 +119,17 @@ public final class Main {
 
         // write result to file
         try {
-            Files.writeString(iArgs.getOutput(), result);
+            Path output = iArgs.getOutput();
+            if (output.toString().toLowerCase().endsWith(".png")) {
+                Files.write(output, SVGTranscoder.svg2Png(result));
+            } else {
+                Files.writeString(output, result);
+            }
         } catch (IOException e) {
             System.out.println("Failed to write: " + e.getMessage());
             return;
+        } catch (TranscoderException e) {
+            System.out.println("Failed to transcode .svg image: " + e.getMessage());
         }
         System.out.println("Done!");
     }
@@ -135,6 +148,7 @@ public final class Main {
             System.out.println("No output file set");
             return false;
         }
+
         if (!Files.exists(output)) {
             try {
                 Files.createFile(output);

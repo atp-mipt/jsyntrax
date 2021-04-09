@@ -61,6 +61,17 @@
             <version>10.3.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- PNG Transcoder -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-transcoder</artifactId>
+            <version>1.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-codec</artifactId>
+            <version>1.14</version>
+        </dependency>
     </dependencies>
 
 

@@ -86,6 +86,12 @@ public final class StyleConfig {
                     .getDeclaredField(StringUtils.snakeToCamelCase(propertyName));
             field.setAccessible(true);
             field.set(obj, parser.apply(s.get(propertyName)));
+        } else {
+            System.out.println(
+                    "[StyleConfigParser] Warning: section ["
+                    + s.getName() + "]"
+                    + " does not contain property ["
+                    + propertyName + "]");
         }
     }
 
