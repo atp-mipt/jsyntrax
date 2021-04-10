@@ -21,12 +21,12 @@ indentstack(10,
 
 This is processed by JSyntrax to generate an SVG image:
 
-![](doc/src/main/asciidoc/images/json_number.svg)
+![](json_number.svg)
 
-JSyntrax renders SVG vector images. The SVG output can have hyperlinked text allowing users to quickly navigate to documentation of different syntax elements.
+JSyntrax can render to SVG vector images or PNG bitmap images. The SVG output can have [hyperlinked text](https://atp-mipt.github.io/jsyntrax/#_hyperlinked_svg) allowing users to quickly navigate to documentation of different syntax elements.
 
-This is a Java reimplementation of [syntrax](https://github.com/kevinpt/syntrax/) project, originally written in Python. 
+JSyntrax is a Java reimplementation of [syntrax](https://github.com/kevinpt/syntrax/) project, originally written in Python. We use [Apache Batik](https://xmlgraphics.apache.org/batik/) for SVG rasterization.
 
-The aim of this project is to make `syntrax` tool easy to install on any operating system (no software is required for `jsyntrax` besides Java 11).
+The aim of this project is to make `syntrax` tool easy to install on any operating system. No software and libraries are required for `jsyntrax` besides Java 11.
 
 See [documentation](https://atp-mipt.github.io/jsyntrax/).
