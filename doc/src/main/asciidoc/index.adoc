@@ -230,12 +230,12 @@ above the forward path.
 
 [source,Groovy]
 ----
-toploop(line('(', 'forward', ')'), line(')', 'backward', '('))
+toploop(line('(', 'forward', ')'), line('(', 'backward', ')'))
 ----
 
 [syntrax,looptop,svg,opts=interactive]
 ....
-toploop(line('(', 'forward', ')'), line(')', 'backward', '('))
+toploop(line('(', 'forward', ')'), line('(', 'backward', ')'))
 ....
 
 ==== choice
