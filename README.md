@@ -21,7 +21,7 @@ indentstack(10,
 
 This is processed by JSyntrax to generate an SVG image:
 
-![](doc/src/main/asciidoc/images/json_number.svg)
+![](json_number.svg)
 
 JSyntrax can render to SVG vector images or PNG bitmap images. The SVG output can have [hyperlinked text](https://atp-mipt.github.io/jsyntrax/#_hyperlinked_svg) allowing users to quickly navigate to documentation of different syntax elements.
 
