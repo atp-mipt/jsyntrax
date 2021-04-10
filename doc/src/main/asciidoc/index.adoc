@@ -35,7 +35,8 @@ indentstack(10,
 )
 ....
 
-JSyntrax can render to SVG vector images, the output can have <<hyperlinked,hyperlinked text>> allowing users to quickly navigate to documentation of different syntax
+JSyntrax can render to PNG bitmap images or SVG vector images.
+The SVG output can have <<Hyperlinked SVG,hyperlinked text>> allowing users to quickly navigate to documentation of different syntax
 elements.
 
 The https://github.com/kevinpt/JSyntrax[original Syntrax] was a heavily modified version of the railroad diagram generator used for the https://www.sqlite.org/lang.html[SQLite documentation] implemented in Python. 
@@ -43,40 +44,34 @@ Then in JSyntrax it has been reimplemented in Java in order to simplify installa
 
 ==== JSyntrax vs. Syntrax
 
-Why did you reimplement Syntrax?:: The problem with Syntrax is that it requires Pycairo and Pango which may be difficult to install, especially on Windows.
+Why did you reimplement Syntrax in Java?:: The problem with Syntrax is that it requires Pycairo and Pango which may be difficult to install, especially on Windows.
+JSyntrax requires only JDK 11, which is easily https://adoptopenjdk.net/releases.html[available] for many platforms.
 
-JSyntrax requires only JDK 11, which is easily available for many platforms.
-
-What output formats are supported?:: Unlike original Syntrax, that can output to many bitmap and vector formats, JSyntrax only produces SVG.
-This can be changed in the future.
+What output formats are supported?:: JSyntrax produces SVG and PNG images. The original Syntrax can also produce PDF, PS, and EPS, these formats are not yet supported by JSyntrax.
 
 Can I build my Syntrax specs with JSyntrax?:: Yes, after only a couple of minor tweaks. 
-If you use url maps, refer to <<Specification language>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax. 
-Also, `text_mod` attribute in  <<Styling diagrams>> is not supported (the author of the original Syntrax warned about potential security issues with this attribute). 
-Instead, if a style regexp pattern contains a capturing group, the node text will contain the contents of this capturing group only.
+If you use url maps, refer to <<Hyperlinked SVG>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax (in short: you will have to replace `{}` with `[]` and add `jsyntrax` wrapper function).
+Also, `text_mod` attribute in  <<Styling diagrams>> is not supported (the author of the original Syntrax https://kevinpt.github.io/syntrax/#node-styles[warned] about potential security issues with this attribute).
+Instead, if a style regexp pattern contains a capturing group, the node text will contain the contents of the first capturing group only.
 
-
-Why your executable file is called `syntrax`?:: This is made intentionally in order to use https://asciidoctor.org/docs/asciidoctor-diagram/[AsciiDoctor Diagram] integration facility. JSyntrax executable has exactly the same command line arguments as Syntrax.
+Why your executable file is called `syntrax`, not `jsyntrax`?:: This is made intentionally in order to use https://asciidoctor.org/docs/asciidoctor-diagram/[AsciiDoctor Diagram] integration facility.
+JSyntrax executable has exactly the same <<Using JSyntrax,command line arguments>> as Syntrax and can be used as a replacement for the original `syntrax` tool.
 
 ==== Licensing
 
 JSyntrax is licensed for free commercial and non-commercial use under the terms of the MIT license.
 
-
 === Requirements, download and installation
 
-JSyntrax requires JDK 11+. No other software is required to run JSyntrax.
+JSyntrax requires https://adoptopenjdk.net/releases.html[JDK 11+]. No other software is required to run JSyntrax.
 
-You can access the JSyntrax Git repository from
-https://github.com/atp-mipt/java-syntrax[Github]. 
+You can access the JSyntrax Git repository from https://github.com/atp-mipt/java-syntrax[Github], and download releases https://github.com/atp-mipt/jsyntrax/releases[here].
 
 Unzip `jsyntrax-XXX.zip` file to any convenient folder. `/bin` directory will contain executable `syntrax` file.
 
 === Using JSyntrax
 
-JSyntrax is a command line tool. You pass it an input specification file
-and it will generate a diagram in any of the supported output formats.
-
+JSyntrax is a command line tool. You pass it an input specification file and it will generate a diagram in any of the supported output formats.
 
 ----
 usage: syntrax [--get-style] [-h] [-i <arg>] [-o <arg>] [-s <arg>] [--scale
@@ -94,6 +89,27 @@ Options
    -v,--version          JSyntrax version
 ----
 
+Any argument not associated with a flag is assumed to be the input file name. The default output format is PNG.
+
+----
+> syntrax spec
+Output file spec.png was created
+Done!
+----
+
+You can specify the specific out file you want with the `-o` option.
+The extension determines the format.
+You can also pass just the extension to `-o` and Syntrax will use the input file base name for the output image:
+
+----
+>syntrax -i spec -o result.svg
+Output file result.svg was created
+Done!
+
+>syntrax -i spec -o svg
+Output file spec.svg was created
+Done!
+----
 
 ==== Transparency
 
@@ -370,9 +386,7 @@ rightstack(
 === Styling diagrams
 
 You can control the styling of the generated diagrams by passing in a
-style INI file with the `+-s+` option. By default JSyntrax will look for
-a file named "jsyntrax.ini" in the current directory and use that if it
-exists. Otherwise it will fall back to its internal defaults.
+style INI file with the `+-s+` option.
 
 You can use the `+--get-style+` option to generate a copy of the default
 styles in the current directory so you can quickly make modifications.
@@ -600,9 +614,10 @@ Fonts are specified as a tuple of three items in the following order:
 * Point size (12, 14, 16, etc.)
 * Style ('normal', 'bold', 'italic')
 
+----
 title_font = ('Helvetica', 14, 'bold')
+----
 
-[hyperlinked]
 === Hyperlinked SVG
 
 SVG images can have hyperlinked node text. This is implemented by adding a `+url_map+` parameter to `jsyntrax` wrapper function. 
@@ -628,6 +643,19 @@ jsyntrax(stack(
 Note that in Groovy, unlike Python, maps are enclosed in brackets `[]`, not braces `{}`.
 ====
 
+[syntrax,hyperlinked,svg,opts=interactive]
+....
+jsyntrax(stack(
+ line('attribute', '/(attribute) identifier', 'of'),
+ line(choice(toploop('/entity_designator', ','), 'others', 'all'), ':'),
+ line('/entity_class', 'is', '/expression', ';')
+),
+[
+  'entity_class': 'https://www.google.com/#q=vhdl+entity+class',
+  '(attribute) identifier': 'http://en.wikipedia.com/wiki/VHDL'
+])
+....
+
 Current browser policies lump SVG hyperlinks together with embedded
 Javascript. 
 Because of this they do not support hyperlinks when an SVG
@@ -637,4 +665,16 @@ To get functional links on a web page you must use an `+<object>+` tag instead:
 [source,html]
 ----
 <object type="image/svg+xml" data="path/to/your.svg"></object>
+----
+
+In Asciidoctor diagrams, we should put set `opts=interactive` or `opts=inline` on the diagram block:
+
+----
+[syntrax,hyperlinked,svg,opts=interactive]
+....
+jsyntrax( ... ,
+[
+  ...
+])
+....
 ----

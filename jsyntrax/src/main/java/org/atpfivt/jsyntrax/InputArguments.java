@@ -27,7 +27,6 @@ public class InputArguments {
     private boolean transparent;
     private double scale = 1.0;
     private boolean getDefaultStyle = false;
-    private boolean png = false;
 
     static {
         OPTIONS = new Options();
@@ -69,7 +68,7 @@ public class InputArguments {
         }
         //Any argument not associated with a flag is assumed to be the input file name
         if (commandLine.getArgList().size() > 0) {
-            this.input = Paths.get(commandLine.getArgList().get(0).toString());
+            this.input = Paths.get(commandLine.getArgList().get(0));
         }
     }
 
@@ -89,15 +88,21 @@ public class InputArguments {
         return input;
     }
 
-    private static Path changeExtension(Path p, String ext) {
+    static Path changeExtension(Path p, String ext) {
         String path = p.toString();
-        return Paths.get(path.substring(0, path.lastIndexOf('.'))
-                + "." + ext);
+        int i = path.lastIndexOf('.');
+        if (i >= 0) {
+            return Paths.get(path.substring(0, i)
+                    + "." + ext);
+        } else {
+            return Paths.get(path
+                    + "." + ext);
+        }
     }
 
     public Path getOutput() {
         if (output == null) {
-            output = changeExtension(input, "svg");
+            output = changeExtension(input, "png");
         } else if ("png".equalsIgnoreCase(output.toString())
                 || "svg".equalsIgnoreCase(output.toString())) {
             output = changeExtension(input, output.toString());

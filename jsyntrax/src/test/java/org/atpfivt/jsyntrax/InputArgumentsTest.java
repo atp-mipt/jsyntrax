@@ -3,6 +3,7 @@ package org.atpfivt.jsyntrax;
 import groovyjarjarcommonscli.ParseException;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,5 +55,20 @@ class InputArgumentsTest {
         InputArguments inputArguments = new InputArguments("-o", "test.svg", "test.spec");
         assertEquals(Paths.get("test.spec"), inputArguments.getInput());
 
+    }
+
+    @Test
+    void changeExtension() {
+        assertEquals("foo.baz", InputArguments.changeExtension(Path.of("foo.bar"), "baz").toString());
+    }
+
+    @Test
+    void changeExtensionNoName() {
+        assertEquals(".baz", InputArguments.changeExtension(Path.of(".bar"), "baz").toString());
+    }
+
+    @Test
+    void addExtension() {
+        assertEquals("foo.baz", InputArguments.changeExtension(Path.of("foo"), "baz").toString());
     }
 }

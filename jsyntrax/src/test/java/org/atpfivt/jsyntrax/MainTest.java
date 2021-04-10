@@ -120,13 +120,13 @@ class MainTest {
     }
 
     @Test
-    void testSvgByDefault() throws IOException, URISyntaxException, NoSuchFieldException, IllegalAccessException {
+    void testPngByDefault() throws IOException, URISyntaxException, NoSuchFieldException, IllegalAccessException {
         Path inputPath = Paths.get(MainTest.class.getResource("jsyntrax.spec").toURI());
-        Path outPath = Paths.get(inputPath.toString().substring(0, inputPath.toString().lastIndexOf('.')) + ".svg");
+        Path outPath = Paths.get(inputPath.toString().substring(0, inputPath.toString().lastIndexOf('.')) + ".png");
         try {
             Main.main(inputPath.toString());
-            String svg = Files.readString(outPath);
-            validateSVG(svg);
+            byte[] png = Files.readAllBytes(outPath);
+            validatePng(png);
         } finally {
             Files.delete(outPath);
         }
