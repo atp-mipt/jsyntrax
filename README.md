@@ -29,4 +29,14 @@ JSyntrax is a Java reimplementation of [syntrax](https://github.com/kevinpt/synt
 
 The aim of this project is to make `syntrax` tool easy to install on any operating system. No software and libraries are required for `jsyntrax` besides Java 11.
 
-See [documentation](https://atp-mipt.github.io/jsyntrax/).
+## Requirements, download and installation
+
+JSyntrax requires [JDK 11 or later](https://adoptopenjdk.net/releases.html).
+
+Download the latest release from [GitHub Releases](https://github.com/atp-mipt/jsyntrax/releases) page. 
+
+Unzip the archive anywhere, `/bin` directory will contain the executable `syntrax` file. 
+
+## Documentation
+
+The full documentation is available online at the [main JSyntrax site](https://atp-mipt.github.io/jsyntrax/).
