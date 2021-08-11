@@ -39,7 +39,7 @@ JSyntrax can render to PNG bitmap images or SVG vector images.
 The SVG output can have <<Hyperlinked SVG,hyperlinked text>> allowing users to quickly navigate to documentation of different syntax
 elements.
 
-The https://github.com/kevinpt/JSyntrax[original Syntrax] was a heavily modified version of the railroad diagram generator used for the https://www.sqlite.org/lang.html[SQLite documentation] implemented in Python. 
+The https://github.com/kevinpt/syntrax[original Syntrax] was a heavily modified version of the railroad diagram generator used for the https://www.sqlite.org/lang.html[SQLite documentation] implemented in Python.
 Then in JSyntrax it has been reimplemented in Java in order to simplify installation, get rid of required libraries and make it easily portable to any operating system.
 
 ==== JSyntrax vs. Syntrax
