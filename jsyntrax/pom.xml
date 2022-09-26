@@ -27,7 +27,7 @@
         <approvaltests.version>9.5.0</approvaltests.version>
         <jacoco.maven.plugin.version>0.8.7</jacoco.maven.plugin.version>
         <checkstyle.maven.plugin.version>3.1.2</checkstyle.maven.plugin.version>
-        <checkstyle.version>8.45</checkstyle.version>
+        <checkstyle.version>10.3.4</checkstyle.version>
         <lombok.version>1.18.16</lombok.version>
     </properties>
 
