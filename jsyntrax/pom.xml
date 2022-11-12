@@ -26,7 +26,7 @@
         <assertj.core.version>3.23.1</assertj.core.version>
         <approvaltests.version>9.5.0</approvaltests.version>
         <jacoco.maven.plugin.version>0.8.8</jacoco.maven.plugin.version>
-        <checkstyle.maven.plugin.version>3.1.2</checkstyle.maven.plugin.version>
+        <checkstyle.maven.plugin.version>3.2.0</checkstyle.maven.plugin.version>
         <checkstyle.version>10.4</checkstyle.version>
         <lombok.version>1.18.16</lombok.version>
     </properties>
