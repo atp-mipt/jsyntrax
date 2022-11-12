@@ -1,11 +1,11 @@
 package org.atpfivt.jsyntrax;
 
-import groovyjarjarcommonscli.CommandLine;
-import groovyjarjarcommonscli.HelpFormatter;
-import groovyjarjarcommonscli.Option;
-import groovyjarjarcommonscli.Options;
-import groovyjarjarcommonscli.ParseException;
-import groovyjarjarcommonscli.PosixParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import java.io.PrintWriter;
 import java.nio.file.Path;
@@ -60,7 +60,7 @@ public class InputArguments {
         for (Option o : OPTIONS_MAP.keySet()) {
             OPTIONS.addOption(o);
         }
-        CommandLine commandLine = new PosixParser().parse(OPTIONS, args);
+        CommandLine commandLine = new DefaultParser().parse(OPTIONS, args);
 
         for (Option o : commandLine.getOptions()) {
             OPTIONS_MAP.getOrDefault(o, (x, s) -> {

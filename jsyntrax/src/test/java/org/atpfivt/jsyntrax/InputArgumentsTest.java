@@ -1,6 +1,6 @@
 package org.atpfivt.jsyntrax;
 
-import groovyjarjarcommonscli.ParseException;
+import org.apache.commons.cli.ParseException;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
@@ -45,13 +45,13 @@ class InputArgumentsTest {
     }
 
     @Test
-    void testTransparentParam() throws ParseException{
+    void testTransparentParam() throws ParseException {
         InputArguments inputArguments = new InputArguments("-t");
         assertTrue(inputArguments.isTransparent());
     }
 
     @Test
-    void testDefaultInputParam() throws ParseException{
+    void testDefaultInputParam() throws ParseException {
         InputArguments inputArguments = new InputArguments("-o", "test.svg", "test.spec");
         assertEquals(Paths.get("test.spec"), inputArguments.getInput());
 
