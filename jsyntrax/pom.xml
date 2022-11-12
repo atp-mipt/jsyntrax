@@ -22,13 +22,11 @@
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <junit.version>5.9.1</junit.version>
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
-
         <assertj.core.version>3.23.1</assertj.core.version>
         <approvaltests.version>9.5.0</approvaltests.version>
         <jacoco.maven.plugin.version>0.8.8</jacoco.maven.plugin.version>
         <checkstyle.maven.plugin.version>3.2.0</checkstyle.maven.plugin.version>
         <checkstyle.version>10.4</checkstyle.version>
-        <lombok.version>1.18.16</lombok.version>
     </properties>
 
     <dependencies>
@@ -123,25 +121,6 @@
                 </executions>
 
             </plugin>
-            <plugin>
-                <!-- if including source jars, use the no-fork goals
-                     otherwise both the Groovy sources and Java stub sources
-                     will get included in your jar -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <!-- source plugin \> = 2.1 is required to use the no-fork goals -->
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                            <goal>test-jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>
