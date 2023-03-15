@@ -31,6 +31,24 @@ public abstract class BubbleElementBase extends Element {
         int y1 = super.getEnd().s;
 
         int x = (x0 + x1) / 2;
+
+        if (fontName.equals("title_font")) {
+            switch (style.getTitlePos()) {
+                case bl:
+                case tl:
+                    x = x0;
+                    break;
+                case bm:
+                case tm:
+                    x = (x0 + x1) / 2;
+                    break;
+                case br:
+                case tr:
+                    x = x1;
+                    break;
+            }
+        }
+
         int y = (y0 + y1) / 2 + (int) (Math.abs(getTextPos().s) * 0.25 + style.getScale() * 2);
 
         String txt = StringUtils.escapeXML(getText());
