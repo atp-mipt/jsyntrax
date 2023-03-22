@@ -79,7 +79,8 @@ public final class SVGCanvasBuilder implements Visitor {
         String titleTag = canvas.newTag("x", "-title");
         Element e = new TitleElement(
                 title,
-                new Font(style.getTitleFont().getFamily(), style.getTitleFont().getStyle(), style.getTitleFont().getSize() + 6),
+                new Font(style.getTitleFont().getFamily(), style.getTitleFont().getStyle(),
+                        style.getTitleFont().getSize() + 6),
                 "title_font",
                 titleTag
         );
@@ -95,7 +96,7 @@ public final class SVGCanvasBuilder implements Visitor {
             case tm:
                 canvas.moveByTag(titleTag,
                         (bbox.f.f + bbox.s.f - e.getEnd().f) / 2
-                        - 2 * style.getPadding(), 0);
+                                - 2 * style.getPadding(), 0);
                 break;
             case br:
             case tr:
