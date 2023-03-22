@@ -149,7 +149,7 @@ public class SVGCanvas {
             String hex = StringUtils.toHex(fontPair.getValue().s);
 
             sb.append(".").append(fontName).append(" ");
-            if (!fontName.equals("title_font")) {
+            if (!"title_font".equals(fontName)) {
                 sb.append("{fill:").append(hex).append("; text-anchor:middle;\n");
             } else {
                 switch (style.getTitlePos()) {

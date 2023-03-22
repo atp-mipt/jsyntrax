@@ -32,7 +32,7 @@ public abstract class BubbleElementBase extends Element {
 
         int x = (x0 + x1) / 2;
 
-        if (fontName.equals("title_font")) {
+        if (TitleElement.class.equals(getClass())) {
             switch (style.getTitlePos()) {
                 case bl:
                 case tl:
