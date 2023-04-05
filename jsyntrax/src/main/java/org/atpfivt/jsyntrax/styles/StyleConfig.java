@@ -42,39 +42,38 @@ public final class StyleConfig {
     ));
 
 
-    private void parseStyleArgs(Section s)
-            throws NoSuchFieldException, IllegalAccessException {
-        parseField(s, this, "line_width", Integer::parseInt);
-        parseField(s, this, "outline_width", Integer::parseInt);
-        parseField(s, this, "padding", Integer::parseInt);
-        parseField(s, this, "line_color", StringUtils::colorFromString);
-        parseField(s, this, "max_radius", Integer::parseInt);
-        parseField(s, this, "h_sep", Integer::parseInt);
-        parseField(s, this, "v_sep", Integer::parseInt);
-        parseField(s, this, "arrows", Boolean::parseBoolean);
-        parseField(s, this, "title_pos", (String v) -> {
-            return TitlePosition.valueOf(v.substring(1, v.length() - 1));
-        });
-        parseField(s, this, "bullet_fill", StringUtils::colorFromString);
-        parseField(s, this, "text_color", StringUtils::colorFromString);
-        parseField(s, this, "shadow", Boolean::parseBoolean);
-        parseField(s, this, "shadow_fill", StringUtils::colorFromString);
-        parseField(s, this, "title_font", StringUtils::fontFromString);
+    private void parseStyleArgs(Section s) throws IOException {
+        try {
+            parseField(s, this, "line_width", Integer::parseInt);
+            parseField(s, this, "outline_width", Integer::parseInt);
+            parseField(s, this, "padding", Integer::parseInt);
+            parseField(s, this, "line_color", StringUtils::colorFromString);
+            parseField(s, this, "max_radius", Integer::parseInt);
+            parseField(s, this, "h_sep", Integer::parseInt);
+            parseField(s, this, "v_sep", Integer::parseInt);
+            parseField(s, this, "arrows", Boolean::parseBoolean);
+            parseField(s, this, "title_pos", (String v) -> TitlePosition.valueOf(v.substring(1, v.length() - 1)));
+            parseField(s, this, "bullet_fill", StringUtils::colorFromString);
+            parseField(s, this, "text_color", StringUtils::colorFromString);
+            parseField(s, this, "shadow", Boolean::parseBoolean);
+            parseField(s, this, "shadow_fill", StringUtils::colorFromString);
+            parseField(s, this, "title_font", StringUtils::fontFromString);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new IOException(e);
+        }
     }
 
-
-    private void parseNodeStyle(Section s, NodeStyle ns)
-            throws NoSuchFieldException, IllegalAccessException {
-        Function<String, Object> patFunc = (String v) -> {
-            return Pattern.compile(v.substring(1, v.length() - 1));
-        };
-        parseField(s, ns, "pattern", patFunc);
-        parseField(s, ns, "shape", (String v) -> {
-            return v.substring(1, v.length() - 1);
-        });
-        parseField(s, ns, "font", StringUtils::fontFromString);
-        parseField(s, ns, "text_color", StringUtils::colorFromString);
-        parseField(s, ns, "fill", StringUtils::colorFromString);
+    private void parseNodeStyle(Section s, NodeStyle ns) throws IOException {
+        try {
+            Function<String, Object> patFunc = (String v) -> Pattern.compile(v.substring(1, v.length() - 1));
+            parseField(s, ns, "pattern", patFunc);
+            parseField(s, ns, "shape", (String v) -> v.substring(1, v.length() - 1));
+            parseField(s, ns, "font", StringUtils::fontFromString);
+            parseField(s, ns, "text_color", StringUtils::colorFromString);
+            parseField(s, ns, "fill", StringUtils::colorFromString);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new IOException(e);
+        }
     }
 
 
@@ -89,15 +88,14 @@ public final class StyleConfig {
         } else {
             System.out.println(
                     "[StyleConfigParser] Warning: section ["
-                    + s.getName() + "]"
-                    + " does not contain property ["
-                    + propertyName + "]");
+                            + s.getName() + "]"
+                            + " does not contain property ["
+                            + propertyName + "]");
         }
     }
 
 
-    public StyleConfig(double scale, boolean transparency) throws
-            IOException, NoSuchFieldException, IllegalAccessException {
+    public StyleConfig(double scale, boolean transparency) throws IOException {
         this.setTransparency(transparency);
         this.setScale(scale);
 
@@ -110,8 +108,7 @@ public final class StyleConfig {
     }
 
 
-    public StyleConfig(double scale, boolean transparency, Path style)
-            throws IllegalAccessException, NoSuchFieldException, IOException {
+    public StyleConfig(double scale, boolean transparency, Path style) throws IOException {
         this.setTransparency(transparency);
         this.setScale(scale);
 

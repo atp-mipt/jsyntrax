@@ -46,8 +46,7 @@ public final class SVGCanvasBuilder implements Visitor {
     private StyleConfig style;
     private SVGCanvas canvas;
 
-    public SVGCanvasBuilder()
-            throws IllegalAccessException, NoSuchFieldException, IOException {
+    public SVGCanvasBuilder() throws IOException {
         this.style = new StyleConfig(1, false);
         this.urlMap = Collections.emptyMap();
     }

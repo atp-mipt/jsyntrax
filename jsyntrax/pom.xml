@@ -12,8 +12,36 @@
     <artifactId>jsyntrax</artifactId>
     <packaging>jar</packaging>
     <name>jsyntrax</name>
+    
+    <description>Syntax diagrams generator</description>
+    <url>https://github.com/atp-mipt/jsyntrax</url>
 
-
+    <organization>
+        <name>MIPT/FIVT/ATP</name>
+        <url>https://mipt.ru/education/chairs/programmingtechnolgy/</url>
+    </organization>
+    
+    <scm>
+        <url>https://github.com/atp-mipt/jsyntrax.git</url>
+        <connection>scm:git:git://github.com/atp-mipt/jsyntrax.git</connection>
+        <developerConnection>scm:git:git://github.com/atp-mipt/jsyntrax.git</developerConnection>
+    </scm>
+    
+    <developers>
+        <developer>
+            <name>Ivan Ponomarev</name>
+            <email>ponomarev@phystech.edu</email>
+        </developer>
+    </developers>
+    
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -27,6 +55,8 @@
         <jacoco.maven.plugin.version>0.8.8</jacoco.maven.plugin.version>
         <checkstyle.maven.plugin.version>3.2.0</checkstyle.maven.plugin.version>
         <checkstyle.version>10.8.1</checkstyle.version>
+        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+        <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
     </properties>
 
     <dependencies>
@@ -227,6 +257,65 @@
                         <version>${checkstyle.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.plugin.version}</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin.version}</version>
+                <configuration>
+                    <show>public</show>
+                    <attach>true</attach>
+                    <maxmemory>1024m</maxmemory>
+                    <failOnError>false</failOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>
