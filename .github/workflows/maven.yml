@@ -25,7 +25,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
       - name: Build jsyntrax
-        run: mvn -B verify --file pom.xml -pl jsyntrax
+        run: mvn -B package --file pom.xml -pl jsyntrax
       - name: Install jsyntrax
         run: sudo ln -s $(pwd)/jsyntrax/target/appassembler/bin/syntrax /usr/local/bin/syntrax && syntrax --version
       - name: Build documentation
