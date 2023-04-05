@@ -24,7 +24,7 @@ public final class Main {
     private Main() {
     }
 
-    public static void main(String... args) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public static void main(String... args) throws IOException {
         // parse command line arguments
         InputArguments iArgs;
         try {
@@ -73,21 +73,12 @@ public final class Main {
 
         // parse style file
         StyleConfig style;
-        if (iArgs.getStyle() != null) {
-            try {
-                style = new StyleConfig(
-                        iArgs.getScale(),
-                        iArgs.isTransparent(),
-                        iArgs.getStyle());
-            } catch (Exception e) {
-                System.out.println("Failed parsing style file.");
-                System.out.println("Error: " + e.getMessage());
-                return;
-            }
-        } else {
-            style = new StyleConfig(
-                    iArgs.getScale(),
-                    iArgs.isTransparent());
+        try {
+            style = getStyleConfig(iArgs);
+        } catch (IOException e) {
+            System.out.println("Failed parsing style file.");
+            System.out.println("Error: " + e.getMessage());
+            return;
         }
 
         // read script
@@ -99,23 +90,8 @@ public final class Main {
             return;
         }
 
-        // parse script
-        Unit root;
-        try {
-            // parse spec
-            root = Parser.parse(scriptText);
-        } catch (CompilationFailedException e) {
-            System.out.println("Something was wrong with input script:");
-            System.out.println("\t" + e.getMessage());
-            return;
-        }
-
-        // generate SVG
-        SVGCanvas c = new SVGCanvasBuilder()
-                .withStyle(style)
-                .withTitle(iArgs.getTitle())
-                .generateSVG(root);
-        String result = c.generateSVG();
+        String result = generateSVG(iArgs.getTitle(), style, scriptText);
+        if (result == null) return;
 
         // write result to file
         try {
@@ -132,6 +108,51 @@ public final class Main {
             System.out.println("Failed to transcode .svg image: " + e.getMessage());
         }
         System.out.println("Done!");
+    }
+
+    /** Generates StyleConfig based on provided command line arguments.
+     *
+     * @param args Command line arguments. Can be created from an array of string arguments
+     * @throws IOException style file is inaccessible or invalid
+     */
+    public static StyleConfig getStyleConfig(InputArguments args) throws IOException {
+        if (args.getStyle() != null) {
+                return new StyleConfig(
+                        args.getScale(),
+                        args.isTransparent(),
+                        args.getStyle());
+        } else {
+            return new StyleConfig(
+                    args.getScale(),
+                    args.isTransparent());
+        }
+    }
+
+    /**
+     * Generates SVG for the diagram.
+     * @param title Diagram title
+     * @param style Diagram style
+     * @param scriptText Text of the diagram script
+     *
+     */
+    public static String generateSVG(String title, StyleConfig style, String scriptText) throws IOException {
+        // parse script
+        Unit root;
+        try {
+            // parse spec
+            root = Parser.parse(scriptText);
+        } catch (CompilationFailedException e) {
+            System.out.println("Something is wrong with input script:");
+            System.out.println("\t" + e.getMessage());
+            return null;
+        }
+
+        // generate SVG
+        SVGCanvas c = new SVGCanvasBuilder()
+                .withStyle(style)
+                .withTitle(title)
+                .generateSVG(root);
+        return c.generateSVG();
     }
 
     static boolean checkPathsFromArgs(InputArguments iArgs) {
