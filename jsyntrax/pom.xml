@@ -53,7 +53,7 @@
         <assertj.core.version>3.24.2</assertj.core.version>
         <approvaltests.version>9.5.0</approvaltests.version>
         <jacoco.maven.plugin.version>0.8.9</jacoco.maven.plugin.version>
-        <checkstyle.maven.plugin.version>3.2.0</checkstyle.maven.plugin.version>
+        <checkstyle.maven.plugin.version>3.2.1</checkstyle.maven.plugin.version>
         <checkstyle.version>10.9.3</checkstyle.version>
         <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
         <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
