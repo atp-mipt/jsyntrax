@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,20 +61,20 @@ class MainTest {
     }
 
     @Test
-    void getStyleTest() throws IOException,
-            NoSuchFieldException, IllegalAccessException {
+    void getStyleTest() throws IOException {
         Main.main("--get-style");
         Path expectedPath = Path.of(
                 System.getProperty("user.dir"),
                 Main.JSYNTRAX_INI
         );
-        byte[] configExpected = Main
+        String configExpectedString = new String(Main
                 .class
                 .getResourceAsStream("/" + Main.JSYNTRAX_INI)
-                .readAllBytes();
+                .readAllBytes());
+        List<String> configExpected = Arrays.asList(configExpectedString.split("\\r?\\n"));
         try {
-            byte[] configActual = Files.readAllBytes(expectedPath);
-            assertTrue(Arrays.equals(configExpected, configActual));
+            List<String> configActual = Files.readAllLines(expectedPath);
+            assertEquals(configExpected, configActual);
         } finally {
             Files.delete(expectedPath);
         }
