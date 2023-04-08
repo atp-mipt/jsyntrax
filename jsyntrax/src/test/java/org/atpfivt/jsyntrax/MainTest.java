@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -61,17 +62,13 @@ class MainTest {
     }
 
     @Test
-    void getStyleTest() throws IOException {
+    void getStyleTest() throws IOException, URISyntaxException {
+        final Path resource = Path.of(
+                Main.class.getResource("/" + Main.JSYNTRAX_INI).toURI());
+        List<String> configExpected = Files.readAllLines(resource);
         Main.main("--get-style");
         Path expectedPath = Path.of(
-                System.getProperty("user.dir"),
-                Main.JSYNTRAX_INI
-        );
-        String configExpectedString = new String(Main
-                .class
-                .getResourceAsStream("/" + Main.JSYNTRAX_INI)
-                .readAllBytes());
-        List<String> configExpected = Arrays.asList(configExpectedString.split("\\r?\\n"));
+                System.getProperty("user.dir"), Main.JSYNTRAX_INI);
         try {
             List<String> configActual = Files.readAllLines(expectedPath);
             assertEquals(configExpected, configActual);
