@@ -3,13 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.atp-fivt</groupId>
-        <artifactId>jsyntrax-parent</artifactId>
-        <version>${revision}</version>
-    </parent>
-
-    <artifactId>jsyntrax</artifactId>
+    <groupId>org.atp-fivt</groupId>
+    <artifactId>jsyntrax</artifactId>    
+    <version>${revision}</version>
+    
     <packaging>jar</packaging>
     <name>jsyntrax</name>
     
@@ -41,8 +38,9 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    
+
     <properties>
+        <revision>1.31</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.main.class>org.atpfivt.jsyntrax.Main</java.main.class>
