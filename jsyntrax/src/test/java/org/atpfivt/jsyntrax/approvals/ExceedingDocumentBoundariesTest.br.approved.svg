@@ -3,7 +3,7 @@
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
-width="1307" height="166" version="1.1">
+width="1307" height="162" version="1.1">
 <style type="text/css">
 <![CDATA[
 .title_font {fill:#000000; text-anchor:end;
@@ -151,5 +151,5 @@ font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
 <line x1="10" y1="20" x2="24" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 <circle cx="1299" cy="20" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
 <line x1="1278" y1="20" x2="1292" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<text class="title_font" x="1292" y="142">klassische for-Loop (jsyntrax, cmd-2)</text>
+<text class="title_font" x="1292" y="140">klassische for-Loop (jsyntrax, cmd-2)</text>
 </svg>

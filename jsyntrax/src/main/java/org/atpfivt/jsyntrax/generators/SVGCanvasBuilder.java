@@ -79,8 +79,7 @@ public final class SVGCanvasBuilder implements Visitor {
         String titleTag = canvas.newTag("x", "-title");
         Element e = new TitleElement(
                 title,
-                new Font(style.getTitleFont().getFamily(), style.getTitleFont().getStyle(),
-                        style.getTitleFont().getSize() + 6),
+                style.getTitleFont(),
                 "title_font",
                 titleTag
         );
