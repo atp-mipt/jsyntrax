@@ -3,7 +3,7 @@
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
-width="2078" height="332" version="1.1">
+width="1377" height="328" version="1.1">
 <style type="text/css">
 <![CDATA[
 .title_font {fill:#000000; text-anchor:start;
@@ -100,5 +100,5 @@ font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
 <line x1="10" y1="20" x2="24" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
 <circle cx="426" cy="20" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
 <line x1="405" y1="20" x2="419" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<text class="title_font" x="15" y="308">1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</text>
+<text class="title_font" x="15" y="306">1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</text>
 </svg>
