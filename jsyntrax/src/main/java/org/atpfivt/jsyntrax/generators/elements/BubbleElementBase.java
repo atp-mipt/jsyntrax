@@ -24,30 +24,17 @@ public abstract class BubbleElementBase extends Element {
         this.setFill(fill);
     }
 
+    int getX(StyleConfig style) {
+        int x0 = getStart().f;
+        int x1 = getEnd().f;
+        return  (x0 + x1) / 2;
+    }
+
     void addXMLText(StringBuilder sb, StyleConfig style) {
-        int x0 = super.getStart().f;
-        int y0 = super.getStart().s;
-        int x1 = super.getEnd().f;
-        int y1 = super.getEnd().s;
+        int y0 = getStart().s;
+        int y1 = getEnd().s;
 
-        int x = (x0 + x1) / 2;
-
-        if (TitleElement.class.equals(getClass())) {
-            switch (style.getTitlePos()) {
-                case bl:
-                case tl:
-                    x = x0;
-                    break;
-                case bm:
-                case tm:
-                    x = (x0 + x1) / 2;
-                    break;
-                case br:
-                case tr:
-                    x = x1;
-                    break;
-            }
-        }
+        int x = getX(style);
 
         int y = (y0 + y1) / 2 + (int) (Math.abs(getTextPos().s) * 0.25 + style.getScale() * 2);
 
