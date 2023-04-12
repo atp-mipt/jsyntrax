@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->
+<svg xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xml:space="preserve"
+width="2078" height="332" version="1.1">
+<style type="text/css">
+<![CDATA[
+.title_font {fill:#000000; text-anchor:end;
+font-family:PT Sans Bold; font-size:22pt; font-weight:bold; font-style:normal; }
+.token_font {fill:#000000; text-anchor:middle;
+font-family:PT Sans Bold; font-size:16pt; font-weight:bold; font-style:normal; }
+.box_font {fill:#000000; text-anchor:middle;
+font-family:PT Sans Italic; font-size:14pt; font-weight:normal; font-style:italic; }
+.bubble_font {fill:#000000; text-anchor:middle;
+font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
+.hex_font {fill:#000000; text-anchor:middle;
+font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
+.label {fill: #000; text-anchor:middle; font-size:16pt; font-weight:bold; font-family:Sans;}
+.link {fill: #0D47A1;}
+.link:hover {fill: #0D47A1; text-decoration:underline;}
+.link:visited {fill: #4A148C;}
+]]>
+</style>
+<defs>
+<marker id="arrow" markerWidth="5" markerHeight="4" refX="2.5" refY="2" orient="auto" markerUnits="strokeWidth">
+<path d="M0,0 L0.5,2 L0,4 L4.5,2 z" fill="#000000" />
+</marker>
+</defs>
+<rect width="100%" height="100%" fill="white"/>
+<circle cx="1652" cy="20" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<rect x="1675" y="9" width="101" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1672" y="6" width="101" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1722" y="26">create_grain</text>
+<path d="M1930,40 A16,16 0 0,1 1930,8 H1933 A16,16 0 0,1 1933,40 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M1927,37 A16,16 0 0,1 1927,5 H1930 A16,16 0 0,1 1930,37 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="token_font" x="1928" y="26">;</text>
+<rect x="1830" y="44" width="127" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1827" y="41" width="127" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1890" y="61">create_sequence</text>
+<rect x="1830" y="78" width="101" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1827" y="75" width="101" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1877" y="95">create_table</text>
+<rect x="1830" y="112" width="126" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1827" y="109" width="126" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1890" y="129">add_foreign_key</text>
+<rect x="1830" y="146" width="103" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1827" y="143" width="103" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1878" y="163">create_index</text>
+<rect x="1830" y="180" width="97" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1827" y="177" width="97" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1875" y="197">create_view</text>
+<rect x="1830" y="214" width="186" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1827" y="211" width="186" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1920" y="231">create_materialized_view</text>
+<rect x="1830" y="248" width="121" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1827" y="245" width="121" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1887" y="265">create_function</text>
+<line x1="1799" y1="55" x2="1827" y2="55" stroke="#000000" stroke-width="2" />
+<line x1="2042" y1="55" x2="1958" y2="55" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1808,64 A9,9 0 0,0 1799,55" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1817" y1="89" x2="1827" y2="89" stroke="#000000" stroke-width="2" />
+<line x1="2023" y1="89" x2="1932" y2="89" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1808,80 A9,9 0 0,0 1817,89" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M2023,89 A9,9 0 0,0 2032,80" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1817" y1="123" x2="1827" y2="123" stroke="#000000" stroke-width="2" />
+<line x1="2023" y1="123" x2="1957" y2="123" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1808,114 A9,9 0 0,0 1817,123" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M2023,123 A9,9 0 0,0 2032,114" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1817" y1="157" x2="1827" y2="157" stroke="#000000" stroke-width="2" />
+<line x1="2023" y1="157" x2="1934" y2="157" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1808,148 A9,9 0 0,0 1817,157" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M2023,157 A9,9 0 0,0 2032,148" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1817" y1="191" x2="1827" y2="191" stroke="#000000" stroke-width="2" />
+<line x1="2023" y1="191" x2="1928" y2="191" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1808,182 A9,9 0 0,0 1817,191" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M2023,191 A9,9 0 0,0 2032,182" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1817" y1="225" x2="1827" y2="225" stroke="#000000" stroke-width="2" />
+<line x1="2023" y1="225" x2="2017" y2="225" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1808,216 A9,9 0 0,0 1817,225" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M2023,225 A9,9 0 0,0 2032,216" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1817" y1="259" x2="1827" y2="259" stroke="#000000" stroke-width="2" />
+<line x1="2023" y1="259" x2="1952" y2="259" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1808,250 A9,9 0 0,0 1817,259" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M2023,259 A9,9 0 0,0 2032,250" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M2041,55 A9,9 0 0,0 2032,64" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1808" y1="250" x2="1808" y2="64" stroke="#000000" stroke-width="2" />
+<line x1="2032" y1="250" x2="2032" y2="64" stroke="#000000" stroke-width="2" />
+<line x1="1799" y1="20" x2="1907" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1946" y1="20" x2="2050" y2="20" stroke="#000000" stroke-width="2" />
+<line x1="1790" y1="20" x2="1799" y2="20" stroke="#000000" stroke-width="2" />
+<path d="M1799,20 A9,9 0 0,0 1790,29" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1790" y1="29" x2="1790" y2="46" stroke="#000000" stroke-width="2" />
+<path d="M1790,46 A9,9 0 0,0 1799,55" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M2050,29 A9,9 0 0,0 2041,20" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="2050" y1="29" x2="2050" y2="46" stroke="#000000" stroke-width="2" />
+<path d="M2041,55 A9,9 0 0,0 2050,46" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="2041" y1="20" x2="2050" y2="20" stroke="#000000" stroke-width="2" />
+<line x1="1772" y1="20" x2="1786" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1654" y1="20" x2="1668" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<circle cx="2070" cy="20" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<line x1="2049" y1="20" x2="2063" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<text class="title_font" x="2063" y="308">1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</text>
+</svg>
