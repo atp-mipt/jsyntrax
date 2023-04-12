@@ -101,9 +101,11 @@ public final class Main {
 
         // parse script
         Unit root;
+        String titleInSpecFile;
         try {
             // parse spec
             root = Parser.parse(scriptText);
+            titleInSpecFile = Parser.getTitle();
         } catch (CompilationFailedException e) {
             System.out.println("Something was wrong with input script:");
             System.out.println("\t" + e.getMessage());
@@ -113,7 +115,7 @@ public final class Main {
         // generate SVG
         SVGCanvas c = new SVGCanvasBuilder()
                 .withStyle(style)
-                .withTitle(iArgs.getTitle())
+                .withTitle(iArgs.getTitle() != null ? iArgs.getTitle() : titleInSpecFile)
                 .generateSVG(root);
         String result = c.generateSVG();
 

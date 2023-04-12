@@ -6,6 +6,7 @@ import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilerConfiguration
 
 class Parser {
+    static String title = null
     static Configuration parse(String scriptText) throws CompilationFailedException {
         def config = new CompilerConfiguration()
         config.setScriptBaseClass(SyntraxScript.class.name)
@@ -14,5 +15,9 @@ class Parser {
         shell.setVariable("None", null)
         Unit result = shell.evaluate(scriptText) as Unit
         result.getConfiguration()
+    }
+
+    static String getTitle() {
+        title
     }
 }
