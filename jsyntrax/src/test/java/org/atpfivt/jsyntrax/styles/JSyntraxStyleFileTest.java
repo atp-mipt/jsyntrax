@@ -101,7 +101,7 @@ public class JSyntraxStyleFileTest {
                         .getResource("/org/atpfivt/jsyntrax/test_spec.txt")
                         .toURI())
         );
-        Configuration configuration = Parser.parse(spec);
+        Configuration configuration = Parser.getNode(spec);
         Files.writeString(stylePath, config);
 
         StyleConfig s = new StyleConfig(1, false, stylePath);
