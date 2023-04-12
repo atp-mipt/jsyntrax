@@ -16,6 +16,28 @@ public class TitleElement extends BubbleElementBase {
     }
 
     @Override
+    int getX(StyleConfig style) {
+        int x0 = getStart().f;
+        int x1 = getEnd().f;
+        int x = (x0 + x1) / 2;
+        switch (style.getTitlePos()) {
+            case bl:
+            case tl:
+                x = x0;
+                break;
+            case bm:
+            case tm:
+                x = (x0 + x1) / 2;
+                break;
+            case br:
+            case tr:
+                x = x1;
+                break;
+        }
+        return x;
+    }
+
+    @Override
     public void addShadow(StringBuilder sb, StyleConfig style) {
 
     }

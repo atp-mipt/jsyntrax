@@ -149,7 +149,24 @@ public class SVGCanvas {
             String hex = StringUtils.toHex(fontPair.getValue().s);
 
             sb.append(".").append(fontName).append(" ");
-            sb.append("{fill:").append(hex).append("; text-anchor:middle;\n");
+            if (!"title_font".equals(fontName)) {
+                sb.append("{fill:").append(hex).append("; text-anchor:middle;\n");
+            } else {
+                switch (style.getTitlePos()) {
+                    case bl:
+                    case tl:
+                        sb.append("{fill:").append(hex).append("; text-anchor:start;\n");
+                        break;
+                    case bm:
+                    case tm:
+                        sb.append("{fill:").append(hex).append("; text-anchor:middle;\n");
+                        break;
+                    case br:
+                    case tr:
+                        sb.append("{fill:").append(hex).append("; text-anchor:end;\n");
+                        break;
+                }
+            }
             sb.append("font-family:").append(fontFamily).append("; ");
             sb.append("font-size:").append(fontSize).append("pt; ");
             sb.append("font-weight:").append(fontWeight).append("; ");

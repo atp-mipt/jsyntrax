@@ -65,6 +65,47 @@ public class JSyntraxTitleTest {
         );
     }
 
+    private static String getLongTitle() {
+        return "12345678901234567890123456789012345678901234567890" +
+               "12345678901234567890123456789012345678901234567890";
+    }
+
+    @ParameterizedTest
+    @MethodSource("titlePosProvider")
+    void longTitleTest(TitlePosition pos) {
+        setTitlePosition(pos);
+        Unit root = getSample();
+        String title = getLongTitle();
+        SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
+        String result = c.generateSVG();
+        Approvals.verify(result, new Options()
+                .forFile()
+                .withName("JSyntraxLongTitleTest" + '.' + pos.name(), ".svg")
+        );
+    }
+
+    private static Unit getSampleExceedingDocumentBoundaries() {
+        return line("for", '(',
+                loop(opt(opt("Typ"),
+                        "/Bezeichner", '=', "/Anweisung"), ","),
+                ';', opt("/boolscher Ausdruck"), ';',
+                opt(loop("/Anweisung", ',')), ')', "/Anweisung");
+    }
+
+    @ParameterizedTest
+    @MethodSource("titlePosProvider")
+    void exceedingDocumentBoundariesTest(TitlePosition pos) {
+        setTitlePosition(pos);
+        Unit root = getSampleExceedingDocumentBoundaries();
+        String title = "klassische for-Loop (jsyntrax, cmd-2)";
+        SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
+        String result = c.generateSVG();
+        Approvals.verify(result, new Options()
+                .forFile()
+                .withName("ExceedingDocumentBoundariesTest" + '.' + pos.name(), ".svg")
+        );
+    }
+
     static Stream<TitlePosition> titlePosProvider() {
         return Arrays.stream(TitlePosition.values());
     }

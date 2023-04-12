@@ -94,7 +94,7 @@ public final class SVGCanvasBuilder implements Visitor {
             case tm:
                 canvas.moveByTag(titleTag,
                         (bbox.f.f + bbox.s.f - e.getEnd().f) / 2
-                        - 2 * style.getPadding(), 0);
+                                - 2 * style.getPadding(), 0);
                 break;
             case br:
             case tr:

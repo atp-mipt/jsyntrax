@@ -16,11 +16,11 @@ public class Element {
         this.start = start;
     }
 
-    public Pair<Integer, Integer> getStart() {
+    public final Pair<Integer, Integer> getStart() {
         return start;
     }
 
-    public Pair<Integer, Integer> getEnd() {
+    public final Pair<Integer, Integer> getEnd() {
         return this.end;
     }
 
@@ -28,11 +28,11 @@ public class Element {
         this.end = end;
     }
 
-    public void addTag(String tag) {
+    public final void addTag(String tag) {
         tags.add(tag);
     }
 
-    public void delTag(String tag) {
+    public final void delTag(String tag) {
         tags.remove(tag);
     }
 

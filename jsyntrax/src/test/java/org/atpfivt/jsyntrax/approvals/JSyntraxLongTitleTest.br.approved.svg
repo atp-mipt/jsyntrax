@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by Jyntrax https://github.com/atp-mipt/jsyntrax -->
+<svg xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xml:space="preserve"
+width="1377" height="328" version="1.1">
+<style type="text/css">
+<![CDATA[
+.title_font {fill:#000000; text-anchor:end;
+font-family:PT Sans Bold; font-size:22pt; font-weight:bold; font-style:normal; }
+.token_font {fill:#000000; text-anchor:middle;
+font-family:PT Sans Bold; font-size:16pt; font-weight:bold; font-style:normal; }
+.box_font {fill:#000000; text-anchor:middle;
+font-family:PT Sans Italic; font-size:14pt; font-weight:normal; font-style:italic; }
+.bubble_font {fill:#000000; text-anchor:middle;
+font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
+.hex_font {fill:#000000; text-anchor:middle;
+font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
+.label {fill: #000; text-anchor:middle; font-size:16pt; font-weight:bold; font-family:Sans;}
+.link {fill: #0D47A1;}
+.link:hover {fill: #0D47A1; text-decoration:underline;}
+.link:visited {fill: #4A148C;}
+]]>
+</style>
+<defs>
+<marker id="arrow" markerWidth="5" markerHeight="4" refX="2.5" refY="2" orient="auto" markerUnits="strokeWidth">
+<path d="M0,0 L0.5,2 L0,4 L4.5,2 z" fill="#000000" />
+</marker>
+</defs>
+<rect width="100%" height="100%" fill="white"/>
+<circle cx="951" cy="20" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<rect x="974" y="9" width="101" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="971" y="6" width="101" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1021" y="26">create_grain</text>
+<path d="M1229,40 A16,16 0 0,1 1229,8 H1232 A16,16 0 0,1 1232,40 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M1226,37 A16,16 0 0,1 1226,5 H1229 A16,16 0 0,1 1229,37 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="token_font" x="1227" y="26">;</text>
+<rect x="1129" y="44" width="127" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1126" y="41" width="127" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1189" y="61">create_sequence</text>
+<rect x="1129" y="78" width="101" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1126" y="75" width="101" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1176" y="95">create_table</text>
+<rect x="1129" y="112" width="126" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1126" y="109" width="126" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1189" y="129">add_foreign_key</text>
+<rect x="1129" y="146" width="103" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1126" y="143" width="103" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1177" y="163">create_index</text>
+<rect x="1129" y="180" width="97" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1126" y="177" width="97" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1174" y="197">create_view</text>
+<rect x="1129" y="214" width="186" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1126" y="211" width="186" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1219" y="231">create_materialized_view</text>
+<rect x="1129" y="248" width="121" height="30" fill="#000000" fill-opacity="0.4980392156862745" />
+<rect x="1126" y="245" width="121" height="30" stroke="#000000" stroke-width="2" fill="#90a4ae" fill-opacity="1.0" />
+<text class="box_font" x="1186" y="265">create_function</text>
+<line x1="1098" y1="55" x2="1126" y2="55" stroke="#000000" stroke-width="2" />
+<line x1="1341" y1="55" x2="1257" y2="55" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1107,64 A9,9 0 0,0 1098,55" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1116" y1="89" x2="1126" y2="89" stroke="#000000" stroke-width="2" />
+<line x1="1322" y1="89" x2="1231" y2="89" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1107,80 A9,9 0 0,0 1116,89" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M1322,89 A9,9 0 0,0 1331,80" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1116" y1="123" x2="1126" y2="123" stroke="#000000" stroke-width="2" />
+<line x1="1322" y1="123" x2="1256" y2="123" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1107,114 A9,9 0 0,0 1116,123" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M1322,123 A9,9 0 0,0 1331,114" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1116" y1="157" x2="1126" y2="157" stroke="#000000" stroke-width="2" />
+<line x1="1322" y1="157" x2="1233" y2="157" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1107,148 A9,9 0 0,0 1116,157" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M1322,157 A9,9 0 0,0 1331,148" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1116" y1="191" x2="1126" y2="191" stroke="#000000" stroke-width="2" />
+<line x1="1322" y1="191" x2="1227" y2="191" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1107,182 A9,9 0 0,0 1116,191" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M1322,191 A9,9 0 0,0 1331,182" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1116" y1="225" x2="1126" y2="225" stroke="#000000" stroke-width="2" />
+<line x1="1322" y1="225" x2="1316" y2="225" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1107,216 A9,9 0 0,0 1116,225" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M1322,225 A9,9 0 0,0 1331,216" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1116" y1="259" x2="1126" y2="259" stroke="#000000" stroke-width="2" />
+<line x1="1322" y1="259" x2="1251" y2="259" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M1107,250 A9,9 0 0,0 1116,259" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M1322,259 A9,9 0 0,0 1331,250" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M1340,55 A9,9 0 0,0 1331,64" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1107" y1="250" x2="1107" y2="64" stroke="#000000" stroke-width="2" />
+<line x1="1331" y1="250" x2="1331" y2="64" stroke="#000000" stroke-width="2" />
+<line x1="1098" y1="20" x2="1206" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1245" y1="20" x2="1349" y2="20" stroke="#000000" stroke-width="2" />
+<line x1="1089" y1="20" x2="1098" y2="20" stroke="#000000" stroke-width="2" />
+<path d="M1098,20 A9,9 0 0,0 1089,29" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1089" y1="29" x2="1089" y2="46" stroke="#000000" stroke-width="2" />
+<path d="M1089,46 A9,9 0 0,0 1098,55" stroke="#000000" stroke-width="2" fill="none"/>
+<path d="M1349,29 A9,9 0 0,0 1340,20" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1349" y1="29" x2="1349" y2="46" stroke="#000000" stroke-width="2" />
+<path d="M1340,55 A9,9 0 0,0 1349,46" stroke="#000000" stroke-width="2" fill="none"/>
+<line x1="1340" y1="20" x2="1349" y2="20" stroke="#000000" stroke-width="2" />
+<line x1="1071" y1="20" x2="1085" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="953" y1="20" x2="967" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<circle cx="1369" cy="20" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<line x1="1348" y1="20" x2="1362" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<text class="title_font" x="1362" y="306">1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</text>
+</svg>

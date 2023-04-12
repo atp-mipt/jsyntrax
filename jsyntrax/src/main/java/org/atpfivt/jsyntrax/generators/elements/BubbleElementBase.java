@@ -24,13 +24,18 @@ public abstract class BubbleElementBase extends Element {
         this.setFill(fill);
     }
 
-    void addXMLText(StringBuilder sb, StyleConfig style) {
-        int x0 = super.getStart().f;
-        int y0 = super.getStart().s;
-        int x1 = super.getEnd().f;
-        int y1 = super.getEnd().s;
+    int getX(StyleConfig style) {
+        int x0 = getStart().f;
+        int x1 = getEnd().f;
+        return  (x0 + x1) / 2;
+    }
 
-        int x = (x0 + x1) / 2;
+    void addXMLText(StringBuilder sb, StyleConfig style) {
+        int y0 = getStart().s;
+        int y1 = getEnd().s;
+
+        int x = getX(style);
+
         int y = (y0 + y1) / 2 + (int) (Math.abs(getTextPos().s) * 0.25 + style.getScale() * 2);
 
         String txt = StringUtils.escapeXML(getText());
