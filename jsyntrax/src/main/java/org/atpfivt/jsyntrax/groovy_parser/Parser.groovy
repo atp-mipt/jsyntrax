@@ -6,7 +6,8 @@ import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilerConfiguration
 
 class Parser {
-    static Configuration parse(String scriptText) throws CompilationFailedException {
+    static String title = null
+    static Configuration getNode(String scriptText) throws CompilationFailedException {
         def config = new CompilerConfiguration()
         config.setScriptBaseClass(SyntraxScript.class.name)
         def sharedData = new Binding()
