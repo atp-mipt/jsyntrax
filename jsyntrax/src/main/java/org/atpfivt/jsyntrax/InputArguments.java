@@ -56,7 +56,7 @@ public class InputArguments {
                 (o, s) -> o.getDefaultStyle = true);
     }
 
-    InputArguments(String... args) throws ParseException {
+    public InputArguments(String... args) throws ParseException {
         for (Option o : OPTIONS_MAP.keySet()) {
             OPTIONS.addOption(o);
         }
