@@ -616,7 +616,7 @@ public final class SVGCanvasBuilder implements Visitor {
     @Override
     public void visitOptx(Optx opt) {
         boolean ltor = getLtor();
-        Choice c = new Choice(new ArrayList<>() {{
+        Choice c = new Choice(new ArrayList<Unit>() {{
             add(new Line(opt.getUnits()));
             add(new NoneNode());
         }});
@@ -627,7 +627,7 @@ public final class SVGCanvasBuilder implements Visitor {
     @Override
     public void visitOpt(Opt opt) {
         boolean ltor = getLtor();
-        Choice c = new Choice(new ArrayList<>() {{
+        Choice c = new Choice(new ArrayList<Unit>() {{
             add(new NoneNode());
             add(new Line(opt.getUnits()));
         }});

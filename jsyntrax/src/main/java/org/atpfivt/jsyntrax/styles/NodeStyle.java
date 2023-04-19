@@ -2,6 +2,7 @@ package org.atpfivt.jsyntrax.styles;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NodeStyle {
@@ -18,7 +19,7 @@ public class NodeStyle {
         if (getPattern() == null) {
             return txt;
         }
-        var matcher = getPattern().matcher(txt);
+        Matcher matcher = getPattern().matcher(txt);
         StringBuilder unwrappedTxt = new StringBuilder();
 
         if (matcher.groupCount() == 0 || !matcher.find()) {
