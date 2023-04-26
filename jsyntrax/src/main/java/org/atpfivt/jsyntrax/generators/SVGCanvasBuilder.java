@@ -34,8 +34,8 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,7 +64,7 @@ public final class SVGCanvasBuilder implements Visitor {
     public SVGCanvas generateSVG(Unit root) {
         this.canvas = new SVGCanvas(this.style);
         parseDiagram(new Line(
-                new ArrayList<>(List.of(new Bullet(), root, new Bullet()))
+                Arrays.asList(new Bullet(), root, new Bullet())
         ), true);
 
         if (title == null) {

@@ -16,6 +16,7 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
@@ -134,8 +135,10 @@ public class JSyntraxTest {
                 line(choice(toploop("/entity_designator", ","), "others", "all"), ':'),
                 line("/entity_class", "is", "/expression", ';')
                 ),
-                Map.of("entity_class", "https://www.google.com/#q=vhdl+entity+class",
-                        "(attribute) identifier", "http://en.wikipedia.com/wiki/VHDL"));
+                new HashMap<String, String>() {{
+                    put("entity_class", "https://www.google.com/#q=vhdl+entity+class");
+                    put("(attribute) identifier", "http://en.wikipedia.com/wiki/VHDL");
+                }});
         SVGCanvas c = canvasBuilder.generateSVG(urlMapped);
         String result = c.generateSVG();
         Approvals.verify(result, OPTIONS);

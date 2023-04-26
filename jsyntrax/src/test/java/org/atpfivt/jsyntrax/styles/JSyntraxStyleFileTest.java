@@ -15,8 +15,10 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +29,7 @@ public class JSyntraxStyleFileTest {
             Files.createTempFile("jsyntrax-test-style", ".ini");
 
     public JSyntraxStyleFileTest()
-            throws IOException, NoSuchFieldException, IllegalAccessException {
+            throws IOException {
         StyleConfig s = new StyleConfig(1, false);
         JSyntraxTestUtils.updateStyle(s);
         canvasBuilder = new SVGCanvasBuilder().withStyle(s);
@@ -55,19 +57,18 @@ public class JSyntraxStyleFileTest {
     }
 
     @Test
-    void configParserTest() throws IOException, NoSuchFieldException, IllegalAccessException {
-        StringBuilder config = new StringBuilder();
-        config.append("[style]\n")
-                .append("line_width = 50\n")
-                .append("v_sep = 42\n")
-                .append("text_color = (30, 40, 50)\n")
-                .append("shadow_fill = (35, 46, 57, 212)\n")
-                .append("[hex_bubble]\n")
-                .append("pattern = '^(\\w.*)'\n")
-                .append("shape = 'hex'\n")
-                .append("font = ('Sans', 14, 'bold')\n")
-                .append("fill = (255,15,3,129)");
-        Files.writeString(stylePath, config);
+    void configParserTest() throws IOException {
+        String config = "[style]\n" +
+                "line_width = 50\n" +
+                "v_sep = 42\n" +
+                "text_color = (30, 40, 50)\n" +
+                "shadow_fill = (35, 46, 57, 212)\n" +
+                "[hex_bubble]\n" +
+                "pattern = '^(\\w.*)'\n" +
+                "shape = 'hex'\n" +
+                "font = ('Sans', 14, 'bold')\n" +
+                "fill = (255,15,3,129)";
+        Files.write(stylePath, config.getBytes(StandardCharsets.UTF_8));
         StyleConfig cfg = new StyleConfig(1, false, stylePath);
 
         NodeStyle ns = cfg.getNodeStyles().get(0);
@@ -86,23 +87,26 @@ public class JSyntraxStyleFileTest {
 
     @Test
     public void svgFromConfigTest()
-            throws IOException, URISyntaxException,
-            NoSuchFieldException, IllegalAccessException {
+            throws IOException, URISyntaxException {
         // Given
-        String config  = Files.readString(
-                Path.of(this
+        String config  =
+                String.join("\n",
+                Files.readAllLines(
+                Paths.get(this
                         .getClass()
                         .getResource("/org/atpfivt/jsyntrax/test_style_config.ini")
                         .toURI())
-        );
-        String spec  = Files.readString(
-                Path.of(this
+        ));
+        String spec  =
+                String.join("\n",
+                Files.readAllLines(
+                Paths.get(this
                         .getClass()
                         .getResource("/org/atpfivt/jsyntrax/test_spec.txt")
                         .toURI())
-        );
+        ));
         Configuration configuration = Parser.parse(spec);
-        Files.writeString(stylePath, config);
+        Files.write(stylePath, config.getBytes(StandardCharsets.UTF_8));
 
         StyleConfig s = new StyleConfig(1, false, stylePath);
         JSyntraxTestUtils.updateStyle(s);

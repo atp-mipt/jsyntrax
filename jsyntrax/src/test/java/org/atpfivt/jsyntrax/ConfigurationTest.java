@@ -12,7 +12,7 @@ class ConfigurationTest {
     void urlMapIsParsed(){
         Configuration configuration = Parser.parse("jsyntrax(line('attribute'), ['a':'b'])");
         Map<String, String> urlMap = configuration.getUrlMap();
-        Assertions.assertEquals(Map.of("a", "b"), urlMap);
+        Assertions.assertEquals(Collections.singletonMap("a", "b"), urlMap);
     }
 
     @Test

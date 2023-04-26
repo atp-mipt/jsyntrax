@@ -24,7 +24,7 @@ class MainTest {
         Path outPath = Files.createTempFile("jsyntrax-test-output", ".svg");
         try {
             Main.main("-o", outPath.toString(), inputPath.toString());
-            String svg = Files.readString(outPath);
+            String svg = String.join("\n", Files.readAllLines(outPath));
             validateSVG(svg);
         } finally {
             Files.delete(outPath);
@@ -39,7 +39,7 @@ class MainTest {
         System.setOut(new PrintStream(outputStreamCaptor));
         try {
             Main.main("-h");
-            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).contains(
+            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8.name()).contains(
                     "Railroad diagram generator."
             ));
         } finally {
@@ -55,7 +55,7 @@ class MainTest {
         System.setOut(new PrintStream(outputStreamCaptor));
         try {
             Main.main("-v");
-            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).startsWith("JSyntrax "));
+            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8.name()).startsWith("JSyntrax "));
         } finally {
             System.setOut(standardOut);
         }
@@ -63,11 +63,11 @@ class MainTest {
 
     @Test
     void getStyleTest() throws IOException, URISyntaxException {
-        final Path resource = Path.of(
+        final Path resource = Paths.get(
                 Main.class.getResource("/" + Main.JSYNTRAX_INI).toURI());
         List<String> configExpected = Files.readAllLines(resource);
         Main.main("--get-style");
-        Path expectedPath = Path.of(
+        Path expectedPath = Paths.get(
                 System.getProperty("user.dir"), Main.JSYNTRAX_INI);
         try {
             List<String> configActual = Files.readAllLines(expectedPath);
@@ -110,7 +110,7 @@ class MainTest {
         Path outPath = Paths.get(inputPath.toString().substring(0, inputPath.toString().lastIndexOf('.')) + ".svg");
         try {
             Main.main("-o", "svg", inputPath.toString());
-            String svg = Files.readString(outPath);
+            String svg = String.join("\n", Files.readAllLines(outPath));
             validateSVG(svg);
         } finally {
             Files.delete(outPath);

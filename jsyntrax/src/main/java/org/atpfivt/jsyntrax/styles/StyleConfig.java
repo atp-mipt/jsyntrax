@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -34,7 +35,7 @@ public final class StyleConfig {
     private double scale;
     private boolean transparency;
     private NodeStyle defNodeStyle = new NodeStyle();
-    private List<NodeStyle> nodeStyles = new ArrayList<>(List.of(
+    private List<NodeStyle> nodeStyles = new ArrayList<>(Arrays.asList(
             new NodeBubbleStyle(),
             new NodeBoxStyle(),
             new NodeTokenStyle(),

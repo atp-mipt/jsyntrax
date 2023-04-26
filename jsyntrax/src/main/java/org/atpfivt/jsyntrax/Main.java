@@ -14,8 +14,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
 public final class Main {
@@ -50,12 +52,12 @@ public final class Main {
                     .lines()
                     .collect(Collectors.joining("\n"))
                     + "\n";
-            Path destPath = Path.of(System.getProperty("user.dir"), JSYNTRAX_INI);
+            Path destPath = Paths.get(System.getProperty("user.dir"), JSYNTRAX_INI);
             if (Files.exists(destPath)) {
                 System.out.printf("Ini file \"%s\" exists%n", JSYNTRAX_INI);
             } else {
                 System.out.printf("Creating ini with default styles in \"%s\"%n", JSYNTRAX_INI);
-                Files.writeString(destPath, config);
+                Files.write(destPath, config.getBytes(StandardCharsets.UTF_8));
             }
             return;
         }
@@ -99,7 +101,7 @@ public final class Main {
             if (output.toString().toLowerCase().endsWith(".png")) {
                 Files.write(output, SVGTranscoder.svg2Png(result));
             } else {
-                Files.writeString(output, result);
+                Files.write(output, result.getBytes(StandardCharsets.UTF_8));
             }
         } catch (IOException e) {
             System.out.println("Failed to write: " + e.getMessage());
