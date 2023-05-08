@@ -65,7 +65,7 @@
     <properties>
         <revision>1.36</revision>
         <asciidoctor.maven.plugin.version>2.2.3</asciidoctor.maven.plugin.version>
-        <asciidoctorj-diagram.version>2.2.7</asciidoctorj-diagram.version>
+        <asciidoctorj-diagram.version>2.2.8</asciidoctorj-diagram.version>
     </properties>
 
     <modules>
