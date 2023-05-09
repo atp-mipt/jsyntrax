@@ -141,8 +141,9 @@ public final class Main {
         String titleInSpecFile;
         try {
             // parse spec
-            root = Parser.getNode(scriptText);
-            titleInSpecFile = Parser.getTitle();
+            Parser parser = new Parser(scriptText);
+            root = parser.getNode();
+            titleInSpecFile = parser.getTitle();
         } catch (CompilationFailedException e) {
             System.out.println("Something is wrong with input script:");
             System.out.println("\t" + e.getMessage());

@@ -141,19 +141,36 @@ line('[', 'Scaled', ']')
 
 ==== Titles
 
-You can include a title in the generated diagram by passing a string to the `+--title+` option. 
+You can include a title in the generated diagram either by using `title(...)` command or by passing a string to the `+--title+` option (the latter takes precedence).
 The position of the title is controlled by the `+title_pos+` entry in the styling configuration. 
 It defaults to the top left. 
 The `+title_font+` entry is used to style the font.
 
+Example 1. Setting the title in diagram specification.
+
+----
+title('title set in spec')
+line('diagram', 'with', 'title')
+----
+
+[syntrax,titling1,svg,opts=interactive]
+....
+title('title set in spec')
+line('diagram', 'with', 'title')
+....
+
+
+Example 2. Setting title from a command line argument.
 ----
 > syntrax -i titling.spec -o svg --title="Diagram with title"
 ----
 
-[syntrax,titling,svg,heading="Diagram with title",opts=interactive]
+[syntrax,titling2,svg,heading="Diagram with title",opts=interactive]
 ....
 line('diagram', 'with', 'title') 
 ....
+
+
 
 === Specification language
 
