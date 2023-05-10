@@ -16,6 +16,9 @@ import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack
 
 class SyntraxScript extends Script {
+  Unit node
+  String title
+
   static ArrayList<Unit> unitsToString(Object... units) {
     for (i in 0..<units.length) {
       if (units[i] == null) {
@@ -28,43 +31,48 @@ class SyntraxScript extends Script {
     return units as ArrayList<Unit>
   }
 
-  static Line line(Object... units) {
-    return new Line(unitsToString(units) as ArrayList<Unit>)
+  Unit title(String title) {
+      this.title = title
+      return node
   }
 
-  static Loop loop(Object... units) {
-    return new Loop(unitsToString(units) as ArrayList<Unit>)
+  Line line(Object... units) {
+    return node = new Line(unitsToString(units) as ArrayList<Unit>)
   }
 
-  static Toploop toploop(Object... units) {
-    return new Toploop(unitsToString(units) as ArrayList<Unit>)
+  Loop loop(Object... units) {
+    return node = new Loop(unitsToString(units) as ArrayList<Unit>)
   }
 
-  static Choice choice(Object... units) {
-    return new Choice(unitsToString(units) as ArrayList<Unit>)
+  Toploop toploop(Object... units) {
+    return node = new Toploop(unitsToString(units) as ArrayList<Unit>)
   }
 
-  static Opt opt(Object... units) {
-    return new Opt([line(units)] as ArrayList<Unit>)
+  Choice choice(Object... units) {
+    return node = new Choice(unitsToString(units) as ArrayList<Unit>)
   }
 
-  static Optx optx(Object... units) {
-    return new Optx([line(units)] as ArrayList<Unit>)
+  Opt opt(Object... units) {
+    return node = new Opt([line(units)] as ArrayList<Unit>)
   }
 
-  static Stack stack(Object... units) {
-    return new Stack(unitsToString(units) as ArrayList<Unit>)
+  Optx optx(Object... units) {
+    return node = new Optx([line(units)] as ArrayList<Unit>)
   }
 
-  static Indentstack indentstack(int indent, Object... units) {
-    return new Indentstack(indent, unitsToString(units) as ArrayList<Unit>)
+  Stack stack(Object... units) {
+    return node = new Stack(unitsToString(units) as ArrayList<Unit>)
   }
 
-  static Rightstack rightstack(Object... units) {
-    return new Rightstack(unitsToString(units) as ArrayList<Unit>)
+  Indentstack indentstack(int indent, Object... units) {
+    return node = new Indentstack(indent, unitsToString(units) as ArrayList<Unit>)
   }
 
-  static Configuration jsyntrax(Track track,
+  Rightstack rightstack(Object... units) {
+    return node = new Rightstack(unitsToString(units) as ArrayList<Unit>)
+  }
+
+  Configuration jsyntrax(Track track,
                                 Map<String, String> url_map = [:]) {
     return new Configuration(track, url_map)
   }

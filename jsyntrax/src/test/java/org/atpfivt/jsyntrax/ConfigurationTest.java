@@ -10,21 +10,21 @@ import java.util.Map;
 class ConfigurationTest {
     @Test
     void urlMapIsParsed(){
-        Configuration configuration = Parser.parse("jsyntrax(line('attribute'), ['a':'b'])");
+        Configuration configuration = new Parser("jsyntrax(line('attribute'), ['a':'b'])").getNode();
         Map<String, String> urlMap = configuration.getUrlMap();
         Assertions.assertEquals(Map.of("a", "b"), urlMap);
     }
 
     @Test
     void noUrlMap(){
-        Configuration configuration = Parser.parse("jsyntrax(line('attribute'))");
+        Configuration configuration = new Parser("jsyntrax(line('attribute'))").getNode();
         Map<String, String> urlMap = configuration.getUrlMap();
         Assertions.assertEquals(Collections.emptyMap(), urlMap);
     }
 
     @Test
     void noSuperFunction(){
-        Configuration configuration = Parser.parse("line('attribute')");
+        Configuration configuration = new Parser("line('attribute')").getNode();
         Map<String, String> urlMap = configuration.getUrlMap();
         Assertions.assertEquals(Collections.emptyMap(), urlMap);
     }

@@ -4,6 +4,7 @@ import org.approvaltests.Approvals;
 import org.approvaltests.core.Options;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
+import org.atpfivt.jsyntrax.groovy_parser.SyntraxScript;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.styles.TitlePosition;
 import org.atpfivt.jsyntrax.units.Unit;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
 
 import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
 
-public class JSyntraxTitleTest {
+public class JSyntraxTitleTest extends SyntraxScript {
     private final SVGCanvasBuilder canvasBuilder;
 
     private final StyleConfig style;
@@ -34,7 +35,7 @@ public class JSyntraxTitleTest {
         canvasBuilder.withStyle(style);
     }
 
-    private static Unit getSample() {
+    private Unit getSample() {
         return line("/create_grain", loop(";",
                 choice("/create_sequence",
                         "/create_table",
@@ -46,17 +47,12 @@ public class JSyntraxTitleTest {
         );
     }
 
-    private static String getTitle() {
-        return "<TestTitle>";
-    }
-
-
     @ParameterizedTest
     @MethodSource("titlePosProvider")
     void titleTest(TitlePosition pos) {
         setTitlePosition(pos);
         Unit root = getSample();
-        String title = getTitle();
+        String title = "<TestTitle>";
         SVGCanvas c = canvasBuilder.withTitle(title).generateSVG(root);
         String result = c.generateSVG();
         Approvals.verify(result, new Options()
@@ -84,7 +80,7 @@ public class JSyntraxTitleTest {
         );
     }
 
-    private static Unit getSampleExceedingDocumentBoundaries() {
+    private Unit getSampleExceedingDocumentBoundaries() {
         return line("for", '(',
                 loop(opt(opt("Typ"),
                         "/Bezeichner", '=', "/Anweisung"), ","),
