@@ -3,19 +3,19 @@
 <svg xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xml:space="preserve"
-width="199" height="73" version="1.1">
+width="202" height="74" version="1.1">
 <style type="text/css">
 <![CDATA[
 .title_font {fill:#000000; text-anchor:start;
-font-family:Sans; font-size:22pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans Bold; font-size:22pt; font-weight:bold; font-style:normal; }
 .token_font {fill:#000000; text-anchor:middle;
-font-family:Sans; font-size:16pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans Bold; font-size:16pt; font-weight:bold; font-style:normal; }
 .box_font {fill:#000000; text-anchor:middle;
-font-family:Times; font-size:14pt; font-weight:normal; font-style:italic; }
+font-family:PT Sans Italic; font-size:14pt; font-weight:normal; font-style:italic; }
 .bubble_font {fill:#000000; text-anchor:middle;
-font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
 .hex_font {fill:#000000; text-anchor:middle;
-font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
+font-family:PT Sans Bold; font-size:14pt; font-weight:bold; font-style:normal; }
 .label {fill: #000; text-anchor:middle; font-size:16pt; font-weight:bold; font-family:Sans;}
 .link {fill: #0D47A1;}
 .link:hover {fill: #0D47A1; text-decoration:underline;}
@@ -27,20 +27,21 @@ font-family:Sans; font-size:14pt; font-weight:bold; font-style:normal; }
 <path d="M0,0 L0.5,2 L0,4 L4.5,2 z" fill="#000000" />
 </marker>
 </defs>
-<circle cx="8" cy="52" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
-<path d="M45,71 A14,14 0 0,1 45,43 H53 A14,14 0 0,1 53,71 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M42,68 A14,14 0 0,1 42,40 H50 A14,14 0 0,1 50,68 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<rect width="100%" height="100%" fill="white"/>
+<circle cx="8" cy="53" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<path d="M46,72 A15,15 0 0,1 46,42 H53 A15,15 0 0,1 53,72 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M43,69 A15,15 0 0,1 43,39 H50 A15,15 0 0,1 50,69 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
 <text class="bubble_font" x="46" y="59">a</text>
-<path d="M98,71 A14,14 0 0,1 98,43 H107 A14,14 0 0,1 107,71 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M95,68 A14,14 0 0,1 95,40 H104 A14,14 0 0,1 104,68 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="99" y="59">b</text>
-<line x1="63" y1="52" x2="77" y2="52" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<path d="M152,71 A14,14 0 0,1 152,43 H160 A14,14 0 0,1 160,71 z" fill="#000000" fill-opacity="0.4980392156862745" />
-<path d="M149,68 A14,14 0 0,1 149,40 H157 A14,14 0 0,1 157,68 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
-<text class="bubble_font" x="153" y="59">c</text>
-<line x1="117" y1="52" x2="131" y2="52" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="10" y1="52" x2="24" y2="52" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<circle cx="191" cy="52" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
-<line x1="170" y1="52" x2="184" y2="52" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
-<text class="title_font" x="15" y="25">defined above</text>
+<path d="M100,72 A15,15 0 0,1 100,42 H108 A15,15 0 0,1 108,72 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M97,69 A15,15 0 0,1 97,39 H105 A15,15 0 0,1 105,69 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="101" y="59">b</text>
+<line x1="64" y1="53" x2="78" y2="53" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<path d="M155,72 A15,15 0 0,1 155,42 H162 A15,15 0 0,1 162,72 z" fill="#000000" fill-opacity="0.4980392156862745" />
+<path d="M152,69 A15,15 0 0,1 152,39 H159 A15,15 0 0,1 159,69 z" stroke="#000000" stroke-width="2" fill="#b3e5fc" fill-opacity="1.0" />
+<text class="bubble_font" x="155" y="59">c</text>
+<line x1="119" y1="53" x2="133" y2="53" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="10" y1="53" x2="24" y2="53" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<circle cx="194" cy="53" r="3" stroke="#000000" stroke-width="2" fill="#ffffff"/>
+<line x1="173" y1="53" x2="187" y2="53" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+<text class="title_font" x="15" y="26">defined above</text>
 </svg>
