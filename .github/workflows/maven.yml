@@ -24,6 +24,7 @@ jobs:
         run: mvn -B package --file pom.xml -pl jsyntrax
       - name: Upload failed approvals
         if: failure()
+        uses: actions/upload-artifact@v3
         with:
           name: failed-approvals
           path: |
