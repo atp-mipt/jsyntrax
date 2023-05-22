@@ -40,19 +40,19 @@
     </licenses>
 
     <properties>
-        <revision>1.36</revision>
+        <revision>1.37</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.main.class>org.atpfivt.jsyntrax.Main</java.main.class>
         <java.version>1.11</java.version>
-        <maven.surefire.plugin.version>3.0.0</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>3.1.0</maven.surefire.plugin.version>
         <junit.version>5.9.3</junit.version>
-        <maven.assembly.plugin.version>3.5.0</maven.assembly.plugin.version>
+        <maven.assembly.plugin.version>3.6.0</maven.assembly.plugin.version>
         <assertj.core.version>3.24.2</assertj.core.version>
         <approvaltests.version>9.5.0</approvaltests.version>
         <jacoco.maven.plugin.version>0.8.10</jacoco.maven.plugin.version>
         <checkstyle.maven.plugin.version>3.2.2</checkstyle.maven.plugin.version>
-        <checkstyle.version>10.10.0</checkstyle.version>
+        <checkstyle.version>10.11.0</checkstyle.version>
         <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
         <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
     </properties>
@@ -293,7 +293,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>

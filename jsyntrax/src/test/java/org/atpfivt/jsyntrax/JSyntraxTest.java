@@ -3,6 +3,7 @@ package org.atpfivt.jsyntrax;
 import org.approvaltests.Approvals;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
+import org.atpfivt.jsyntrax.groovy_parser.SyntraxScript;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.tracks.Choice;
 import org.atpfivt.jsyntrax.units.tracks.Line;
@@ -13,21 +14,21 @@ import org.atpfivt.jsyntrax.units.tracks.opt.Optx;
 import org.atpfivt.jsyntrax.units.tracks.stack.Indentstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Rightstack;
 import org.atpfivt.jsyntrax.units.tracks.stack.Stack;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Map;
 
 import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
-import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
 
 
-public class JSyntraxTest {
+public class JSyntraxTest extends SyntraxScript {
 
-    private final SVGCanvasBuilder canvasBuilder;
+    private SVGCanvasBuilder canvasBuilder;
 
-    public JSyntraxTest()
-            throws IllegalAccessException, NoSuchFieldException, IOException {
+    @BeforeEach
+    void setUp() throws IOException {
         StyleConfig s = new StyleConfig(1, false);
         JSyntraxTestUtils.updateStyle(s);
         canvasBuilder = new SVGCanvasBuilder().withStyle(s);

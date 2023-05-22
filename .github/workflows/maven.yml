@@ -22,6 +22,14 @@ jobs:
           java-version: '11'
       - name: Build jsyntrax
         run: mvn -B package --file pom.xml -pl jsyntrax
+      - name: Upload failed approvals
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: failed-approvals
+          path: |
+            jsyntrax/src/test/java/org/atpfivt/jsyntrax/approvals/*.received.*
+            jsyntrax/src/test/java/org/atpfivt/jsyntrax/approvals/*.approved.*
       - name: Build documentation
         run: mvn -B verify --file pom.xml -pl doc
         env:

@@ -138,9 +138,12 @@ public final class Main {
     public static String generateSVG(String title, StyleConfig style, String scriptText) throws IOException {
         // parse script
         Unit root;
+        String titleInSpecFile;
         try {
             // parse spec
-            root = Parser.parse(scriptText);
+            Parser parser = new Parser(scriptText);
+            root = parser.getNode();
+            titleInSpecFile = parser.getTitle();
         } catch (CompilationFailedException e) {
             System.out.println("Something is wrong with input script:");
             System.out.println("\t" + e.getMessage());
@@ -150,7 +153,7 @@ public final class Main {
         // generate SVG
         SVGCanvas c = new SVGCanvasBuilder()
                 .withStyle(style)
-                .withTitle(title)
+                .withTitle(title != null ? title : titleInSpecFile)
                 .generateSVG(root);
         return c.generateSVG();
     }
