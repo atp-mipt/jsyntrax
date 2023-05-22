@@ -30,10 +30,10 @@ jobs:
           path: |
             jsyntrax/src/test/java/org/atpfivt/jsyntrax/approvals/*.received.*
             jsyntrax/src/test/java/org/atpfivt/jsyntrax/approvals/*.approved.*
-      - name: Install jsyntrax
-        run: sudo ln -s $(pwd)/jsyntrax/target/appassembler/bin/syntrax /usr/local/bin/syntrax && syntrax --version
       - name: Build documentation
         run: mvn -B verify --file pom.xml -pl doc
+        env:
+          DIAGRAM_JSYNTRAX_HOME: ${{ github.workspace }}/jsyntrax/target/appassembler
       - name: Deploy to GitHub Pages
         if: success() && github.ref == 'refs/heads/main'
         uses: crazy-max/ghaction-github-pages@v2
