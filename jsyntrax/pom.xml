@@ -45,7 +45,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.main.class>org.atpfivt.jsyntrax.Main</java.main.class>
         <java.version>1.11</java.version>
-        <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>3.2.1</maven.surefire.plugin.version>
         <junit.version>5.10.0</junit.version>
         <maven.assembly.plugin.version>3.6.0</maven.assembly.plugin.version>
         <assertj.core.version>3.24.2</assertj.core.version>
