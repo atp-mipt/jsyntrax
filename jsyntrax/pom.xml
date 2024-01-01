@@ -48,7 +48,7 @@
         <maven.surefire.plugin.version>3.2.1</maven.surefire.plugin.version>
         <junit.version>5.10.1</junit.version>
         <maven.assembly.plugin.version>3.6.0</maven.assembly.plugin.version>
-        <assertj.core.version>3.24.2</assertj.core.version>
+        <assertj.core.version>3.25.0</assertj.core.version>
         <approvaltests.version>9.5.0</approvaltests.version>
         <jacoco.maven.plugin.version>0.8.11</jacoco.maven.plugin.version>
         <checkstyle.maven.plugin.version>3.3.1</checkstyle.maven.plugin.version>
