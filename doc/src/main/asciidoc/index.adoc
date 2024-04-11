@@ -71,7 +71,7 @@ Unzip `jsyntrax-XXX.zip` file to any convenient folder. `/bin` directory will co
 
 === Using JSyntrax
 
-JSyntrax is a command line tool. You pass it an input specification file and it will generate a diagram in any of the supported output formats.
+JSyntrax is a command line tool. You pass it an input specification file, and it will generate a diagram in any of the supported output formats.
 
 ----
 usage: syntrax [--get-style] [-h] [-i <arg>] [-o <arg>] [-s <arg>] [--scale
@@ -113,7 +113,7 @@ Done!
 
 ==== Transparency
 
-By default the images have a white background. If you want a transparent background pass the `+-t+` option.
+By default, the images have a white background. If you want a transparent background pass the `+-t+` option.
 
 ==== Scaling
 
@@ -181,7 +181,7 @@ Nodes in the diagram are represented by quoted strings.
 Nodes default to rounded bubbles but will change to a box when prefixed with "/". 
 Note that this is the reverse of how the original SQLite generator works. 
 The rounded bubbles are typically used for literal tokens. 
-Boxes are typically place holders for syntactic elements too complex to include in the current diagram. 
+Boxes are typically placeholders for syntactic elements too complex to include in the current diagram.
 Nodes starting with a non-alphanumeric character are rendered with their own font style so that punctuation tokens can be made more distinct.
 
 The following functions are available for creating diagrams:
@@ -406,7 +406,7 @@ You can control the styling of the generated diagrams by passing in a
 style INI file with the `+-s+` option.
 
 You can use the `+--get-style+` option to generate a copy of the default
-styles in the current directory so you can quickly make modifications.
+styles in the current directory, so you can quickly make modifications.
 
 Here is the default styling:
 
@@ -597,7 +597,7 @@ A regex pattern to match the node text to a style. Notes about pattern format:
  - If given input sequence does not match specified expression, default style will be used.
 
 shape::
-Node outline shape. Must be "bubble", "box", or "hex".
+Node outline shape. Must be one of the following: "bubble", "box", or "hex".
 
 font::
 Font style for the node.
@@ -650,7 +650,7 @@ jsyntrax(stack(
 ), 
 [
   'entity_class': 'https://www.google.com/#q=vhdl+entity+class',
-  '(attribute) identifier': 'http://en.wikipedia.com/wiki/VHDL'
+  '(attribute) identifier': 'https://en.wikipedia.com/wiki/VHDL'
 ])
 ----
 
@@ -669,7 +669,7 @@ jsyntrax(stack(
 ),
 [
   'entity_class': 'https://www.google.com/#q=vhdl+entity+class',
-  '(attribute) identifier': 'http://en.wikipedia.com/wiki/VHDL'
+  '(attribute) identifier': 'https://en.wikipedia.com/wiki/VHDL'
 ])
 ....
 

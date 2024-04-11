@@ -284,7 +284,7 @@ public final class SVGCanvasBuilder implements Visitor {
                 this.canvas.addElement(l);
                 pos.f = xn + endPoint.endpoint.f;
             } else {
-                // first element on line
+                // first element on the line
                 pos.f = endPoint.endpoint.f;
             }
             pos.s = endPoint.endpoint.s;
@@ -925,8 +925,8 @@ public final class SVGCanvasBuilder implements Visitor {
             this.endpoint = endpoint;
         }
 
-        public String tag;
-        public Pair<Integer, Integer> endpoint;
+        public final String tag;
+        public final Pair<Integer, Integer> endpoint;
     }
 
     public UnitEndPoint getUnitEndPoint() {

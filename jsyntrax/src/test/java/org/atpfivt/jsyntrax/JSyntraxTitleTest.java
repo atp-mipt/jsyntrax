@@ -15,15 +15,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static org.atpfivt.jsyntrax.groovy_parser.SyntraxScript.*;
-
 public class JSyntraxTitleTest extends SyntraxScript {
     private final SVGCanvasBuilder canvasBuilder;
 
     private final StyleConfig style;
 
     public JSyntraxTitleTest()
-            throws IllegalAccessException, NoSuchFieldException, IOException {
+            throws IOException {
         style = new StyleConfig(1, false);
         JSyntraxTestUtils.updateStyle(style);
         canvasBuilder = new SVGCanvasBuilder().withStyle(style);

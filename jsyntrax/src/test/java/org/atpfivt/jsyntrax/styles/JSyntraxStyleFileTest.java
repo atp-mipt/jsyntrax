@@ -27,7 +27,7 @@ public class JSyntraxStyleFileTest {
             Files.createTempFile("jsyntrax-test-style", ".ini");
 
     public JSyntraxStyleFileTest()
-            throws IOException, NoSuchFieldException, IllegalAccessException {
+            throws IOException {
         StyleConfig s = new StyleConfig(1, false);
         JSyntraxTestUtils.updateStyle(s);
         canvasBuilder = new SVGCanvasBuilder().withStyle(s);
@@ -55,7 +55,7 @@ public class JSyntraxStyleFileTest {
     }
 
     @Test
-    void configParserTest() throws IOException, NoSuchFieldException, IllegalAccessException {
+    void configParserTest() throws IOException {
         StringBuilder config = new StringBuilder();
         config.append("[style]\n")
                 .append("line_width = 50\n")
@@ -86,8 +86,7 @@ public class JSyntraxStyleFileTest {
 
     @Test
     public void svgFromConfigTest()
-            throws IOException, URISyntaxException,
-            NoSuchFieldException, IllegalAccessException {
+            throws IOException, URISyntaxException {
         // Given
         String config  = Files.readString(
                 Path.of(this

@@ -12,7 +12,7 @@ class Parser {
     private final String title
 
     Parser(String scriptText) throws CompilationFailedException {
-        this.scriptText = scriptText;
+        this.scriptText = scriptText
         def config = new CompilerConfiguration()
         config.setScriptBaseClass(SyntraxScript.class.name)
         def sharedData = new Binding()

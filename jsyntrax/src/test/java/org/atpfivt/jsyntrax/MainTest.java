@@ -6,20 +6,17 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.*;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
     @Test
-    void testEnd2EndHappyPath() throws URISyntaxException, IOException,
-            NoSuchFieldException, IllegalAccessException {
+    void testEnd2EndHappyPath() throws URISyntaxException, IOException {
         Path inputPath = Paths.get(MainTest.class.getResource("jsyntrax.spec").toURI());
         Path outPath = Files.createTempFile("jsyntrax-test-output", ".svg");
         try {
@@ -32,8 +29,7 @@ class MainTest {
     }
 
     @Test
-    void testWriteHelp() throws IOException,
-            NoSuchFieldException, IllegalAccessException {
+    void testWriteHelp() throws IOException {
         final PrintStream standardOut = System.out;
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -48,8 +44,7 @@ class MainTest {
     }
 
     @Test
-    void printVersionTest() throws IOException,
-            NoSuchFieldException, IllegalAccessException {
+    void printVersionTest() throws IOException {
         final PrintStream standardOut = System.out;
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -79,7 +74,7 @@ class MainTest {
 
     @ValueSource(strings = {".png", ".PNG", ".PnG"})
     @ParameterizedTest
-    void testPngByOutFileExtention(String ext) throws IOException, URISyntaxException, NoSuchFieldException, IllegalAccessException {
+    void testPngByOutFileExtention(String ext) throws IOException, URISyntaxException {
         Path inputPath = Paths.get(MainTest.class.getResource("jsyntrax.spec").toURI());
         Path outPath = Files.createTempFile("jsyntrax-test-output", ext);
         try {
@@ -92,7 +87,7 @@ class MainTest {
     }
 
     @Test
-    void testPngByOutFileType() throws IOException, URISyntaxException, NoSuchFieldException, IllegalAccessException {
+    void testPngByOutFileType() throws IOException, URISyntaxException {
         Path inputPath = Paths.get(MainTest.class.getResource("jsyntrax.spec").toURI());
         Path outPath = Paths.get(inputPath.toString().substring(0, inputPath.toString().lastIndexOf('.')) + ".png");
         try {
@@ -105,7 +100,7 @@ class MainTest {
     }
 
     @Test
-    void testSvgByOutFileType() throws IOException, URISyntaxException, NoSuchFieldException, IllegalAccessException {
+    void testSvgByOutFileType() throws IOException, URISyntaxException {
         Path inputPath = Paths.get(MainTest.class.getResource("jsyntrax.spec").toURI());
         Path outPath = Paths.get(inputPath.toString().substring(0, inputPath.toString().lastIndexOf('.')) + ".svg");
         try {
@@ -118,7 +113,7 @@ class MainTest {
     }
 
     @Test
-    void testPngByDefault() throws IOException, URISyntaxException, NoSuchFieldException, IllegalAccessException {
+    void testPngByDefault() throws IOException, URISyntaxException {
         Path inputPath = Paths.get(MainTest.class.getResource("jsyntrax.spec").toURI());
         Path outPath = Paths.get(inputPath.toString().substring(0, inputPath.toString().lastIndexOf('.')) + ".png");
         try {
