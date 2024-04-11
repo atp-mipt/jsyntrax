@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 
 public class PngOutputTest {
     @Test
-    public void transcodeTest() throws IllegalAccessException, NoSuchFieldException,
+    public void transcodeTest() throws
             IOException, URISyntaxException {
         // Given
         Path inputPath = Paths.get(MainTest.class.getResource("test_spec.txt").toURI());

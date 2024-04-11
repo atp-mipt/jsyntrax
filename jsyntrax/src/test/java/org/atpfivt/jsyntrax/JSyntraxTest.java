@@ -136,7 +136,7 @@ public class JSyntraxTest extends SyntraxScript {
                 line("/entity_class", "is", "/expression", ';')
                 ),
                 Map.of("entity_class", "https://www.google.com/#q=vhdl+entity+class",
-                        "(attribute) identifier", "http://en.wikipedia.com/wiki/VHDL"));
+                        "(attribute) identifier", "https://en.wikipedia.com/wiki/VHDL"));
         SVGCanvas c = canvasBuilder.generateSVG(urlMapped);
         String result = c.generateSVG();
         Approvals.verify(result, OPTIONS);
