@@ -4,6 +4,7 @@ import org.atpfivt.jsyntrax.Configuration
 import org.atpfivt.jsyntrax.units.Unit
 import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilerConfiguration
+import org.codehaus.groovy.control.customizers.SecureASTCustomizer
 
 class Parser {
 
@@ -13,8 +14,15 @@ class Parser {
 
     Parser(String scriptText) throws CompilationFailedException {
         this.scriptText = scriptText
+        final SecureASTCustomizer secure = new SecureASTCustomizer()
+        secure.with {
+            indirectImportCheckEnabled = true
+
+            importsWhitelist = ['java.lang.Object']
+        }
         def config = new CompilerConfiguration()
         config.setScriptBaseClass(SyntraxScript.class.name)
+        config.addCompilationCustomizers(secure)
         def sharedData = new Binding()
         def shell = new GroovyShell(this.class.classLoader, sharedData, config)
         shell.setVariable("None", null)
