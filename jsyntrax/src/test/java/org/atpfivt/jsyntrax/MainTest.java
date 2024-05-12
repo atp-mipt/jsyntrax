@@ -125,6 +125,24 @@ class MainTest {
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "sysexit.spec",
+            "sysexitreflection.spec"})
+    void testSysexitNotAllowed(String filename) throws URISyntaxException, IOException {
+        Path inputPath = Paths.get(MainTest.class.getResource(filename).toURI());
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        try {
+            System.setOut(new PrintStream(outContent));
+            Main.main(inputPath.toString());
+            assertTrue(outContent.toString().contains("Something is wrong with input script"));
+        } finally {
+            System.setOut(originalOut);
+            System.out.println(outContent);
+        }
+    }
+
 
     private static void validatePng(byte[] png) {
         //check for png header
@@ -137,6 +155,7 @@ class MainTest {
     private static void validateSVG(String svg) {
         assertTrue(svg.startsWith("<?xml"));
         assertTrue(svg.contains("JSYNTRAX"));
+        assertTrue(svg.contains("diagram title"));
         assertTrue(svg.contains("href=\"https://github.com/atp-mipt/jsyntrax\""));
     }
 }
