@@ -103,6 +103,7 @@
             <artifactId>batik-codec</artifactId>
             <version>1.17</version>
         </dependency>
+
     </dependencies>
 
 
