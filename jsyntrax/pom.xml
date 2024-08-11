@@ -59,9 +59,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>3.0.13</version>
+            <version>4.0.22</version>
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>
