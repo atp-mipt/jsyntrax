@@ -46,7 +46,7 @@
         <java.main.class>org.atpfivt.jsyntrax.Main</java.main.class>
         <java.version>1.11</java.version>
         <maven.surefire.plugin.version>3.5.0</maven.surefire.plugin.version>
-        <junit.version>5.11.0</junit.version>
+        <junit.version>5.11.4</junit.version>
         <maven.assembly.plugin.version>3.7.1</maven.assembly.plugin.version>
         <assertj.core.version>3.26.3</assertj.core.version>
         <approvaltests.version>9.5.0</approvaltests.version>
