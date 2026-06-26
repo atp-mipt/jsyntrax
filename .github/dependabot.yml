@@ -16,3 +16,8 @@ updates:
   - dependency-name: org.codehaus.groovy:groovy-eclipse-compiler
     versions:
     - 3.6.0-03
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
