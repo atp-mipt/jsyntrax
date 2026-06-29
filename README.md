@@ -4,7 +4,7 @@
 # jsyntrax
 
 [![Actions Status: build](https://github.com/atp-mipt/jsyntrax/workflows/build/badge.svg)](https://github.com/atp-mipt/jsyntrax/actions?query=workflow%3A"build")
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.atp-fivt/jsyntrax/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.atp-fivt/jsyntrax)
+[![Maven Central](https://img.shields.io/maven-central/v/org.atp-fivt/jsyntrax)](https://central.sonatype.com/artifact/org.atp-fivt/jsyntrax)
 
 JSyntrax is a railroad diagrams generator. 
 It creates a visual illustration of the grammar used for programming languages. A specification file describes the syntax as a hierarchy of basic elements. 
