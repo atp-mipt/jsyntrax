@@ -4,7 +4,7 @@ import org.approvaltests.Approvals;
 import org.approvaltests.core.Options;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
-import org.atpfivt.jsyntrax.groovy_parser.SyntraxScript;
+import org.atpfivt.jsyntrax.parser.SyntraxScript;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.styles.TitlePosition;
 import org.atpfivt.jsyntrax.units.Unit;

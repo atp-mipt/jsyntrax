@@ -5,7 +5,7 @@ import org.atpfivt.jsyntrax.Configuration;
 import org.atpfivt.jsyntrax.JSyntraxTestUtils;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
-import org.atpfivt.jsyntrax.groovy_parser.Parser;
+import org.atpfivt.jsyntrax.parser.Parser;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.util.StringUtils;
 import org.junit.jupiter.api.AfterEach;

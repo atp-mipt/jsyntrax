@@ -4,11 +4,11 @@ package org.atpfivt.jsyntrax;
 import org.apache.batik.transcoder.TranscoderException;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
-import org.atpfivt.jsyntrax.groovy_parser.Parser;
+import org.atpfivt.jsyntrax.parser.Parser;
+import org.atpfivt.jsyntrax.parser.SyntraxParseException;
 import org.atpfivt.jsyntrax.styles.StyleConfig;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.util.SVGTranscoder;
-import org.codehaus.groovy.control.CompilationFailedException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -144,7 +144,7 @@ public final class Main {
             Parser parser = new Parser(scriptText);
             root = parser.getNode();
             titleInSpecFile = parser.getTitle();
-        } catch (CompilationFailedException e) {
+        } catch (SyntraxParseException e) {
             System.out.println("Something is wrong with input script:");
             System.out.println("\t" + e.getMessage());
             return null;
