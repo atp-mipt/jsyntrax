@@ -10,9 +10,9 @@ JSyntrax is a railroad diagrams generator.
 It creates a visual illustration of the grammar used for programming languages. A specification file describes the syntax as a hierarchy of basic elements. 
 This is processed into an image representing the same syntax with interconnected bubbles.
 
-The specification is a set of nested Groovy function calls:
+The specification is a set of nested function calls:
 
-```groovy
+```
 indentstack(10,
   line(opt('-'), choice('0', line('1-9', loop(None, '0-9'))),
     opt('.', loop('0-9', None))),

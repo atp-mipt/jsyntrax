@@ -13,9 +13,6 @@ updates:
     - 10.4.0
     - 11.0.0
     - 11.1.0
-  - dependency-name: org.codehaus.groovy:groovy-eclipse-compiler
-    versions:
-    - 3.6.0-03
 - package-ecosystem: github-actions
   directory: "/"
   schedule:

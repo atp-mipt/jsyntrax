@@ -1,6 +1,6 @@
 package org.atpfivt.jsyntrax;
 
-import org.atpfivt.jsyntrax.groovy_parser.Parser;
+import org.atpfivt.jsyntrax.parser.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

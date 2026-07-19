@@ -1,0 +1,348 @@
+/*
+ * Grammar for the JSyntrax diagram specification language.
+ *
+ * This replaces the former Groovy-based DSL with a small, self-contained
+ * JavaCC grammar. The language surface is intentionally identical to the one
+ * previously accepted by the Groovy parser, so existing specification files
+ * keep working unchanged:
+ *
+ *   - track builders: line(), loop(), toploop(), choice(), opt(), optx(),
+ *     stack(), indentstack(), rightstack()
+ *   - title('...') to set the diagram title
+ *   - jsyntrax(track [, ['key':'value', ...]]) to attach a URL map
+ *   - the None literal (an empty node)
+ *   - single- and double-quoted string literals and integer literals
+ *
+ * Statements are separated by newlines and/or semicolons and the value of the
+ * last statement is the resulting diagram, exactly as with the Groovy script.
+ *
+ * Every DSL function is an explicit token and production, so a syntax error
+ * reports the exact set of expected functions ("line", "loop", ...). Anything
+ * outside this surface (arbitrary code, field access, method chains such as
+ * System.exit(...), reflection, assignments, ...) is a syntax error, which is
+ * what makes the language safe by construction.
+ */
+
+options {
+    STATIC = false;
+    UNICODE_INPUT = true;
+    JAVA_UNICODE_ESCAPE = false;
+}
+
+PARSER_BEGIN(SyntraxParser)
+package org.atpfivt.jsyntrax.parser;
+
+import org.atpfivt.jsyntrax.units.Unit;
+import org.atpfivt.jsyntrax.units.tracks.Track;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+public class SyntraxParser {
+    private final SyntraxScript script = new SyntraxScript();
+
+    /** Returns the builder that also holds the parsed diagram title. */
+    public SyntraxScript getScript() {
+        return script;
+    }
+
+    /** Removes the surrounding quotes and resolves escape sequences. */
+    private static String unescape(String image) {
+        String s = image.substring(1, image.length() - 1);
+        if (s.indexOf('\\') < 0) {
+            return s;
+        }
+        StringBuilder sb = new StringBuilder(s.length());
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c != '\\' || i == s.length() - 1) {
+                sb.append(c);
+                continue;
+            }
+            char n = s.charAt(++i);
+            switch (n) {
+                case 'n': sb.append('\n'); break;
+                case 't': sb.append('\t'); break;
+                case 'r': sb.append('\r'); break;
+                case 'b': sb.append('\b'); break;
+                case 'f': sb.append('\f'); break;
+                case 'u':
+                    if (i + 4 < s.length()) {
+                        sb.append((char) Integer.parseInt(s.substring(i + 1, i + 5), 16));
+                        i += 4;
+                    } else {
+                        sb.append(n);
+                    }
+                    break;
+                default: sb.append(n); break;
+            }
+        }
+        return sb.toString();
+    }
+}
+PARSER_END(SyntraxParser)
+
+/* ---- whitespace and statement separators ---- */
+SKIP : {
+    " "
+  | "\t"
+  | "\n"
+  | "\r"
+  | ";"
+}
+
+/* ---- comments ---- */
+SKIP : {
+    < LINE_COMMENT: "//" (~["\n", "\r"])* >
+  | < BLOCK_COMMENT: "/*" (~["*"])* "*" ("*" | (~["*", "/"] (~["*"])* "*"))* "/" >
+}
+
+/* ---- keywords: one token per DSL function ---- */
+TOKEN : {
+    < LINE: "line" >
+  | < LOOP: "loop" >
+  | < TOPLOOP: "toploop" >
+  | < CHOICE: "choice" >
+  | < OPT: "opt" >
+  | < OPTX: "optx" >
+  | < STACK: "stack" >
+  | < INDENTSTACK: "indentstack" >
+  | < RIGHTSTACK: "rightstack" >
+  | < TITLE: "title" >
+  | < JSYNTRAX: "jsyntrax" >
+  | < NONE: "None" >
+}
+
+/* ---- literals ---- */
+TOKEN : {
+    < STRING:
+        "'"  ( (~["'", "\\"])  | ("\\" (~[])) )* "'"
+      | "\"" ( (~["\"", "\\"]) | ("\\" (~[])) )* "\""
+    >
+}
+
+TOKEN : {
+    < INTEGER: ("-")? (["0"-"9"])+ >
+}
+
+/*
+ * Any other word. Never referenced by a production, so an unknown function
+ * name yields a ParseException listing the expected DSL functions instead of
+ * a bare lexical error.
+ */
+TOKEN : {
+    < IDENTIFIER: ["a"-"z", "A"-"Z", "_"] (["a"-"z", "A"-"Z", "0"-"9", "_"])* >
+}
+
+/* ---- grammar ---- */
+
+/**
+ * A script is a sequence of statements. Its value is the value of the last
+ * statement, matching the semantics of the former Groovy script.
+ */
+Unit Script() :
+{
+    Unit last = null;
+    Unit value;
+}
+{
+    ( value = Statement() { last = value; } )* <EOF>
+    { return last; }
+}
+
+Unit Statement() :
+{
+    Unit unit;
+}
+{
+    (
+        unit = TitleStatement()
+      | unit = JsyntraxStatement()
+      | unit = TrackExpr()
+    )
+    { return unit; }
+}
+
+/** title('...') — remembers the title; returns the last built track. */
+Unit TitleStatement() :
+{
+    Token text;
+}
+{
+    <TITLE> "(" text = <STRING> ")"
+    { return script.title(unescape(text.image)); }
+}
+
+/** jsyntrax(track [, url-map]) — wraps a track into a configuration. */
+Unit JsyntraxStatement() :
+{
+    Track track;
+    Map<String, String> urlMap = null;
+}
+{
+    <JSYNTRAX> "(" track = TrackExpr() [ "," urlMap = MapLiteral() ] ")"
+    {
+        return urlMap == null
+                ? script.jsyntrax(track)
+                : script.jsyntrax(track, urlMap);
+    }
+}
+
+Track TrackExpr() :
+{
+    Track track;
+}
+{
+    (
+        track = LineExpr()
+      | track = LoopExpr()
+      | track = ToploopExpr()
+      | track = ChoiceExpr()
+      | track = OptExpr()
+      | track = OptxExpr()
+      | track = StackExpr()
+      | track = IndentstackExpr()
+      | track = RightstackExpr()
+    )
+    { return track; }
+}
+
+Track LineExpr() :
+{
+    List<Object> args;
+}
+{
+    <LINE> args = Arguments()
+    { return script.line(args.toArray()); }
+}
+
+/** A loop takes exactly two arguments: a forward and a backward path. */
+Track LoopExpr() :
+{
+    Object forward;
+    Object backward;
+}
+{
+    <LOOP> "(" forward = Argument() "," backward = Argument() ")"
+    { return script.loop(forward, backward); }
+}
+
+Track ToploopExpr() :
+{
+    Object forward;
+    Object backward;
+}
+{
+    <TOPLOOP> "(" forward = Argument() "," backward = Argument() ")"
+    { return script.toploop(forward, backward); }
+}
+
+Track ChoiceExpr() :
+{
+    List<Object> args;
+}
+{
+    <CHOICE> args = Arguments()
+    { return script.choice(args.toArray()); }
+}
+
+Track OptExpr() :
+{
+    List<Object> args;
+}
+{
+    <OPT> args = Arguments()
+    { return script.opt(args.toArray()); }
+}
+
+Track OptxExpr() :
+{
+    List<Object> args;
+}
+{
+    <OPTX> args = Arguments()
+    { return script.optx(args.toArray()); }
+}
+
+Track StackExpr() :
+{
+    List<Object> args;
+}
+{
+    <STACK> args = Arguments()
+    { return script.stack(args.toArray()); }
+}
+
+/** An indentstack takes the indent amount followed by the stacked lines. */
+Track IndentstackExpr() :
+{
+    Token indent;
+    List<Object> args = new ArrayList<Object>();
+    Object arg;
+}
+{
+    <INDENTSTACK> "(" indent = <INTEGER>
+    ( "," arg = Argument() { args.add(arg); } )*
+    ")"
+    { return script.indentstack(Integer.parseInt(indent.image), args.toArray()); }
+}
+
+Track RightstackExpr() :
+{
+    List<Object> args;
+}
+{
+    <RIGHTSTACK> args = Arguments()
+    { return script.rightstack(args.toArray()); }
+}
+
+List<Object> Arguments() :
+{
+    List<Object> args = new ArrayList<Object>();
+    Object arg;
+}
+{
+    "("
+    [
+        arg = Argument() { args.add(arg); }
+        ( "," arg = Argument() { args.add(arg); } )*
+    ]
+    ")"
+    { return args; }
+}
+
+Object Argument() :
+{
+    Token t;
+    Track track;
+}
+{
+    t = <STRING>          { return unescape(t.image); }
+  | t = <INTEGER>         { return Integer.valueOf(t.image); }
+  | <NONE>                { return null; }
+  | track = TrackExpr()   { return track; }
+}
+
+Map<String, String> MapLiteral() :
+{
+    Map<String, String> map = new LinkedHashMap<String, String>();
+    Token key;
+    Token val;
+}
+{
+    "["
+    (
+        ":"
+      |
+        key = <STRING> ":" val = <STRING>
+        { map.put(unescape(key.image), unescape(val.image)); }
+        (
+            "," key = <STRING> ":" val = <STRING>
+            { map.put(unescape(key.image), unescape(val.image)); }
+        )*
+    )
+    "]"
+    { return map; }
+}

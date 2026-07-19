@@ -13,9 +13,9 @@ It creates a visual illustration of the grammar used for programming languages.
 A specification file describes the syntax as a hierarchy of basic elements. 
 This is processed into an image representing the same syntax with interconnected nodes.
 
-The specification is a set of nested Groovy function calls:
+The specification is a set of nested function calls:
 
-[source,Groovy]
+[source]
 ----
 indentstack(10,
   line(opt('-'), choice('0', line('1-9', loop(None, '0-9'))),
@@ -50,7 +50,7 @@ JSyntrax requires only JDK 11, which is easily https://adoptopenjdk.net/releases
 What output formats are supported?:: JSyntrax produces SVG and PNG images. The original Syntrax can also produce PDF, PS, and EPS, these formats are not yet supported by JSyntrax.
 
 Can I build my Syntrax specs with JSyntrax?:: Yes, after only a couple of minor tweaks. 
-If you use url maps, refer to <<Hyperlinked SVG>> section for Groovy-specific DSL which is a bit different from what was in original Syntrax (in short: you will have to replace `{}` with `[]` and add `jsyntrax` wrapper function).
+If you use url maps, refer to <<Hyperlinked SVG>> section for the JSyntrax DSL which is a bit different from what was in original Syntrax (in short: you will have to replace `{}` with `[]` and add `jsyntrax` wrapper function).
 Also, `text_mod` attribute in  <<Styling diagrams>> is not supported (the author of the original Syntrax https://kevinpt.github.io/syntrax/#node-styles[warned] about potential security issues with this attribute).
 Instead, if a style regexp pattern contains a capturing group, the node text will contain the contents of the first capturing group only.
 
@@ -174,8 +174,8 @@ line('diagram', 'with', 'title')
 
 === Specification language
 
-JSyntrax diagrams are created using a Groovy-based specification
-language. 
+JSyntrax diagrams are created using its own concise specification
+language.
 A series of nestable function calls generate specific diagram elements. 
 Nodes in the diagram are represented by quoted strings. 
 Nodes default to rounded bubbles but will change to a box when prefixed with "/". 
@@ -193,12 +193,76 @@ The following functions are available for creating diagrams:
 |`stack()` |`indentstack()`|`rightstack()`
 |===
 
+==== Language syntax
+
+Being a syntax diagram generator, JSyntrax can describe its own
+specification language. A specification is an optional `title`
+followed by a single <<track,track>>, optionally wrapped into a
+`jsyntrax()` call that attaches a <<Hyperlinked SVG,URL map>>.
+In this and the following diagrams the box nodes are clickable and
+lead to the definitions of the corresponding elements:
+
+[syntrax,lang_specification,svg,opts=interactive]
+....
+jsyntrax(stack(
+  line(opt('title', '(', "/'string'", ')')),
+  line(choice('/track',
+       line('jsyntrax', '(', '/track', opt(',', '/url-map'), ')')))
+),
+[
+  'track': '.#track',
+  'url-map': '.#urlmap'
+])
+....
+
+A track is one of the diagram-building function calls. `loop()` and
+`toploop()` take exactly two arguments, `indentstack()` takes an
+indentation amount followed by the stacked lines, and the remaining
+functions accept any number of arguments:
+
+[[track]]
+[syntrax,lang_track,svg,opts=interactive]
+....
+title('track')
+jsyntrax(choice(
+  line(choice('line', 'choice', 'opt', 'optx', 'stack', 'rightstack'),
+       '(', opt(loop('/argument', ',')), ')'),
+  line(choice('loop', 'toploop'), '(', '/argument', ',', '/argument', ')'),
+  line('indentstack', '(', '/integer', ',', loop('/argument', ','), ')')
+),
+['argument': '.#argument'])
+....
+
+Each argument is a quoted string (single or double quotes), an
+integer, the `None` literal denoting an empty node, or a nested track:
+
+[[argument]]
+[syntrax,lang_argument,svg,opts=interactive]
+....
+title('argument')
+jsyntrax(choice("/'string'", '/integer', 'None', '/track'),
+         ['track': '.#track'])
+....
+
+Finally, a URL map used in `jsyntrax()` maps node texts to hyperlink
+targets:
+
+[[urlmap]]
+[syntrax,lang_urlmap,svg,opts=interactive]
+....
+title('url-map')
+line('[', choice(':', loop(line("/'string'", ':', "/'string'"), ',')), ']')
+....
+
+Java-style `//` line comments and `/* */` block comments may be used
+anywhere in a specification and are ignored.
+
 ==== line
 
 A `+line()+` creates a series of nodes arranged horizontally from left
 to right.
 
-[source,Groovy]
+[source]
 ----
 line('[', 'foo', ',', '/bar', ']')
 ----
@@ -216,7 +280,7 @@ takes two arguments. The first is the line of nodes for the forward path
 and the second is the nodes for the backward path. The backward path is
 rendered with nodes ordered from right to left.
 
-[source,Groovy]
+[source]
 ----
 loop(line('/forward', 'path'), line('backward', 'path'))
 ----
@@ -230,7 +294,7 @@ loop(line('/forward', 'path'), line('backward', 'path'))
 Either the forward or backward path can be `+None+` to represent no
 nodes on that portion of the loop.
 
-[source,Groovy]
+[source]
 ----
 loop('forward', None)
 ----
@@ -245,7 +309,7 @@ loop('forward', None)
 A `+toploop()+` is a variant of `+loop()+` that places the backward path
 above the forward path.
 
-[source,Groovy]
+[source]
 ----
 toploop(line('(', 'forward', ')'), line('(', 'backward', ')'))
 ----
@@ -260,7 +324,7 @@ toploop(line('(', 'forward', ')'), line('(', 'backward', ')'))
 The `+choice()+` element represents a branch between multiple syntax
 options.
 
-[source,Groovy]
+[source]
 ----
 choice('A', 'B', 'C')
 ----
@@ -276,7 +340,7 @@ choice('A', 'B', 'C')
 An `+opt()+` element specifies an optional portion of the syntax. The
 main path bypasses the optional portion positioned below.
 
-[source,Groovy]
+[source]
 ----
 opt('A', 'B', 'C')
 ----
@@ -290,7 +354,7 @@ opt('A', 'B', 'C')
 choice is `+None+` and the remaining nodes are put into a single line
 for the second choice. The example above is equivalent the following:
 
-[source,Groovy]
+[source]
 ----
 choice(None, line('A', 'B', 'C'))
 ----
@@ -300,7 +364,7 @@ choice(None, line('A', 'B', 'C'))
 The `+optx()+` element is a variant of `+opt()+` with the main path
 passing through the nodes.
 
-[source,Groovy]
+[source]
 ----
 optx('A', 'B', 'C')
 ----
@@ -317,7 +381,7 @@ right. To break up long sections of a diagram you use the `+stack()+`
 element. Each of its arguments forms a separate line that is stacked
 from top to bottom.
 
-[source,Groovy]
+[source]
 ----
 stack(
   line('top', 'line'),
@@ -337,7 +401,7 @@ stack(
 When an inner element of a stack argument list is an `+opt()+` or an
 `+optx()+` it will be rendered with a special vertical bypass.
 
-[source,Groovy]
+[source]
 ----
 stack(
   line('A', 'B'),
@@ -362,7 +426,7 @@ element. It shifts lower lines to the right relative to the top line of
 the stack. Its first argument is an integer specifing the amount of
 indentation.
 
-[source,Groovy]
+[source]
 ----
 indentstack(3,
   line('top', 'line'),
@@ -383,7 +447,7 @@ indentstack(3,
 The `+rightstack()+` element will right align successive lines without
 needing to determine the indentation.
 
-[source,Groovy]
+[source]
 ----
 rightstack(
   line('top', 'line', 'with', 'more', 'code'),
@@ -641,7 +705,7 @@ SVG images can have hyperlinked node text. This is implemented by adding a `+url
 The keys of the dictionary are the text identifying the node and their values are the URL for the link. 
 The text key should not include any leading "/" character for the box nodes.
 
-[source,Groovy]
+[source]
 ----
 jsyntrax(stack(
  line('attribute', '/(attribute) identifier', 'of'),
@@ -657,7 +721,7 @@ jsyntrax(stack(
 [NOTE]
 .Note for Syntrax (Python) users
 ====
-Note that in Groovy, unlike Python, maps are enclosed in brackets `[]`, not braces `{}`.
+Note that in JSyntrax, unlike Python, maps are enclosed in brackets `[]`, not braces `{}`.
 ====
 
 [syntrax,hyperlinked,svg,opts=interactive]
