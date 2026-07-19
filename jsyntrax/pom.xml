@@ -40,7 +40,7 @@
     </licenses>
 
     <properties>
-        <revision>1.38</revision>
+        <revision>1.39</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.main.class>org.atpfivt.jsyntrax.Main</java.main.class>
@@ -55,6 +55,7 @@
         <checkstyle.version>10.25.0</checkstyle.version>
         <maven.source.plugin.version>3.4.0</maven.source.plugin.version>
         <maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
+        <central.publishing.maven.plugin.version>0.11.0</central.publishing.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -180,7 +181,6 @@
                         <manifestEntries>
                             <Implementation-Version>${revision}</Implementation-Version>
                         </manifestEntries>
-                        >
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
@@ -287,14 +287,15 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.7.0</version>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>${central.publishing.maven.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <publishingServerId>central</publishingServerId>
+                    <deploymentName>jsyntrax-${revision}</deploymentName>
+                    <autoPublish>true</autoPublish>
+                    <waitUntil>validated</waitUntil>
                 </configuration>
             </plugin>
         </plugins>
