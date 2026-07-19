@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class MainTest {
     @Test
@@ -35,9 +35,8 @@ class MainTest {
         System.setOut(new PrintStream(outputStreamCaptor));
         try {
             Main.main("-h");
-            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).contains(
-                    "Railroad diagram generator."
-            ));
+            assertThat(outputStreamCaptor.toString(StandardCharsets.UTF_8))
+                    .contains("Railroad diagram generator.");
         } finally {
             System.setOut(standardOut);
         }
@@ -50,7 +49,7 @@ class MainTest {
         System.setOut(new PrintStream(outputStreamCaptor));
         try {
             Main.main("-v");
-            assertTrue(outputStreamCaptor.toString(StandardCharsets.UTF_8).startsWith("JSyntrax "));
+            assertThat(outputStreamCaptor.toString(StandardCharsets.UTF_8)).startsWith("JSyntrax ");
         } finally {
             System.setOut(standardOut);
         }
@@ -66,7 +65,7 @@ class MainTest {
                 System.getProperty("user.dir"), Main.JSYNTRAX_INI);
         try {
             List<String> configActual = Files.readAllLines(expectedPath);
-            assertEquals(configExpected, configActual);
+            assertThat(configActual).isEqualTo(configExpected);
         } finally {
             Files.delete(expectedPath);
         }
@@ -136,7 +135,7 @@ class MainTest {
         try {
             System.setOut(new PrintStream(outContent));
             Main.main(inputPath.toString());
-            assertTrue(outContent.toString().contains("Something is wrong with input script"));
+            assertThat(outContent.toString()).contains("Something is wrong with input script");
         } finally {
             System.setOut(originalOut);
             System.out.println(outContent);
@@ -146,16 +145,14 @@ class MainTest {
 
     private static void validatePng(byte[] png) {
         //check for png header
-        assertEquals((byte) 0x89, png[0]);
-        assertEquals((byte) 0x50, png[1]);
-        assertEquals((byte) 0x4e, png[2]);
-        assertEquals((byte) 0x47, png[3]);
+        assertThat(png).startsWith((byte) 0x89, (byte) 0x50, (byte) 0x4e, (byte) 0x47);
     }
 
     private static void validateSVG(String svg) {
-        assertTrue(svg.startsWith("<?xml"));
-        assertTrue(svg.contains("JSYNTRAX"));
-        assertTrue(svg.contains("diagram title"));
-        assertTrue(svg.contains("href=\"https://github.com/atp-mipt/jsyntrax\""));
+        assertThat(svg)
+                .startsWith("<?xml")
+                .contains("JSYNTRAX")
+                .contains("diagram title")
+                .contains("href=\"https://github.com/atp-mipt/jsyntrax\"");
     }
 }

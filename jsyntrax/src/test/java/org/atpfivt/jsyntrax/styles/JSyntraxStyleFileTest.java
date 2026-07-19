@@ -8,8 +8,8 @@ import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.parser.Parser;
 import org.atpfivt.jsyntrax.units.Unit;
 import org.atpfivt.jsyntrax.util.StringUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -19,7 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.atpfivt.jsyntrax.JSyntraxTestUtils.OPTIONS;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class JSyntraxStyleFileTest {
     private final SVGCanvasBuilder canvasBuilder;
@@ -40,18 +40,18 @@ public class JSyntraxStyleFileTest {
 
     @Test
     void colorFromString(){
-        assertEquals(new Color(1, 2, 3, 4),
-                StringUtils.colorFromString("(1, 2, 3, 4)"));
-        assertEquals(new Color(1, 2, 3),
-                StringUtils.colorFromString(" (1,2, 3) "));
+        assertThat(StringUtils.colorFromString("(1, 2, 3, 4)"))
+                .isEqualTo(new Color(1, 2, 3, 4));
+        assertThat(StringUtils.colorFromString(" (1,2, 3) "))
+                .isEqualTo(new Color(1, 2, 3));
     }
 
     @Test
     void fontFromString(){
-        assertEquals(new Font("FooFont", Font.BOLD, 12),
-                StringUtils.fontFromString("('FooFont', 12, 'bold')"));
-        assertEquals(new Font("BarFont", Font.ITALIC | Font.BOLD, 10),
-                StringUtils.fontFromString(" ('BarFont', 10, 'bold italic') "));
+        assertThat(StringUtils.fontFromString("('FooFont', 12, 'bold')"))
+                .isEqualTo(new Font("FooFont", Font.BOLD, 12));
+        assertThat(StringUtils.fontFromString(" ('BarFont', 10, 'bold italic') "))
+                .isEqualTo(new Font("BarFont", Font.ITALIC | Font.BOLD, 10));
     }
 
     @Test
@@ -71,17 +71,17 @@ public class JSyntraxStyleFileTest {
         StyleConfig cfg = new StyleConfig(1, false, stylePath);
 
         NodeStyle ns = cfg.getNodeStyles().get(0);
-        Assertions.assertAll(
-                () -> assertEquals(50, cfg.getLineWidth()),
-                () -> assertEquals(42, cfg.getVSep()),
-                () -> assertEquals(new Color(30, 40, 50), cfg.getTextColor()),
-                () -> assertEquals(new Color(35, 46, 57, 212), cfg.getShadowFill()),
-                () -> assertEquals(1, cfg.getNodeStyles().size()),
-                () -> assertEquals("hex_bubble", ns.getName()),
-                () -> assertEquals("hex", ns.getShape()),
-                () -> assertEquals(new Font("Sans", Font.BOLD, 14), ns.getFont()),
-                () -> assertEquals(new Color(255, 15, 3, 129), ns.getFill())
-        );
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(cfg.getLineWidth()).isEqualTo(50);
+            softly.assertThat(cfg.getVSep()).isEqualTo(42);
+            softly.assertThat(cfg.getTextColor()).isEqualTo(new Color(30, 40, 50));
+            softly.assertThat(cfg.getShadowFill()).isEqualTo(new Color(35, 46, 57, 212));
+            softly.assertThat(cfg.getNodeStyles()).hasSize(1);
+            softly.assertThat(ns.getName()).isEqualTo("hex_bubble");
+            softly.assertThat(ns.getShape()).isEqualTo("hex");
+            softly.assertThat(ns.getFont()).isEqualTo(new Font("Sans", Font.BOLD, 14));
+            softly.assertThat(ns.getFill()).isEqualTo(new Color(255, 15, 3, 129));
+        });
     }
 
     @Test
