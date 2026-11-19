@@ -22,7 +22,7 @@ public final class StringUtils {
 
     public static Font fontFromString(String txt) {
         Pattern fontPattern = Pattern.compile(
-                "\\(\\s*'([a-zA-Z]+)'\\s*,\\s*(\\d+)\\s*,\\s*'([a-zA-Z ]+)'\\s*\\)");
+                "\\(\\s*'([a-zA-Z ]+)'\\s*,\\s*(\\d+)\\s*,\\s*'([a-zA-Z ]+)'\\s*\\)");
         Matcher matcher = fontPattern.matcher(txt.trim());
 
         if (!matcher.matches()) {
