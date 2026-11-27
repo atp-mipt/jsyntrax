@@ -2,6 +2,7 @@ package org.atpfivt.jsyntrax;
 
 import org.approvaltests.Approvals;
 import org.approvaltests.core.Options;
+import org.approvaltests.namer.TemplatedCustomNamer;
 import org.atpfivt.jsyntrax.generators.SVGCanvas;
 import org.atpfivt.jsyntrax.generators.SVGCanvasBuilder;
 import org.atpfivt.jsyntrax.parser.SyntraxScript;
@@ -55,7 +56,12 @@ public class JSyntraxTitleTest extends SyntraxScript {
         String result = c.generateSVG();
         Approvals.verify(result, new Options()
                 .forFile()
-                .withName(JSyntraxTitleTest.class.getSimpleName() + '.' + pos.name(), ".svg")
+                .withNamer(TemplatedCustomNamer.create(
+                        "{test_source_directory}/{approvals_subdirectory}/"
+                        + JSyntraxTitleTest.class.getSimpleName() + '.' + pos.name()
+                        + ".{approved_or_received}.{file_extension}"))
+                .forFile()
+                .withExtension(".svg")
         );
     }
 
@@ -74,7 +80,12 @@ public class JSyntraxTitleTest extends SyntraxScript {
         String result = c.generateSVG();
         Approvals.verify(result, new Options()
                 .forFile()
-                .withName("JSyntraxLongTitleTest" + '.' + pos.name(), ".svg")
+                .withNamer(TemplatedCustomNamer.create(
+                        "{test_source_directory}/{approvals_subdirectory}/"
+                        + "JSyntraxLongTitleTest" + '.' + pos.name()
+                        + ".{approved_or_received}.{file_extension}"))
+                .forFile()
+                .withExtension(".svg")
         );
     }
 
@@ -96,7 +107,12 @@ public class JSyntraxTitleTest extends SyntraxScript {
         String result = c.generateSVG();
         Approvals.verify(result, new Options()
                 .forFile()
-                .withName("ExceedingDocumentBoundariesTest" + '.' + pos.name(), ".svg")
+                .withNamer(TemplatedCustomNamer.create(
+                        "{test_source_directory}/{approvals_subdirectory}/"
+                        + "ExceedingDocumentBoundariesTest" + '.' + pos.name()
+                        + ".{approved_or_received}.{file_extension}"))
+                .forFile()
+                .withExtension(".svg")
         );
     }
 

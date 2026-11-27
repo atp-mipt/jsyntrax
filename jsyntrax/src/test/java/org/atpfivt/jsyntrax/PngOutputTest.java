@@ -1,8 +1,7 @@
 package org.atpfivt.jsyntrax;
 
 import org.approvaltests.Approvals;
-import org.approvaltests.namer.NamedEnvironment;
-import org.approvaltests.namer.NamerFactory;
+import org.approvaltests.namer.NamerFactoryForOptions;
 import org.approvaltests.writers.ApprovalBinaryFileWriter;
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +26,9 @@ public class PngOutputTest {
         Main.main("-o", outPath.toString(), inputPath.toString(), "-s", configPath.toString());
 
         // Then
-        try (NamedEnvironment ignored = NamerFactory.asOsSpecificTest();
-            InputStream inputStream = Files.newInputStream(outPath)) {
-            Approvals.verify(new ApprovalBinaryFileWriter(inputStream, "png"));
+        try (InputStream inputStream = Files.newInputStream(outPath)) {
+            Approvals.verify(new ApprovalBinaryFileWriter(inputStream, "png"),
+                    NamerFactoryForOptions.INSTANCE.asOsSpecificTest());
         } finally {
             Files.deleteIfExists(outPath);
         }
