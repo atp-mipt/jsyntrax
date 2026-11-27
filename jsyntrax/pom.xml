@@ -44,7 +44,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.main.class>org.atpfivt.jsyntrax.Main</java.main.class>
-        <java.version>1.11</java.version>
+        <!-- Produced bytecode is Java 11; tests and tooling run on Java 21 (see the enforcer rules below). -->
+        <java.release>11</java.release>
+        <java.test.release>21</java.test.release>
+        <maven.enforcer.plugin.version>3.7.0</maven.enforcer.plugin.version>
         <maven.surefire.plugin.version>3.6.1</maven.surefire.plugin.version>
         <junit.version>5.13.0</junit.version>
         <maven.assembly.plugin.version>3.8.0</maven.assembly.plugin.version>
@@ -104,14 +107,56 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforcer.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>[3.8.6,)</version>
+                                </requireMavenVersion>
+                                <!-- The build (tests, Checkstyle and other tooling) needs Java 21,
+                                     while the produced artifact stays runnable on Java 11. -->
+                                <requireJavaVersion>
+                                    <version>[${java.test.release},)</version>
+                                </requireJavaVersion>
+                                <!-- enforceBytecodeVersion is a core rule since enforcer 3.6.3; do not add
+                                     extra-enforcer-rules here, it registers a rule under the same name and
+                                     which one wins differs between builds (e.g. CLI vs IntelliJ). -->
+                                <enforceBytecodeVersion>
+                                    <maxJdkVersion>${java.release}</maxJdkVersion>
+                                    <searchTransitive>true</searchTransitive>
+                                    <ignoredScopes>
+                                        <ignoredScope>test</ignoredScope>
+                                    </ignoredScopes>
+                                </enforceBytecodeVersion>
+                                <!-- Released library must not depend on SNAPSHOT artifacts -->
+                                <requireReleaseDeps/>
+                                <!-- No duplicate <dependency> entries in this POM -->
+                                <banDuplicatePomDependencyVersions/>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- maven-compiler-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.16.0</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <release>${java.release}</release>
+                    <testRelease>${java.test.release}</testRelease>
                 </configuration>
             </plugin>
 
